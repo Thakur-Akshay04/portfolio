@@ -6,14 +6,15 @@ WORKDIR /app
 # Install package manager
 RUN npm install -g pnpm
 
-# Copy package files
-COPY package.json pnpm-lock.yaml* ./
+# Copy package files (explicitly defined, no globs to comply with S6470)
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 # Stage 2: Build the source code
 FROM node:18-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+# Safe copy: all sensitive credentials (.env.local, .git, etc.) are ignored via .dockerignore (S6470)
 COPY . .
 
 # Set environment variables for build time
