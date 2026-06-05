@@ -124,17 +124,7 @@ function FloatingTechDock() {
               }}
               className="flex flex-col items-center gap-2.5 select-none"
             >
-              {/* Individual Item Floating Wavy Loop */}
-              <motion.div
-                animate={{ y: [0, -3, 0] }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: idx * 0.35,
-                }}
-                className="flex flex-col items-center gap-2.5 group cursor-default"
-              >
+              <div className="flex flex-col items-center gap-2.5 group cursor-default">
                 {/* Glowing hover backdrop */}
                 <div className="absolute w-12 h-12 rounded-full bg-accent-purple/5 group-hover:bg-accent-purple/15 blur-md transition-all duration-300 pointer-events-none -z-10" />
 
@@ -144,7 +134,7 @@ function FloatingTechDock() {
                 <span className="font-mono text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium">
                   {name}
                 </span>
-              </motion.div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
