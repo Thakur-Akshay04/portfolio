@@ -25,7 +25,7 @@ export default function Hero() {
   const [taglineIndex, setTaglineIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  
+
   // Custom typewriter taglines
   const words = PORTFOLIO_DATA.personal.taglineWords;
 
