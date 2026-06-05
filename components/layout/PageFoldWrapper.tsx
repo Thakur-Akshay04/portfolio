@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useSafeReducedMotion } from "@/lib/hooks";
 
@@ -12,6 +12,15 @@ interface PageFoldWrapperProps {
 
 export default function PageFoldWrapper({ children, id, className }: PageFoldWrapperProps) {
   const shouldReduceMotion = useSafeReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 1024px)");
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
 
   if (shouldReduceMotion) {
     return (
@@ -21,7 +30,23 @@ export default function PageFoldWrapper({ children, id, className }: PageFoldWra
     );
   }
 
-  // Parent container variant revealing top-to-bottom
+  // Safe and high-performance simplified animation for mobile/tablet screens
+  const mobileVariants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
+  // Premium clipPath & blur reveal animation for desktop screens
   const containerVariants = {
     hidden: {
       opacity: 0.3,
@@ -77,31 +102,35 @@ export default function PageFoldWrapper({ children, id, className }: PageFoldWra
       className={`${className || ""} relative overflow-hidden`}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: false, amount: 0.15 }}
-      variants={containerVariants}
+      viewport={{ once: true, amount: isMobile ? 0.05 : 0.15 }}
+      variants={isMobile ? mobileVariants : containerVariants}
       style={{
-        willChange: "transform, opacity, clip-path, filter",
+        willChange: isMobile ? "transform, opacity" : "transform, opacity, clip-path, filter",
       }}
     >
-      {/* Laser Scanline rendering sweep */}
-      <motion.div
-        variants={scanLineVariants}
-        className="absolute left-0 right-0 h-[2px] pointer-events-none z-10"
-        style={{
-          background: "linear-gradient(to right, transparent, var(--accent-purple, #9d4edd), #ffffff, var(--accent-purple, #9d4edd), transparent)",
-          boxShadow: "0 0 12px var(--accent-purple, #9d4edd), 0 0 4px #ffffff",
-          willChange: "top, opacity",
-        }}
-      />
+      {/* Laser Scanline rendering sweep (Desktop only) */}
+      {!isMobile && (
+        <motion.div
+          variants={scanLineVariants}
+          className="absolute left-0 right-0 h-[2px] pointer-events-none z-10"
+          style={{
+            background: "linear-gradient(to right, transparent, var(--accent-purple, #9d4edd), #ffffff, var(--accent-purple, #9d4edd), transparent)",
+            boxShadow: "0 0 12px var(--accent-purple, #9d4edd), 0 0 4px #ffffff",
+            willChange: "top, opacity",
+          }}
+        />
+      )}
 
-      {/* Grid overlay that fades out as compiling completes */}
-      <motion.div
-        variants={gridVariants}
-        className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(rgba(157,78,221,0.12)_1px,transparent_1px)] bg-[size:16px_16px]"
-        style={{
-          willChange: "opacity",
-        }}
-      />
+      {/* Grid overlay that fades out as compiling completes (Desktop only) */}
+      {!isMobile && (
+        <motion.div
+          variants={gridVariants}
+          className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(rgba(157,78,221,0.12)_1px,transparent_1px)] bg-[size:16px_16px]"
+          style={{
+            willChange: "opacity",
+          }}
+        />
+      )}
 
       {/* Main Content Section */}
       <div className="relative z-10">
@@ -110,4 +139,5 @@ export default function PageFoldWrapper({ children, id, className }: PageFoldWra
     </motion.div>
   );
 }
+
 
