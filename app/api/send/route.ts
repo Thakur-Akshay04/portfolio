@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Simple in-memory rate limiter store
 interface RateLimitRecord {
   count: number;
@@ -25,6 +23,15 @@ function escapeHtml(text: string): string {
 
 export async function POST(req: Request) {
   try {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: "Email service is not configured (missing API key)." },
+        { status: 500 }
+      );
+    }
+    const resend = new Resend(apiKey);
+
     // 1. IP-based Rate Limiter Check
     const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "127.0.0.1";
     const currentTime = Date.now();

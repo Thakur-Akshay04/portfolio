@@ -21,7 +21,7 @@ COPY constants ./constants
 COPY lib ./lib
 COPY logo ./logo
 COPY public ./public
-COPY next.config.mjs tailwind.config.ts tsconfig.json postcss.config.mjs ./
+COPY next.config.mjs tailwind.config.ts tsconfig.json postcss.config.mjs package.json ./
 
 # Set environment variables for build time
 ENV NEXT_TELEMETRY_DISABLED=1
