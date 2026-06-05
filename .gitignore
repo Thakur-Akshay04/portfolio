@@ -28,8 +28,9 @@ yarn-error.log*
 # local env files
 .env*.local
 .env.local
-.env
-
+# ZAP audit reports
+2026-06-05-ZAP-Report-.html
+2026-06-05-ZAP-Report-/
 
 # vercel
 .vercel
