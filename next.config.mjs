@@ -2,12 +2,12 @@
 
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval';
   style-src 'self' 'unsafe-inline';
   img-src 'self' data: blob:;
   font-src 'self' data:;
-  connect-src 'self' https://api.web3forms.com https://challenges.cloudflare.com;
-  frame-src 'self' https://challenges.cloudflare.com;
+  connect-src 'self' https://api.web3forms.com;
+  frame-src 'self';
   worker-src 'self' blob:;
   frame-ancestors 'none';
   base-uri 'self';

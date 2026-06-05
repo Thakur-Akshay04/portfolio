@@ -9,15 +9,6 @@ import { getFadeIn, getScaleIn } from "@/lib/variants";
 import { useSafeReducedMotion } from "@/lib/hooks";
 import PageFoldWrapper from "@/components/layout/PageFoldWrapper";
 import SectionHeading from "@/components/layout/SectionHeading";
-import Script from "next/script";
-
-interface TurnstileWindow extends Window {
-  turnstile?: {
-    render: (container: HTMLElement, options: Record<string, unknown>) => string;
-    reset: (widgetId: string) => void;
-    remove: (widgetId: string) => void;
-  };
-}
 
 interface FormFieldProps {
   label: string;
@@ -110,45 +101,7 @@ export default function Contact() {
 
   const [coords, setCoords] = useState({ x: 0, y: 0 });
 
-  // Turnstile integration
-  const turnstileRef = useRef<HTMLDivElement>(null);
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [widgetId, setWidgetId] = useState<string | null>(null);
 
-  useEffect(() => {
-    let checkTurnstile: NodeJS.Timeout;
-    if (typeof window !== "undefined") {
-      checkTurnstile = setInterval(() => {
-        if ((window as unknown as TurnstileWindow).turnstile && turnstileRef.current && !widgetId) {
-          clearInterval(checkTurnstile);
-          const id = (window as unknown as TurnstileWindow).turnstile!.render(turnstileRef.current, {
-            sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA",
-            callback: (token: string) => {
-              setTurnstileToken(token);
-            },
-            "expired-callback": () => {
-              setTurnstileToken(null);
-            },
-            "error-callback": () => {
-              setTurnstileToken(null);
-            },
-          });
-          setWidgetId(id);
-        }
-      }, 100);
-    }
-
-    return () => {
-      if (checkTurnstile) clearInterval(checkTurnstile);
-      if (widgetId && typeof window !== "undefined" && (window as unknown as TurnstileWindow).turnstile) {
-        try {
-          (window as unknown as TurnstileWindow).turnstile!.remove(widgetId);
-        } catch (e) {
-          console.error("Failed to remove turnstile widget:", e);
-        }
-      }
-    };
-  }, [widgetId]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { left, top } = e.currentTarget.getBoundingClientRect();
@@ -184,11 +137,6 @@ export default function Contact() {
     e.preventDefault();
     if (!validate()) return;
 
-    if (!turnstileToken) {
-      setSubmitError("Please complete the security check.");
-      return;
-    }
-
     setSubmitting(true);
     setSubmitError(null);
 
@@ -198,7 +146,7 @@ export default function Contact() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, subject, message, turnstileToken }),
+        body: JSON.stringify({ name, email, subject, message }),
       });
 
       const result = await response.json();
@@ -215,12 +163,6 @@ export default function Contact() {
       setSubject("");
       setMessage("");
 
-      // Reset Turnstile
-      if (widgetId && typeof window !== "undefined" && (window as unknown as TurnstileWindow).turnstile) {
-        (window as unknown as TurnstileWindow).turnstile!.reset(widgetId);
-        setTurnstileToken(null);
-      }
-
       // Hide Toast after 4 seconds
       setTimeout(() => {
         setSuccess(false);
@@ -229,12 +171,6 @@ export default function Contact() {
       const errorMessage = err instanceof Error ? err.message : "Failed to transmit message.";
       setSubmitError(errorMessage);
       
-      // Reset Turnstile on error so they can solve it again
-      if (widgetId && typeof window !== "undefined" && (window as unknown as TurnstileWindow).turnstile) {
-        (window as unknown as TurnstileWindow).turnstile!.reset(widgetId);
-        setTurnstileToken(null);
-      }
-
       // Hide Error Toast after 5 seconds
       setTimeout(() => {
         setSubmitError(null);
@@ -490,17 +426,12 @@ export default function Contact() {
               error={errors.message}
             />
 
-            {/* Cloudflare Turnstile CAPTCHA */}
-            <div className="flex justify-center py-2" data-lenis-prevent>
-              <div ref={turnstileRef} />
-            </div>
-
             {/* Submit Button */}
             <motion.button
               type="submit"
-              disabled={submitting || !turnstileToken}
-              whileHover={!turnstileToken || submitting ? {} : { scale: 1.01, boxShadow: "0 0 20px rgba(157, 78, 221, 0.4)" }}
-              whileTap={!turnstileToken || submitting ? {} : { scale: 0.99 }}
+              disabled={submitting}
+              whileHover={submitting ? {} : { scale: 1.01, boxShadow: "0 0 20px rgba(157, 78, 221, 0.4)" }}
+              whileTap={submitting ? {} : { scale: 0.99 }}
               className="w-full h-12 bg-accent-purple hover:bg-accent-purple-hover text-black font-extrabold text-sm rounded-xl transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? (
@@ -512,12 +443,6 @@ export default function Contact() {
                 </>
               )}
             </motion.button>
-
-            {/* Load Turnstile explicit script */}
-            <Script
-              src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-              strategy="afterInteractive"
-            />
           </form>
         </motion.div>
       </motion.div>
