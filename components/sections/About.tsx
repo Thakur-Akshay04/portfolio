@@ -1,0 +1,187 @@
+"use client";
+
+import { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
+import { PORTFOLIO_DATA } from "@/constants/data";
+import { useSafeReducedMotion } from "@/lib/hooks";
+import { getFadeIn } from "@/lib/variants";
+import PageFoldWrapper from "@/components/layout/PageFoldWrapper";
+import SectionHeading from "@/components/layout/SectionHeading";
+
+const ConstellationSphere = dynamic(() => import("./ConstellationSphere"), {
+  ssr: false,
+  loading: () => <div className="w-full h-full min-h-[320px] md:min-h-[420px]" />,
+});
+
+// Text highlighter decorator helper
+function renderHighlightedText(text: string) {
+  const highlights = [
+    "React, TypeScript, Node.js, and modern web technologies",
+    "secure verification systems",
+    "web performance and accessibility (a11y)",
+    "pixel-perfect user interfaces",
+    "scalable cloud-based solutions",
+    "Full-stack / MERN developer",
+    "highly efficient API architectures",
+    "Agile team environments",
+    "AI Resume Tailor",
+    "CredVault"
+  ];
+
+  let parts: (string | JSX.Element)[] = [text];
+  
+  highlights.forEach((phrase) => {
+    parts = parts.flatMap((part) => {
+      if (typeof part !== "string") return [part];
+      const index = part.indexOf(phrase);
+      if (index === -1) return [part];
+      
+      const before = part.substring(0, index);
+      const after = part.substring(index + phrase.length);
+      return [
+        before,
+        <span key={phrase} className="text-white font-semibold drop-shadow-[0_0_6px_rgba(255,255,255,0.15)]">{phrase}</span>,
+        after
+      ];
+    });
+  });
+
+  return parts;
+}
+
+import { TechLogo } from "@/components/sections/Projects";
+
+// Static terminal lines definition to avoid useEffect dependency warnings
+const ALL_STACK = [
+  "React 19",
+  "Next.js 14",
+  "Node.js",
+  "MongoDB",
+  "TypeScript",
+  "Tailwind CSS",
+  "Docker",
+  "Git & GitHub",
+  "Express.js",
+  "Nginx",
+  "Jest Testing",
+  "Supabase"
+];
+
+// Simple, cleanly animated horizontal Floating Tech Stack Dock with auto-cycling items in pairs of 4
+function FloatingTechDock() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 4) % ALL_STACK.length);
+    }, 4500); // cycle every 4.5 seconds
+    return () => clearInterval(timer);
+  }, []);
+
+  const currentItems = ALL_STACK.slice(currentIndex, currentIndex + 4);
+
+  return (
+    <div className="relative w-full h-40 bg-[#050508]/80 border border-white/10 rounded-xl flex items-center justify-around px-6 overflow-hidden shadow-2xl">
+      {/* Background Grid Accent */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:1.2rem_1.2rem] opacity-35 pointer-events-none" />
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.45 }}
+          className="w-full flex items-center justify-around shrink-0"
+        >
+          {currentItems.map((name, idx) => {
+            return (
+              <motion.div
+                key={name}
+                animate={{ y: [0, -6, 0] }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: idx * 0.15,
+                }}
+                className="flex flex-col items-center gap-2.5 select-none z-10 group cursor-default"
+              >
+                {/* Glowing circle hover backlight */}
+                <div className="absolute w-12 h-12 rounded-full bg-accent-purple/5 group-hover:bg-accent-purple/15 blur-md transition-all duration-300 pointer-events-none -z-10" />
+
+                <div className="w-14 h-14 rounded-xl bg-black/60 border border-white/5 group-hover:border-accent-purple/45 flex items-center justify-center shadow-lg transition-all duration-300">
+                  <TechLogo name={name} className="w-7 h-7 group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <span className="font-mono text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium">
+                  {name}
+                </span>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+export default function About() {
+  const containerRef = useRef(null);
+  const shouldReduceMotion = useSafeReducedMotion();
+
+  const fadeIn = getFadeIn("up", 40)(shouldReduceMotion);
+  const fadeInRight = getFadeIn("right", 40)(shouldReduceMotion);
+  const fadeInLeft = getFadeIn("left", 40)(shouldReduceMotion);
+
+  return (
+    <PageFoldWrapper id="about" className="py-24 md:py-32 px-6 max-w-7xl mx-auto">
+      {/* Reusable Section Heading with blur-to-clear entrance */}
+      <SectionHeading title="About Me" subtitle="// Introduction" />
+
+      <div
+        ref={containerRef}
+        className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center"
+      >
+        {/* Left Column - 3D Animated Star Sphere */}
+        <motion.div
+          variants={fadeInLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="lg:col-span-5 flex justify-center lg:justify-start w-full relative"
+        >
+          <div className="w-full flex items-center justify-center select-none">
+            <ConstellationSphere />
+          </div>
+        </motion.div>
+
+        {/* Right Column - Biography & Interactive Console */}
+        <motion.div
+          variants={fadeInRight}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="lg:col-span-7 flex flex-col justify-between space-y-8"
+        >
+          <div className="space-y-6">
+            {PORTFOLIO_DATA.personal.bio.map((paragraph, index) => (
+              <motion.p
+                key={index}
+                variants={fadeIn}
+                className="text-gray-300 text-base md:text-lg leading-relaxed font-sans text-left"
+              >
+                {renderHighlightedText(paragraph)}
+              </motion.p>
+            ))}
+          </div>
+
+          {/* Floating animated tech stack dock */}
+          <div className="pt-4">
+            <FloatingTechDock />
+          </div>
+        </motion.div>
+      </div>
+    </PageFoldWrapper>
+  );
+}
