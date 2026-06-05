@@ -58,7 +58,7 @@ export const PORTFOLIO_DATA = {
       "My recent work includes developing AI-powered tools like the AI Resume Tailor and engineering secure verification systems for academic credentials with CredVault.",
       "I thrive in Agile team environments, enjoy optimizing web performance and accessibility, and constantly push the boundaries of React, TypeScript, Node.js, and modern web technologies."
     ],
-    email: process.env.NEXT_PUBLIC_PERSONAL_EMAIL || "",
+    email: process.env.NEXT_PUBLIC_PERSONAL_EMAIL || "akshaysinghthakur0004@gmail.com",
     location: "Himachal Pradesh, India",
   },
   
