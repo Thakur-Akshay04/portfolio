@@ -68,60 +68,42 @@ const ALL_STACK = [
   "Supabase"
 ];
 
-// Simple, cleanly animated horizontal Floating Tech Stack Dock with auto-cycling items in pairs of 4
+// Infinite scrolling marquee for a butter-smooth, seamless tech stack presentation
 function FloatingTechDock() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 4) % ALL_STACK.length);
-    }, 4500); // cycle every 4.5 seconds
-    return () => clearInterval(timer);
-  }, []);
-
-  const currentItems = ALL_STACK.slice(currentIndex, currentIndex + 4);
-
   return (
-    <div className="relative w-full h-40 bg-[#050508]/80 border border-white/10 rounded-xl flex items-center justify-around px-6 overflow-hidden shadow-2xl">
+    <div className="relative w-full h-24 bg-[#050508]/80 border border-white/10 rounded-xl flex items-center overflow-hidden shadow-2xl">
       {/* Background Grid Accent */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:1.2rem_1.2rem] opacity-35 pointer-events-none" />
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.45 }}
-          className="w-full flex items-center justify-around shrink-0"
-        >
-          {currentItems.map((name, idx) => {
-            return (
-              <motion.div
-                key={name}
-                animate={{ y: [0, -6, 0] }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: idx * 0.15,
-                }}
-                className="flex flex-col items-center gap-2.5 select-none z-10 group cursor-default"
-              >
-                {/* Glowing circle hover backlight */}
-                <div className="absolute w-12 h-12 rounded-full bg-accent-purple/5 group-hover:bg-accent-purple/15 blur-md transition-all duration-300 pointer-events-none -z-10" />
+      {/* Fade masks for visual polish */}
+      <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#050508] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#050508] to-transparent z-10 pointer-events-none" />
 
-                <div className="w-14 h-14 rounded-xl bg-black/60 border border-white/5 group-hover:border-accent-purple/45 flex items-center justify-center shadow-lg transition-all duration-300">
-                  <TechLogo name={name} className="w-7 h-7 group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <span className="font-mono text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium">
-                  {name}
-                </span>
-              </motion.div>
-            );
-          })}
+      <div className="flex w-full overflow-hidden">
+        <motion.div
+          className="flex gap-8 items-center shrink-0 pr-8"
+          animate={{ x: [0, "-50%"] }}
+          transition={{
+            ease: "linear",
+            duration: 25,
+            repeat: Infinity,
+          }}
+        >
+          {[...ALL_STACK, ...ALL_STACK].map((name, idx) => (
+            <div
+              key={idx}
+              className="flex items-center gap-3 select-none z-10 group cursor-default px-4 py-2 bg-black/40 border border-white/5 rounded-xl hover:border-accent-purple/45 transition-colors duration-300 shadow-md shrink-0"
+            >
+              <div className="w-8 h-8 rounded-lg bg-black/60 border border-white/5 group-hover:border-accent-purple/30 flex items-center justify-center transition-all duration-300 shrink-0">
+                <TechLogo name={name} className="w-4.5 h-4.5 group-hover:scale-110 transition-transform duration-300" />
+              </div>
+              <span className="font-mono text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium whitespace-nowrap">
+                {name}
+              </span>
+            </div>
+          ))}
         </motion.div>
-      </AnimatePresence>
+      </div>
     </div>
   );
 }
