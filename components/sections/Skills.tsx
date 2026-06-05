@@ -5,16 +5,16 @@ import { motion } from "framer-motion";
 import PageFoldWrapper from "@/components/layout/PageFoldWrapper";
 import SectionHeading from "@/components/layout/SectionHeading";
 
-interface TechItem {
+export interface TechItem {
   name: string;
 }
 
-interface TechCategory {
+export interface TechCategory {
   title: string;
   items: TechItem[];
 }
 
-const TECH_CATEGORIES: TechCategory[] = [
+export const TECH_CATEGORIES: TechCategory[] = [
   {
     title: "Languages",
     items: [
@@ -60,7 +60,7 @@ const TECH_CATEGORIES: TechCategory[] = [
 ];
 
 // Vector SVG components defined locally for instant rendering & brand colors
-function TechIcon({ name, className = "w-full h-full" }: { name: string; className?: string }) {
+export function TechIcon({ name, className = "w-full h-full" }: { name: string; className?: string }) {
   const n = name.toLowerCase().trim();
   
   if (n.includes("react")) {

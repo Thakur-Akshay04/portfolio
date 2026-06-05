@@ -987,7 +987,7 @@ export default function Projects() {
               animate="visible"
               exit="exit"
               onClick={(e) => e.stopPropagation()} // Prevent close on card click
-              className="relative w-full h-full md:h-auto md:max-w-3xl rounded-none md:rounded-2xl border-0 md:border border-accent-purple/35 bg-black overflow-hidden shadow-2xl"
+              className="relative w-full h-full md:h-auto md:max-h-screen lg:max-h-[90vh] md:max-w-3xl rounded-none md:rounded-2xl border-0 md:border border-accent-purple/35 bg-black overflow-hidden shadow-2xl flex flex-col"
             >
               {/* Close Button */}
               <button
@@ -998,13 +998,13 @@ export default function Projects() {
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="p-5 md:p-8 space-y-6 h-full md:max-h-[85vh] overflow-y-auto pb-12" data-lenis-prevent>
+              <div className="p-5 md:p-8 space-y-6 overflow-y-auto flex-1 pb-16" data-lenis-prevent>
                 {/* Header */}
                 <div className="space-y-2">
                   <span className="text-xs font-mono text-accent-purple font-semibold tracking-wider uppercase drop-shadow-[0_0_8px_var(--accent-neon-glow)]">
                     {selectedProject.category}
                   </span>
-                  <h3 className="text-3xl md:text-4xl font-display font-extrabold text-white pr-8">
+                  <h3 className="text-3xl md:text-4xl font-display font-extrabold text-white pr-12">
                     {selectedProject.title}
                   </h3>
                 </div>

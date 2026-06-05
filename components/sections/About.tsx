@@ -50,95 +50,51 @@ function renderHighlightedText(text: string) {
   return parts;
 }
 
-import { TechLogo } from "@/components/sections/Projects";
+import { TECH_CATEGORIES, TechIcon } from "@/components/sections/Skills";
 
-// Static terminal lines definition to avoid useEffect dependency warnings
-const ALL_STACK = [
-  "React 19",
-  "Next.js 14",
-  "Node.js",
-  "MongoDB",
-  "TypeScript",
-  "Tailwind CSS",
-  "Docker",
-  "Git & GitHub",
-  "Express.js",
-  "Nginx",
-  "Jest Testing",
-  "Supabase"
-];
-
-// Vertical rolling tech stack dock that cycles in pairs of 4 with a smooth, staggered reveal
-function FloatingTechDock() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 4) % ALL_STACK.length);
-    }, 4500); // cycle every 4.5 seconds
-    return () => clearInterval(timer);
-  }, []);
-
-  const currentItems = ALL_STACK.slice(currentIndex, currentIndex + 4);
+function AboutTechStack() {
+  const allTech = TECH_CATEGORIES.flatMap(category => category.items);
 
   return (
-    <div className="relative w-full h-40 bg-[#050508]/80 border border-white/10 rounded-xl flex items-center justify-around px-6 overflow-hidden shadow-2xl">
+    <div className="relative w-full bg-[#050508]/60 backdrop-blur-md border border-white/10 rounded-2xl p-5 md:p-6 shadow-2xl overflow-hidden group">
       {/* Background Grid Accent */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:1.2rem_1.2rem] opacity-35 pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:1rem_1rem] opacity-25 pointer-events-none" />
 
-      {/* Vertical fade masks */}
-      <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-[#050508] to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#050508] to-transparent z-10 pointer-events-none" />
+      <h4 className="text-xs font-mono text-accent-purple uppercase tracking-widest mb-4 flex items-center gap-2">
+        <span className="w-1.5 h-1.5 rounded-full bg-accent-purple animate-pulse" />
+        {"// Tech Stack"}
+      </h4>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          className="w-full flex items-center justify-around shrink-0 z-10"
-        >
-          {currentItems.map((name, idx) => (
-            <motion.div
-              key={name}
-              variants={{
-                hidden: { opacity: 0, y: 35 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    duration: 0.75,
-                    ease: [0.16, 1, 0.3, 1], // premium easeOutQuart
-                    delay: idx * 0.08,
-                  },
-                },
-                exit: {
-                  opacity: 0,
-                  y: -35,
-                  transition: {
-                    duration: 0.55,
-                    ease: [0.16, 1, 0.3, 1],
-                    delay: idx * 0.04,
-                  },
-                },
-              }}
-              className="flex flex-col items-center gap-2.5 select-none"
-            >
-              <div className="flex flex-col items-center gap-2.5 group cursor-default">
-                {/* Glowing hover backdrop */}
-                <div className="absolute w-12 h-12 rounded-full bg-accent-purple/5 group-hover:bg-accent-purple/15 blur-md transition-all duration-300 pointer-events-none -z-10" />
-
-                <div className="w-14 h-14 rounded-xl bg-black/60 border border-white/5 group-hover:border-accent-purple/45 flex items-center justify-center shadow-lg transition-all duration-300">
-                  <TechLogo name={name} className="w-7 h-7 group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <span className="font-mono text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium">
-                  {name}
-                </span>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </AnimatePresence>
+      <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-9 gap-3 relative z-10">
+        {allTech.map((tech, idx) => (
+          <motion.div
+            key={tech.name}
+            initial={{ opacity: 0, scale: 0.85 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{
+              type: "spring",
+              stiffness: 260,
+              damping: 20,
+              delay: idx * 0.02
+            }}
+            whileHover={{
+              scale: 1.05,
+              borderColor: "rgba(157, 78, 221, 0.4)",
+              backgroundColor: "rgba(157, 78, 221, 0.05)",
+              boxShadow: "0 0 15px rgba(157, 78, 221, 0.15)"
+            }}
+            className="flex flex-col items-center justify-center gap-2 p-3 bg-black/40 border border-white/5 rounded-xl transition-colors duration-300 group/item cursor-default"
+          >
+            <div className="w-7 h-7 flex items-center justify-center group-hover/item:scale-110 transition-transform duration-300">
+              <TechIcon name={tech.name} className="w-full h-full" />
+            </div>
+            <span className="font-mono text-[9px] md:text-[10px] text-gray-400 group-hover/item:text-white transition-colors duration-300 text-center truncate w-full">
+              {tech.name}
+            </span>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -193,9 +149,9 @@ export default function About() {
             ))}
           </div>
 
-          {/* Floating animated tech stack dock */}
+          {/* Responsive Tech Stack Grid */}
           <div className="pt-4">
-            <FloatingTechDock />
+            <AboutTechStack />
           </div>
         </motion.div>
       </div>
