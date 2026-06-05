@@ -23,6 +23,10 @@ function escapeHtml(text: string): string {
 
 export async function POST(req: Request) {
   try {
+    console.log("[API DEBUG] Checking env variables inside POST handler...");
+    console.log("[API DEBUG] RESEND_API_KEY present:", !!process.env.RESEND_API_KEY);
+    console.log("[API DEBUG] RESEND_API_KEY length:", process.env.RESEND_API_KEY?.length || 0);
+
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
       return NextResponse.json(
