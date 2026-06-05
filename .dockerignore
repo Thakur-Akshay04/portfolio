@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+build
+.git
+.gitignore
+.env*.local
+*.md
+2026-06-05-ZAP-Report-*

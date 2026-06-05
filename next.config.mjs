@@ -48,6 +48,7 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
+  output: "standalone",
   // Fix: Server Leaks Information via "X-Powered-By" — Low Risk
   poweredByHeader: false,
 
