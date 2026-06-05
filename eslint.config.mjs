@@ -1,14 +1,11 @@
 import nextVitals from "eslint-config-next/core-web-vitals";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
 
 const eslintConfig = [
-  ...nextVitals,
   {
-    rules: {
-      "react-hooks/purity": "warn",
-      "react-hooks/set-state-in-effect": "warn"
-    },
     ignores: [
       ".next/**",
+      ".open-next/**",
       "node_modules/**",
       "out/**",
       "dist/**",
@@ -17,6 +14,16 @@ const eslintConfig = [
       "next.config.mjs",
       "tailwind.config.ts"
     ]
+  },
+  ...nextVitals,
+  {
+    plugins: {
+      "react-hooks": reactHooksPlugin,
+    },
+    rules: {
+      "react-hooks/purity": "warn",
+      "react-hooks/set-state-in-effect": "warn"
+    }
   }
 ];
 
