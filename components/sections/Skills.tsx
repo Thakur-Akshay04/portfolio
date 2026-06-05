@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import { motion } from "framer-motion";
 import PageFoldWrapper from "@/components/layout/PageFoldWrapper";
 import SectionHeading from "@/components/layout/SectionHeading";
@@ -203,78 +204,84 @@ export default function Skills() {
       {/* Section Heading */}
       <SectionHeading title="Tech Stack" subtitle="// Expertise" />
 
-      {/* Categories Grid: 5 columns on desktop, 3 on tablet/medium, 1 on mobile */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-10 mt-16">
+      {/* Categories Grid: 5 columns on desktop, stack on mobile/tablet */}
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-y-10 lg:gap-8 lg:gap-x-10 mt-16">
         {TECH_CATEGORIES.map((category, catIndex) => (
-          <motion.div
-            key={category.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: catIndex * 0.08 }}
-            className="flex flex-col gap-6"
-          >
-            {/* Category Title with simple border line */}
-            <div className="flex items-center gap-3">
-              <span className="w-1.5 h-4 bg-accent-purple rounded-full shadow-[0_0_8px_var(--accent-neon-glow)]" />
-              <h4 className="text-xs sm:text-sm font-mono font-bold tracking-widest text-white uppercase">
-                {category.title}
-              </h4>
-            </div>
+          <Fragment key={category.title}>
+            {/* Divider line between categories on mobile */}
+            {catIndex > 0 && (
+              <div className="w-full h-[1px] bg-white/10 lg:hidden my-2" />
+            )}
+            <motion.div
+              key={category.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: catIndex * 0.08 }}
+              className="flex flex-col gap-6"
+            >
+              {/* Category Title with simple border line */}
+              <div className="flex items-center gap-3">
+                <span className="hidden lg:inline-block w-1.5 h-4 bg-accent-purple rounded-full shadow-[0_0_8px_var(--accent-neon-glow)]" />
+                <h4 className="text-lg lg:text-sm font-sans lg:font-mono font-bold lg:tracking-widest text-white lg:uppercase">
+                  {category.title}
+                </h4>
+              </div>
 
-            {/* Vertical list of clean chips */}
-            <div className="flex flex-col gap-3.5">
-              {category.items.map((tech) => (
-                <motion.div
-                  key={tech.name}
-                  whileHover="hover"
-                  initial="initial"
-                  className="group flex items-center gap-4 py-3.5 px-5 rounded-xl border border-white/5 bg-[#050505] hover:bg-[#0c0c0c] hover:border-accent-purple/35 transition-all duration-300 cursor-default"
-                  variants={{
-                    hover: { x: 6 },
-                    initial: { x: 0 }
-                  }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                  {/* Tech Logo: colorful by default, with 3D Y-axis flip hover animation */}
+              {/* Grid lists of clean chips on mobile, vertical cards on desktop */}
+              <div className="flex flex-wrap gap-x-8 gap-y-3 lg:flex-col lg:gap-3.5">
+                {category.items.map((tech) => (
                   <motion.div
-                    className="relative w-6 h-6 flex-shrink-0 flex items-center justify-center"
-                    style={{ transformStyle: "preserve-3d", perspective: 600 }}
+                    key={tech.name}
+                    whileHover="hover"
+                    initial="initial"
+                    className="group flex items-center gap-3 lg:gap-4 py-2 lg:py-3.5 px-0 lg:px-5 rounded-xl border-0 lg:border border-transparent lg:border-white/5 bg-transparent lg:bg-[#050505] hover:lg:bg-[#0c0c0c] hover:lg:border-accent-purple/35 transition-all duration-300 cursor-default shrink-0"
                     variants={{
-                      hover: {
-                        scale: 1.25,
-                        rotateY: 360,
-                        transition: {
-                          rotateY: {
-                            duration: 0.65,
-                            ease: "easeInOut"
-                          },
-                          scale: {
-                            type: "spring",
-                            stiffness: 400,
-                            damping: 15
-                          }
-                        }
-                      },
-                      initial: {
-                        scale: 1,
-                        rotateY: 0
-                      }
+                      hover: { x: 6 },
+                      initial: { x: 0 }
                     }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
-                    <div className="w-full h-full opacity-85 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                      <TechIcon name={tech.name} />
-                    </div>
-                  </motion.div>
+                    {/* Tech Logo: colorful by default, with 3D Y-axis flip hover animation */}
+                    <motion.div
+                      className="relative w-6 h-6 flex-shrink-0 flex items-center justify-center"
+                      style={{ transformStyle: "preserve-3d", perspective: 600 }}
+                      variants={{
+                        hover: {
+                          scale: 1.25,
+                          rotateY: 360,
+                          transition: {
+                            rotateY: {
+                              duration: 0.65,
+                              ease: "easeInOut"
+                            },
+                            scale: {
+                              type: "spring",
+                              stiffness: 400,
+                              damping: 15
+                            }
+                          }
+                        },
+                        initial: {
+                          scale: 1,
+                          rotateY: 0
+                        }
+                      }}
+                    >
+                      <div className="w-full h-full opacity-85 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <TechIcon name={tech.name} />
+                      </div>
+                    </motion.div>
 
-                  {/* Tech Name */}
-                  <span className="font-sans text-sm font-medium text-gray-400 group-hover:text-white transition-colors duration-300">
-                    {tech.name}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                    {/* Tech Name */}
+                    <span className="font-sans text-sm font-medium text-gray-400 group-hover:text-white transition-colors duration-300">
+                      {tech.name}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </Fragment>
         ))}
       </div>
     </PageFoldWrapper>
