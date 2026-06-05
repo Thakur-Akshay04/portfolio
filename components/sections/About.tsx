@@ -158,7 +158,7 @@ export default function About() {
 
       <div
         ref={containerRef}
-        className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center"
+        className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative"
       >
         {/* Left Column - 3D Animated Star Sphere */}
         <motion.div
@@ -166,9 +166,9 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="lg:col-span-5 flex justify-center lg:justify-start w-full relative"
+          className="absolute lg:relative inset-0 lg:inset-auto lg:col-span-5 flex justify-center lg:justify-start w-full h-full lg:h-auto -z-10 lg:z-0 opacity-20 lg:opacity-100 pointer-events-none lg:pointer-events-auto"
         >
-          <div className="w-full flex items-center justify-center select-none">
+          <div className="w-full h-full lg:h-auto flex items-center justify-center select-none">
             <ConstellationSphere />
           </div>
         </motion.div>

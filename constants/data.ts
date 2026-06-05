@@ -56,7 +56,7 @@ export const PORTFOLIO_DATA = {
     bio: [
       "I am a Full-stack / MERN developer specializing in building responsive web applications and scalable cloud-based solutions. I focus on creating pixel-perfect user interfaces and designing highly efficient API architectures.",
       "My recent work includes developing AI-powered tools like the AI Resume Tailor and engineering secure verification systems for academic credentials with CredVault.",
-      "I thrive in Agile team environments, enjoy optimizing web performance and accessibility (a11y), and constantly push the boundaries of React, TypeScript, Node.js, and modern web technologies."
+      "I thrive in Agile team environments, enjoy optimizing web performance and accessibility, and constantly push the boundaries of React, TypeScript, Node.js, and modern web technologies."
     ],
     email: process.env.NEXT_PUBLIC_PERSONAL_EMAIL || "",
     location: "Himachal Pradesh, India",
