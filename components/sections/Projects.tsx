@@ -795,6 +795,7 @@ const techItemVariants = {
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const shouldReduceMotion = useSafeReducedMotion();
+  const openTimeRef = useRef<number>(0);
 
   useEffect(() => {
     if (selectedProject) {
@@ -932,6 +933,7 @@ export default function Projects() {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
+                      openTimeRef.current = Date.now();
                       setSelectedProject(project);
                     }}
                     className="inline-flex items-center justify-center px-5 py-2 border border-accent-purple/40 text-accent-purple bg-accent-purple/5 rounded-full font-semibold hover:bg-accent-purple/15 hover:border-accent-purple transition-all duration-300 h-9"
@@ -971,8 +973,12 @@ export default function Projects() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            onClick={() => setSelectedProject(null)}
-            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-0 md:p-4 overflow-hidden"
+            onClick={() => {
+              if (Date.now() - openTimeRef.current > 400) {
+                setSelectedProject(null);
+              }
+            }}
+            className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-center justify-center p-0 md:p-4 overflow-hidden"
           >
             {/* Modal Box */}
             <motion.div
