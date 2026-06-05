@@ -168,6 +168,55 @@ body {
 }
 
 /* ─── Floating Bottom Dock Navbar ─── */
+.navbar-header-wide {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-radius: 20px;
+  background: rgba(10, 10, 10, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 
+    0 10px 40px -10px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+  width: 100%;
+}
+
+.navbar-wide-item {
+  position: relative;
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar-wide-item:hover {
+  color: var(--accent-purple);
+  text-shadow: 0 0 8px var(--accent-neon-glow);
+}
+
+.navbar-wide-item.active {
+  color: #ffffff;
+}
+
+.navbar-wide-active-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: var(--accent-purple);
+  box-shadow: 0 0 8px var(--accent-purple);
+  border-radius: 2px;
+}
+
 .navbar-dock {
   display: flex;
   align-items: center;
