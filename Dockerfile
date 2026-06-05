@@ -14,8 +14,14 @@ RUN pnpm install --frozen-lockfile
 FROM node:18-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-# Safe copy: all sensitive credentials (.env.local, .git, etc.) are ignored via .dockerignore (S6470)
-COPY . .
+# Copy directories explicitly to prevent directory globbing risks (Compliant with S6470)
+COPY app ./app
+COPY components ./components
+COPY constants ./constants
+COPY lib ./lib
+COPY logo ./logo
+COPY public ./public
+COPY next.config.mjs tailwind.config.ts tsconfig.json postcss.config.mjs ./
 
 # Set environment variables for build time
 ENV NEXT_TELEMETRY_DISABLED=1
