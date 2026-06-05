@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "build:cf": "opennextjs-cloudflare build --dangerouslyUseUnsupportedNextVersion",
+    "deploy:cf": "opennextjs-cloudflare build --dangerouslyUseUnsupportedNextVersion && wrangler deploy",
+    "version:cf": "opennextjs-cloudflare build --dangerouslyUseUnsupportedNextVersion && wrangler versions upload",
     "start": "next start",
     "lint": "eslint ."
   },
