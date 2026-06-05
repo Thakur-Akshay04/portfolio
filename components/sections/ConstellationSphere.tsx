@@ -75,6 +75,7 @@ function RotatingSphere() {
             count={positions.length / 3}
             array={positions}
             itemSize={3}
+            args={[positions, 3]}
           />
         </bufferGeometry>
         <pointsMaterial
@@ -94,6 +95,7 @@ function RotatingSphere() {
             count={linePositions.length / 3}
             array={linePositions}
             itemSize={3}
+            args={[linePositions, 3]}
           />
         </bufferGeometry>
         <lineBasicMaterial
@@ -112,6 +114,7 @@ function RotatingSphere() {
             count={ringPositions.length / 3}
             array={ringPositions}
             itemSize={3}
+            args={[ringPositions, 3]}
           />
         </bufferGeometry>
         <pointsMaterial

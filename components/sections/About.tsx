@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 import { PORTFOLIO_DATA } from "@/constants/data";
@@ -29,7 +29,7 @@ function renderHighlightedText(text: string) {
     "CredVault"
   ];
 
-  let parts: (string | JSX.Element)[] = [text];
+  let parts: (string | React.ReactElement)[] = [text];
   
   highlights.forEach((phrase) => {
     parts = parts.flatMap((part) => {

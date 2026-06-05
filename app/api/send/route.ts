@@ -2,11 +2,8 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import dns from "dns/promises";
 
-// Comprehensive list of 3,000+ disposable/temporary email domains
-// Source: https://github.com/disposable-email-domains/disposable-email-domains
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const disposableDomains: string[] = require("disposable-email-domains");
-const DISPOSABLE_EMAIL_DOMAINS = new Set(disposableDomains);
+import disposableDomains from "disposable-email-domains";
+const DISPOSABLE_EMAIL_DOMAINS = new Set(disposableDomains as string[]);
 
 /**
  * Validates that the email domain has valid MX (Mail Exchange) records.
