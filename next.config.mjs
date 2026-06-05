@@ -49,7 +49,7 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
-  output: "standalone",
+  output: process.platform === "win32" ? undefined : "standalone",
   // Fix: Server Leaks Information via "X-Powered-By" — Low Risk
   poweredByHeader: false,
 

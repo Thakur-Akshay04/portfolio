@@ -11,6 +11,14 @@ import PageFoldWrapper from "@/components/layout/PageFoldWrapper";
 import SectionHeading from "@/components/layout/SectionHeading";
 import Script from "next/script";
 
+interface TurnstileWindow extends Window {
+  turnstile?: {
+    render: (container: HTMLElement, options: Record<string, unknown>) => string;
+    reset: (widgetId: string) => void;
+    remove: (widgetId: string) => void;
+  };
+}
+
 interface FormFieldProps {
   label: string;
   id: string;
@@ -111,9 +119,9 @@ export default function Contact() {
     let checkTurnstile: NodeJS.Timeout;
     if (typeof window !== "undefined") {
       checkTurnstile = setInterval(() => {
-        if ((window as any).turnstile && turnstileRef.current && !widgetId) {
+        if ((window as unknown as TurnstileWindow).turnstile && turnstileRef.current && !widgetId) {
           clearInterval(checkTurnstile);
-          const id = (window as any).turnstile.render(turnstileRef.current, {
+          const id = (window as unknown as TurnstileWindow).turnstile!.render(turnstileRef.current, {
             sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA",
             callback: (token: string) => {
               setTurnstileToken(token);
@@ -132,9 +140,9 @@ export default function Contact() {
 
     return () => {
       if (checkTurnstile) clearInterval(checkTurnstile);
-      if (widgetId && typeof window !== "undefined" && (window as any).turnstile) {
+      if (widgetId && typeof window !== "undefined" && (window as unknown as TurnstileWindow).turnstile) {
         try {
-          (window as any).turnstile.remove(widgetId);
+          (window as unknown as TurnstileWindow).turnstile!.remove(widgetId);
         } catch (e) {
           console.error("Failed to remove turnstile widget:", e);
         }
@@ -208,8 +216,8 @@ export default function Contact() {
       setMessage("");
 
       // Reset Turnstile
-      if (widgetId && typeof window !== "undefined" && (window as any).turnstile) {
-        (window as any).turnstile.reset(widgetId);
+      if (widgetId && typeof window !== "undefined" && (window as unknown as TurnstileWindow).turnstile) {
+        (window as unknown as TurnstileWindow).turnstile!.reset(widgetId);
         setTurnstileToken(null);
       }
 
@@ -222,8 +230,8 @@ export default function Contact() {
       setSubmitError(errorMessage);
       
       // Reset Turnstile on error so they can solve it again
-      if (widgetId && typeof window !== "undefined" && (window as any).turnstile) {
-        (window as any).turnstile.reset(widgetId);
+      if (widgetId && typeof window !== "undefined" && (window as unknown as TurnstileWindow).turnstile) {
+        (window as unknown as TurnstileWindow).turnstile!.reset(widgetId);
         setTurnstileToken(null);
       }
 
