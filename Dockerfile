@@ -27,6 +27,10 @@ COPY next.config.mjs tailwind.config.ts tsconfig.json postcss.config.mjs package
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
+# Allow passing Turnstile site key at build time (fall back to testing key if not provided)
+ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY
+ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-1x00000000000000000000AA}
+
 # Install package manager for pnpm build
 RUN npm install -g pnpm
 RUN pnpm build
