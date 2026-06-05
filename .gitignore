@@ -26,8 +26,16 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
+.env.development
+.env.production
+.env.test
 .env*.local
 .env.local
+
+# Cloudflare wrangler
+.wrangler/
+
 # ZAP audit reports
 2026-06-05-ZAP-Report-.html
 2026-06-05-ZAP-Report-/
@@ -41,3 +49,4 @@ next-env.d.ts
 
 # open-next build files
 .open-next/
+
