@@ -63,12 +63,48 @@ export async function POST(req: Request) {
     }
 
     // 2. Parse request body
-    const { name, email, subject, message } = await req.json();
+    const body = await req.json().catch(() => ({}));
+    const { name, email, subject, message, turnstileToken } = body;
 
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
+      );
+    }
+
+    // 2.5. Verify Cloudflare Turnstile Token
+    if (!turnstileToken) {
+      return NextResponse.json(
+        { error: "Security check failed (missing CAPTCHA token)." },
+        { status: 400 }
+      );
+    }
+
+    const turnstileSecret = process.env.TURNSTILE_SECRET_KEY || "1x0000000000000000000000000000000AA";
+    const verifyUrl = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+
+    try {
+      const verifyResponse = await fetch(verifyUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `secret=${encodeURIComponent(turnstileSecret)}&response=${encodeURIComponent(turnstileToken)}&remoteip=${encodeURIComponent(ip)}`,
+      });
+
+      const verifyData = await verifyResponse.json();
+      if (!verifyData.success) {
+        return NextResponse.json(
+          { error: "Security check failed (invalid CAPTCHA). Please try again." },
+          { status: 400 }
+        );
+      }
+    } catch (verifyError) {
+      console.error("Cloudflare Turnstile verification failed:", verifyError);
+      return NextResponse.json(
+        { error: "Security validation error. Please try again later." },
+        { status: 500 }
       );
     }
 
