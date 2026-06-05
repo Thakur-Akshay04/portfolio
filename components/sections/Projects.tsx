@@ -1017,7 +1017,7 @@ export default function Projects() {
                   variants={techContainerVariants}
                   initial="hidden"
                   animate="visible"
-                  className="flex flex-wrap gap-2 border-b border-white/10 pb-6"
+                  className="flex flex-wrap gap-1.5 md:gap-2 border-b border-white/10 pb-6"
                 >
                   {selectedProject.techStack.map((tech) => (
                     <motion.span
@@ -1030,19 +1030,19 @@ export default function Projects() {
                         backgroundColor: "rgba(157, 78, 221, 0.05)",
                         color: "#ffffff"
                       }}
-                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0a0a0a] border border-white/5 text-xs text-gray-300 font-mono transition-all cursor-default"
+                      className="inline-flex items-center gap-1.5 md:gap-2 p-1.5 md:px-3 md:py-1.5 rounded-full bg-[#0a0a0a] border border-white/5 text-xs text-gray-300 font-mono transition-all cursor-default"
                     >
                       <TechLogo name={tech} className="w-4 h-4 shrink-0" />
-                      <span>{tech}</span>
+                      <span className="hidden lg:inline">{tech}</span>
                     </motion.span>
                   ))}
                 </motion.div>
 
 
                 {/* Description Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   {/* Left Column - Main Details */}
-                  <div className="md:col-span-2 space-y-4">
+                  <div className="lg:col-span-2 space-y-4">
                     <h4 className="text-sm font-mono text-accent-purple uppercase tracking-wider">{"// Description"}</h4>
                     <p className="text-sm md:text-base text-gray-300 leading-relaxed font-sans whitespace-pre-line">
                       {selectedProject.fullDescription}
@@ -1050,7 +1050,7 @@ export default function Projects() {
                   </div>
 
                   {/* Right Column - Challenges / Stats */}
-                  <div className="space-y-4 bg-[#0a0a0a] p-5 border border-white/10 rounded-xl hover-glow-purple">
+                  <div className="hidden lg:block space-y-4 bg-[#0a0a0a] p-5 border border-white/10 rounded-xl hover-glow-purple">
                     <h4 className="text-sm font-mono text-accent-purple uppercase tracking-wider">{"// Project Details"}</h4>
                     <div className="space-y-3 font-mono text-xs text-gray-400">
                       <p className="flex justify-between">
@@ -1070,7 +1070,7 @@ export default function Projects() {
                 </div>
 
                 {/* Challenge & Solution Panels */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* Challenge panel */}
                   <div className="p-5 rounded-xl border border-red-500/20 bg-red-950/5 flex gap-3 items-start">
                     <ShieldAlert className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
