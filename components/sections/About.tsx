@@ -68,7 +68,7 @@ const ALL_STACK = [
   "Supabase"
 ];
 
-// Infinite scrolling marquee for a butter-smooth, seamless tech stack presentation
+// Infinite scrolling marquee for a butter-smooth, seamless tech stack presentation with organic float wave
 function FloatingTechDock() {
   return (
     <div className="relative w-full h-24 bg-[#050508]/80 border border-white/10 rounded-xl flex items-center overflow-hidden shadow-2xl">
@@ -79,19 +79,27 @@ function FloatingTechDock() {
       <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#050508] to-transparent z-10 pointer-events-none" />
       <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#050508] to-transparent z-10 pointer-events-none" />
 
-      <div className="flex w-full overflow-hidden">
+      <div className="flex w-max shrink-0 overflow-hidden">
+        {/* Track 1 */}
         <motion.div
           className="flex gap-8 items-center shrink-0 pr-8"
-          animate={{ x: [0, "-50%"] }}
+          animate={{ x: [0, "-100%"] }}
           transition={{
             ease: "linear",
             duration: 25,
             repeat: Infinity,
           }}
         >
-          {[...ALL_STACK, ...ALL_STACK].map((name, idx) => (
-            <div
+          {ALL_STACK.map((name, idx) => (
+            <motion.div
               key={idx}
+              animate={{ y: [0, -4, 0] }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: idx * 0.25,
+              }}
               className="flex items-center gap-3 select-none z-10 group cursor-default px-4 py-2 bg-black/40 border border-white/5 rounded-xl hover:border-accent-purple/45 transition-colors duration-300 shadow-md shrink-0"
             >
               <div className="w-8 h-8 rounded-lg bg-black/60 border border-white/5 group-hover:border-accent-purple/30 flex items-center justify-center transition-all duration-300 shrink-0">
@@ -100,7 +108,39 @@ function FloatingTechDock() {
               <span className="font-mono text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium whitespace-nowrap">
                 {name}
               </span>
-            </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Track 2 (Duplicate for Seamless Loop) */}
+        <motion.div
+          className="flex gap-8 items-center shrink-0 pr-8"
+          animate={{ x: [0, "-100%"] }}
+          transition={{
+            ease: "linear",
+            duration: 25,
+            repeat: Infinity,
+          }}
+        >
+          {ALL_STACK.map((name, idx) => (
+            <motion.div
+              key={`dup-${idx}`}
+              animate={{ y: [0, -4, 0] }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: idx * 0.25,
+              }}
+              className="flex items-center gap-3 select-none z-10 group cursor-default px-4 py-2 bg-black/40 border border-white/5 rounded-xl hover:border-accent-purple/45 transition-colors duration-300 shadow-md shrink-0"
+            >
+              <div className="w-8 h-8 rounded-lg bg-black/60 border border-white/5 group-hover:border-accent-purple/30 flex items-center justify-center transition-all duration-300 shrink-0">
+                <TechLogo name={name} className="w-4.5 h-4.5 group-hover:scale-110 transition-transform duration-300" />
+              </div>
+              <span className="font-mono text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium whitespace-nowrap">
+                {name}
+              </span>
+            </motion.div>
           ))}
         </motion.div>
       </div>
