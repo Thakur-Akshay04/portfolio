@@ -22,7 +22,7 @@ export default function SectionHeading({ title, subtitle }: SectionHeadingProps)
       <h2 className="text-xs font-mono tracking-[0.25em] text-accent-purple uppercase mb-3 drop-shadow-[0_0_8px_var(--accent-neon-glow)]">
         {subtitle}
       </h2>
-      <h3 className="text-4xl md:text-5xl font-display font-extrabold text-white tracking-tight uppercase">
+      <h3 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-white tracking-tight uppercase">
         {title}
       </h3>
       <div className="w-16 h-[2px] bg-accent-purple mx-auto mt-4 shadow-[0_0_10px_var(--accent-neon-glow)]" />

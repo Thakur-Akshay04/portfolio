@@ -17,7 +17,7 @@ export default function Home() {
       <Contact />
       
       {/* Footer */}
-      <footer className="py-8 text-center text-s font-mono text-gray-500 border-t border-accent-purple/5 bg-black">
+      <footer className="py-8 text-center text-xs font-mono text-gray-500 border-t border-accent-purple/5 bg-black">
         <div className="max-w-7xl mx-auto px-7 flex justify-center items-center">
           <p>© {new Date().getFullYear()} Akshay Singh Thakur.</p>
         </div>

@@ -165,8 +165,9 @@ export default function Contact() {
       setTimeout(() => {
         setSuccess(false);
       }, 4000);
-    } catch (err: any) {
-      setSubmitError(err.message || "Failed to transmit message.");
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "Failed to transmit message.";
+      setSubmitError(errorMessage);
       // Hide Error Toast after 5 seconds
       setTimeout(() => {
         setSubmitError(null);
@@ -250,7 +251,7 @@ export default function Contact() {
               <span className="text-gray-500">EMAIL:</span>
               <motion.a
                 href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-                className="px-4 py-2.5 rounded-xl border border-white/20 bg-black/60 text-gray-300 font-semibold relative overflow-hidden group"
+                className="px-4 py-2.5 rounded-xl border border-white/20 bg-black/60 text-gray-300 font-semibold relative overflow-hidden group text-[11px] sm:text-sm max-w-full"
                 whileHover="hover"
                 whileTap="tap"
                 variants={{
@@ -283,7 +284,7 @@ export default function Contact() {
 
                 {/* Email text animation */}
                 <motion.span
-                  className="relative z-10 inline-block"
+                  className="relative z-10 inline-block break-all"
                   variants={{
                     hover: {
                       color: "#ffffff",

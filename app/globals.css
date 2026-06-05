@@ -249,3 +249,12 @@ body {
   }
 }
 
+@media (max-width: 480px) {
+  .navbar-dock-label {
+    display: none;
+  }
+  .navbar-dock-item {
+    padding: 10px 14px;
+  }
+}
+

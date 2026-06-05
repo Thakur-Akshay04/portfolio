@@ -92,8 +92,6 @@ export default function Hero() {
     }
   };
 
-  const nameChars = Array.from(PORTFOLIO_DATA.personal.name);
-
   return (
     <section
       id="home"
@@ -111,21 +109,31 @@ export default function Hero() {
         {/* Left Side: Name and details */}
         <div className="lg:col-span-7 flex flex-col items-start text-left">
           {/* Heading Name: Character Staggered Entrance Reveal */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight mb-4 select-none uppercase text-white flex flex-wrap md:flex-nowrap leading-[1.05] whitespace-normal md:whitespace-nowrap">
-            {nameChars.map((char, i) => (
-              <motion.span
-                key={i}
-                initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.03,
-                  ease: [0.16, 1, 0.3, 1], // easeOutQuart
-                }}
-                className={char === " " ? "mr-4 md:mr-6" : ""}
-              >
-                {char}
-              </motion.span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight mb-4 select-none uppercase text-white flex flex-wrap leading-[1.05]">
+            {PORTFOLIO_DATA.personal.name.split(" ").map((word, wIdx) => (
+              <span key={wIdx} className="inline-block whitespace-nowrap mr-3 md:mr-5">
+                {Array.from(word).map((char, cIdx) => {
+                  const charIndex =
+                    PORTFOLIO_DATA.personal.name.split(" ").slice(0, wIdx).join(" ").length +
+                    wIdx +
+                    cIdx;
+                  return (
+                    <motion.span
+                      key={cIdx}
+                      initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 40 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.6,
+                        delay: charIndex * 0.03,
+                        ease: [0.16, 1, 0.3, 1], // easeOutQuart
+                      }}
+                      className="inline-block"
+                    >
+                      {char}
+                    </motion.span>
+                  );
+                })}
+              </span>
             ))}
           </h1>
 

@@ -37,7 +37,7 @@ export default function Experience() {
       <div ref={containerRef} className="relative mt-16 md:mt-24 w-full flex flex-col items-center">
         
         {/* Horizontal Line Container */}
-        <div className="relative w-full h-[2px] bg-white/5 rounded-full my-16">
+        <div className="hidden md:block relative w-full h-[2px] bg-white/5 rounded-full my-16">
           <div className="absolute inset-0 bg-white/5 rounded-full overflow-hidden">
             <motion.div
               style={{ scaleX: shouldReduceMotion ? 1 : scaleX }}

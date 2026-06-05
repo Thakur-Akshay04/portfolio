@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -127,13 +127,31 @@ function RotatingSphere() {
 }
 
 export default function ConstellationSphere() {
+  const [cameraZ, setCameraZ] = useState(3.6);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const w = window.innerWidth;
+      if (w < 480) {
+        setCameraZ(6.2);
+      } else if (w < 768) {
+        setCameraZ(4.8);
+      } else {
+        setCameraZ(3.6);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="w-full h-full min-h-[380px] md:min-h-[480px] lg:min-h-[550px] relative flex items-center justify-center select-none">
       {/* Subtle outer neon purple glow */}
       <div className="absolute w-80 h-80 rounded-full bg-accent-purple/5 blur-3xl opacity-60 pointer-events-none animate-pulse" />
       
       <Canvas
-        camera={{ position: [0, 0, 3.6], fov: 60 }}
+        camera={{ position: [0, 0, cameraZ], fov: 60 }}
         gl={{ antialias: true, alpha: true }}
         className="w-full h-full"
       >
