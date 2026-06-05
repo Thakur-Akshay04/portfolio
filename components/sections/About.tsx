@@ -126,12 +126,12 @@ function FloatingTechDock() {
             >
               {/* Individual Item Floating Wavy Loop */}
               <motion.div
-                animate={{ y: [0, -6, 0] }}
+                animate={{ y: [0, -3, 0] }}
                 transition={{
-                  duration: 3.5,
+                  duration: 6,
                   repeat: Infinity,
                   ease: "easeInOut",
-                  delay: idx * 0.2,
+                  delay: idx * 0.35,
                 }}
                 className="flex flex-col items-center gap-2.5 group cursor-default"
               >
