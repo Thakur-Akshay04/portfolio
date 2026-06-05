@@ -68,82 +68,87 @@ const ALL_STACK = [
   "Supabase"
 ];
 
-// Infinite scrolling marquee for a butter-smooth, seamless tech stack presentation with organic float wave
+// Vertical rolling tech stack dock that cycles in pairs of 4 with a smooth, staggered reveal
 function FloatingTechDock() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 4) % ALL_STACK.length);
+    }, 4500); // cycle every 4.5 seconds
+    return () => clearInterval(timer);
+  }, []);
+
+  const currentItems = ALL_STACK.slice(currentIndex, currentIndex + 4);
+
   return (
-    <div className="relative w-full h-24 bg-[#050508]/80 border border-white/10 rounded-xl flex items-center overflow-hidden shadow-2xl">
+    <div className="relative w-full h-40 bg-[#050508]/80 border border-white/10 rounded-xl flex items-center justify-around px-6 overflow-hidden shadow-2xl">
       {/* Background Grid Accent */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:1.2rem_1.2rem] opacity-35 pointer-events-none" />
 
-      {/* Fade masks for visual polish */}
-      <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#050508] to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#050508] to-transparent z-10 pointer-events-none" />
+      {/* Vertical fade masks */}
+      <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-[#050508] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#050508] to-transparent z-10 pointer-events-none" />
 
-      <div className="flex w-max shrink-0 overflow-hidden">
-        {/* Track 1 */}
+      <AnimatePresence mode="wait">
         <motion.div
-          className="flex gap-8 items-center shrink-0 pr-8"
-          animate={{ x: [0, "-100%"] }}
-          transition={{
-            ease: "linear",
-            duration: 25,
-            repeat: Infinity,
-          }}
+          key={currentIndex}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          className="w-full flex items-center justify-around shrink-0 z-10"
         >
-          {ALL_STACK.map((name, idx) => (
+          {currentItems.map((name, idx) => (
             <motion.div
-              key={idx}
-              animate={{ y: [0, -4, 0] }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: idx * 0.25,
+              key={name}
+              variants={{
+                hidden: { opacity: 0, y: 35 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.75,
+                    ease: [0.16, 1, 0.3, 1], // premium easeOutQuart
+                    delay: idx * 0.08,
+                  },
+                },
+                exit: {
+                  opacity: 0,
+                  y: -35,
+                  transition: {
+                    duration: 0.55,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: idx * 0.04,
+                  },
+                },
               }}
-              className="flex items-center gap-3 select-none z-10 group cursor-default px-4 py-2 bg-black/40 border border-white/5 rounded-xl hover:border-accent-purple/45 transition-colors duration-300 shadow-md shrink-0"
+              className="flex flex-col items-center gap-2.5 select-none"
             >
-              <div className="w-8 h-8 rounded-lg bg-black/60 border border-white/5 group-hover:border-accent-purple/30 flex items-center justify-center transition-all duration-300 shrink-0">
-                <TechLogo name={name} className="w-4.5 h-4.5 group-hover:scale-110 transition-transform duration-300" />
-              </div>
-              <span className="font-mono text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium whitespace-nowrap">
-                {name}
-              </span>
+              {/* Individual Item Floating Wavy Loop */}
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: idx * 0.2,
+                }}
+                className="flex flex-col items-center gap-2.5 group cursor-default"
+              >
+                {/* Glowing hover backdrop */}
+                <div className="absolute w-12 h-12 rounded-full bg-accent-purple/5 group-hover:bg-accent-purple/15 blur-md transition-all duration-300 pointer-events-none -z-10" />
+
+                <div className="w-14 h-14 rounded-xl bg-black/60 border border-white/5 group-hover:border-accent-purple/45 flex items-center justify-center shadow-lg transition-all duration-300">
+                  <TechLogo name={name} className="w-7 h-7 group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <span className="font-mono text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium">
+                  {name}
+                </span>
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>
-
-        {/* Track 2 (Duplicate for Seamless Loop) */}
-        <motion.div
-          className="flex gap-8 items-center shrink-0 pr-8"
-          animate={{ x: [0, "-100%"] }}
-          transition={{
-            ease: "linear",
-            duration: 25,
-            repeat: Infinity,
-          }}
-        >
-          {ALL_STACK.map((name, idx) => (
-            <motion.div
-              key={`dup-${idx}`}
-              animate={{ y: [0, -4, 0] }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: idx * 0.25,
-              }}
-              className="flex items-center gap-3 select-none z-10 group cursor-default px-4 py-2 bg-black/40 border border-white/5 rounded-xl hover:border-accent-purple/45 transition-colors duration-300 shadow-md shrink-0"
-            >
-              <div className="w-8 h-8 rounded-lg bg-black/60 border border-white/5 group-hover:border-accent-purple/30 flex items-center justify-center transition-all duration-300 shrink-0">
-                <TechLogo name={name} className="w-4.5 h-4.5 group-hover:scale-110 transition-transform duration-300" />
-              </div>
-              <span className="font-mono text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium whitespace-nowrap">
-                {name}
-              </span>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
+      </AnimatePresence>
     </div>
   );
 }
