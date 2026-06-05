@@ -267,3 +267,10 @@ body {
     padding: 10px 14px;
   }
 }
+
+/* Hide navbar on mobile and tablets when modal is open */
+@media (max-width: 1023px) {
+  body.modal-open nav {
+    display: none !important;
+  }
+}
