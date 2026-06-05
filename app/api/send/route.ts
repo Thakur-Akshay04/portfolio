@@ -52,7 +52,7 @@ interface RateLimitRecord {
 }
 const rateLimitStore = new Map<string, RateLimitRecord>();
 
-const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
 const MAX_LIMIT = 3; // Max 3 emails per window
 
 // Helper to escape HTML tags to prevent HTML Injection in emails
@@ -101,7 +101,7 @@ export async function POST(req: Request) {
 
     if (record.count > MAX_LIMIT) {
       return NextResponse.json(
-        { error: "Too many requests. Please try again after 10 minutes." },
+        { error: "Too many requests. Please try again after 15 minutes." },
         { status: 429 }
       );
     }
