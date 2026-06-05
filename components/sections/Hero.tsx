@@ -171,7 +171,7 @@ export default function Hero() {
         animate={{ y: [0, 8, 0] }}
         transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
         onClick={() => scrollToSection("about")}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer flex flex-col items-center gap-2 text-gray-500 hover:text-white transition-colors"
+        className="hidden lg:flex absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer flex-col items-center gap-2 text-gray-500 hover:text-white transition-colors"
       >
         <span className="font-mono text-[9px] uppercase tracking-widest">Scroll Down</span>
         <ArrowDown className="w-4 h-4 text-accent-purple" />
