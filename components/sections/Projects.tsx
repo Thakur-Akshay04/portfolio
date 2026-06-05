@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, X, Lightbulb, ShieldAlert, Lock, Code2, Globe } from "lucide-react";
 import { PORTFOLIO_DATA, Project } from "@/constants/data";
@@ -796,6 +796,31 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const shouldReduceMotion = useSafeReducedMotion();
 
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedProject]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedProject(null);
+      }
+    };
+    if (selectedProject) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedProject]);
+
   return (
     <PageFoldWrapper id="projects" className="py-24 md:py-32 px-6 max-w-6xl mx-auto">
       {/* Reusable Section Heading */}
@@ -909,7 +934,7 @@ export default function Projects() {
                       e.stopPropagation();
                       setSelectedProject(project);
                     }}
-                    className="inline-flex items-center justify-center px-5 py-2 border border-white rounded-full text-accent-purple bg-transparent font-semibold hover:bg-white/5 transition-all duration-300 h-9"
+                    className="inline-flex items-center justify-center px-5 py-2 border border-accent-purple/40 text-accent-purple bg-accent-purple/5 rounded-full font-semibold hover:bg-accent-purple/15 hover:border-accent-purple transition-all duration-300 h-9"
                   >
                     <span>Case Study</span>
                   </button>
@@ -947,7 +972,7 @@ export default function Projects() {
             animate="visible"
             exit="exit"
             onClick={() => setSelectedProject(null)}
-            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-0 md:p-4 overflow-hidden"
           >
             {/* Modal Box */}
             <motion.div
@@ -956,7 +981,7 @@ export default function Projects() {
               animate="visible"
               exit="exit"
               onClick={(e) => e.stopPropagation()} // Prevent close on card click
-              className="relative w-full max-w-3xl rounded-2xl border border-accent-purple/35 bg-black overflow-hidden shadow-2xl"
+              className="relative w-full h-full md:h-auto md:max-w-3xl rounded-none md:rounded-2xl border-0 md:border border-accent-purple/35 bg-black overflow-hidden shadow-2xl"
             >
               {/* Close Button */}
               <button
@@ -967,7 +992,7 @@ export default function Projects() {
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="p-6 md:p-8 space-y-6 max-h-[85vh] overflow-y-auto">
+              <div className="p-5 md:p-8 space-y-6 h-full md:max-h-[85vh] overflow-y-auto pb-12" data-lenis-prevent>
                 {/* Header */}
                 <div className="space-y-2">
                   <span className="text-xs font-mono text-accent-purple font-semibold tracking-wider uppercase drop-shadow-[0_0_8px_var(--accent-neon-glow)]">
@@ -983,34 +1008,25 @@ export default function Projects() {
                   variants={techContainerVariants}
                   initial="hidden"
                   animate="visible"
-                  className="flex flex-wrap gap-3 border-b border-white/10 pb-6"
+                  className="flex flex-wrap gap-2 border-b border-white/10 pb-6"
                 >
-                  {(() => {
-                    const seenLogos = new Set<string>();
-                    return selectedProject.techStack
-                      .filter((tech) => {
-                        const logoKey = getTechLogoKey(tech);
-                        if (seenLogos.has(logoKey)) return false;
-                        seenLogos.add(logoKey);
-                        return true;
-                      })
-                      .map((tech) => (
-                        <motion.span
-                          key={tech}
-                          variants={techItemVariants}
-                          title={tech}
-                          whileHover={{
-                            scale: 1.15,
-                            borderColor: "rgba(157, 78, 221, 0.45)",
-                            boxShadow: "0 4px 15px rgba(157, 78, 221, 0.2)",
-                            backgroundColor: "rgba(157, 78, 221, 0.05)",
-                          }}
-                          className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[#0a0a0a] border border-white/5 text-gray-300 transition-all cursor-default"
-                        >
-                          <TechLogo name={tech} className="w-5 h-5 shrink-0" />
-                        </motion.span>
-                      ));
-                  })()}
+                  {selectedProject.techStack.map((tech) => (
+                    <motion.span
+                      key={tech}
+                      variants={techItemVariants}
+                      whileHover={{
+                        scale: 1.05,
+                        borderColor: "rgba(157, 78, 221, 0.45)",
+                        boxShadow: "0 4px 15px rgba(157, 78, 221, 0.2)",
+                        backgroundColor: "rgba(157, 78, 221, 0.05)",
+                        color: "#ffffff"
+                      }}
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0a0a0a] border border-white/5 text-xs text-gray-300 font-mono transition-all cursor-default"
+                    >
+                      <TechLogo name={tech} className="w-4 h-4 shrink-0" />
+                      <span>{tech}</span>
+                    </motion.span>
+                  ))}
                 </motion.div>
 
 
@@ -1019,7 +1035,7 @@ export default function Projects() {
                   {/* Left Column - Main Details */}
                   <div className="md:col-span-2 space-y-4">
                     <h4 className="text-sm font-mono text-accent-purple uppercase tracking-wider">{"// Description"}</h4>
-                    <p className="text-sm md:text-base text-gray-300 leading-relaxed font-sans">
+                    <p className="text-sm md:text-base text-gray-300 leading-relaxed font-sans whitespace-pre-line">
                       {selectedProject.fullDescription}
                     </p>
                   </div>
@@ -1051,7 +1067,7 @@ export default function Projects() {
                     <ShieldAlert className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
                     <div className="space-y-1 text-left">
                       <h5 className="text-xs font-mono font-bold text-red-400 uppercase">The Challenge</h5>
-                      <p className="text-xs text-gray-300 leading-relaxed font-sans">{selectedProject.challenge}</p>
+                      <p className="text-xs text-gray-300 leading-relaxed font-sans whitespace-pre-line">{selectedProject.challenge}</p>
                     </div>
                   </div>
 
@@ -1060,15 +1076,15 @@ export default function Projects() {
                     <Lightbulb className="w-5 h-5 text-accent-purple shrink-0 mt-0.5 drop-shadow-[0_0_4px_var(--accent-neon-glow)]" />
                     <div className="space-y-1 text-left">
                       <h5 className="text-xs font-mono font-bold text-accent-purple uppercase">The Solution</h5>
-                      <p className="text-xs text-gray-300 leading-relaxed font-sans">{selectedProject.solution}</p>
+                      <p className="text-xs text-gray-300 leading-relaxed font-sans whitespace-pre-line">{selectedProject.solution}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Footer Buttons */}
-                <div className="flex gap-4 border-t border-white/10 pt-6 mt-6">
+                <div className="flex flex-col sm:flex-row gap-4 border-t border-white/10 pt-6 mt-6">
                   <motion.div
-                    className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-accent-purple text-black text-sm font-semibold transition-all duration-300 cursor-default select-none group/modal-btn w-[160px] hover:shadow-[0_0_20px_rgba(157,78,221,0.45)]"
+                    className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-accent-purple text-black text-sm font-semibold transition-all duration-300 cursor-default select-none group/modal-btn w-full sm:w-[160px] hover:shadow-[0_0_20px_rgba(157,78,221,0.45)]"
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                   >
@@ -1080,7 +1096,7 @@ export default function Projects() {
                     href={selectedProject.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 bg-transparent hover:border-white/35 text-white text-sm font-semibold transition-all duration-300"
+                    className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/10 bg-transparent hover:border-white/35 text-white text-sm font-semibold transition-all duration-300 w-full sm:w-auto"
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                   >
