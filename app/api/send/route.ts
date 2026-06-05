@@ -1,5 +1,49 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import dns from "dns/promises";
+
+// Comprehensive list of 3,000+ disposable/temporary email domains
+// Source: https://github.com/disposable-email-domains/disposable-email-domains
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const disposableDomains: string[] = require("disposable-email-domains");
+const DISPOSABLE_EMAIL_DOMAINS = new Set(disposableDomains);
+
+/**
+ * Validates that the email domain has valid MX (Mail Exchange) records.
+ * Returns { valid: true } if the domain can receive email,
+ * or { valid: false, reason: string } if it cannot.
+ */
+async function validateEmailDomain(email: string): Promise<{ valid: boolean; reason?: string }> {
+  const domain = email.split("@")[1]?.toLowerCase();
+
+  if (!domain) {
+    return { valid: false, reason: "Invalid email format." };
+  }
+
+  // Check disposable email blocklist (exact match + subdomain match)
+  if (DISPOSABLE_EMAIL_DOMAINS.has(domain)) {
+    return { valid: false, reason: "Disposable or temporary email addresses are not allowed." };
+  }
+  // Also catch subdomains like "random123.guerrillamail.com"
+  const domainParts = domain.split(".");
+  for (let i = 1; i < domainParts.length - 1; i++) {
+    const parentDomain = domainParts.slice(i).join(".");
+    if (DISPOSABLE_EMAIL_DOMAINS.has(parentDomain)) {
+      return { valid: false, reason: "Disposable or temporary email addresses are not allowed." };
+    }
+  }
+
+  try {
+    const mxRecords = await dns.resolveMx(domain);
+    if (!mxRecords || mxRecords.length === 0) {
+      return { valid: false, reason: "This email domain cannot receive mail. Please use a valid email address." };
+    }
+    return { valid: true };
+  } catch {
+    // DNS lookup failed — domain doesn't exist or has no MX records
+    return { valid: false, reason: "This email domain does not exist. Please check for typos." };
+  }
+}
 
 // Simple in-memory rate limiter store
 interface RateLimitRecord {
@@ -73,7 +117,16 @@ export async function POST(req: Request) {
       );
     }
 
-    // 2.5. Verify Cloudflare Turnstile Token
+    // 2.5. Validate email domain (DNS MX record check + disposable email block)
+    const emailValidation = await validateEmailDomain(email.trim());
+    if (!emailValidation.valid) {
+      return NextResponse.json(
+        { error: emailValidation.reason },
+        { status: 400 }
+      );
+    }
+
+    // 2.6. Verify Cloudflare Turnstile Token
     if (!turnstileToken) {
       return NextResponse.json(
         { error: "Security check failed (missing CAPTCHA token)." },
