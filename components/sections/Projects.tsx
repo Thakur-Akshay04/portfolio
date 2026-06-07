@@ -826,7 +826,8 @@ export default function Projects() {
   }, [selectedProject]);
 
   return (
-    <PageFoldWrapper id="projects" className="py-24 md:py-32 px-6 max-w-6xl mx-auto">
+    <>
+      <PageFoldWrapper id="projects" className="py-24 md:py-32 px-6 max-w-6xl mx-auto">
       {/* Reusable Section Heading */}
       <SectionHeading title="Featured Projects" subtitle="// Showcase" />
 
@@ -967,6 +968,7 @@ export default function Projects() {
           );
         })}
       </div>
+      </PageFoldWrapper>
 
       {/* Case Study details Modal */}
       <AnimatePresence>
@@ -981,7 +983,7 @@ export default function Projects() {
                 setSelectedProject(null);
               }
             }}
-            className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-center justify-center p-0 md:p-4 overflow-hidden"
+            className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-hidden"
           >
             {/* Modal Box */}
             <motion.div
@@ -990,7 +992,7 @@ export default function Projects() {
               animate="visible"
               exit="exit"
               onClick={(e) => e.stopPropagation()} // Prevent close on card click
-              className="relative w-full h-full md:h-auto md:max-h-screen lg:max-h-[90vh] md:max-w-3xl rounded-none md:rounded-2xl border-0 md:border border-accent-purple/35 bg-black overflow-hidden shadow-2xl flex flex-col"
+              className="relative w-[92%] sm:w-[88%] md:w-full h-auto max-h-[85vh] md:max-h-[90vh] md:max-w-3xl rounded-2xl border border-accent-purple/35 bg-black overflow-hidden shadow-2xl flex flex-col"
             >
               {/* Close Button */}
               <button
@@ -1118,6 +1120,6 @@ export default function Projects() {
           </motion.div>
         )}
       </AnimatePresence>
-    </PageFoldWrapper>
+    </>
   );
 }

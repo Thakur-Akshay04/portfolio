@@ -71,7 +71,7 @@ function FloatingTechDock() {
   ];
 
   return (
-    <div className="relative w-full h-40 bg-[#050508]/80 border border-white/10 rounded-xl flex items-center justify-around px-6 overflow-hidden shadow-2xl">
+    <div className="relative w-full h-28 md:h-32 lg:h-40 bg-[#050508]/80 border border-white/10 rounded-xl flex items-center justify-around px-6 overflow-hidden shadow-2xl">
       {/* Background Grid Accent */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:1.2rem_1.2rem] opacity-35 pointer-events-none" />
 
@@ -122,7 +122,7 @@ function FloatingTechDock() {
                     <TechIcon name={tech.name} />
                   </div>
                 </div>
-                <span className="font-mono text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium">
+                <span className="hidden lg:block font-mono text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium">
                   {tech.name}
                 </span>
               </div>
