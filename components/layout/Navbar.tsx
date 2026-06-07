@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { useSafeReducedMotion } from "@/lib/hooks";
 import { useLenis } from "lenis/react";
@@ -24,12 +24,14 @@ const navItems = [
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
+  const isScrollingRef = useRef(false);
   const shouldReduceMotion = useSafeReducedMotion();
   const lenis = useLenis();
 
   // Scroll-spy: track which section is currently in view
   useEffect(() => {
     const handleScroll = () => {
+      if (isScrollingRef.current) return;
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
 
@@ -77,15 +79,28 @@ export default function Navbar() {
     const id = href.slice(1);
     const element = document.getElementById(id);
     if (element) {
+      isScrollingRef.current = true;
+      setActiveSection(id);
+      
       if (lenis) {
-        lenis.scrollTo(element, { offset: -100 });
+        lenis.scrollTo(element, { 
+          offset: -100,
+          onComplete: () => {
+            setTimeout(() => {
+              isScrollingRef.current = false;
+            }, 80);
+          }
+        });
       } else {
         const bodyRect = document.body.getBoundingClientRect().top;
         const elementRect = element.getBoundingClientRect().top;
         const offsetPosition = elementRect - bodyRect - 100;
         window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+        
+        setTimeout(() => {
+          isScrollingRef.current = false;
+        }, 800);
       }
-      setActiveSection(id);
     }
   };
 
@@ -123,7 +138,7 @@ export default function Navbar() {
                   transition={
                     shouldReduceMotion
                       ? { duration: 0 }
-                      : { type: "spring", stiffness: 350, damping: 30 }
+                      : { type: "spring", stiffness: 280, damping: 28 }
                   }
                 />
               )}

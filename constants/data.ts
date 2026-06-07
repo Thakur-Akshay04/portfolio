@@ -51,7 +51,7 @@ export const PORTFOLIO_DATA = {
   personal: {
     name: "Akshay Singh Thakur",
     title: "Full-stack / MERN Developer",
-    subtitle: "Developing High-Performance MERN Stack & Full-Stack Web Applications",
+    subtitle: "Developing High-Performance Full-Stack Web Applications with AI Integration",
     taglineWords: ["MERN Stack Developer", "Full Stack Developer"],
     bio: [
       "I am a Full-stack / MERN developer specializing in building responsive web applications and scalable cloud-based solutions. I focus on creating pixel-perfect user interfaces and designing highly efficient API architectures.",

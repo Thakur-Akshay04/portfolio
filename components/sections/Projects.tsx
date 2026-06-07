@@ -83,7 +83,7 @@ const HardhatIcon = ({ className }: { className?: string }) => (
 
 const MetaMaskIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 35 33" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g stroke-linecap="round" stroke-linejoin="round" stroke-width=".25">
+    <g strokeLinecap="round" strokeLinejoin="round" strokeWidth=".25">
       <path d="m32.9582 1-13.1341 9.7183 2.4424-5.72731z" fill="#e17726" stroke="#e17726" />
       <g fill="#e27625" stroke="#e27625">
         <path d="m2.66296 1 13.01714 9.809-2.3254-5.81802z" />
@@ -1047,8 +1047,13 @@ export default function Projects() {
                   <div className="lg:col-span-2 space-y-4">
                     <h4 className="text-sm font-mono text-accent-purple uppercase tracking-wider">{"// Description"}</h4>
                     <p className="text-sm md:text-base text-gray-300 leading-relaxed font-sans whitespace-pre-line">
-                      {selectedProject.fullDescription}
+                      {selectedProject.fullDescription.split("\n\nKey Features Built:")[0]}
                     </p>
+                    {selectedProject.fullDescription.includes("\n\nKey Features Built:") && (
+                      <p className="hidden lg:block text-sm md:text-base text-gray-300 leading-relaxed font-sans whitespace-pre-line mt-4">
+                        {`Key Features Built:${selectedProject.fullDescription.split("\n\nKey Features Built:")[1]}`}
+                      </p>
+                    )}
                   </div>
 
                   {/* Right Column - Challenges / Stats */}
