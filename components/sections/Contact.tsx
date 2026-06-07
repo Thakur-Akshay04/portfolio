@@ -323,34 +323,35 @@ export default function Contact() {
                 else if (nameLower.includes("resume")) Icon = FileText;
 
                 const isLinkedin = nameLower.includes("linkedin");
-                const isResume = nameLower.includes("resume");
-                const showBanned = isLinkedin && linkedinBanned;
-
-                return (
-                  <div key={social.name} className="relative group/btn">
-                    {/* Hover Animated Tooltip Text */}
-                    <span className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 rounded bg-[#0a0a0a] border text-[10px] font-mono whitespace-nowrap transition-all duration-200 ease-out origin-bottom z-20 ${
-                      showBanned 
-                        ? "opacity-100 translate-y-0 scale-100 border-red-500 text-red-400 shadow-[0_0_10px_rgba(239,68,68,0.25)]"
-                        : "opacity-0 translate-y-1 scale-95 pointer-events-none group-hover/btn:opacity-100 group-hover/btn:translate-y-0 group-hover/btn:scale-100 border-accent-purple/30 text-white shadow-[0_0_10px_rgba(157,78,221,0.15)]"
-                    }`}>
-                      {showBanned ? "currently banned!" : social.name}
-                      <span className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-[#0a0a0a]" />
-                    </span>
-
-                    <motion.a
-                      href={isLinkedin || (isResume && social.url === "#") ? "#" : social.url}
-                      onClick={(e) => {
-                        if (isLinkedin) {
-                          e.preventDefault();
-                          setLinkedinBanned(true);
-                          setTimeout(() => setLinkedinBanned(false), 3000);
-                        } else if (isResume && social.url === "#") {
-                          e.preventDefault();
-                        }
-                      }}
-                      target={isLinkedin || (isResume && social.url === "#") ? undefined : "_blank"}
-                      rel={isLinkedin || (isResume && social.url === "#") ? undefined : "noopener noreferrer"}
+                 const isResume = nameLower.includes("resume");
+                 const hasValidResumeUrl = isResume && (social.url.startsWith("http://") || social.url.startsWith("https://"));
+                 const showBanned = isLinkedin && linkedinBanned;
+ 
+                 return (
+                   <div key={social.name} className="relative group/btn">
+                     {/* Hover Animated Tooltip Text */}
+                     <span className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 rounded bg-[#0a0a0a] border text-[10px] font-mono whitespace-nowrap transition-all duration-200 ease-out origin-bottom z-20 ${
+                       showBanned 
+                         ? "opacity-100 translate-y-0 scale-100 border-red-500 text-red-400 shadow-[0_0_10px_rgba(239,68,68,0.25)]"
+                         : "opacity-0 translate-y-1 scale-95 pointer-events-none group-hover/btn:opacity-100 group-hover/btn:translate-y-0 group-hover/btn:scale-100 border-accent-purple/30 text-white shadow-[0_0_10px_rgba(157,78,221,0.15)]"
+                     }`}>
+                       {showBanned ? "currently banned!" : social.name}
+                       <span className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-[#0a0a0a]" />
+                     </span>
+ 
+                     <motion.a
+                       href={isLinkedin || (isResume && !hasValidResumeUrl) ? "#" : social.url}
+                       onClick={(e) => {
+                         if (isLinkedin) {
+                           e.preventDefault();
+                           setLinkedinBanned(true);
+                           setTimeout(() => setLinkedinBanned(false), 3000);
+                         } else if (isResume && !hasValidResumeUrl) {
+                           e.preventDefault();
+                         }
+                       }}
+                       target={isLinkedin || (isResume && !hasValidResumeUrl) ? undefined : "_blank"}
+                       rel={isLinkedin || (isResume && !hasValidResumeUrl) ? undefined : "noopener noreferrer"}
                       className={`w-12 h-12 flex items-center justify-center rounded-xl bg-[#0a0a0a] border text-gray-400 hover:text-white transition-colors shadow-lg ${
                         showBanned 
                           ? "border-red-500 text-red-400 shadow-[0_0_15px_rgba(239,68,68,0.35)]" 
