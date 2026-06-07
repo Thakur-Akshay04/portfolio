@@ -22,7 +22,7 @@
   "vars": {
     "NEXT_PUBLIC_PERSONAL_EMAIL": "akshaysinghthakur0004@gmail.com",
     "NEXT_PUBLIC_TURNSTILE_SITE_KEY": "0x4AAAAAADfQS4i8bVY-iZju",
-    "NEXT_PUBLIC_RESUME_URL": "YOUR_GDRIVE_LINK_HERE"
+    "NEXT_PUBLIC_RESUME_URL": "https://drive.google.com/file/d/1_8H3NW-OQInYAeV0ZKIaGqSNacY1hOpG/view?usp=sharing"
   },
   "observability": {
     "enabled": true

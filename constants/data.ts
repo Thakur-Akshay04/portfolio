@@ -209,6 +209,6 @@ export const PORTFOLIO_DATA = {
   socials: [
     { name: "GitHub", url: "https://github.com/Thakur-Akshay04", iconName: "Github" },
     { name: "LinkedIn", url: "https://linkedin.com/in/thakur-akshay04", iconName: "Linkedin" },
-    { name: "Resume", url: process.env.NEXT_PUBLIC_RESUME_URL || "#", iconName: "Resume" },
+    { name: "Resume", url: process.env.NEXT_PUBLIC_RESUME_URL || "https://drive.google.com/file/d/1_8H3NW-OQInYAeV0ZKIaGqSNacY1hOpG/view?usp=sharing", iconName: "Resume" },
   ] as SocialLink[],
 };
