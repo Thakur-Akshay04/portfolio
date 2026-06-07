@@ -339,18 +339,18 @@ export default function Contact() {
                     </span>
 
                     <motion.a
-                      href={isLinkedin || isResume ? "#" : social.url}
+                      href={isLinkedin || (isResume && social.url === "#") ? "#" : social.url}
                       onClick={(e) => {
                         if (isLinkedin) {
                           e.preventDefault();
                           setLinkedinBanned(true);
                           setTimeout(() => setLinkedinBanned(false), 3000);
-                        } else if (isResume) {
+                        } else if (isResume && social.url === "#") {
                           e.preventDefault();
                         }
                       }}
-                      target={isLinkedin || isResume ? undefined : "_blank"}
-                      rel={isLinkedin || isResume ? undefined : "noopener noreferrer"}
+                      target={isLinkedin || (isResume && social.url === "#") ? undefined : "_blank"}
+                      rel={isLinkedin || (isResume && social.url === "#") ? undefined : "noopener noreferrer"}
                       className={`w-12 h-12 flex items-center justify-center rounded-xl bg-[#0a0a0a] border text-gray-400 hover:text-white transition-colors shadow-lg ${
                         showBanned 
                           ? "border-red-500 text-red-400 shadow-[0_0_15px_rgba(239,68,68,0.35)]" 
