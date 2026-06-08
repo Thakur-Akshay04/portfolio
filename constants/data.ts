@@ -54,9 +54,9 @@ export const PORTFOLIO_DATA = {
     subtitle: "Developing High-Performance Full-Stack Web Applications with AI Integration",
     taglineWords: ["MERN Stack Developer", "Full Stack Developer"],
     bio: [
-      "I am a Full-stack / MERN developer specializing in building responsive web applications and scalable cloud-based solutions. I focus on creating pixel-perfect user interfaces and designing highly efficient API architectures.",
-      "My recent work includes developing AI-powered tools like the AI Resume Tailor and engineering secure verification systems for academic credentials with CredVault.",
-      "I thrive in Agile team environments, enjoy optimizing web performance and accessibility, and constantly push the boundaries of React, TypeScript, Node.js, and modern web technologies."
+      "I am a Full-stack MERN developer building responsive web applications with integrated AI. I focus on crafting clean user interfaces and efficient API architectures.",
+      "Currently, I am building AI-powered features for web applications and actively studying LLM integrations, prompt engineering, and emerging AI technologies.",
+      "I am constantly experimenting with new web standards and AI tools to build modern, future-proof applications."
     ],
     email: process.env.NEXT_PUBLIC_PERSONAL_EMAIL || "akshaysinghthakur0004@gmail.com",
     location: "Himachal Pradesh, India",

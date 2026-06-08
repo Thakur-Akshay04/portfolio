@@ -104,7 +104,18 @@ export default function Navbar() {
     }
   };
 
-  const isVisible = activeSection !== "home";
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileOrTablet(window.innerWidth < 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isVisible = isMobileOrTablet || activeSection !== "home";
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">

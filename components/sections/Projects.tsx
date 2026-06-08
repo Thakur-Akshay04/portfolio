@@ -794,6 +794,7 @@ const techItemVariants = {
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [activeTechMobile, setActiveTechMobile] = useState<string | null>(null);
   const shouldReduceMotion = useSafeReducedMotion();
   const openTimeRef = useRef<number>(0);
 
@@ -804,6 +805,7 @@ export default function Projects() {
     } else {
       document.body.style.overflow = "";
       document.body.classList.remove("modal-open");
+      setActiveTechMobile(null);
     }
     return () => {
       document.body.style.overflow = "";
@@ -1024,6 +1026,7 @@ export default function Projects() {
                   {selectedProject.techStack.map((tech) => (
                     <motion.span
                       key={tech}
+                      layout
                       variants={techItemVariants}
                       whileHover={{
                         scale: 1.05,
@@ -1032,10 +1035,14 @@ export default function Projects() {
                         backgroundColor: "rgba(157, 78, 221, 0.05)",
                         color: "#ffffff"
                       }}
-                      className="inline-flex items-center gap-1.5 md:gap-2 p-1.5 md:px-3 md:py-1.5 rounded-full bg-[#0a0a0a] border border-white/5 text-xs text-gray-300 font-mono transition-all cursor-default"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveTechMobile(activeTechMobile === tech ? null : tech);
+                      }}
+                      className="inline-flex items-center gap-1.5 md:gap-2 p-1.5 md:px-3 md:py-1.5 rounded-full bg-[#0a0a0a] border border-white/5 text-xs text-gray-300 font-mono transition-all cursor-pointer lg:cursor-default select-none"
                     >
                       <TechLogo name={tech} className="w-4 h-4 shrink-0" />
-                      <span className="hidden lg:inline">{tech}</span>
+                      <span className={activeTechMobile === tech ? "inline" : "hidden lg:inline"}>{tech}</span>
                     </motion.span>
                   ))}
                 </motion.div>
