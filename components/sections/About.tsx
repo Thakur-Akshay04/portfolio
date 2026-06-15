@@ -117,11 +117,21 @@ function FloatingTechDock() {
                 {/* Glowing hover backdrop */}
                 <div className="absolute w-12 h-12 rounded-full bg-accent-purple/5 group-hover:bg-accent-purple/15 blur-md transition-all duration-300 pointer-events-none -z-10" />
 
-                <div className="w-14 h-14 rounded-xl bg-black/60 border border-white/5 group-hover:border-accent-purple/45 flex items-center justify-center shadow-lg transition-all duration-300">
-                  <div className="w-7 h-7 group-hover:scale-110 transition-transform duration-300">
+                {/* Interactive Logo container with 3D flip hover and physical tap feedback */}
+                <motion.div
+                  whileHover={{ scale: 1.15, rotateY: 360 }}
+                  whileTap={{ scale: 0.9, rotate: -5 }}
+                  transition={{
+                    rotateY: { duration: 0.65, ease: "easeInOut" },
+                    scale: { type: "spring", stiffness: 400, damping: 15 }
+                  }}
+                  style={{ transformStyle: "preserve-3d", perspective: 600 }}
+                  className="w-14 h-14 rounded-xl bg-black/60 border border-white/5 hover:border-accent-purple/45 flex items-center justify-center shadow-lg transition-colors duration-300 cursor-pointer"
+                >
+                  <div className="w-7 h-7">
                     <TechIcon name={tech.name} />
                   </div>
-                </div>
+                </motion.div>
                 <span className="hidden lg:block font-mono text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium">
                   {tech.name}
                 </span>

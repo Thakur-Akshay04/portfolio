@@ -54,9 +54,8 @@ export const PORTFOLIO_DATA = {
     subtitle: "Developing High-Performance Full-Stack Web Applications with AI Integration",
     taglineWords: ["MERN Stack Developer", "Full Stack Developer"],
     bio: [
-      "I am a Full-stack MERN developer building responsive web applications with integrated AI. I focus on crafting clean user interfaces and efficient API architectures.",
-      "Currently, I am building AI-powered features for web applications and actively studying LLM integrations, prompt engineering, and emerging AI technologies.",
-      "I am constantly experimenting with new web standards and AI tools to build modern, future-proof applications."
+      "I am a Full-stack / MERN developer focused on crafting clean user interfaces and highly efficient API architectures. I build responsive, modern web applications.",
+      "I am passionate about creating high-performance digital experiences, experimenting with modern web standards, and integrating intelligent AI features into full-stack systems."
     ],
     email: process.env.NEXT_PUBLIC_PERSONAL_EMAIL || "akshaysinghthakur0004@gmail.com",
     location: "Himachal Pradesh, India",
@@ -86,8 +85,10 @@ export const PORTFOLIO_DATA = {
       title: "Backend & Database",
       skills: [
         { name: "Node.js & Express.js", iconName: "Server", level: 90 },
+        { name: "FastAPI & Python", iconName: "Cpu", level: 88 },
         { name: "REST APIs (Axios/Fetch)", iconName: "Cpu", level: 92 },
         { name: "MongoDB & Mongoose", iconName: "Database", level: 88 },
+        { name: "PostgreSQL & Redis", iconName: "Database", level: 85 },
         { name: "Clerk Auth", iconName: "Lock", level: 85 },
         { name: "Supabase Auth", iconName: "Shield", level: 85 },
         { name: "JWT & Bcrypt", iconName: "Lock", level: 85 },
