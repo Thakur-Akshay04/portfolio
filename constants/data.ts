@@ -192,7 +192,7 @@ export const PORTFOLIO_DATA = {
       id: "exp-1",
       role: "Frontend Web-Developer (Intern)",
       company: "1Stop ai",
-      period: "Jan 2025 - Mar 2025",
+      period: "July 2025 - Sept 2025",
       location: "Remote",
       description: "Developed client-facing features, dashboard components, and API integrations in a responsive web environment.",
       achievements: [
@@ -209,7 +209,7 @@ export const PORTFOLIO_DATA = {
 
   socials: [
     { name: "GitHub", url: "https://github.com/Thakur-Akshay04", iconName: "Github" },
-    { name: "LinkedIn", url: "https://linkedin.com/in/thakur-akshay04", iconName: "Linkedin" },
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/akshaythakur04/", iconName: "Linkedin" },
     { name: "Resume", url: process.env.NEXT_PUBLIC_RESUME_URL || "https://drive.google.com/file/d/1_8H3NW-OQInYAeV0ZKIaGqSNacY1hOpG/view?usp=sharing", iconName: "Resume" },
   ] as SocialLink[],
 };
