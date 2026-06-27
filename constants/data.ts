@@ -190,7 +190,7 @@ export const PORTFOLIO_DATA = {
   experience: [
     {
       id: "exp-1",
-      role: "Frontend Web-Developer (Intern)",
+      role: "Web-Developer (Intern)",
       company: "1Stop ai",
       period: "July 2025 - Sept 2025",
       location: "Remote",
