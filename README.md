@@ -6,7 +6,7 @@ Welcome to the source code of my personal portfolio website. This is a highly in
 
 ## 🛠️ Tech Stack & Technologies
 
-- **Framework**: [Next.js 14 (App Router)](https://nextjs.org/)
+- **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
 - **Libraries**: React 18/19, Three.js (WebGL), `@react-three/fiber`, `@react-three/drei`
 - **Animations**: [Framer Motion](https://www.framer.com/motion/) & [Lenis Smooth Scroll](https://lenis.darkroom.engineering/)
 - **Styling**: Tailwind CSS & Glassmorphism design tokens
@@ -40,6 +40,7 @@ To run this project locally, create a `.env.local` file in the root directory an
 RESEND_API_KEY=your_resend_api_key
 PERSONAL_EMAIL=your_inbox_email_address
 NEXT_PUBLIC_PERSONAL_EMAIL=your_inbox_email_address
+NEXT_PUBLIC_RESUME_URL=your_resume_google_drive_link
 ```
 
 ---
