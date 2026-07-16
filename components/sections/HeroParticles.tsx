@@ -4,6 +4,7 @@ import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
 import * as THREE from "three";
+import WebGLErrorBoundary from "@/components/ui/WebGLErrorBoundary";
 
 function ParticleField() {
   const pointsRef = useRef<THREE.Points>(null);
@@ -62,9 +63,14 @@ export default function HeroParticles() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#000000_90%)] z-10" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30 z-0" />
       
-      <Canvas camera={{ position: [0, 0, 4.5], fov: 60 }} gl={{ antialias: true, alpha: true }}>
-        <ParticleField />
-      </Canvas>
+      <WebGLErrorBoundary>
+        <Canvas
+          camera={{ position: [0, 0, 4.5], fov: 60 }}
+          gl={{ antialias: true, alpha: true, powerPreference: "default", failIfMajorPerformanceCaveat: false }}
+        >
+          <ParticleField />
+        </Canvas>
+      </WebGLErrorBoundary>
     </div>
   );
 }

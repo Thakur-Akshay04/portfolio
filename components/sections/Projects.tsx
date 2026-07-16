@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, X, Lightbulb, ShieldAlert, Lock, Code2, Globe } from "lucide-react";
+import { ExternalLink, X, ShieldAlert, Lock, Code2, Globe, FileText, Sparkles, Plus } from "lucide-react";
 import { PORTFOLIO_DATA, Project } from "@/constants/data";
 import { getModalOverlay, getModalContent } from "@/lib/variants";
 import { GithubIcon } from "@/components/icons/BrandIcons";
@@ -197,6 +197,54 @@ const JestIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const FastAPIIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 256 256" className={`${className} fill-[#009688]`}>
+    <path d="M128 0C57.33 0 0 57.33 0 128s57.33 128 128 128 128-57.33 128-128S198.67 0 128 0Zm-6.67 230.605v-80.288H76.699l64.128-124.922v80.288h42.966L121.33 230.605Z" />
+  </svg>
+);
+
+const PostgreSQLIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 128 128" className={className}>
+    <path d="M93.809 92.112c.785-6.533.55-7.492 5.416-6.433l1.235.108c3.742.17 8.637-.602 11.513-1.938 6.191-2.873 9.861-7.668 3.758-6.409-13.924 2.873-14.881-1.842-14.881-1.842 14.703-21.815 20.849-49.508 15.543-56.287-14.47-18.489-39.517-9.746-39.936-9.52l-.134.025c-2.751-.571-5.83-.912-9.289-.968-6.301-.104-11.082 1.652-14.709 4.402 0 0-44.683-18.409-42.604 23.151.442 8.841 12.672 66.898 27.26 49.362 5.332-6.412 10.484-11.834 10.484-11.834 2.558 1.699 5.622 2.567 8.834 2.255l.249-.212c-.078.796-.044 1.575.099 2.497-3.757 4.199-2.653 4.936-10.166 6.482-7.602 1.566-3.136 4.355-.221 5.084 3.535.884 11.712 2.136 17.238-5.598l-.22.882c1.474 1.18 1.375 8.477 1.583 13.69.209 5.214.558 10.079 1.621 12.948 1.063 2.868 2.317 10.256 12.191 8.14 8.252-1.764 14.561-4.309 15.136-27.985" fill="#336791" />
+    <path d="M75.458 125.256c-4.367 0-7.211-1.689-8.938-3.32-2.607-2.46-3.641-5.629-4.259-7.522l-.267-.79c-1.244-3.358-1.666-8.193-1.916-14.419-.038-.935-.064-1.898-.093-2.919-.021-.747-.047-1.684-.085-2.664a18.8 18.8 0 01-4.962 1.568c-3.079.526-6.389.356-9.84-.507-2.435-.609-4.965-1.871-6.407-3.82-4.203 3.681-8.212 3.182-10.396 2.453-3.853-1.285-7.301-4.896-10.542-11.037-2.309-4.375-4.542-10.075-6.638-16.943-3.65-11.96-5.969-24.557-6.175-28.693C4.292 23.698 7.777 14.44 15.296 9.129 27.157.751 45.128 5.678 51.68 7.915c4.402-2.653 9.581-3.944 15.433-3.851 3.143.051 6.136.327 8.916.823 2.9-.912 8.628-2.221 15.185-2.139 12.081.144 22.092 4.852 28.949 13.615 4.894 6.252 2.474 19.381.597 26.651-2.642 10.226-7.271 21.102-12.957 30.57 1.544.011 3.781-.174 6.961-.831 6.274-1.295 8.109 2.069 8.607 3.575 1.995 6.042-6.677 10.608-9.382 11.864-3.466 1.609-9.117 2.589-13.745 2.377l-.202-.013-1.216-.107-.12 1.014-.116.991c-.311 11.999-2.025 19.598-5.552 24.619-3.697 5.264-8.835 6.739-13.361 7.709-1.544.33-2.947.474-4.219.474zm-9.19-43.671c2.819 2.256 3.066 6.501 3.287 14.434.028.99.054 1.927.089 2.802.106 2.65.355 8.855 1.327 11.477.137.371.26.747.39 1.146 1.083 3.316 1.626 4.979 6.309 3.978 3.931-.843 5.952-1.599 7.534-3.851 2.299-3.274 3.585-9.86 3.821-19.575l4.783.116-4.75-.57.14-1.186c.455-3.91.783-6.734 3.396-8.602 2.097-1.498 4.486-1.353 6.389-1.01-2.091-1.58-2.669-3.433-2.823-4.193l-.399-1.965 1.121-1.663c6.457-9.58 11.781-21.354 14.609-32.304 2.906-11.251 2.02-17.226 1.134-18.356-11.729-14.987-32.068-8.799-34.192-8.097l-.359.194-1.8.335-.922-.191c-2.542-.528-5.366-.82-8.393-.869-4.756-.08-8.593 1.044-11.739 3.431l-2.183 1.655-2.533-1.043c-5.412-2.213-21.308-6.662-29.696-.721-4.656 3.298-6.777 9.76-6.305 19.207.156 3.119 2.275 14.926 5.771 26.377 4.831 15.825 9.221 21.082 11.054 21.693.32.108 1.15-.537 1.976-1.529a270.708 270.708 0 0110.694-12.07l2.77-2.915 3.349 2.225c1.35.897 2.839 1.406 4.368 1.502l7.987-6.812-1.157 11.808c-.026.265-.039.626.065 1.296l.348 2.238-1.51 1.688-.174.196 4.388 2.025 1.836-2.301z" fill="#336791" />
+    <path fill="#336791" d="M115.731 77.44c-13.925 2.873-14.882-1.842-14.882-1.842 14.703-21.816 20.849-49.51 15.545-56.287C101.924.823 76.875 9.566 76.457 9.793l-.135.024c-2.751-.571-5.83-.911-9.291-.967-6.301-.103-11.08 1.652-14.707 4.402 0 0-44.684-18.408-42.606 23.151.442 8.842 12.672 66.899 27.26 49.363 5.332-6.412 10.483-11.834 10.483-11.834 2.559 1.699 5.622 2.567 8.833 2.255l.25-.212c-.078.796-.042 1.575.1 2.497-3.758 4.199-2.654 4.936-10.167 6.482-7.602 1.566-3.136 4.355-.22 5.084 3.534.884 11.712 2.136 17.237-5.598l-.221.882c1.473 1.18 2.507 7.672 2.334 13.557-.174 5.885-.29 9.926.871 13.082 1.16 3.156 2.316 10.256 12.192 8.14 8.252-1.768 12.528-6.351 13.124-13.995.422-5.435 1.377-4.631 1.438-9.49l.767-2.3c.884-7.367.14-9.743 5.225-8.638l1.235.108c3.742.17 8.639-.602 11.514-1.938 6.19-2.871 9.861-7.667 3.758-6.408z" />
+  </svg>
+);
+
+const PgVectorIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <ellipse cx="12" cy="5" rx="9" ry="3" className="stroke-[#336791]" />
+    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" className="stroke-[#336791]" />
+    <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" className="stroke-[#336791]" />
+    <path d="M12 5l4 4-4 4" className="stroke-[#3ECF8E]" strokeWidth="2.5" />
+    <path d="M8 9h8" className="stroke-[#3ECF8E]" strokeWidth="2.5" />
+  </svg>
+);
+
+const RedisIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 128 128" className={className}>
+    <path fill="#A41E11" d="M121.8 93.1c-6.7 3.5-41.4 17.7-48.8 21.6-7.4 3.9-11.5 3.8-17.3 1S13 98.1 6.3 94.9c-3.3-1.6-5-2.9-5-4.2V78s48-10.5 55.8-13.2c7.8-2.8 10.4-2.9 17-.5s46.1 9.5 52.6 11.9v12.5c0 1.3-1.5 2.7-4.9 4.4z" />
+    <path fill="#D82C20" d="M121.8 80.5C115.1 84 80.4 98.2 73 102.1c-7.4 3.9-11.5 3.8-17.3 1-5.8-2.8-42.7-17.7-49.4-20.9C-.3 79-.5 76.8 6 74.3c6.5-2.6 43.2-17 51-19.7 7.8-2.8 10.4-2.9 17-.5s41.1 16.1 47.6 18.5c6.7 2.4 6.9 4.4.2 7.9z" />
+    <path fill="#A41E11" d="M121.8 72.5C115.1 76 80.4 90.2 73 94.1c-7.4 3.8-11.5 3.8-17.3 1C49.9 92.3 13 77.4 6.3 74.2c-3.3-1.6-5-2.9-5-4.2V57.3s48-10.5 55.8-13.2c7.8-2.8 10.4-2.9 17-.5s46.1 9.5 52.6 11.9V68c0 1.3-1.5 2.7-4.9 4.5z" />
+    <path fill="#D82C20" d="M121.8 59.8c-6.7 3.5-41.4 17.7-48.8 21.6-7.4 3.8-11.5 3.8-17.3 1C49.9 79.6 13 64.7 6.3 61.5s-6.8-5.4-.3-7.9c6.5-2.6 43.2-17 51-19.7 7.8-2.8 10.4-2.9 17-.5s41.1 16.1 47.6 18.5c6.7 2.4 6.9 4.4.2 7.9z" />
+    <path fill="#A41E11" d="M121.8 51c-6.7 3.5-41.4 17.7-48.8 21.6-7.4 3.8-11.5 3.8-17.3 1C49.9 70.9 13 56 6.3 52.8c-3.3-1.6-5.1-2.9-5.1-4.2V35.9s48-10.5 55.8-13.2c7.8-2.8 10.4-2.9 17-.5s46.1 9.5 52.6 11.9v12.5c.1 1.3-1.4 2.6-4.8 4.4z" />
+    <path fill="#D82C20" d="M121.8 38.3C115.1 41.8 80.4 56 73 59.9c-7.4 3.8-11.5 3.8-17.3 1S13 43.3 6.3 40.1s-6.8-5.4-.3-7.9c6.5-2.6 43.2-17 51-19.7 7.8-2.8 10.4-2.9 17-.5s41.1 16.1 47.6 18.5c6.7 2.4 6.9 4.4.2 7.8z" />
+    <path fill="#fff" d="M80.4 26.1l-10.8 1.2-2.5 5.8-3.9-6.5-12.5-1.1 9.3-3.4-2.8-5.2 8.8 3.4 8.2-2.7L72 23zM66.5 54.5l-20.3-8.4 29.1-4.4z" />
+    <ellipse fill="#fff" cx="38.4" cy="35.4" rx="15.5" ry="6" />
+    <path fill="#7A0C00" d="M93.3 27.7l17.2 6.8-17.2 6.8z" />
+    <path fill="#AD2115" d="M74.3 35.3l19-7.6v13.6l-1.9.8z" />
+  </svg>
+);
+
+const GroqIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 498.82 299.17" className={`${className} fill-[#F43E01]`}>
+    <path d="M128.73,174.02c-.42-16.82-7.27-32.55-19.29-44.31-12.01-11.74-27.87-18.23-44.65-18.27h-.54C29.19,111.44.51,139.87.21,175.07c-.15,17.14,6.36,33.33,18.35,45.57,11.99,12.25,28,19.07,45.14,19.22h19.53v-34.01h-18.55c-8.04.11-15.64-2.96-21.39-8.59-5.75-5.63-8.97-13.18-9.06-21.26-.18-16.65,13.15-30.35,29.73-30.55h.8c16.55,0,30.09,13.55,30.19,30.17v59.37c0,16.43-13.37,29.96-29.82,30.17-7.88-.06-15.28-3.19-20.84-8.82l-4.32-4.36-.02.02-17.35,30.65c11.58,10.57,26.42,16.41,42.16,16.53h.87c16.88-.24,32.71-6.99,44.58-19.02,11.86-12.02,18.45-27.97,18.54-44.94v-61.19h-.02Z" />
+    <path d="M140.69,171.78c.14-3.92.48-7.72,1.22-11.58l.02-.08c.95-4.55,2.39-8.92,4.28-13.02,3.94-8.38,9.75-15.76,16.83-21.38,6.94-5.47,15.06-9.55,23.5-11.8,4.14-1.15,8.42-1.89,12.74-2.2,9.56-.69,19.01.38,28.01,3.75,3.33,1.25,6.66,2.83,9.77,4.63l5.27,3.06-16.9,29.39-5.27-2.94c-3.65-2.04-7.6-3.29-11.74-3.71-4.33-.39-8.8,0-13,1.15-3.97,1.06-7.76,2.98-10.97,5.55-3,2.42-5.43,5.51-7,8.92-1.7,3.67-2.33,7.72-2.33,11.74v66.49h-34.43v-68Z" />
+    <path d="M297.32,111.54h-.01c-36.59,0-66.36,29.77-66.36,66.36s29.77,66.36,66.36,66.36,66.36-29.77,66.36-66.38c-.06-36.52-29.83-66.29-66.35-66.35ZM328.47,177.9c0,17.19-13.98,31.17-31.17,31.17s-31.17-13.98-31.17-31.17,13.98-31.17,31.17-31.17,31.17,13.98,31.17,31.17Z" />
+    <path d="M434.93,111.54c-17.14,0-33.24,6.68-45.35,18.82-12.09,12.12-18.73,28.22-18.7,45.32,0,35.34,28.73,64.09,64.05,64.09h18.17v-33.96h-18.17c-16.6,0-30.11-13.51-30.11-30.13s13.51-30.13,30.11-30.13c7.54,0,14.77,2.82,20.34,7.93,5.38,4.94,9.61,11.56,9.61,18.85v122.74h33.94v-119.4c0-35.37-28.66-64.15-63.89-64.15Z" />
+  </svg>
+);
+
 // Tech logo resolver helper component
 export function TechLogo({ name, className = "w-4 h-4" }: { name: string; className?: string }) {
   const n = name.toLowerCase().trim();
@@ -273,6 +321,21 @@ export function TechLogo({ name, className = "w-4 h-4" }: { name: string; classN
   if (n.includes("rest")) {
     return <RestIcon className={className} />;
   }
+  if (n.includes("fastapi")) {
+    return <FastAPIIcon className={className} />;
+  }
+  if (n.includes("postgres")) {
+    return <PostgreSQLIcon className={className} />;
+  }
+  if (n.includes("pgvector")) {
+    return <PgVectorIcon className={className} />;
+  }
+  if (n.includes("redis")) {
+    return <RedisIcon className={className} />;
+  }
+  if (n.includes("groq")) {
+    return <GroqIcon className={className} />;
+  }
 
   // Lucide icon fallbacks
   if (n.includes("lock") || n.includes("jwt") || n.includes("bcrypt") || n.includes("auth")) {
@@ -289,100 +352,6 @@ export function TechLogo({ name, className = "w-4 h-4" }: { name: string; classN
   }
 
   return <Code2 className={`${className} text-gray-400`} strokeWidth={2} />;
-}
-
-// Helper to identify unique tech logos to avoid duplicates in modal
-export function getTechLogoKey(name: string): string {
-  const n = name.toLowerCase().trim();
-
-  if (n.includes("react 1") || n.includes("react 18") || n.includes("react 19") || n === "react") {
-    return "react";
-  }
-  if (n.includes("next")) {
-    return "next";
-  }
-  if (n.includes("typescript")) {
-    return "typescript";
-  }
-  if (n.includes("git")) {
-    return "git";
-  }
-  if (n.includes("nginx")) {
-    return "nginx";
-  }
-  if (n.includes("jest")) {
-    return "jest";
-  }
-  if (n.includes("vite")) {
-    return "vite";
-  }
-  if (n.includes("tailwind")) {
-    return "tailwind";
-  }
-  if (n.includes("query") || n.includes("tanstack")) {
-    return "reactquery";
-  }
-  if (n.includes("node") || n.includes("mode.js")) {
-    return "node";
-  }
-  if (n.includes("express")) {
-    return "express";
-  }
-  if (n.includes("mongo") || n.includes("mongoose")) {
-    return "mongo";
-  }
-  if (n.includes("supabase")) {
-    return "supabase";
-  }
-  if (n.includes("solidity")) {
-    return "solidity";
-  }
-  if (n.includes("hardhat")) {
-    return "hardhat";
-  }
-  if (n.includes("metamask")) {
-    return "metamask";
-  }
-  if (n.includes("ethers")) {
-    return "ethers";
-  }
-  if (n.includes("bootstrap")) {
-    return "bootstrap";
-  }
-  if (n.includes("html5") || n === "html") {
-    return "html";
-  }
-  if (n.includes("css3") || n === "css") {
-    return "css";
-  }
-  if (n.includes("docker")) {
-    return "docker";
-  }
-  if (n.includes("clerk")) {
-    return "clerk";
-  }
-  if (n.includes("llama") || n.includes("meta")) {
-    return "meta";
-  }
-  if (n.includes("rest")) {
-    return "rest";
-  }
-
-  // Lucide icon fallbacks
-  if (n.includes("lock") || n.includes("jwt") || n.includes("bcrypt") || n.includes("auth")) {
-    return "lock";
-  }
-  if (n.includes("test") || n.includes("jest")) {
-    return "shield-alert-green";
-  }
-  if (n.includes("sonarqube")) {
-    return "shield-alert-blue";
-  }
-  if (n.includes("puppeteer")) {
-    return "globe";
-  }
-
-  return name;
 }
 
 
@@ -758,12 +727,347 @@ function CredVaultMockup() {
   );
 }
 
+function LuminoteMockup() {
+  const [notes, setNotes] = useState<Record<string, { id: string; title: string; content: string }>>({
+    "note-1": {
+      id: "note-1",
+      title: "📝 Project Ideas",
+      content: "# 📝 Project Ideas\n\n## Next Steps\n- Build high-perf React app\n- Deploy to Cloudflare\n- Add real-time collaboration",
+    },
+    "note-2": {
+      id: "note-2",
+      title: "💡 Luminote Roadmap",
+      content: "# 💡 Luminote Roadmap\n\n## Core Features\n- [x] Live Markdown Preview\n- [ ] Edge DB Integration\n- [ ] Multi-device Syncing",
+    },
+    "note-3": {
+      id: "note-3",
+      title: "🎯 Design Sprint",
+      content: "# 🎯 Design Sprint\n\n## Priorities\n- Finalize glassmorphism theme\n- Implement smooth micro-interactions\n- Add distraction-free writing mode",
+    }
+  });
+  const [activeNoteId, setActiveNoteId] = useState("note-1");
+  const [isAiWriting, setIsAiWriting] = useState(false);
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [activeTab, setActiveTab] = useState<"write" | "preview" | "split">("split");
+
+  const activeNote = notes[activeNoteId] || { id: "", title: "", content: "" };
+
+  const handleContentChange = (newVal: string) => {
+    // Dynamically derive title from first line of note
+    const lines = newVal.split("\n");
+    const firstLine = lines[0] || "";
+    let newTitle = "Untitled Note";
+    if (firstLine.startsWith("# ")) {
+      newTitle = firstLine.slice(2).trim();
+    } else if (firstLine.trim()) {
+      newTitle = firstLine.trim();
+    }
+
+    setNotes((prev) => ({
+      ...prev,
+      [activeNoteId]: {
+        ...prev[activeNoteId],
+        title: newTitle.substring(0, 18) || "Untitled Note",
+        content: newVal,
+      },
+    }));
+  };
+
+  const handleAiPrompt = () => {
+    if (isAiWriting) return;
+    setIsAiWriting(true);
+
+    const promptText = aiPrompt.trim() || "suggestions";
+    setAiPrompt("");
+
+    setTimeout(() => {
+      let suggestion = "";
+      if (promptText.toLowerCase().includes("suggest") || promptText.toLowerCase().includes("idea")) {
+        suggestion = "\n\n### AI Suggestions:\n- Add auto-save to cloud storage\n- Deploy via wrangler to Cloudflare Pages\n- Optimize bundle sizes";
+      } else if (promptText.toLowerCase().includes("roadmap") || promptText.toLowerCase().includes("feature")) {
+        suggestion = "\n\n### AI Roadmap Additions:\n- [ ] Multi-user collaborative cursor sync\n- [ ] Dynamic keyboard shortcut customizer\n- [ ] Offline-first sync logic";
+      } else {
+        suggestion = `\n\n### AI Draft on "${promptText}":\n- Luminote is designed for instant Markdown rendering with integrated AI tools. Edge computing powers collaboration.`;
+      }
+
+      handleContentChange(activeNote.content + suggestion);
+      setIsAiWriting(false);
+    }, 1000);
+  };
+
+  const insertFormat = (before: string, after: string) => {
+    handleContentChange(activeNote.content + before + "text" + after);
+  };
+
+  // Simple Markdown Parser for mockup preview
+  const renderMarkdown = (text: string) => {
+    return text.split("\n").map((line, index) => {
+      if (line.startsWith("# ")) {
+        return (
+          <h1 key={index} className="text-gray-100 text-[9px] font-bold border-b border-white/5 pb-0.5 mb-1.5 flex items-center gap-1">
+            {line.slice(2)}
+          </h1>
+        );
+      }
+      if (line.startsWith("## ")) {
+        return (
+          <h2 key={index} className="text-gray-200 text-[7.5px] font-semibold mt-2 mb-1">
+            {line.slice(3)}
+          </h2>
+        );
+      }
+      if (line.startsWith("### ")) {
+        return (
+          <h3 key={index} className="text-purple-400 text-[7px] font-semibold mt-2 mb-1 flex items-center gap-1 animate-fade-in">
+            <span className="text-[6px]">✨</span> {line.slice(4)}
+          </h3>
+        );
+      }
+      if (line.startsWith("- [ ] ")) {
+        return (
+          <div key={index} className="flex items-center gap-1 ml-1 py-0.5">
+            <input type="checkbox" checked={false} readOnly className="w-1.5 h-1.5 accent-purple-600 bg-white/5 border border-white/10 rounded" />
+            <span className="text-gray-400 text-[6.5px] leading-normal">{line.slice(6)}</span>
+          </div>
+        );
+      }
+      if (line.startsWith("- [x] ")) {
+        return (
+          <div key={index} className="flex items-center gap-1 ml-1 py-0.5">
+            <input type="checkbox" checked={true} readOnly className="w-1.5 h-1.5 accent-purple-600" />
+            <span className="text-gray-500 text-[6.5px] line-through leading-normal">{line.slice(6)}</span>
+          </div>
+        );
+      }
+      if (line.startsWith("- ")) {
+        return (
+          <li key={index} className="text-gray-400 text-[6.5px] list-disc list-inside ml-1 leading-normal">
+            {line.slice(2)}
+          </li>
+        );
+      }
+      return (
+        <p key={index} className="text-gray-500 text-[6px] leading-relaxed min-h-[6px]">
+          {line}
+        </p>
+      );
+    });
+  };
+
+  return (
+    <div className="relative w-full aspect-[4/3] rounded-xl border border-white/10 bg-[#0a0a0d] overflow-hidden font-sans text-gray-100 shadow-2xl flex flex-col group/lumi transition-colors duration-300">
+      {/* Browser Header Bar */}
+      <div className="flex items-center justify-between bg-black/40 border-b border-white/5 px-3 py-1.5 shrink-0">
+        <div className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-red-400" />
+          <span className="w-2 h-2 rounded-full bg-yellow-400" />
+          <span className="w-2 h-2 rounded-full bg-green-400" />
+        </div>
+        <div className="flex-1 max-w-[150px] mx-auto bg-white/[0.05] rounded px-2 py-0.5 text-[7px] text-gray-400 text-center font-mono truncate">
+          {"luminote.app/sandbox"}
+        </div>
+        <div className="w-8" />
+      </div>
+
+      {/* Editor & Preview Toolbar */}
+      <div className="flex items-center justify-between bg-white/[0.02] border-b border-white/5 px-3 py-1 shrink-0 text-[6.5px] text-gray-400 select-none">
+        <div className="flex items-center gap-2">
+          <span className="font-bold text-gray-200">{"Workspace: Drafts"}</span>
+          <span className="text-gray-600">{"|"}</span>
+          <span className="text-[5.5px] px-1 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono font-bold animate-pulse">{"● SAVED"}</span>
+        </div>
+        <div className="flex gap-1.5">
+          <button
+            onClick={() => setActiveTab("write")}
+            className={`px-1.5 py-0.5 rounded transition-all ${
+              activeTab === "write" ? "bg-white/10 text-white font-bold" : "hover:text-gray-200"
+            }`}
+          >
+            {"Editor"}
+          </button>
+          <button
+            onClick={() => setActiveTab("preview")}
+            className={`px-1.5 py-0.5 rounded transition-all ${
+              activeTab === "preview" ? "bg-white/10 text-white font-bold" : "hover:text-gray-200"
+            }`}
+          >
+            {"Preview"}
+          </button>
+          <button
+            onClick={() => setActiveTab("split")}
+            className={`px-1.5 py-0.5 rounded transition-all ${
+              activeTab === "split" ? "bg-white/10 text-white font-bold" : "hover:text-gray-200"
+            }`}
+          >
+            {"Split"}
+          </button>
+        </div>
+      </div>
+
+      {/* Workspace Area */}
+      <div className="flex-1 flex bg-[#0d0e12] overflow-hidden min-h-0">
+        
+        {/* Left Sidebar (Notes Navigator) */}
+        <div className="w-[26%] border-r border-white/5 bg-black/35 p-2 flex flex-col gap-1 shrink-0 min-w-0">
+          <div className="text-[5px] uppercase tracking-wider text-gray-500 font-bold mb-1 select-none">
+            {"📁 MY NOTES"}
+          </div>
+          <div className="flex-1 flex flex-col gap-1 overflow-y-auto pr-0.5">
+            {Object.values(notes).map((note) => (
+              <button
+                key={note.id}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveNoteId(note.id);
+                }}
+                className={`w-full px-1.5 py-1 rounded text-left text-[6px] font-medium flex items-center gap-1 transition-all ${
+                  activeNoteId === note.id
+                    ? "bg-purple-600/10 text-purple-400 border border-purple-500/20"
+                    : "text-gray-400 hover:bg-white/[0.02] hover:text-gray-200 border border-transparent"
+                }`}
+              >
+                <FileText size={7} className="shrink-0" />
+                <span className="truncate">{note.title}</span>
+              </button>
+            ))}
+          </div>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              const newId = `note-${Date.now()}`;
+              setNotes((prev) => ({
+                ...prev,
+                [newId]: {
+                  id: newId,
+                  title: "📝 New Note",
+                  content: "# 📝 New Note\n\nStart writing..."
+                }
+              }));
+              setActiveNoteId(newId);
+            }}
+            className="mt-auto w-full py-1 border border-dashed border-white/10 hover:border-purple-500/30 rounded text-[5px] font-bold text-gray-500 hover:text-purple-400 flex items-center justify-center gap-1 transition-all shrink-0"
+          >
+            <Plus size={6} />
+            <span>{"New Note"}</span>
+          </button>
+        </div>
+
+        {/* Editor Pane (shown in write or split) */}
+        {(activeTab === "write" || activeTab === "split") && (
+          <div className="flex-1 flex flex-col p-2 min-w-0 border-r border-white/5 bg-[#08090c]">
+            <div className="flex items-center justify-between mb-1.5 shrink-0 text-[5px] uppercase tracking-wider text-gray-500 font-bold select-none">
+              <span>{"Markdown Editor"}</span>
+              <span>{activeNote.content.length} {"chars"}</span>
+            </div>
+            
+            {/* Tiny formatting bar */}
+            <div className="flex gap-1 border-b border-white/5 pb-1 mb-1.5 shrink-0 text-[5px] select-none">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  insertFormat("**", "**");
+                }}
+                className="px-1 py-0.5 rounded bg-white/5 hover:bg-white/10 text-gray-300 font-bold"
+              >
+                {"B"}
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  insertFormat("*", "*");
+                }}
+                className="px-1 py-0.5 rounded bg-white/5 hover:bg-white/10 text-gray-300 italic"
+              >
+                {"I"}
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  insertFormat("`", "`");
+                }}
+                className="px-1 py-0.5 rounded bg-white/5 hover:bg-white/10 text-gray-300 font-mono"
+              >
+                {"< >"}
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  insertFormat("\n- ", "");
+                }}
+                className="px-1 py-0.5 rounded bg-white/5 hover:bg-white/10 text-gray-300"
+              >
+                {"List"}
+              </button>
+            </div>
+
+            {/* Textarea */}
+            <textarea
+              value={activeNote.content}
+              onChange={(e) => handleContentChange(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
+              className="flex-1 w-full bg-transparent resize-none focus:outline-none font-mono text-[6px] leading-relaxed text-gray-300 border-none p-0 overflow-y-auto"
+              placeholder="# Start writing..."
+            />
+            
+            {/* AI Assistant Input Area */}
+            <div className="pt-1.5 shrink-0 border-t border-white/5">
+              <div className="flex gap-1 items-center bg-purple-950/20 border border-purple-500/20 rounded px-1.5 py-1">
+                <Sparkles size={8} className="text-purple-400 shrink-0" />
+                <input
+                  type="text"
+                  value={aiPrompt}
+                  onChange={(e) => setAiPrompt(e.target.value)}
+                  onClick={(e) => e.stopPropagation()}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.stopPropagation();
+                      handleAiPrompt();
+                    }
+                  }}
+                  placeholder={isAiWriting ? "AI is generating suggestion..." : "Ask AI to suggest ideas or roadmap..."}
+                  disabled={isAiWriting}
+                  className="flex-1 bg-transparent text-[6px] text-white focus:outline-none placeholder-gray-600"
+                />
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleAiPrompt();
+                  }}
+                  disabled={isAiWriting}
+                  className="px-1.5 py-0.5 rounded bg-purple-600 hover:bg-purple-700 text-white text-[5px] font-bold disabled:opacity-50 transition-all shrink-0"
+                >
+                  {isAiWriting ? "..." : "Generate"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Preview Pane (shown in preview or split) */}
+        {(activeTab === "preview" || activeTab === "split") && (
+          <div className="flex-1 flex flex-col p-2 bg-[#0d0e12] min-w-0 overflow-y-auto">
+            <div className="mb-1 shrink-0 text-[5px] uppercase tracking-wider text-gray-500 font-bold text-left select-none">
+              {"Live Document Preview"}
+            </div>
+            <div className="flex-1 text-left space-y-1 overflow-y-auto pr-1">
+              {renderMarkdown(activeNote.content)}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function ProjectMockup({ id }: { id: string }) {
   if (id === "project-1") {
     return <AIResumeMockup />;
   }
   if (id === "project-2") {
     return <CredVaultMockup />;
+  }
+  if (id === "project-3") {
+    return <LuminoteMockup />;
   }
   return null;
 }
@@ -842,46 +1146,50 @@ export default function Projects() {
           return (
             <div
               key={project.id}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center"
+              className="relative p-6 sm:p-8 lg:p-12 rounded-3xl bg-[#09090c]/40 border border-white/[0.03] backdrop-blur-md transition-all duration-500 overflow-hidden group hover:border-accent-purple/20 hover:bg-[#0f0e15]/50 hover:shadow-[0_20px_50px_rgba(157,78,221,0.08)] grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
             >
-              {/* Left Column (Details) */}
+              {/* Decorative radial gradient glow */}
+              <div className="absolute -inset-px bg-gradient-to-tr from-accent-purple/0 via-accent-purple/5 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-3xl" />
+
+              {/* Left/Right Column (Details) */}
               <div
-                className={`lg:col-span-6 space-y-6 ${
+                className={`lg:col-span-6 space-y-6 relative z-10 ${
                   isEven ? "order-1" : "order-1 lg:order-2"
                 }`}
               >
                 {/* Index / Category Metadata */}
                 <div className="flex items-center gap-4">
-                  <span className="font-mono text-5xl md:text-6xl font-light text-white/10 select-none">
-                    {displayIndex} /
-                  </span>
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent-purple animate-pulse" />
-                      <span className="text-xs font-mono text-accent-purple tracking-widest uppercase">
-                        {project.category.toUpperCase()}
-                      </span>
-                    </div>
+                  <div className="flex items-baseline font-mono select-none">
+                    <span className="text-5xl md:text-6xl font-extralight bg-gradient-to-b from-white/20 to-white/5 bg-clip-text text-transparent group-hover:from-accent-purple/40 group-hover:to-accent-purple/10 transition-all duration-500">
+                      {displayIndex}
+                    </span>
+                    <span className="text-3xl md:text-4xl font-light text-accent-purple/30 group-hover:text-accent-purple/60 transition-colors duration-500 ml-1">
+                      /
+                    </span>
+                  </div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-purple/5 border border-accent-purple/15 text-[10px] font-mono text-accent-purple tracking-widest uppercase">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent-purple animate-pulse shrink-0" />
+                    <span>{project.category}</span>
                   </div>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-3xl md:text-4xl font-display font-extrabold text-white leading-tight hover:text-accent-purple transition-colors duration-300">
+                <h3 className="text-3xl md:text-4xl font-display font-extrabold text-white leading-tight hover:text-glow-purple group-hover:text-accent-purple transition-all duration-500">
                   {project.title}
                 </h3>
 
                 {/* Title description and feature bullet points */}
                 <ul className="space-y-3.5 pt-2 text-left">
-                  <li className="flex items-start gap-3 text-xs md:text-sm text-gray-300 font-sans leading-relaxed">
+                  <li className="flex items-start gap-3 text-xs md:text-sm text-gray-400 group-hover:text-gray-200 transition-colors duration-500 font-sans leading-relaxed">
                     <div className="flex items-center font-mono text-xs shrink-0 select-none pt-0.5">
-                      <span className="text-accent-purple font-semibold">{"//"}</span>
+                      <span className="text-accent-purple/50 group-hover:text-accent-purple transition-colors duration-500 font-semibold">{"//"}</span>
                     </div>
-                    <span>{project.description}</span>
+                    <span className="font-semibold text-gray-300 group-hover:text-white transition-colors duration-500">{project.description}</span>
                   </li>
                   {project.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-start gap-3 text-xs md:text-sm text-gray-300 font-sans leading-relaxed">
+                    <li key={fIdx} className="flex items-start gap-3 text-xs md:text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-500 font-sans leading-relaxed">
                       <div className="flex items-center font-mono text-xs shrink-0 select-none pt-0.5">
-                        <span className="text-accent-purple font-semibold">{"//"}</span>
+                        <span className="text-accent-purple/40 group-hover:text-accent-purple/70 transition-colors duration-500 font-semibold">{"//"}</span>
                       </div>
                       <span>{feature}</span>
                     </li>
@@ -894,7 +1202,7 @@ export default function Projects() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.15 }}
-                  className="flex flex-wrap gap-2.5 pt-2"
+                  className="flex flex-wrap gap-2"
                 >
                   {project.techStack.slice(0, 7).map((tech) => (
                     <motion.span
@@ -908,7 +1216,7 @@ export default function Projects() {
                         backgroundColor: "rgba(157, 78, 221, 0.05)",
                         color: "#ffffff"
                       }}
-                      className="inline-flex items-center gap-1.5 px-3 py-1 border border-white/5 bg-[#050505] rounded-full text-xs text-gray-400 font-mono transition-all duration-200 cursor-default"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 border border-white/5 bg-[#050505] rounded-full text-xs text-gray-400 group-hover:text-gray-300 hover:text-white transition-all duration-200 cursor-default font-mono"
                     >
                       <TechLogo name={tech} className="w-3.5 h-3.5" />
                       <span>{tech}</span>
@@ -951,7 +1259,7 @@ export default function Projects() {
 
               {/* Right Column (Interactive Mockup) */}
               <div
-                className={`lg:col-span-6 ${
+                className={`lg:col-span-6 relative z-10 ${
                   isEven ? "order-2" : "order-2 lg:order-1"
                 }`}
               >
@@ -961,7 +1269,7 @@ export default function Projects() {
                   viewport={{ once: true, amount: 0.35 }}
                   transition={{ duration: 0.65, ease: "easeOut" }}
                 >
-                  <TiltCard className="relative p-1 bg-gradient-to-tr from-accent-purple/15 to-white/5 rounded-2xl hover:shadow-[0_0_30px_rgba(157,78,221,0.15)] transition-shadow duration-500">
+                  <TiltCard className="relative p-1.5 border border-white/5 bg-[#070709]/60 rounded-2xl hover:border-accent-purple/20 transition-all duration-500 hover:shadow-[0_0_40px_rgba(157,78,221,0.15)]">
                     <ProjectMockup id={project.id} />
                   </TiltCard>
                 </motion.div>
@@ -1083,26 +1391,7 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* Challenge & Solution Panels */}
-                <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Challenge panel */}
-                  <div className="p-5 rounded-xl border border-red-500/20 bg-red-950/5 flex gap-3 items-start">
-                    <ShieldAlert className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
-                    <div className="space-y-1 text-left">
-                      <h5 className="text-xs font-mono font-bold text-red-400 uppercase">The Challenge</h5>
-                      <p className="text-xs text-gray-300 leading-relaxed font-sans whitespace-pre-line">{selectedProject.challenge}</p>
-                    </div>
-                  </div>
 
-                  {/* Solution panel */}
-                  <div className="p-5 rounded-xl border border-accent-purple/20 bg-accent-purple/5 flex gap-3 items-start">
-                    <Lightbulb className="w-5 h-5 text-accent-purple shrink-0 mt-0.5 drop-shadow-[0_0_4px_var(--accent-neon-glow)]" />
-                    <div className="space-y-1 text-left">
-                      <h5 className="text-xs font-mono font-bold text-accent-purple uppercase">The Solution</h5>
-                      <p className="text-xs text-gray-300 leading-relaxed font-sans whitespace-pre-line">{selectedProject.solution}</p>
-                    </div>
-                  </div>
-                </div>
 
                 {/* Footer Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 border-t border-white/10 pt-6 mt-6">

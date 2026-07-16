@@ -3,6 +3,19 @@
 import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import WebGLErrorBoundary from "@/components/ui/WebGLErrorBoundary";
+
+function isWebGLSupported(): boolean {
+  try {
+    const canvas = document.createElement("canvas");
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+    );
+  } catch {
+    return false;
+  }
+}
 
 function RotatingSphere() {
   const groupRef = useRef<THREE.Group>(null);
@@ -129,10 +142,50 @@ function RotatingSphere() {
   );
 }
 
+// CSS-only fallback when WebGL is not available (e.g. iOS/Android simulators)
+function ConstellationFallback() {
+  return (
+    <div className="w-full h-full min-h-[380px] md:min-h-[480px] lg:min-h-[550px] relative flex items-center justify-center select-none">
+      <div className="absolute w-80 h-80 rounded-full bg-accent-purple/5 blur-3xl opacity-60 pointer-events-none animate-pulse" />
+      {/* Static decorative sphere rings */}
+      <div className="relative w-64 h-64 md:w-80 md:h-80">
+        <div className="absolute inset-0 rounded-full border border-purple-500/20 animate-spin" style={{ animationDuration: "20s" }} />
+        <div className="absolute inset-4 rounded-full border border-purple-400/15 animate-spin" style={{ animationDuration: "15s", animationDirection: "reverse" }} />
+        <div className="absolute inset-8 rounded-full border border-blue-400/10 animate-spin" style={{ animationDuration: "25s" }} />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-4 h-4 rounded-full bg-purple-500/60 blur-sm animate-pulse" />
+        </div>
+        {/* Static dots to mimic stars */}
+        {[...Array(12)].map((_, i) => {
+          const angle = (i / 12) * 360;
+          const r = 110;
+          const x = 50 + r * Math.cos((angle * Math.PI) / 180);
+          const y = 50 + r * Math.sin((angle * Math.PI) / 180);
+          return (
+            <div
+              key={i}
+              className="absolute w-1 h-1 rounded-full bg-purple-400/70 animate-pulse"
+              style={{
+                left: `${x}%`,
+                top: `${y}%`,
+                transform: "translate(-50%, -50%)",
+                animationDelay: `${i * 0.2}s`,
+              }}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export default function ConstellationSphere() {
   const [cameraZ, setCameraZ] = useState(3.6);
+  const [webGLAvailable, setWebGLAvailable] = useState(true);
 
   useEffect(() => {
+    setWebGLAvailable(isWebGLSupported());
+
     const handleResize = () => {
       const w = window.innerWidth;
       if (w < 480) {
@@ -148,19 +201,28 @@ export default function ConstellationSphere() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  if (!webGLAvailable) {
+    return <ConstellationFallback />;
+  }
+
   return (
-    <div className="w-full h-full min-h-[380px] md:min-h-[480px] lg:min-h-[550px] relative flex items-center justify-center select-none">
-      {/* Subtle outer neon purple glow */}
-      <div className="absolute w-80 h-80 rounded-full bg-accent-purple/5 blur-3xl opacity-60 pointer-events-none animate-pulse" />
-      
-      <Canvas
-        camera={{ position: [0, 0, cameraZ], fov: 60 }}
-        gl={{ antialias: true, alpha: true }}
-        className="w-full h-full"
-      >
-        <ambientLight intensity={0.5} />
-        <RotatingSphere />
-      </Canvas>
-    </div>
+    <WebGLErrorBoundary fallback={<ConstellationFallback />}>
+      <div className="w-full h-full min-h-[380px] md:min-h-[480px] lg:min-h-[550px] relative flex items-center justify-center select-none">
+        {/* Subtle outer neon purple glow */}
+        <div className="absolute w-80 h-80 rounded-full bg-accent-purple/5 blur-3xl opacity-60 pointer-events-none animate-pulse" />
+
+        <Canvas
+          camera={{ position: [0, 0, cameraZ], fov: 60 }}
+          gl={{ antialias: true, alpha: true, powerPreference: "default", failIfMajorPerformanceCaveat: false }}
+          className="w-full h-full"
+          onCreated={({ gl }) => {
+            gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          }}
+        >
+          <ambientLight intensity={0.5} />
+          <RotatingSphere />
+        </Canvas>
+      </div>
+    </WebGLErrorBoundary>
   );
 }

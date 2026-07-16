@@ -4,17 +4,6 @@ export interface Stat {
   suffix: string;
 }
 
-export interface Skill {
-  name: string;
-  iconName: string;
-  level: number;
-}
-
-export interface SkillCategory {
-  title: string;
-  skills: Skill[];
-}
-
 export interface Project {
   id: string;
   title: string;
@@ -52,66 +41,48 @@ export const PORTFOLIO_DATA = {
     name: "Akshay Singh Thakur",
     title: "Full-stack / MERN Developer",
     subtitle: "Developing High-Performance Full-Stack Web Applications with AI Integration",
-    taglineWords: ["MERN Stack Developer", "Full Stack Developer"],
+    taglineWords: ["MERN Developer", "Full Stack Developer"],
     bio: [
       "I am a Full-stack / MERN developer focused on crafting clean user interfaces and highly efficient API architectures. I build responsive, modern web applications.",
       "I am passionate about creating high-performance digital experiences, experimenting with modern web standards, and integrating intelligent AI features into full-stack systems."
     ],
-    email: process.env.NEXT_PUBLIC_PERSONAL_EMAIL || "akshaysinghthakur0004@gmail.com",
+    email: process.env.NEXT_PUBLIC_PERSONAL_EMAIL || "[EMAIL_ADDRESS] ",
     location: "Himachal Pradesh, India",
   },
-  
+
   stats: [
     { value: 5, label: "Projects Completed", suffix: "+" },
     { value: 1, label: "Internship Completed", suffix: "" },
     { value: 3, label: "Certifications Earned", suffix: "" },
   ] as Stat[],
 
-  skills: [
-    {
-      title: "Frontend Development",
-      skills: [
-        { name: "React 19 / 18", iconName: "Code2", level: 92 },
-        { name: "Vite", iconName: "ArrowUpRight", level: 90 },
-        { name: "Tailwind CSS", iconName: "Palette", level: 95 },
-        { name: "TanStack Query (v5)", iconName: "RefreshCw", level: 85 },
-        { name: "Zustand", iconName: "Sliders", level: 88 },
-
-        { name: "HTML5 & CSS3", iconName: "Flame", level: 95 },
-        { name: "React Router DOM", iconName: "Share2", level: 92 },
-      ],
-    },
-    {
-      title: "Backend & Database",
-      skills: [
-        { name: "Node.js & Express.js", iconName: "Server", level: 90 },
-        { name: "FastAPI & Python", iconName: "Cpu", level: 88 },
-        { name: "REST APIs (Axios/Fetch)", iconName: "Cpu", level: 92 },
-        { name: "MongoDB & Mongoose", iconName: "Database", level: 88 },
-        { name: "PostgreSQL & Redis", iconName: "Database", level: 85 },
-        { name: "Clerk Auth", iconName: "Lock", level: 85 },
-        { name: "Supabase Auth", iconName: "Shield", level: 85 },
-        { name: "JWT & Bcrypt", iconName: "Lock", level: 85 },
-        { name: "MySQL & Databases", iconName: "Database", level: 88 },
-      ],
-    },
-    {
-      title: "Blockchain & DevOps",
-      skills: [
-        { name: "Solidity (Ethereum)", iconName: "Box", level: 82 },
-        { name: "Hardhat & Ethers.js", iconName: "Activity", level: 84 },
-        { name: "MetaMask Wallet", iconName: "Wallet", level: 85 },
-        { name: "Docker & Compose", iconName: "Container", level: 78 },
-        { name: "Nginx", iconName: "Globe", level: 80 },
-        { name: "Jest & Supertest", iconName: "Gauge", level: 80 },
-        { name: "SonarQube Cloud", iconName: "CheckSquare", level: 75 },
-        { name: "Puppeteer (PDF Generation)", iconName: "FileText", level: 82 },
-        { name: "Git & GitHub", iconName: "GitCommit", level: 90 },
-      ],
-    },
-  ] as SkillCategory[],
-
   projects: [
+    {
+      id: "project-3",
+      title: "Luminote",
+      category: "Full Stack / Productivity",
+      image: "/images/luminote.png",
+      liveUrl: "https://luminote.demo.dev",
+      githubUrl: "https://github.com/Thakur-Akshay04/Luminote",
+      description: "An AI-powered notes application supporting rich text, hand-drawn sketchpads, and voice memos. Features automated background note summarization, interactive Q&A chat, AI task checklist extraction, and vector-based semantic search.",
+      fullDescription: "Luminote is a next-generation notes and productivity workspace built for developers and creators. Rather than limiting users to simple text, it supports text notes, interactive checklists, an HTML5 Canvas drawing board, and voice recording with auto-transcription. The application leverages a FastAPI backend connected to PostgreSQL and Redis, implementing pgvector for similarity searches across note embeddings and integrating LLMs for real-time document Q&A and task auto-generation.",
+      solution: "Engineered a full-stack web application using Next.js and Tailwind CSS, backed by a FastAPI server, PostgreSQL (with pgvector), and Redis. Implemented a feature-rich editor supporting text, checklists, drawing, and audio transcriptions, alongside LLM-driven tools for Q&A, auto-summarization, and semantic search.",
+      features: [
+        "Interactive multi-format editor for text notes, checklists, canvas drawings, and voice recordings",
+        "LLM-powered background note summarization, interactive Q&A, and task auto-extraction",
+        "Semantic similarity search powered by OpenAI text embeddings and pgvector storage",
+        "Real-time websocket alert checks and notification pushes for note-linked reminders"
+      ],
+      techStack: [
+        "Next.js",
+        "FastAPI",
+        "PostgreSQL",
+        "pgvector",
+        "Redis",
+        "Groq API",
+        "Groq Whisper"
+      ],
+    },
     {
       id: "project-1",
       title: "AI Resume Tailor",
@@ -130,10 +101,7 @@ export const PORTFOLIO_DATA = {
       ],
       techStack: [
         "React 19",
-        "Vite",
         "Tailwind CSS",
-        "TanStack Query (v5)",
-        "Zustand",
         "Node.js",
         "Express.js",
         "Puppeteer",
@@ -142,12 +110,7 @@ export const PORTFOLIO_DATA = {
         "Clerk Auth",
         "Groq Cloud API",
         "Meta Llama-3",
-        "Docker",
-        "Docker Compose",
-        "Nginx",
-        "Jest",
-        "Supertest",
-        "SonarQube Cloud"
+        "Docker"
       ],
     },
     {
@@ -158,7 +121,7 @@ export const PORTFOLIO_DATA = {
       liveUrl: "https://credvault.demo.dev",
       githubUrl: "https://github.com/Thakur-Akshay04/CredValut",
       description: "A blockchain-based credential registry on Ethereum — issue, store, and verify academic certificates using smart contracts.",
-      fullDescription: "CredVault solves academic credential fraud by storing certificate records permanently on the Ethereum blockchain. Academic institutions issue credentials via smart contracts, which live on the Ethereum blockchain and are cryptographically verifiable by anyone, forever.\n\nKey Features Built:\n• On-chain credential issuance via a Solidity smart contract\n• Cryptographic verification — verify any credential's authenticity by its hash\n• Dual authentication using Supabase (Email/password + Google OAuth)\n• MetaMask wallet integration for secure transaction signing\n• REST API with 5 endpoints for credential CRUD operations\n• Glassmorphism UI with custom animations and responsive layout design",
+      fullDescription: "CredVault solves academic credential fraud by storing certificate records permanently on the Ethereum blockchain. Academic institutions issue credentials via smart contracts, which live on the Ethereum blockchain and are cryptographically verifiable by anyone, forever.",
       challenge: "Credential fraud is rampant — degrees get faked, certificates get forged.",
       solution: "Built a decentralized registry system featuring on-chain credential issuance via a Solidity smart contract, cryptographic verification via credential hash, MetaMask wallet integration, and Supabase OAuth authentication, backed by Node.js, Express.js, and MongoDB.",
       features: [
@@ -167,18 +130,15 @@ export const PORTFOLIO_DATA = {
         "Flexible OAuth and credentials login backed by Supabase Auth"
       ],
       techStack: [
-        "React 18",
+        "React",
         "Ethers.js",
-        "CSS3 (Glassmorphism)",
-        "React Router DOM",
+        "CSS3",
         "HTML5 & CSS3",
         "Bootstrap 5",
         "Node.js",
         "Express.js",
         "REST API",
         "MongoDB",
-        "Mongoose",
-        "Supabase",
         "Solidity",
         "Hardhat",
         "MetaMask",
