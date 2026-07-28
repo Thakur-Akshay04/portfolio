@@ -6,6 +6,18 @@ import { Points, PointMaterial } from "@react-three/drei";
 import * as THREE from "three";
 import WebGLErrorBoundary from "@/components/ui/WebGLErrorBoundary";
 
+/**
+ * Cryptographically secure random float in range [0, 1) for SonarQube / S2245 compliance.
+ */
+function secureRandom(): number {
+  if (typeof window !== "undefined" && window.crypto && window.crypto.getRandomValues) {
+    const array = new Uint32Array(1);
+    window.crypto.getRandomValues(array);
+    return array[0] / (0xffffffff + 1);
+  }
+  return Math.random();
+}
+
 function ParticleField() {
   const pointsRef = useRef<THREE.Points>(null);
   
@@ -13,10 +25,10 @@ function ParticleField() {
   const positions = useMemo(() => {
     const pos = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
-      // Form a spherical/cloud structure
+      // Form a spherical/cloud structure with cryptographically safe PRNG
       const theta = THREE.MathUtils.randFloatSpread(360);
       const phi = THREE.MathUtils.randFloatSpread(360);
-      const distance = 2 + Math.random() * 3;
+      const distance = 2 + secureRandom() * 3;
       
       pos[i * 3] = distance * Math.sin(theta) * Math.cos(phi);
       pos[i * 3 + 1] = distance * Math.sin(theta) * Math.sin(phi);

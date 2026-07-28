@@ -3,12 +3,12 @@ FROM node:18-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Install package manager
-RUN npm install -g pnpm
+# Install package manager safely with --ignore-scripts
+RUN npm install -g pnpm --ignore-scripts
 
 # Copy package files (explicitly defined, no globs to comply with S6470)
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
 # Stage 2: Build the source code
 FROM node:18-alpine AS builder
@@ -32,7 +32,7 @@ ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY
 ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-1x00000000000000000000AA}
 
 # Install package manager for pnpm build
-RUN npm install -g pnpm
+RUN npm install -g pnpm --ignore-scripts
 RUN pnpm build
 
 # Stage 3: Runner

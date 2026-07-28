@@ -5,6 +5,18 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import WebGLErrorBoundary from "@/components/ui/WebGLErrorBoundary";
 
+/**
+ * Cryptographically secure random float in range [0, 1) for SonarQube / S2245 compliance.
+ */
+function secureRandom(): number {
+  if (typeof window !== "undefined" && window.crypto && window.crypto.getRandomValues) {
+    const array = new Uint32Array(1);
+    window.crypto.getRandomValues(array);
+    return array[0] / (0xffffffff + 1);
+  }
+  return Math.random();
+}
+
 function isWebGLSupported(): boolean {
   try {
     const canvas = document.createElement("canvas");
@@ -60,14 +72,14 @@ function HolographicBackgroundGlobe() {
     return lines;
   }, [radius]);
 
-  // Surface Data Hotspots
+  // Surface Data Hotspots (Cryptographically Safe Randomization)
   const nodeCount = 42;
   const nodes = useMemo(() => {
     const pos = new Float32Array(nodeCount * 3);
     const nodeVectors: THREE.Vector3[] = [];
     for (let i = 0; i < nodeCount; i++) {
-      const u = Math.random();
-      const v = Math.random();
+      const u = secureRandom();
+      const v = secureRandom();
       const theta = u * 2.0 * Math.PI;
       const phi = Math.acos(2.0 * v - 1.0);
 
@@ -95,7 +107,7 @@ function HolographicBackgroundGlobe() {
         const p2 = nodes.vectors[j];
         const dist = p1.distanceTo(p2);
 
-        if (dist > 0.8 && dist < maxDist && Math.random() > 0.4) {
+        if (dist > 0.8 && dist < maxDist && secureRandom() > 0.4) {
           const mid = p1.clone().add(p2).multiplyScalar(0.5);
           const midLength = mid.length();
           if (midLength > 0) {
@@ -124,13 +136,13 @@ function HolographicBackgroundGlobe() {
     for (let i = 0; i < count; i++) {
       const a1 = (i / count) * Math.PI * 2;
       pos1[i * 3] = r1 * Math.cos(a1);
-      pos1[i * 3 + 1] = (Math.random() - 0.5) * 0.08;
+      pos1[i * 3 + 1] = (secureRandom() - 0.5) * 0.08;
       pos1[i * 3 + 2] = r1 * Math.sin(a1);
 
       const a2 = (i / count) * Math.PI * 2;
       pos2[i * 3] = r2 * Math.cos(a2);
       pos2[i * 3 + 1] = r2 * Math.sin(a2);
-      pos2[i * 3 + 2] = (Math.random() - 0.5) * 0.08;
+      pos2[i * 3 + 2] = (secureRandom() - 0.5) * 0.08;
     }
     return { ring1: pos1, ring2: pos2 };
   }, [radius]);

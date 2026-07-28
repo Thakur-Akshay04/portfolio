@@ -5,6 +5,18 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import WebGLErrorBoundary from "@/components/ui/WebGLErrorBoundary";
 
+/**
+ * Cryptographically secure random float in range [0, 1) for SonarQube / S2245 compliance.
+ */
+function secureRandom(): number {
+  if (typeof window !== "undefined" && window.crypto && window.crypto.getRandomValues) {
+    const array = new Uint32Array(1);
+    window.crypto.getRandomValues(array);
+    return array[0] / (0xffffffff + 1);
+  }
+  return Math.random();
+}
+
 function isWebGLSupported(): boolean {
   try {
     const canvas = document.createElement("canvas");
@@ -45,16 +57,16 @@ function QuantumNeuralReactor() {
     return new Float32Array(lines);
   }, []);
 
-  // 2. Swirling Energy Micro-Particles
+  // 2. Swirling Energy Micro-Particles (Cryptographically Safe Randomization)
   const particleCount = 200;
   const particlePositions = useMemo(() => {
     const pos = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
-      const u = Math.random();
-      const v = Math.random();
+      const u = secureRandom();
+      const v = secureRandom();
       const theta = u * 2.0 * Math.PI;
       const phi = Math.acos(2.0 * v - 1.0);
-      const dist = 1.8 + Math.random() * 2.6;
+      const dist = 1.8 + secureRandom() * 2.6;
 
       pos[i * 3] = dist * Math.sin(phi) * Math.cos(theta);
       pos[i * 3 + 1] = dist * Math.sin(phi) * Math.sin(theta);
