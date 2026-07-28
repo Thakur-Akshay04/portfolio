@@ -2,17 +2,13 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import dynamic from "next/dynamic";
 import { PORTFOLIO_DATA } from "@/constants/data";
 import { useSafeReducedMotion } from "@/lib/hooks";
 import { getFadeIn } from "@/lib/variants";
 import PageFoldWrapper from "@/components/layout/PageFoldWrapper";
 import SectionHeading from "@/components/layout/SectionHeading";
 
-const ConstellationSphere = dynamic(() => import("./ConstellationSphere"), {
-  ssr: false,
-  loading: () => <div className="w-full h-full min-h-[320px] md:min-h-[420px]" />,
-});
+
 
 // Text highlighter decorator helper
 function renderHighlightedText(text: string) {
@@ -162,17 +158,8 @@ export default function About() {
         className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative"
       >
         {/* Left Column - 3D Animated Star Sphere */}
-        <motion.div
-          variants={fadeInLeft}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="absolute lg:relative inset-0 lg:inset-auto lg:col-span-5 flex justify-center lg:justify-start w-full h-full lg:h-auto -z-10 lg:z-0 opacity-20 lg:opacity-100 pointer-events-none lg:pointer-events-auto"
-        >
-          <div className="w-full h-full lg:h-auto flex items-center justify-center select-none">
-            <ConstellationSphere />
-          </div>
-        </motion.div>
+        {/* Left Column Spacer */}
+        <div className="hidden lg:block lg:col-span-5 w-full h-full pointer-events-none" />
 
         {/* Right Column - Biography & Interactive Console */}
         <motion.div

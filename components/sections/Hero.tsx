@@ -161,7 +161,7 @@ export default function Hero() {
         </div>
 
         {/* Right Side: Animated 3D Star Constellation */}
-        <div className="absolute lg:relative inset-0 lg:inset-auto lg:col-span-5 w-full h-full lg:h-auto -z-10 lg:z-0 opacity-30 lg:opacity-100 pointer-events-none lg:pointer-events-auto flex items-center justify-center lg:translate-x-12">
+        <div className="absolute lg:relative inset-0 lg:inset-auto lg:col-span-5 w-full h-full lg:h-auto -z-10 lg:z-0 opacity-40 lg:opacity-100 pointer-events-none lg:pointer-events-auto flex items-center justify-center lg:translate-x-12">
           <ConstellationSphere />
         </div>
       </div>

@@ -17,124 +17,198 @@ function isWebGLSupported(): boolean {
   }
 }
 
-function RotatingSphere() {
-  const groupRef = useRef<THREE.Group>(null);
-  
-  // Star Sphere Points
-  const starCount = 100;
-  const sphereRadius = 4.85;
-  const positions = useMemo(() => {
-    const pos = new Float32Array(starCount * 3);
-    for (let i = 0; i < starCount; i++) {
+// 3D Quantum Neural Reactor Component - Deep Cyber Electric Color Theme
+function QuantumNeuralReactor() {
+  const mainGroupRef = useRef<THREE.Group>(null);
+  const coreMeshRef = useRef<THREE.Mesh>(null);
+  const innerPolyRef = useRef<THREE.Mesh>(null);
+  const outerPolyRef = useRef<THREE.Mesh>(null);
+  const ring1Ref = useRef<THREE.Mesh>(null);
+  const ring2Ref = useRef<THREE.Mesh>(null);
+
+  // 1. Generate Vertices Laser Beams between Geometries
+  const laserPositions = useMemo(() => {
+    const dGeo = new THREE.DodecahedronGeometry(2.1, 0);
+    const iGeo = new THREE.IcosahedronGeometry(3.1, 0);
+    const dPos = dGeo.attributes.position;
+    const iPos = iGeo.attributes.position;
+
+    const lines: number[] = [];
+    const count = Math.min(dPos.count, iPos.count);
+
+    for (let i = 0; i < count; i += 2) {
+      lines.push(
+        dPos.getX(i), dPos.getY(i), dPos.getZ(i),
+        iPos.getX(i), iPos.getY(i), iPos.getZ(i)
+      );
+    }
+    return new Float32Array(lines);
+  }, []);
+
+  // 2. Swirling Energy Micro-Particles
+  const particleCount = 200;
+  const particlePositions = useMemo(() => {
+    const pos = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount; i++) {
       const u = Math.random();
       const v = Math.random();
       const theta = u * 2.0 * Math.PI;
       const phi = Math.acos(2.0 * v - 1.0);
-      
-      pos[i * 3] = sphereRadius * Math.sin(phi) * Math.cos(theta);
-      pos[i * 3 + 1] = sphereRadius * Math.sin(phi) * Math.sin(theta);
-      pos[i * 3 + 2] = sphereRadius * Math.cos(phi);
+      const dist = 1.8 + Math.random() * 2.6;
+
+      pos[i * 3] = dist * Math.sin(phi) * Math.cos(theta);
+      pos[i * 3 + 1] = dist * Math.sin(phi) * Math.sin(theta);
+      pos[i * 3 + 2] = dist * Math.cos(phi);
     }
     return pos;
   }, []);
 
-  // Connect close stars with thin constellation lines
-  const linePositions = useMemo(() => {
-    const lines: number[] = [];
-    const threshold = 1.05;
-    for (let i = 0; i < starCount; i++) {
-      const p1 = new THREE.Vector3(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]);
-      for (let j = i + 1; j < starCount; j++) {
-        const p2 = new THREE.Vector3(positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]);
-        if (p1.distanceTo(p2) < threshold) {
-          lines.push(p1.x, p1.y, p1.z);
-          lines.push(p2.x, p2.y, p2.z);
-        }
-      }
-    }
-    return new Float32Array(lines);
-  }, [positions]);
-
-  // Outer orbital circle of stars
-  const ringCount = 80;
-  const ringPositions = useMemo(() => {
-    const pos = new Float32Array(ringCount * 3);
-    const ringRadius = 4.4;
-    for (let i = 0; i < ringCount; i++) {
-      const angle = (i / ringCount) * Math.PI * 2;
-      const jitter = (Math.random() - 0.5) * 0.03;
-      pos[i * 3] = (ringRadius + jitter) * Math.cos(angle);
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 0.04;
-      pos[i * 3 + 2] = (ringRadius + jitter) * Math.sin(angle);
-    }
-    return pos;
-  }, []);
-
+  // 3. Reactor Pulse & Multi-Axis Rotations
   useFrame((state) => {
-    if (!groupRef.current) return;
+    if (!mainGroupRef.current) return;
     const time = state.clock.getElapsedTime();
-    // Continuous organic rotation
-    groupRef.current.rotation.y = time * 0.05;
-    groupRef.current.rotation.x = time * 0.025;
+
+    // Core pulsing scale & rotation
+    if (coreMeshRef.current) {
+      const pulse = 1 + Math.sin(time * 2.5) * 0.06;
+      coreMeshRef.current.scale.set(pulse, pulse, pulse);
+      coreMeshRef.current.rotation.y = time * 0.2;
+    }
+
+    // Inner Dodecahedron Wireframe rotation
+    if (innerPolyRef.current) {
+      innerPolyRef.current.rotation.x = time * 0.15;
+      innerPolyRef.current.rotation.y = time * 0.25;
+    }
+
+    // Outer Icosahedron Wireframe counter-rotation
+    if (outerPolyRef.current) {
+      outerPolyRef.current.rotation.x = -time * 0.12;
+      outerPolyRef.current.rotation.z = time * 0.18;
+    }
+
+    // Outer Torus Rings rotation
+    if (ring1Ref.current) {
+      ring1Ref.current.rotation.z = time * 0.3;
+      ring1Ref.current.rotation.y = Math.sin(time * 0.5) * 0.2;
+    }
+
+    if (ring2Ref.current) {
+      ring2Ref.current.rotation.z = -time * 0.25;
+      ring2Ref.current.rotation.x = Math.cos(time * 0.4) * 0.25;
+    }
+
+    // Overall Group Pointer Tilt
+    const targetX = state.pointer.y * 0.35;
+    const targetY = state.pointer.x * 0.35;
+    mainGroupRef.current.rotation.x += (targetX - mainGroupRef.current.rotation.x) * 0.05;
+    mainGroupRef.current.rotation.y += (targetY - mainGroupRef.current.rotation.y) * 0.05;
   });
 
   return (
-    <group ref={groupRef}>
-      {/* 1. Constellation Star Points */}
-      <points>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={positions.length / 3}
-            array={positions}
-            itemSize={3}
-            args={[positions, 3]}
-          />
-        </bufferGeometry>
-        <pointsMaterial
-          size={0.075}
-          color="#9d4edd"
+    <group ref={mainGroupRef}>
+      {/* Central Glowing Energy Core (Electric Cyan) */}
+      <mesh ref={coreMeshRef}>
+        <sphereGeometry args={[1.05, 32, 32]} />
+        <meshStandardMaterial
+          color="#00f0ff"
+          emissive="#0284c7"
+          emissiveIntensity={1.4}
+          roughness={0.1}
+          metalness={0.9}
           transparent
-          opacity={0.85}
-          depthWrite={false}
+          opacity={0.88}
         />
-      </points>
+      </mesh>
 
-      {/* 2. Constellation Connecting Lines */}
+      {/* Inner Glowing Plasma Shell (Amber Gold) */}
+      <mesh>
+        <sphereGeometry args={[1.25, 24, 24]} />
+        <meshBasicMaterial
+          color="#fbbf24"
+          wireframe
+          transparent
+          opacity={0.35}
+        />
+      </mesh>
+
+      {/* Layer 1: Inner Dodecahedron Wireframe (Vivid Violet) */}
+      <mesh ref={innerPolyRef}>
+        <dodecahedronGeometry args={[2.1, 0]} />
+        <meshBasicMaterial
+          color="#9d4edd"
+          wireframe
+          transparent
+          opacity={0.7}
+        />
+      </mesh>
+
+      {/* Layer 2: Outer Icosahedron Wireframe (Bright Cyber Cyan) */}
+      <mesh ref={outerPolyRef}>
+        <icosahedronGeometry args={[3.1, 0]} />
+        <meshBasicMaterial
+          color="#00f0ff"
+          wireframe
+          transparent
+          opacity={0.5}
+        />
+      </mesh>
+
+      {/* Layer 3: Laser Connections between Vertices (Solar Amber Gold) */}
       <lineSegments>
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            count={linePositions.length / 3}
-            array={linePositions}
+            count={laserPositions.length / 3}
+            array={laserPositions}
             itemSize={3}
-            args={[linePositions, 3]}
+            args={[laserPositions, 3]}
           />
         </bufferGeometry>
         <lineBasicMaterial
-          color="#a29bfe"
-          opacity={0.2}
+          color="#fbbf24"
           transparent
+          opacity={0.5}
           depthWrite={false}
         />
       </lineSegments>
 
-      {/* 3. Outer Orbital Circle of Stars */}
+      {/* Layer 4: Orbital Torus Ring 1 (Cyber Cyan) */}
+      <mesh ref={ring1Ref} rotation={[Math.PI / 3, 0, 0]}>
+        <torusGeometry args={[3.7, 0.018, 16, 100]} />
+        <meshBasicMaterial
+          color="#00f0ff"
+          transparent
+          opacity={0.8}
+        />
+      </mesh>
+
+      {/* Layer 5: Orbital Torus Ring 2 (Vivid Violet) */}
+      <mesh ref={ring2Ref} rotation={[-Math.PI / 4, Math.PI / 6, 0]}>
+        <torusGeometry args={[4.2, 0.014, 16, 100]} />
+        <meshBasicMaterial
+          color="#9d4edd"
+          transparent
+          opacity={0.7}
+        />
+      </mesh>
+
+      {/* Layer 6: Swirling Quantum Micro-Particles (Cyan & Gold) */}
       <points>
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            count={ringPositions.length / 3}
-            array={ringPositions}
+            count={particlePositions.length / 3}
+            array={particlePositions}
             itemSize={3}
-            args={[ringPositions, 3]}
+            args={[particlePositions, 3]}
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.055}
-          color="#61DAFB"
+          size={0.08}
+          color="#67e8f9"
           transparent
-          opacity={0.75}
+          opacity={0.95}
           depthWrite={false}
         />
       </points>
@@ -142,45 +216,24 @@ function RotatingSphere() {
   );
 }
 
-// CSS-only fallback when WebGL is not available (e.g. iOS/Android simulators)
-function ConstellationFallback() {
+// CSS/SVG Fallback for Non-WebGL devices
+function QuantumReactorFallback() {
   return (
     <div className="w-full h-full min-h-[380px] md:min-h-[480px] lg:min-h-[550px] relative flex items-center justify-center select-none">
-      <div className="absolute w-80 h-80 rounded-full bg-accent-purple/5 blur-3xl opacity-60 pointer-events-none animate-pulse" />
-      {/* Static decorative sphere rings */}
-      <div className="relative w-64 h-64 md:w-80 md:h-80">
-        <div className="absolute inset-0 rounded-full border border-purple-500/20 animate-spin" style={{ animationDuration: "20s" }} />
-        <div className="absolute inset-4 rounded-full border border-purple-400/15 animate-spin" style={{ animationDuration: "15s", animationDirection: "reverse" }} />
-        <div className="absolute inset-8 rounded-full border border-blue-400/10 animate-spin" style={{ animationDuration: "25s" }} />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-4 h-4 rounded-full bg-purple-500/60 blur-sm animate-pulse" />
-        </div>
-        {/* Static dots to mimic stars */}
-        {[...Array(12)].map((_, i) => {
-          const angle = (i / 12) * 360;
-          const r = 110;
-          const x = 50 + r * Math.cos((angle * Math.PI) / 180);
-          const y = 50 + r * Math.sin((angle * Math.PI) / 180);
-          return (
-            <div
-              key={i}
-              className="absolute w-1 h-1 rounded-full bg-purple-400/70 animate-pulse"
-              style={{
-                left: `${x}%`,
-                top: `${y}%`,
-                transform: "translate(-50%, -50%)",
-                animationDelay: `${i * 0.2}s`,
-              }}
-            />
-          );
-        })}
+      <div className="absolute w-80 h-80 rounded-full bg-cyan-500/20 blur-3xl opacity-80 pointer-events-none animate-pulse" />
+      
+      <div className="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
+        <div className="absolute inset-0 rounded-full border-2 border-cyan-400/35 animate-spin" style={{ animationDuration: "12s" }} />
+        <div className="absolute inset-4 rounded-full border-2 border-purple-500/30 animate-spin" style={{ animationDuration: "9s", animationDirection: "reverse" }} />
+        <div className="absolute inset-10 rounded-full border border-dashed border-amber-400/40 animate-spin" style={{ animationDuration: "16s" }} />
+        <div className="w-16 h-16 rounded-full bg-cyan-500/80 blur-md animate-pulse shadow-[0_0_30px_#00f0ff]" />
       </div>
     </div>
   );
 }
 
 export default function ConstellationSphere() {
-  const [cameraZ, setCameraZ] = useState(3.6);
+  const [cameraZ, setCameraZ] = useState(6.2);
   const [webGLAvailable, setWebGLAvailable] = useState(true);
 
   useEffect(() => {
@@ -189,11 +242,11 @@ export default function ConstellationSphere() {
     const handleResize = () => {
       const w = window.innerWidth;
       if (w < 480) {
-        setCameraZ(6.2);
+        setCameraZ(8.8);
       } else if (w < 768) {
-        setCameraZ(4.8);
+        setCameraZ(7.2);
       } else {
-        setCameraZ(3.6);
+        setCameraZ(6.2);
       }
     };
     handleResize();
@@ -202,25 +255,28 @@ export default function ConstellationSphere() {
   }, []);
 
   if (!webGLAvailable) {
-    return <ConstellationFallback />;
+    return <QuantumReactorFallback />;
   }
 
   return (
-    <WebGLErrorBoundary fallback={<ConstellationFallback />}>
+    <WebGLErrorBoundary fallback={<QuantumReactorFallback />}>
       <div className="w-full h-full min-h-[380px] md:min-h-[480px] lg:min-h-[550px] relative flex items-center justify-center select-none">
-        {/* Subtle outer neon purple glow */}
-        <div className="absolute w-80 h-80 rounded-full bg-accent-purple/5 blur-3xl opacity-60 pointer-events-none animate-pulse" />
+        {/* Deep Cyber Electric Backdrop Glow */}
+        <div className="absolute w-96 h-96 rounded-full bg-gradient-to-r from-cyan-500/25 via-purple-600/20 to-amber-500/20 blur-3xl opacity-80 pointer-events-none animate-pulse" />
 
         <Canvas
-          camera={{ position: [0, 0, cameraZ], fov: 60 }}
+          camera={{ position: [0, 0, cameraZ], fov: 55 }}
           gl={{ antialias: true, alpha: true, powerPreference: "default", failIfMajorPerformanceCaveat: false }}
           className="w-full h-full"
           onCreated={({ gl }) => {
             gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
           }}
         >
-          <ambientLight intensity={0.5} />
-          <RotatingSphere />
+          <ambientLight intensity={0.7} />
+          <pointLight position={[0, 0, 0]} intensity={3.0} color="#00f0ff" />
+          <directionalLight position={[6, 6, 6]} intensity={1.6} color="#00f0ff" />
+          <directionalLight position={[-6, -6, -6]} intensity={1.3} color="#9d4edd" />
+          <QuantumNeuralReactor />
         </Canvas>
       </div>
     </WebGLErrorBoundary>
