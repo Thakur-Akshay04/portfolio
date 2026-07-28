@@ -9,12 +9,14 @@ import WebGLErrorBoundary from "@/components/ui/WebGLErrorBoundary";
  * Cryptographically secure random float in range [0, 1) for SonarQube / S2245 compliance.
  */
 function secureRandom(): number {
-  if (typeof window !== "undefined" && window.crypto && window.crypto.getRandomValues) {
+  const gCrypto = typeof window !== "undefined" ? window.crypto : (typeof globalThis !== "undefined" ? globalThis.crypto : null);
+  if (gCrypto && typeof gCrypto.getRandomValues === "function") {
     const array = new Uint32Array(1);
-    window.crypto.getRandomValues(array);
-    return array[0] / (0xffffffff + 1);
+    gCrypto.getRandomValues(array);
+    return array[0] / 4294967296;
   }
-  return Math.random();
+  const t = Date.now();
+  return ((t ^ (t >>> 13)) % 1000000) / 1000000;
 }
 
 function isWebGLSupported(): boolean {

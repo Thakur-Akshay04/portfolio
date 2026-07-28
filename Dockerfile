@@ -4,7 +4,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Install package manager safely with --ignore-scripts
-RUN npm install -g pnpm --ignore-scripts
+RUN npm install -g pnpm@9.15.4 --ignore-scripts
 
 # Copy package files (explicitly defined, no globs to comply with S6470)
 COPY package.json pnpm-lock.yaml ./
@@ -32,7 +32,7 @@ ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY
 ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-1x00000000000000000000AA}
 
 # Install package manager for pnpm build
-RUN npm install -g pnpm --ignore-scripts
+RUN npm install -g pnpm@9.15.4 --ignore-scripts
 RUN pnpm build
 
 # Stage 3: Runner
