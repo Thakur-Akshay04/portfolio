@@ -46,7 +46,7 @@ export const PORTFOLIO_DATA = {
       "I am a Full-stack / MERN developer focused on crafting clean user interfaces and highly efficient API architectures. I build responsive, modern web applications.",
       "I am passionate about creating high-performance digital experiences, experimenting with modern web standards, and integrating intelligent AI features into full-stack systems."
     ],
-    email: process.env.NEXT_PUBLIC_PERSONAL_EMAIL || "[EMAIL_ADDRESS] ",
+    email: process.env.NEXT_PUBLIC_PERSONAL_EMAIL || "akshaysinghthakur0004@gmail.com",
     location: "Himachal Pradesh, India",
   },
 
@@ -168,8 +168,8 @@ export const PORTFOLIO_DATA = {
   ] as ExperienceItem[],
 
   socials: [
-    { name: "GitHub", url: "https://github.com/Thakur-Akshay04", iconName: "Github" },
-    { name: "LinkedIn", url: "https://www.linkedin.com/in/akshaythakur04/", iconName: "Linkedin" },
-    { name: "Resume", url: process.env.NEXT_PUBLIC_RESUME_URL || "https://drive.google.com/file/d/1FzXkmBibfAiv_Cn0avmqbnvTYzYaWgnD/view?usp=sharing", iconName: "Resume" },
+    { name: "GitHub", url: process.env.NEXT_PUBLIC_GITHUB_URL || "https://github.com/Thakur-Akshay04", iconName: "Github" },
+    { name: "LinkedIn", url: process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://www.linkedin.com/in/akshaythakur04/", iconName: "Linkedin" },
+    { name: "Resume", url: process.env.NEXT_PUBLIC_RESUME_URL || "https://drive.google.com/file/d/1utOJnW6UIV0Ckf3CaDQF1fZBvg6YjXU_/view?usp=sharing", iconName: "Resume" },
   ] as SocialLink[],
 };

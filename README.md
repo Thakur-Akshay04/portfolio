@@ -40,6 +40,8 @@ To run this project locally, create a `.env.local` file in the root directory an
 RESEND_API_KEY=your_resend_api_key
 PERSONAL_EMAIL=your_inbox_email_address
 NEXT_PUBLIC_PERSONAL_EMAIL=your_inbox_email_address
+NEXT_PUBLIC_GITHUB_URL=your_github_profile_url
+NEXT_PUBLIC_LINKEDIN_URL=your_linkedin_profile_url
 NEXT_PUBLIC_RESUME_URL=your_resume_google_drive_link
 ```
 
