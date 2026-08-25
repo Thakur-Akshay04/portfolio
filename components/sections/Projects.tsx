@@ -428,8 +428,8 @@ function AIResumeMockup() {
           <div className="flex-1 overflow-hidden px-2.5 py-2 leading-[1.5] text-[6.5px] text-gray-400 space-y-1.5">
             {/* Name header */}
             <div className="text-center space-y-0.5">
-              <div className="text-[9px] font-bold text-gray-100">kevin</div>
-              <div className="text-[6px] text-gray-600">+91 83598867415 · ddd464@gmail.com · Indore, Madhya Pradesh</div>
+              <div className="text-[9px] font-bold text-gray-100">Alex Morgan</div>
+              <div className="text-[6px] text-gray-600">+1 (555) 019-2834 · alex.morgan@example.com · San Francisco, CA</div>
             </div>
             <div className="border-t border-white/5 pt-1">
               <div className="text-[7px] font-bold text-gray-300 mb-0.5">Summary</div>
