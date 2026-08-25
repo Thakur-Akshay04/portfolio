@@ -100,6 +100,25 @@ export default function Contact() {
 
   const [coords, setCoords] = useState({ x: 0, y: 0 });
 
+  const [emailStr, setEmailStr] = useState(PORTFOLIO_DATA.personal.email || "");
+  const [socialLinks, setSocialLinks] = useState(PORTFOLIO_DATA.socials);
+
+  useEffect(() => {
+    fetch("/api/config")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data) {
+          if (data.email) setEmailStr(data.email);
+          setSocialLinks([
+            { name: "GitHub", url: data.githubUrl || "", iconName: "Github" },
+            { name: "LinkedIn", url: data.linkedinUrl || "", iconName: "Linkedin" },
+            { name: "Resume", url: data.resumeUrl || "", iconName: "Resume" },
+          ]);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
 
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -249,11 +268,11 @@ export default function Contact() {
           </div>
 
           <div className="space-y-4 font-mono text-sm border-t-2 border-white/20 pt-6">
-            {PORTFOLIO_DATA.personal.email ? (
+            {emailStr ? (
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-gray-300 gap-2">
                 <span className="text-gray-500">EMAIL:</span>
                 <motion.a
-                  href={`mailto:${PORTFOLIO_DATA.personal.email}`}
+                  href={`mailto:${emailStr}`}
                   className="px-4 py-2.5 rounded-xl border border-white/20 bg-black/60 text-gray-300 font-semibold relative overflow-hidden group text-[11px] sm:text-sm max-w-full"
                   whileHover="hover"
                   whileTap="tap"
@@ -297,7 +316,7 @@ export default function Contact() {
                       },
                     }}
                   >
-                    {PORTFOLIO_DATA.personal.email}
+                    {emailStr}
                   </motion.span>
                 </motion.a>
               </div>
@@ -316,14 +335,14 @@ export default function Contact() {
           <div className="space-y-4 border-t-2 border-white/20 pt-6">
             <h5 className="text-xs font-mono text-gray-500 uppercase tracking-widest">{"// Find Me"}</h5>
             <div className="flex gap-4">
-              {PORTFOLIO_DATA.socials.map((social) => {
+              {socialLinks.map((social) => {
                 let Icon: React.ComponentType<{ className?: string }> = Mail;
                 const nameLower = social.name.toLowerCase();
                 if (nameLower.includes("github")) Icon = GithubIcon;
                 else if (nameLower.includes("linkedin")) Icon = LinkedinIcon;
                 else if (nameLower.includes("resume")) Icon = FileText;
 
-                const hasValidUrl = social.url && (social.url.startsWith("http://") || social.url.startsWith("https://"));
+                const hasValidUrl = Boolean(social.url && (social.url.startsWith("http://") || social.url.startsWith("https://")));
 
                 return (
                   <div key={social.name} className="relative group/btn">
@@ -342,11 +361,13 @@ export default function Contact() {
                       }}
                       target={hasValidUrl ? "_blank" : undefined}
                       rel={hasValidUrl ? "noopener noreferrer" : undefined}
-                      className="w-12 h-12 flex items-center justify-center rounded-xl bg-[#0a0a0a] border text-gray-400 hover:text-white transition-colors shadow-lg border-white/10 hover:border-accent-purple/50 hover:shadow-[0_0_15px_rgba(157,78,221,0.35)]"
+                      className={`w-12 h-12 flex items-center justify-center rounded-xl bg-[#0a0a0a] border text-gray-400 hover:text-white transition-colors shadow-lg border-white/10 hover:border-accent-purple/50 hover:shadow-[0_0_15px_rgba(157,78,221,0.35)] ${
+                        !hasValidUrl ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+                      }`}
                       whileHover={{
-                        scale: 1.08,
+                        scale: hasValidUrl ? 1.08 : 1,
                       }}
-                      whileTap={{ scale: 0.95 }}
+                      whileTap={{ scale: hasValidUrl ? 0.95 : 1 }}
                     >
                       <Icon className="w-5 h-5" />
                     </motion.a>
