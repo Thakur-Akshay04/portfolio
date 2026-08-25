@@ -62,13 +62,30 @@ function escapeHtml(text: string): string {
     .replace(/'/g, "&#x27;");
 }
 
+import { getCloudflareContext } from "@opennextjs/cloudflare";
+
+export const dynamic = "force-dynamic";
+
 export async function POST(req: Request) {
   try {
-    console.log("[API DEBUG] Checking env variables inside POST handler...");
-    console.log("[API DEBUG] RESEND_API_KEY present:", !!process.env.RESEND_API_KEY);
-    console.log("[API DEBUG] RESEND_API_KEY length:", process.env.RESEND_API_KEY?.length || 0);
+    let cfEnv: Record<string, string | undefined> = {};
+    try {
+      const ctx = await getCloudflareContext({ async: true });
+      if (ctx && ctx.env) {
+        cfEnv = ctx.env as Record<string, string | undefined>;
+      }
+    } catch {
+      // Fallback for non-worker environments
+    }
 
-    const apiKey = process.env.RESEND_API_KEY;
+    const apiKey = cfEnv.RESEND_API_KEY || process.env.RESEND_API_KEY;
+    const recipientEmail =
+      cfEnv.PERSONAL_EMAIL ||
+      cfEnv.NEXT_PUBLIC_PERSONAL_EMAIL ||
+      process.env.PERSONAL_EMAIL ||
+      process.env.NEXT_PUBLIC_PERSONAL_EMAIL ||
+      "";
+
     if (!apiKey) {
       return NextResponse.json(
         { error: "Email service is not configured (missing API key)." },
@@ -132,7 +149,7 @@ export async function POST(req: Request) {
     // 4. Send email
     const { data, error } = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: [process.env.PERSONAL_EMAIL || process.env.NEXT_PUBLIC_PERSONAL_EMAIL || ""],
+      to: [recipientEmail],
       replyTo: cleanEmail,
       subject: `New Portfolio Message: ${cleanSubject}`,
       html: `
