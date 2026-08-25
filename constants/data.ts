@@ -170,6 +170,6 @@ export const PORTFOLIO_DATA = {
   socials: [
     { name: "GitHub", url: process.env.NEXT_PUBLIC_GITHUB_URL || "https://github.com/Thakur-Akshay04", iconName: "Github" },
     { name: "LinkedIn", url: process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://www.linkedin.com/in/akshaythakur04/", iconName: "Linkedin" },
-    { name: "Resume", url: process.env.NEXT_PUBLIC_RESUME_URL || "https://drive.google.com/file/d/1utOJnW6UIV0Ckf3CaDQF1fZBvg6YjXU_/view?usp=sharing", iconName: "Resume" },
+    { name: "Resume", url: process.env.NEXT_PUBLIC_RESUME_URL || "https://drive.google.com/file/d/1lh0gWPiYjK5YSNiuLNUXh3iPYDHob-e-/view?usp=sharing", iconName: "Resume" },
   ] as SocialLink[],
 };
