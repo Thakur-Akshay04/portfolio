@@ -249,57 +249,59 @@ export default function Contact() {
           </div>
 
           <div className="space-y-4 font-mono text-sm border-t-2 border-white/20 pt-6">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-gray-300 gap-2">
-              <span className="text-gray-500">EMAIL:</span>
-              <motion.a
-                href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-                className="px-4 py-2.5 rounded-xl border border-white/20 bg-black/60 text-gray-300 font-semibold relative overflow-hidden group text-[11px] sm:text-sm max-w-full"
-                whileHover="hover"
-                whileTap="tap"
-                variants={{
-                  hover: {
-                    scale: 1.03,
-                    borderColor: "rgba(157, 78, 221, 0.5)",
-                    boxShadow: "0 0 15px rgba(157, 78, 221, 0.25)",
-                  },
-                  tap: {
-                    scale: 0.98,
-                  }
-                }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              >
-                {/* Shiny gradient overlay sweeping across the button on hover */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-accent-purple/10 to-transparent -translate-x-full"
+            {PORTFOLIO_DATA.personal.email ? (
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-gray-300 gap-2">
+                <span className="text-gray-500">EMAIL:</span>
+                <motion.a
+                  href={`mailto:${PORTFOLIO_DATA.personal.email}`}
+                  className="px-4 py-2.5 rounded-xl border border-white/20 bg-black/60 text-gray-300 font-semibold relative overflow-hidden group text-[11px] sm:text-sm max-w-full"
+                  whileHover="hover"
+                  whileTap="tap"
                   variants={{
                     hover: {
-                      x: "100%",
-                      transition: {
-                        repeat: Infinity,
-                        repeatType: "loop",
-                        duration: 1.5,
-                        ease: "linear",
-                      },
+                      scale: 1.03,
+                      borderColor: "rgba(157, 78, 221, 0.5)",
+                      boxShadow: "0 0 15px rgba(157, 78, 221, 0.25)",
                     },
+                    tap: {
+                      scale: 0.98,
+                    }
                   }}
-                />
-
-                {/* Email text animation */}
-                <motion.span
-                  className="relative z-10 inline-block break-all"
-                  variants={{
-                    hover: {
-                      color: "#ffffff",
-                      textShadow: "0 0 8px rgba(157, 78, 221, 0.6)",
-                      scale: 1.02,
-                      transition: { duration: 0.2 },
-                    },
-                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 >
-                  {PORTFOLIO_DATA.personal.email}
-                </motion.span>
-              </motion.a>
-            </div>
+                  {/* Shiny gradient overlay sweeping across the button on hover */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-accent-purple/10 to-transparent -translate-x-full"
+                    variants={{
+                      hover: {
+                        x: "100%",
+                        transition: {
+                          repeat: Infinity,
+                          repeatType: "loop",
+                          duration: 1.5,
+                          ease: "linear",
+                        },
+                      },
+                    }}
+                  />
+
+                  {/* Email text animation */}
+                  <motion.span
+                    className="relative z-10 inline-block break-all"
+                    variants={{
+                      hover: {
+                        color: "#ffffff",
+                        textShadow: "0 0 8px rgba(157, 78, 221, 0.6)",
+                        scale: 1.02,
+                        transition: { duration: 0.2 },
+                      },
+                    }}
+                  >
+                    {PORTFOLIO_DATA.personal.email}
+                  </motion.span>
+                </motion.a>
+              </div>
+            ) : null}
 
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-gray-300 gap-2">
               <span className="text-gray-500">LOCATION:</span>
@@ -321,8 +323,7 @@ export default function Contact() {
                 else if (nameLower.includes("linkedin")) Icon = LinkedinIcon;
                 else if (nameLower.includes("resume")) Icon = FileText;
 
-                const isResume = nameLower.includes("resume");
-                const hasValidResumeUrl = isResume && (social.url.startsWith("http://") || social.url.startsWith("https://"));
+                const hasValidUrl = social.url && (social.url.startsWith("http://") || social.url.startsWith("https://"));
 
                 return (
                   <div key={social.name} className="relative group/btn">
@@ -333,14 +334,14 @@ export default function Contact() {
                     </span>
 
                     <motion.a
-                      href={isResume && !hasValidResumeUrl ? "#" : social.url}
+                      href={hasValidUrl ? social.url : "#"}
                       onClick={(e) => {
-                        if (isResume && !hasValidResumeUrl) {
+                        if (!hasValidUrl) {
                           e.preventDefault();
                         }
                       }}
-                      target={isResume && !hasValidResumeUrl ? undefined : "_blank"}
-                      rel={isResume && !hasValidResumeUrl ? undefined : "noopener noreferrer"}
+                      target={hasValidUrl ? "_blank" : undefined}
+                      rel={hasValidUrl ? "noopener noreferrer" : undefined}
                       className="w-12 h-12 flex items-center justify-center rounded-xl bg-[#0a0a0a] border text-gray-400 hover:text-white transition-colors shadow-lg border-white/10 hover:border-accent-purple/50 hover:shadow-[0_0_15px_rgba(157,78,221,0.35)]"
                       whileHover={{
                         scale: 1.08,
