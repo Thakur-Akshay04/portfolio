@@ -14,33 +14,37 @@ export async function GET() {
     // Fallback when running outside Cloudflare Worker environment
   }
 
-  const email =
+  const email = (
     cfEnv.NEXT_PUBLIC_PERSONAL_EMAIL ||
     cfEnv.PERSONAL_EMAIL ||
     process.env.NEXT_PUBLIC_PERSONAL_EMAIL ||
     process.env.PERSONAL_EMAIL ||
-    "";
+    ""
+  ).trim();
 
-  const githubUrl =
+  const githubUrl = (
     cfEnv.NEXT_PUBLIC_GITHUB_URL ||
     cfEnv.GITHUB_URL ||
     process.env.NEXT_PUBLIC_GITHUB_URL ||
     process.env.GITHUB_URL ||
-    "";
+    ""
+  ).trim();
 
-  const linkedinUrl =
+  const linkedinUrl = (
     cfEnv.NEXT_PUBLIC_LINKEDIN_URL ||
     cfEnv.LINKEDIN_URL ||
     process.env.NEXT_PUBLIC_LINKEDIN_URL ||
     process.env.LINKEDIN_URL ||
-    "";
+    ""
+  ).trim();
 
-  const resumeUrl =
+  const resumeUrl = (
     cfEnv.NEXT_PUBLIC_RESUME_URL ||
     cfEnv.RESUME_URL ||
     process.env.NEXT_PUBLIC_RESUME_URL ||
     process.env.RESUME_URL ||
-    "";
+    ""
+  ).trim();
 
   return NextResponse.json(
     {

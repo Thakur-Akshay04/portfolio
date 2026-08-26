@@ -78,13 +78,14 @@ export async function POST(req: Request) {
       // Fallback for non-worker environments
     }
 
-    const apiKey = cfEnv.RESEND_API_KEY || process.env.RESEND_API_KEY;
-    const recipientEmail =
+    const apiKey = (cfEnv.RESEND_API_KEY || process.env.RESEND_API_KEY || "").trim();
+    const recipientEmail = (
       cfEnv.PERSONAL_EMAIL ||
       cfEnv.NEXT_PUBLIC_PERSONAL_EMAIL ||
       process.env.PERSONAL_EMAIL ||
       process.env.NEXT_PUBLIC_PERSONAL_EMAIL ||
-      "";
+      ""
+    ).trim();
 
     if (!apiKey) {
       return NextResponse.json(

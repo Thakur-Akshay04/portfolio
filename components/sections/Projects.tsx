@@ -429,7 +429,7 @@ function AIResumeMockup() {
             {/* Name header */}
             <div className="text-center space-y-0.5">
               <div className="text-[9px] font-bold text-gray-100">Alex Morgan</div>
-              <div className="text-[6px] text-gray-600">+1 (555) 019-2834 · alex.morgan@example.com · San Francisco, CA</div>
+              <div className="text-[6px] text-gray-600">Software Engineer · Full-Stack Developer</div>
             </div>
             <div className="border-t border-white/5 pt-1">
               <div className="text-[7px] font-bold text-gray-300 mb-0.5">Summary</div>

@@ -108,11 +108,11 @@ export default function Contact() {
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (data) {
-          if (data.email) setEmailStr(data.email);
+          if (data.email) setEmailStr(data.email.trim());
           setSocialLinks([
-            { name: "GitHub", url: data.githubUrl || "", iconName: "Github" },
-            { name: "LinkedIn", url: data.linkedinUrl || "", iconName: "Linkedin" },
-            { name: "Resume", url: data.resumeUrl || "", iconName: "Resume" },
+            { name: "GitHub", url: (data.githubUrl || "").trim(), iconName: "Github" },
+            { name: "LinkedIn", url: (data.linkedinUrl || "").trim(), iconName: "Linkedin" },
+            { name: "Resume", url: (data.resumeUrl || "").trim(), iconName: "Resume" },
           ]);
         }
       })
@@ -342,7 +342,13 @@ export default function Contact() {
                 else if (nameLower.includes("linkedin")) Icon = LinkedinIcon;
                 else if (nameLower.includes("resume")) Icon = FileText;
 
-                const hasValidUrl = Boolean(social.url && (social.url.startsWith("http://") || social.url.startsWith("https://")));
+                const rawUrl = (social.url || "").trim();
+                const normalizedUrl = rawUrl
+                  ? rawUrl.startsWith("http://") || rawUrl.startsWith("https://")
+                    ? rawUrl
+                    : `https://${rawUrl}`
+                  : "";
+                const hasValidUrl = Boolean(normalizedUrl && (normalizedUrl.startsWith("http://") || normalizedUrl.startsWith("https://")));
 
                 return (
                   <div key={social.name} className="relative group/btn">
@@ -353,7 +359,7 @@ export default function Contact() {
                     </span>
 
                     <motion.a
-                      href={hasValidUrl ? social.url : "#"}
+                      href={hasValidUrl ? normalizedUrl : "#"}
                       onClick={(e) => {
                         if (!hasValidUrl) {
                           e.preventDefault();
