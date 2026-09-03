@@ -53,10 +53,13 @@ const securityHeaders = [
 
 const nextConfig = {
   output: process.platform === "win32" ? undefined : "standalone",
-  // Fix: Server Leaks Information via "X-Powered-By" — Low Risk
   poweredByHeader: false,
+  compress: true,
+  reactStrictMode: true,
 
-  transpilePackages: ["three", "@react-three/fiber", "@react-three/drei"],
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
 
   async headers() {
     return [

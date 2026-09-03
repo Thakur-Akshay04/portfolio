@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 
 const sansFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -26,20 +24,20 @@ const monoFont = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Akshay Singh Thakur",
-  description: "Explore the personal portfolio of Akshay, a Full Stack & MERN Developer specializing in Next.js, React, Node.js, and high-performance cloud applications.",
-  keywords: "Full Stack Developer, MERN Stack Developer, React, Next.js, Node.js, Cloud, DevOps, Portfolio",
-  authors: [{ name: "Akshay" }],
+  title: "Akshay Singh Thakur | Full-Stack & AI Developer",
+  description: "Explore the personal portfolio of Akshay Singh Thakur, a Full-Stack / MERN Developer specializing in Next.js, React, Node.js, FastAPI, pgvector, and AI Integration.",
+  keywords: "Full Stack Developer, MERN Stack Developer, React, Next.js, Node.js, FastAPI, pgvector, Cloud, DevOps, Portfolio",
+  authors: [{ name: "Akshay Singh Thakur" }],
   openGraph: {
-    title: "Akshay Singh Thakur",
-    description: "Personal portfolio demonstrating MERN Stack engineering expertise, interactive React interfaces, and modern full-stack web applications.",
+    title: "Akshay Singh Thakur | Full-Stack & AI Developer",
+    description: "Personal portfolio demonstrating MERN & AI engineering expertise, interactive Windows Desktop interface, and modern full-stack web applications.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Akshay Singh Thakur",
-    description: "Personal portfolio demonstrating MERN Stack engineering expertise, interactive React interfaces, and modern full-stack web applications.",
+    title: "Akshay Singh Thakur | Full-Stack & AI Developer",
+    description: "Personal portfolio demonstrating MERN & AI engineering expertise, interactive Windows Desktop interface, and modern full-stack web applications.",
   },
   robots: {
     index: true,
@@ -61,16 +59,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${sansFont.variable} ${displayFont.variable} ${monoFont.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${sansFont.variable} ${displayFont.variable} ${monoFont.variable} font-sans antialiased bg-black text-foreground overflow-hidden`}
       >
-        <SmoothScrollProvider>
-          <div className="max-w-[2200px] mx-auto border-x border-white/10 min-h-screen flex flex-col bg-black relative">
-            <Navbar />
-            <div className="flex-grow">
-              {children}
-            </div>
-          </div>
-        </SmoothScrollProvider>
+        {children}
       </body>
     </html>
   );
