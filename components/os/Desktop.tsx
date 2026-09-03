@@ -8,6 +8,7 @@ import StartMenu from "./StartMenu";
 import SearchModal from "./SearchModal";
 import ContextMenu from "./ContextMenu";
 import SplashCursor from "./SplashCursor";
+import DesktopWelcome from "./DesktopWelcome";
 import dynamic from "next/dynamic";
 import {
   Win11ThisPC,
@@ -188,6 +189,9 @@ export default function Desktop() {
           Akshay Singh Thakur Edition · Build 22631.3007
         </div>
       </div>
+
+      {/* Desktop Welcoming Widget with Animated Text */}
+      <DesktopWelcome />
 
       {/* Desktop Icons Grid */}
       <div className="relative z-10 p-5 grid grid-flow-col grid-rows-6 auto-cols-max gap-4 sm:gap-6 w-fit h-[calc(100vh-60px)]">
