@@ -40,6 +40,7 @@ export default function Taskbar() {
     wallpaper,
     setWallpaper,
     openWindow,
+    minimizeAll,
   } = useWindowManager();
 
   const [time, setTime] = useState<string>("");
@@ -224,12 +225,9 @@ export default function Taskbar() {
           {/* Desktop Peek line */}
           <div
             onClick={() => {
-              Object.keys(windows).forEach((id) => {
-                const wId = id as WindowId;
-                if (windows[wId].isOpen) {
-                  // minimize all
-                }
-              });
+              minimizeAll();
+              setQuickSettingsOpen(false);
+              setCalendarOpen(false);
             }}
             className="w-1 h-6 ml-0.5 hover:bg-white/20 rounded-sm cursor-pointer"
             title="Show Desktop"

@@ -7,7 +7,7 @@ import Taskbar from "./Taskbar";
 import StartMenu from "./StartMenu";
 import SearchModal from "./SearchModal";
 import ContextMenu from "./ContextMenu";
-import LiquidBackground from "./LiquidBackground";
+import SplashCursor from "./SplashCursor";
 import dynamic from "next/dynamic";
 import {
   Win11ThisPC,
@@ -38,7 +38,7 @@ interface DesktopIconItem {
 }
 
 export default function Desktop() {
-  const { openWindow, wallpaper, setStartMenuOpen } = useWindowManager();
+  const { openWindow, wallpaper, setStartMenuOpen, isDesktopActive } = useWindowManager();
 
   const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
   const [selectedIcon, setSelectedIcon] = useState<WindowId | null>(null);
@@ -158,8 +158,23 @@ export default function Desktop() {
       onMouseUp={handleMouseUp}
       className={`relative w-screen h-screen overflow-hidden select-none ${getWallpaperClass()} text-white font-sans`}
     >
-      {/* Interactive Splashy Liquid Effect */}
-      <LiquidBackground />
+      {/* SplashCursor Fluid Effect from React Bits - rendered ONLY when directly on Desktop with no windows or tasks open */}
+      {isDesktopActive && !contextMenu && (
+        <SplashCursor
+          SIM_RESOLUTION={128}
+          DYE_RESOLUTION={1440}
+          DENSITY_DISSIPATION={3.5}
+          VELOCITY_DISSIPATION={2}
+          PRESSURE={0.25}
+          PRESSURE_ITERATIONS={20}
+          CURL={3}
+          SPLAT_RADIUS={0.2}
+          SPLAT_FORCE={6000}
+          SHADING={true}
+          RAINBOW_MODE={true}
+          zIndex={1}
+        />
+      )}
 
       {/* Subtle Desktop Ambient Lighting */}
       <div className="absolute inset-0 bg-desktop-grid opacity-30 pointer-events-none z-0" />

@@ -110,6 +110,8 @@ interface WindowManagerContextType {
   toggleWindow: (id: WindowId) => void;
   updatePosition: (id: WindowId, position: { x: number; y: number }) => void;
   updateSize: (id: WindowId, size: { width: number; height: number }) => void;
+  minimizeAll: () => void;
+  isDesktopActive: boolean;
 }
 
 const WindowManagerContext = createContext<WindowManagerContextType | null>(null);
@@ -263,6 +265,26 @@ export function WindowManagerProvider({ children }: { children: React.ReactNode 
     }));
   }, []);
 
+  const minimizeAll = useCallback(() => {
+    setWindows((prev) => {
+      const updated = { ...prev };
+      for (const key of Object.keys(updated) as WindowId[]) {
+        if (updated[key].isOpen) {
+          updated[key] = { ...updated[key], isMinimized: true };
+        }
+      }
+      return updated;
+    });
+    setStartMenuOpen(false);
+    setSearchOpen(false);
+    setActiveWindowId(null);
+  }, []);
+
+  // Check if any window is open and not minimized
+  const isAnyWindowOpen = Object.values(windows).some((w) => w.isOpen && !w.isMinimized);
+  // True only when completely on desktop with no active windows, start menu, or search opened
+  const isDesktopActive = !isAnyWindowOpen && !startMenuOpen && !searchOpen;
+
   // Keyboard shortcut: Ctrl+K or Cmd+K to open RAG search
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -278,14 +300,6 @@ export function WindowManagerProvider({ children }: { children: React.ReactNode 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
-
-  // Automatically open "about" or "projects" on initial first load for immediate engagement
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      openWindow("about");
-    }, 450);
-    return () => clearTimeout(timer);
-  }, [openWindow]);
 
   return (
     <WindowManagerContext.Provider
@@ -308,6 +322,8 @@ export function WindowManagerProvider({ children }: { children: React.ReactNode 
         toggleWindow,
         updatePosition,
         updateSize,
+        minimizeAll,
+        isDesktopActive,
       }}
     >
       {children}
