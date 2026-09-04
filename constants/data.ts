@@ -147,23 +147,21 @@ export const PORTFOLIO_DATA = {
     },
   ] as Project[],
 
-  experience: [
+experience: [
     {
       id: "exp-1",
-      role: "Web-Developer (Intern)",
-      company: "1Stop ai",
+      role: "Software Development Intern",
+      company: "Worisgo",
       period: "July 2025 - Sept 2025",
       location: "Remote",
-      description: "Developed client-facing features, dashboard components, and API integrations in a responsive web environment.",
+      description: "Built back-end services for a real-time employee management system and migrated legacy infrastructure with zero downtime.",
       achievements: [
-        "Built and maintained responsive web pages using HTML5, CSS3, and JavaScript, ensuring cross-browser compatibility and mobile-first design.",
-        "Developed reusable React components for a client-facing dashboard, improving code maintainability and reducing development time.",
-        "Implemented Bootstrap grid layouts and utility classes to create consistent, responsive UI across multiple projects.",
-        "Integrated REST APIs using fetch and axios to dynamically render data on product listing and user profile pages.",
-        "Refactored interactive components to eliminate UI bugs, enhancing screen reader compatibility and overall usability.",
-        "Managed version control using Git & GitHub, working on feature branches and merging via pull requests."
+        "Built back-end services with Spring Boot, Node.js, and Firebase Cloud Functions for a real-time employee management system supporting 30-40 users, achieving <150ms latency and 99% uptime.",
+        "Designed and scaled MongoDB and Firestore databases, improving data access speed by ~40% and enabling real-time updates under 200ms.",
+        "Connected new Node.js/Spring Boot services to a legacy PHP system with zero data loss and zero downtime during migration.",
+        "Worked in a 3-person Agile team using Git & GitHub, applying Java, Spring, and related tools to deliver stable production features."
       ],
-      techStack: ["React", "HTML5", "CSS3", "Bootstrap"],
+      techStack: ["Spring Boot", "Node.js", "Firebase", "MongoDB", "Java"],
     },
   ] as ExperienceItem[],
 
