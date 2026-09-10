@@ -498,7 +498,7 @@ function AIResumeMockup() {
             </div>
             <div>
               <div className="text-[7px] font-bold text-gray-300 mb-0.5">Projects</div>
-              <div className="text-[6.5px] text-blue-400 font-semibold">AI Resume Builder</div>
+              <div className="text-[6.5px] text-blue-400 font-semibold">ResuCraft</div>
               <p className="text-gray-600 text-[6px]">Built a MERN stack resume builder with LLaMA 3.3 70B for real-time, ATS-optimized content generation via SSF.</p>
             </div>
             <div>
@@ -1227,9 +1227,16 @@ export default function Projects() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-3xl md:text-4xl font-display font-extrabold text-white leading-tight hover:text-glow-purple group-hover:text-accent-purple transition-all duration-500">
-                  {project.title}
-                </h3>
+                <div>
+                  <h3 className="text-3xl md:text-4xl font-display font-extrabold text-white leading-tight hover:text-glow-purple group-hover:text-accent-purple transition-all duration-500">
+                    {project.title}
+                  </h3>
+                  {project.subtitle && (
+                    <p className="text-xs sm:text-sm font-mono text-accent-purple/90 mt-1 font-medium tracking-wide">
+                      {project.subtitle}
+                    </p>
+                  )}
+                </div>
 
                 {/* Title description and feature bullet points */}
                 <ul className="space-y-3.5 pt-2 text-left">
@@ -1375,6 +1382,11 @@ export default function Projects() {
                   <h3 className="text-3xl md:text-4xl font-display font-extrabold text-white pr-12">
                     {selectedProject.title}
                   </h3>
+                  {selectedProject.subtitle && (
+                    <p className="text-sm font-mono text-accent-purple/90 font-medium tracking-wide">
+                      {selectedProject.subtitle}
+                    </p>
+                  )}
                 </div>
 
                 {/* Tech Pills */}

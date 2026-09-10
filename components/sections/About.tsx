@@ -21,7 +21,7 @@ function renderHighlightedText(text: string) {
     "Full-stack / MERN developer",
     "highly efficient API architectures",
     "Agile team environments",
-    "AI Resume Tailor",
+    "ResuCraft",
     "CredVault"
   ];
 

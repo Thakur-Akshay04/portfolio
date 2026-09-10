@@ -7,6 +7,7 @@ export interface Stat {
 export interface Project {
   id: string;
   title: string;
+  subtitle?: string;
   description: string;
   fullDescription: string;
   challenge: string;
@@ -85,13 +86,14 @@ export const PORTFOLIO_DATA = {
     },
     {
       id: "project-1",
-      title: "AI Resume Tailor",
+      title: "ResuCraft",
+      subtitle: "AI Resume Builder & ATS Optimizer",
       category: "Full Stack / AI",
       image: "/images/ai_resume.png",
       liveUrl: "https://ai-resume.demo.dev",
       githubUrl: "https://github.com/Thakur-Akshay04/Res_AI",
       description: "A full-stack web application designed to help job seekers instantly tailor their resumes to specific job descriptions.",
-      fullDescription: "AI Resume Tailor leverages Meta Llama-3 to provide real-time ATS keyword auditing, AI-powered summary and bullet-point rewriting, and live PDF rendering in a print-ready split-screen editor. It automates the tedious process of keyword-matching and formatting to drastically increase the chances of passing automated ATS filters.",
+      fullDescription: "ResuCraft is an AI-powered resume builder and ATS optimizer that leverages Meta Llama-3 to provide real-time ATS keyword auditing, AI-powered summary and bullet-point rewriting, and live PDF rendering in a print-ready split-screen editor. It automates the tedious process of keyword-matching and formatting to drastically increase the chances of passing automated ATS filters.",
       challenge: "Job seekers often fail to pass automated ATS filters because they submit generic resumes.",
       solution: "Engineered a Live Split-Screen Editor where input changes instantly reflect on a live, print-ready PDF using React and Puppeteer. Integrated Groq Cloud API (Llama-3) to rewrite bullet points, summaries, and skills to align perfectly with target job descriptions, backed by Clerk Auth and MongoDB.",
       features: [
