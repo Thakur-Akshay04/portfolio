@@ -247,8 +247,10 @@ function QuantumReactorFallback() {
 }
 
 export default function ConstellationSphere() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [cameraZ, setCameraZ] = useState(6.2);
   const [webGLAvailable, setWebGLAvailable] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     setWebGLAvailable(isWebGLSupported());
@@ -268,23 +270,39 @@ export default function ConstellationSphere() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   if (!webGLAvailable) {
     return <QuantumReactorFallback />;
   }
 
   return (
     <WebGLErrorBoundary fallback={<QuantumReactorFallback />}>
-      <div className="w-full h-full min-h-[380px] md:min-h-[480px] lg:min-h-[550px] relative flex items-center justify-center select-none">
+      <div ref={containerRef} className="w-full h-full min-h-[380px] md:min-h-[480px] lg:min-h-[550px] relative flex items-center justify-center select-none">
         {/* Deep Cyber Electric Backdrop Glow */}
         <div className="absolute w-96 h-96 rounded-full bg-gradient-to-r from-cyan-500/25 via-purple-600/20 to-amber-500/20 blur-3xl opacity-80 pointer-events-none animate-pulse" />
 
         <Canvas
+          frameloop={isVisible ? "always" : "never"}
+          dpr={Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 1.25)}
           camera={{ position: [0, 0, cameraZ], fov: 55 }}
-          gl={{ antialias: true, alpha: true, powerPreference: "default", failIfMajorPerformanceCaveat: false }}
-          className="w-full h-full"
-          onCreated={({ gl }) => {
-            gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          gl={{
+            antialias: true,
+            alpha: true,
+            powerPreference: "low-power",
+            failIfMajorPerformanceCaveat: false,
           }}
+          className="w-full h-full"
         >
           <ambientLight intensity={0.7} />
           <pointLight position={[0, 0, 0]} intensity={3.0} color="#00f0ff" />

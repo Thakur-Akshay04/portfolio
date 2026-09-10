@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial } from "@react-three/drei";
 import * as THREE from "three";
 import WebGLErrorBoundary from "@/components/ui/WebGLErrorBoundary";
 
@@ -27,7 +26,6 @@ function ParticleField() {
   const positions = useMemo(() => {
     const pos = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
-      // Form a spherical/cloud structure with cryptographically safe PRNG
       const theta = THREE.MathUtils.randFloatSpread(360);
       const phi = THREE.MathUtils.randFloatSpread(360);
       const distance = 2 + secureRandom() * 3;
@@ -57,8 +55,17 @@ function ParticleField() {
   });
 
   return (
-    <Points ref={pointsRef} positions={positions} stride={3} frustumCulled={false}>
-      <PointMaterial
+    <points ref={pointsRef} frustumCulled={false}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={positions.length / 3}
+          array={positions}
+          itemSize={3}
+          args={[positions, 3]}
+        />
+      </bufferGeometry>
+      <pointsMaterial
         transparent
         color="#ffffff"
         size={0.015}
@@ -66,21 +73,43 @@ function ParticleField() {
         depthWrite={false}
         opacity={0.15}
       />
-    </Points>
+    </points>
   );
 }
 
 export default function HeroParticles() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none overflow-hidden">
+    <div ref={containerRef} className="absolute inset-0 w-full h-full -z-10 pointer-events-none overflow-hidden">
       {/* Dark overlay grid for high-tech aesthetic */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#000000_90%)] z-10" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30 z-0" />
       
       <WebGLErrorBoundary>
         <Canvas
+          frameloop={isVisible ? "always" : "never"}
+          dpr={1}
           camera={{ position: [0, 0, 4.5], fov: 60 }}
-          gl={{ antialias: true, alpha: true, powerPreference: "default", failIfMajorPerformanceCaveat: false }}
+          gl={{
+            antialias: false,
+            alpha: true,
+            powerPreference: "low-power",
+            failIfMajorPerformanceCaveat: false,
+          }}
         >
           <ParticleField />
         </Canvas>

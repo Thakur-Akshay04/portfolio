@@ -149,6 +149,24 @@ function HolographicBackgroundGlobe() {
     return { ring1: pos1, ring2: pos2 };
   }, [radius]);
 
+  // Reusable Shared Materials to prevent allocating dozens of material instances
+  const sharedMaterials = useMemo(() => {
+    return {
+      purpleHeavy: new THREE.LineBasicMaterial({ color: "#a855f7", transparent: true, opacity: 0.45, depthWrite: false }),
+      purpleLight: new THREE.LineBasicMaterial({ color: "#a855f7", transparent: true, opacity: 0.22, depthWrite: false }),
+      cyanHeavy: new THREE.LineBasicMaterial({ color: "#06b6d4", transparent: true, opacity: 0.45, depthWrite: false }),
+      cyanLight: new THREE.LineBasicMaterial({ color: "#06b6d4", transparent: true, opacity: 0.22, depthWrite: false }),
+      arcMat: new THREE.LineBasicMaterial({ color: "#38bdf8", transparent: true, opacity: 0.55, depthWrite: false }),
+    };
+  }, []);
+
+  const getGridMaterial = (idx: number) => {
+    const isPurple = idx % 2 === 0;
+    const isHeavy = idx % 3 === 0;
+    if (isPurple) return isHeavy ? sharedMaterials.purpleHeavy : sharedMaterials.purpleLight;
+    return isHeavy ? sharedMaterials.cyanHeavy : sharedMaterials.cyanLight;
+  };
+
   useFrame((state) => {
     if (!globeGroupRef.current) return;
     const time = state.clock.getElapsedTime();
@@ -208,12 +226,7 @@ function HolographicBackgroundGlobe() {
               args={[lineData, 3]}
             />
           </bufferGeometry>
-          <lineBasicMaterial
-            color={idx % 2 === 0 ? "#a855f7" : "#06b6d4"}
-            transparent
-            opacity={idx % 3 === 0 ? 0.45 : 0.22}
-            depthWrite={false}
-          />
+          <primitive object={getGridMaterial(idx)} attach="material" />
         </lineLoop>
       ))}
 
@@ -228,12 +241,7 @@ function HolographicBackgroundGlobe() {
               args={[arcData, 3]}
             />
           </bufferGeometry>
-          <lineBasicMaterial
-            color="#38bdf8"
-            transparent
-            opacity={0.55}
-            depthWrite={false}
-          />
+          <primitive object={sharedMaterials.arcMat} attach="material" />
         </line>
       ))}
 
@@ -340,11 +348,14 @@ export default function BackgroundGlobe() {
 
         <Canvas
           camera={{ position: [0, 0, cameraZ], fov: 55 }}
-          gl={{ antialias: true, alpha: true, powerPreference: "default", failIfMajorPerformanceCaveat: false }}
-          className="w-full h-full"
-          onCreated={({ gl }) => {
-            gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          dpr={1}
+          gl={{
+            antialias: false,
+            alpha: true,
+            powerPreference: "low-power",
+            failIfMajorPerformanceCaveat: false,
           }}
+          className="w-full h-full"
         >
           <ambientLight intensity={0.7} />
           <directionalLight position={[5, 5, 5]} intensity={1.2} color="#a855f7" />

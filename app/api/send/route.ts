@@ -69,13 +69,15 @@ export const dynamic = "force-dynamic";
 export async function POST(req: Request) {
   try {
     let cfEnv: Record<string, string | undefined> = {};
-    try {
-      const ctx = await getCloudflareContext({ async: true });
-      if (ctx && ctx.env) {
-        cfEnv = ctx.env as Record<string, string | undefined>;
+    if (process.env.NODE_ENV === "production") {
+      try {
+        const ctx = await getCloudflareContext({ async: true });
+        if (ctx && ctx.env) {
+          cfEnv = ctx.env as Record<string, string | undefined>;
+        }
+      } catch {
+        // Fallback for non-worker environments
       }
-    } catch {
-      // Fallback for non-worker environments
     }
 
     const apiKey = (cfEnv.RESEND_API_KEY || process.env.RESEND_API_KEY || "").trim();

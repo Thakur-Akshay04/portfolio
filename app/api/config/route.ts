@@ -5,13 +5,15 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   let cfEnv: Record<string, string | undefined> = {};
-  try {
-    const ctx = await getCloudflareContext({ async: true });
-    if (ctx && ctx.env) {
-      cfEnv = ctx.env as Record<string, string | undefined>;
+  if (process.env.NODE_ENV === "production") {
+    try {
+      const ctx = await getCloudflareContext({ async: true });
+      if (ctx && ctx.env) {
+        cfEnv = ctx.env as Record<string, string | undefined>;
+      }
+    } catch {
+      // Fallback when running outside Cloudflare Worker environment
     }
-  } catch {
-    // Fallback when running outside Cloudflare Worker environment
   }
 
   const email = (

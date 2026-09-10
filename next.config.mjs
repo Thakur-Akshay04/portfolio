@@ -56,7 +56,29 @@ const nextConfig = {
   // Fix: Server Leaks Information via "X-Powered-By" — Low Risk
   poweredByHeader: false,
 
-  transpilePackages: ["three", "@react-three/fiber", "@react-three/drei"],
+  transpilePackages: ["three", "@react-three/fiber"],
+
+  experimental: {
+    optimizePackageImports: ["lucide-react", "three", "framer-motion"],
+  },
+
+  onDemandEntries: {
+    maxInactiveAge: 25 * 1000,
+    pagesBufferLength: 2,
+  },
+
+  turbopack: {},
+
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.watchOptions = {
+        aggregateTimeout: 300,
+        poll: false,
+        ignored: ["**/node_modules/**", "**/.git/**", "**/.next/**"],
+      };
+    }
+    return config;
+  },
 
   async headers() {
     return [
