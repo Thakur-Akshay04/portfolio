@@ -211,12 +211,12 @@ export default function CyberAtmosphereBackground() {
 
       {/* 5. Precision Architectural Telemetry Watermarks */}
       <div className="hidden 2xl:flex flex-col fixed left-4 top-1/3 text-[9px] font-mono text-cyan-400/25 tracking-[0.3em] uppercase gap-2 select-none -rotate-90 origin-left">
-        <span>SYS_TELEMETRY // V3.8</span>
-        <span className="text-purple-400/25">BUFFER // NOMINAL</span>
+        <span>SYS_TELEMETRY • V3.8</span>
+        <span className="text-purple-400/25">BUFFER • NOMINAL</span>
       </div>
       <div className="hidden 2xl:flex flex-col fixed right-4 top-2/3 text-[9px] font-mono text-purple-400/25 tracking-[0.3em] uppercase gap-2 select-none rotate-90 origin-right">
-        <span>CORE_GRID // ACTIVE</span>
-        <span className="text-cyan-400/25">STACK // FULL_STACK_DEV</span>
+        <span>CORE_GRID • ACTIVE</span>
+        <span className="text-cyan-400/25">STACK • FULL_STACK_DEV</span>
       </div>
     </div>
   );

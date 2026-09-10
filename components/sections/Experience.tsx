@@ -31,7 +31,7 @@ export default function Experience() {
   return (
     <PageFoldWrapper id="experience" className="py-24 md:py-32 px-6 max-w-5xl mx-auto">
       {/* Reusable Section Heading with blur-to-clear entrance */}
-      <SectionHeading title="Work Experience" subtitle="// Journey" />
+      <SectionHeading title="Work Experience" subtitle="▸ Journey" />
 
       {/* Horizontal Timeline Section */}
       <div ref={containerRef} className="relative mt-16 md:mt-24 w-full flex flex-col items-center">
@@ -86,9 +86,11 @@ export default function Experience() {
                   <h4 className="text-xl font-bold font-sans text-white leading-tight">
                     {item.role}
                   </h4>
-                  <div className="flex items-center gap-2 mt-2">
+                  <div className="flex items-center flex-wrap gap-2 mt-2">
                     {item.techStack.map((tech) => (
-                      <TechLogo key={tech} name={tech} className="w-[22px] h-[22px] shrink-0 opacity-80 hover:opacity-100 hover:scale-110 hover:-rotate-6 transition-all duration-200 cursor-default" />
+                      <span key={tech} title={tech} className="inline-flex">
+                        <TechLogo name={tech} className="w-[22px] h-[22px] shrink-0 opacity-80 hover:opacity-100 hover:scale-110 hover:-rotate-6 transition-all duration-200 cursor-default" />
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -108,15 +110,25 @@ export default function Experience() {
                 )}
               </div>
 
-              {/* Bullet Description */}
-              <ul className="space-y-3 pt-2 text-left">
+              {/* Role Summary / Description */}
+              {item.description && (
+                <p className="text-xs md:text-sm text-gray-300 font-sans leading-relaxed mb-4">
+                  {item.description}
+                </p>
+              )}
+
+              {/* Key Achievements */}
+              <div className="text-xs font-mono font-semibold uppercase tracking-wider text-accent-purple/90 mb-3">
+                Key achievements
+              </div>
+              <ul className="space-y-3 pt-1 text-left">
                 {item.achievements.map((achievement, i) => (
                   <li
                     key={i}
                     className="flex gap-2.5 items-start text-xs md:text-sm text-gray-300 font-sans leading-relaxed"
                   >
                     <span className="text-accent-purple font-mono text-xs mt-0.5 select-none">
-                      {"//"}
+                      {"▸"}
                     </span>
                     <span>{achievement}</span>
                   </li>

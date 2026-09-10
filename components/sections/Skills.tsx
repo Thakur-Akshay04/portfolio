@@ -272,7 +272,7 @@ export default function Skills() {
   return (
     <PageFoldWrapper id="skills" className="py-24 md:py-32 px-6 max-w-7xl mx-auto">
       {/* Section Heading */}
-      <SectionHeading title="Tech Stack" subtitle="// Expertise" />
+      <SectionHeading title="Tech Stack" subtitle="▸ Expertise" />
 
       {/* Categories Grid: 5 columns on desktop, stack on mobile/tablet */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-y-10 lg:gap-8 lg:gap-x-6 mt-16">

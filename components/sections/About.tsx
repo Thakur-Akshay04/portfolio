@@ -161,7 +161,7 @@ function DeveloperIdentityHUD() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500" />
           </span>
           <span className="font-mono text-xs font-semibold tracking-wider text-cyan-300 uppercase">
-            SYS.CORE // ACTIVE
+            SYS.CORE • ACTIVE
           </span>
         </div>
         <span className="font-mono text-[10px] text-gray-400 tracking-widest uppercase px-2 py-0.5 rounded bg-white/5 border border-white/5">
@@ -247,7 +247,7 @@ export default function About() {
   return (
     <PageFoldWrapper id="about" className="py-24 md:py-32 px-6 max-w-7xl mx-auto">
       {/* Reusable Section Heading with blur-to-clear entrance */}
-      <SectionHeading title="About Me" subtitle="// Introduction" />
+      <SectionHeading title="About Me" subtitle="▸ Introduction" />
 
       <div
         ref={containerRef}

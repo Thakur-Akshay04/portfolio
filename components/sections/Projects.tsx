@@ -245,6 +245,44 @@ const GroqIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const SpringBootIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={`${className} fill-[#6DB33F]`} xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.996 11.233c-.23-4.908-4.226-8.88-9.155-9.088-5.32-.224-9.76 3.978-9.76 9.274 0 2.222.802 4.256 2.138 5.845l-1.077 3.593a.96.96 0 0 0 1.206 1.206l3.65-1.095c1.164.673 2.508 1.056 3.94 1.056 4.966 0 9.072-3.805 9.476-8.683l-.004-.006-.414-2.102zm-9.914 5.992c-3.923 0-7.114-3.18-7.126-7.102 0-.256.02-.508.05-.756l.012-.078a7.12 7.12 0 0 1 4.544-5.35c.42-.162.775.244.575.656-.632 1.306-.99 2.766-.99 4.31 0 4.148 2.87 7.643 6.786 8.572.484.115.655.698.249.998-.636.47-1.392.75-2.204.75z" />
+  </svg>
+);
+
+const FirebaseIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+    <path d="M3.89 15.672L6.255.461A.542.542 0 0 1 7.27.28l3.543 6.643-6.923 8.749z" fill="#FFA000" />
+    <path d="M13.578 8.718l2.172-4.14a.545.545 0 0 1 .986.03l3.374 11.064-6.532-6.954z" fill="#F57C00" />
+    <path d="M3.89 15.672l8.032 4.524a1.08 1.08 0 0 0 1.04 0l7.148-4.524-2.822-9.255-13.398 9.255z" fill="#FFCA28" />
+  </svg>
+);
+
+const JavaIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+    <path d="M8.85 16.84s-.97.23-1.39.54c-1.33 1-.39 2.01-.39 2.01s.41-.24 1.34-.54c1.37-.44 2.76-.32 4.55.15 2.12.56 4.19.16 4.19.16s-.79-.5-2.02-.82c-2.08-.55-4.22-.84-6.28-.5m-1.3-3.23c-1.28.91-.4 1.87-.4 1.87s.41-.22 1.31-.5c1.45-.44 3.03-.32 4.97.16 2.09.52 3.8.12 3.8.12s-.75-.46-1.89-.76c-2.19-.57-4.48-.87-6.68-.51-.43.07-.77.19-1.11.33v-.71zm9.64 4.31c.26.24.49.52.49.52s-.75.4-2.12.44c-1.78.05-3.69-.34-5.32-.96-1.23-.47-2.31-.48-3.07-.15-.65.28-.73.66-.73.66s.28-.27 1.08-.43c1.23-.25 2.65-.13 4.15.3 1.94.55 4.1.75 5.52-.38M13.2 0c.93 1.62-.23 3.32-.23 3.32s1.86-1.63.79-3.32m-3.4 3.48c1.36 1.77.34 3.73.34 3.73s1.77-1.77.47-3.73m6.11 3.58s.9 1.15-.36 2.45c-1.61 1.66-3.77 1.83-3.77 1.83s1.83-.56 2.97-1.83c.96-1.07.72-2.12.72-2.12z" fill="#E76F00" />
+    <path d="M19.04 15.35c.78-.85.9-2.04.28-2.67-.68-.69-1.74-.35-1.74-.35s.54-.42.06-.9c-.61-.61-1.9-.38-2.61.16-.62.47-1.04 1.13-1.39 1.82 1.25-.09 2.51.04 3.7.46.59.21 1.2.62 1.7 1.48m-5.46 7.42c-2.58.17-5.37-.15-7.46-1.04-1.29-.55-1.01-1.32-.42-1.63 1.49-.78 3.52-.61 5.3-.35 2.46.36 5.09.84 7.6.22 0 0-.4 1.14-3.13 1.54-1.42.21-2.85.29-4.28.26l2.39-1" fill="#5382A1" />
+  </svg>
+);
+
+const HibernateIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.89 6.22l-7.39-4.22a1 1 0 0 0-1 0L4.11 6.22a1 1 0 0 0-.5.87v10.02a1 1 0 0 0 .5.87l7.39 4.22a1 1 0 0 0 1 0l7.39-4.22a1 1 0 0 0 .5-.87V7.09a1 1 0 0 0-.5-.87z" fill="#59666C" />
+    <path d="M8.5 7.5h2v3.2h3V7.5h2v9h-2v-3.8h-3v3.8h-2z" fill="#BCAE79" />
+  </svg>
+);
+
+const JdbcIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="12" cy="5" rx="8" ry="2.5" className="fill-[#5382A1]/30 stroke-[#5382A1]" strokeWidth="1.5" />
+    <path d="M4 5v14c0 1.38 3.58 2.5 8 2.5s8-1.12 8-2.5V5" className="stroke-[#5382A1]" strokeWidth="1.5" />
+    <path d="M4 12c0 1.38 3.58 2.5 8 2.5s8-1.12 8-2.5" className="stroke-[#5382A1]" strokeWidth="1.5" />
+    <circle cx="12" cy="12" r="2.5" className="fill-[#ED8B00]" />
+    <path d="M12 9.5v5M9.5 12h5" className="stroke-[#1E293B]" strokeWidth="1.2" strokeLinecap="round" />
+  </svg>
+);
+
 // Tech logo resolver helper component
 export function TechLogo({ name, className = "w-4 h-4" }: { name: string; className?: string }) {
   const n = name.toLowerCase().trim();
@@ -335,6 +373,21 @@ export function TechLogo({ name, className = "w-4 h-4" }: { name: string; classN
   }
   if (n.includes("groq")) {
     return <GroqIcon className={className} />;
+  }
+  if (n.includes("spring")) {
+    return <SpringBootIcon className={className} />;
+  }
+  if (n.includes("firebase") || n.includes("cloud functions") || n.includes("firestore")) {
+    return <FirebaseIcon className={className} />;
+  }
+  if (n === "java" || (n.includes("java") && !n.includes("javascript"))) {
+    return <JavaIcon className={className} />;
+  }
+  if (n.includes("hibernate") || n.includes("jpa")) {
+    return <HibernateIcon className={className} />;
+  }
+  if (n.includes("jdbc")) {
+    return <JdbcIcon className={className} />;
   }
 
   // Lucide icon fallbacks
@@ -1135,7 +1188,7 @@ export default function Projects() {
     <>
       <PageFoldWrapper id="projects" className="py-24 md:py-32 px-6 max-w-6xl mx-auto">
       {/* Reusable Section Heading */}
-      <SectionHeading title="Featured Projects" subtitle="// Showcase" />
+      <SectionHeading title="Featured Projects" subtitle="▸ Showcase" />
 
       {/* Projects Showcase Grid */}
       <div className="mt-16 md:mt-24 space-y-24 md:space-y-36">
@@ -1182,14 +1235,14 @@ export default function Projects() {
                 <ul className="space-y-3.5 pt-2 text-left">
                   <li className="flex items-start gap-3 text-xs md:text-sm text-gray-400 group-hover:text-gray-200 transition-colors duration-500 font-sans leading-relaxed">
                     <div className="flex items-center font-mono text-xs shrink-0 select-none pt-0.5">
-                      <span className="text-accent-purple/50 group-hover:text-accent-purple transition-colors duration-500 font-semibold">{"//"}</span>
+                      <span className="text-accent-purple/50 group-hover:text-accent-purple transition-colors duration-500 font-semibold">{"▸"}</span>
                     </div>
                     <span className="font-semibold text-gray-300 group-hover:text-white transition-colors duration-500">{project.description}</span>
                   </li>
                   {project.features.map((feature, fIdx) => (
                     <li key={fIdx} className="flex items-start gap-3 text-xs md:text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-500 font-sans leading-relaxed">
                       <div className="flex items-center font-mono text-xs shrink-0 select-none pt-0.5">
-                        <span className="text-accent-purple/40 group-hover:text-accent-purple/70 transition-colors duration-500 font-semibold">{"//"}</span>
+                        <span className="text-accent-purple/40 group-hover:text-accent-purple/70 transition-colors duration-500 font-semibold">{"▸"}</span>
                       </div>
                       <span>{feature}</span>
                     </li>
@@ -1360,7 +1413,7 @@ export default function Projects() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   {/* Left Column - Main Details */}
                   <div className="lg:col-span-2 space-y-4">
-                    <h4 className="text-sm font-mono text-accent-purple uppercase tracking-wider">{"// Description"}</h4>
+                    <h4 className="text-sm font-mono text-accent-purple uppercase tracking-wider">{"▸ Description"}</h4>
                     <p className="text-sm md:text-base text-gray-300 leading-relaxed font-sans whitespace-pre-line">
                       {selectedProject.fullDescription.split("\n\nKey Features Built:")[0]}
                     </p>
@@ -1373,7 +1426,7 @@ export default function Projects() {
 
                   {/* Right Column - Challenges / Stats */}
                   <div className="hidden lg:block space-y-4 bg-[#0a0a0a] p-5 border border-white/10 rounded-xl hover-glow-purple">
-                    <h4 className="text-sm font-mono text-accent-purple uppercase tracking-wider">{"// Project Details"}</h4>
+                    <h4 className="text-sm font-mono text-accent-purple uppercase tracking-wider">{"▸ Project Details"}</h4>
                     <div className="space-y-3 font-mono text-xs text-gray-400">
                       <p className="flex justify-between">
                         <span>STATUS:</span>

@@ -232,7 +232,7 @@ export default function Contact() {
       </div>
 
       {/* Reusable Section Heading */}
-      <SectionHeading title="Get In Touch" subtitle="// Connection" />
+      <SectionHeading title="Get In Touch" subtitle="▸ Connection" />
 
       <motion.div
         onMouseMove={handleMouseMove}
@@ -333,7 +333,7 @@ export default function Contact() {
 
           {/* Social Links with Pulsing Glow on Hover */}
           <div className="space-y-4 border-t-2 border-white/20 pt-6">
-            <h5 className="text-xs font-mono text-gray-500 uppercase tracking-widest">{"// Find Me"}</h5>
+            <h5 className="text-xs font-mono text-gray-500 uppercase tracking-widest">{"▸ Find Me"}</h5>
             <div className="flex gap-4">
               {socialLinks.map((social) => {
                 let Icon: React.ComponentType<{ className?: string }> = Mail;
