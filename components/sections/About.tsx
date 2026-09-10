@@ -140,6 +140,102 @@ function FloatingTechDock() {
   );
 }
 
+function DeveloperIdentityHUD() {
+  return (
+    <div className="relative w-full rounded-2xl bg-[#08080c]/85 border border-white/10 p-6 md:p-7 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden group hover:border-cyan-500/35 transition-all duration-500">
+      {/* Corner Bracket Accents */}
+      <div className="absolute top-2.5 left-2.5 w-2.5 h-2.5 border-t-2 border-l-2 border-cyan-400/70 pointer-events-none" />
+      <div className="absolute top-2.5 right-2.5 w-2.5 h-2.5 border-t-2 border-r-2 border-accent-purple/70 pointer-events-none" />
+      <div className="absolute bottom-2.5 left-2.5 w-2.5 h-2.5 border-b-2 border-l-2 border-accent-purple/70 pointer-events-none" />
+      <div className="absolute bottom-2.5 right-2.5 w-2.5 h-2.5 border-b-2 border-r-2 border-cyan-400/70 pointer-events-none" />
+
+      {/* Ambient background glow */}
+      <div className="absolute -top-16 -left-16 w-48 h-48 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none group-hover:bg-cyan-500/20 transition-all duration-500" />
+      <div className="absolute -bottom-16 -right-16 w-48 h-48 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none group-hover:bg-accent-purple/20 transition-all duration-500" />
+
+      {/* Header telemetry strip */}
+      <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
+        <div className="flex items-center gap-2">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500" />
+          </span>
+          <span className="font-mono text-xs font-semibold tracking-wider text-cyan-300 uppercase">
+            SYS.CORE // ACTIVE
+          </span>
+        </div>
+        <span className="font-mono text-[10px] text-gray-400 tracking-widest uppercase px-2 py-0.5 rounded bg-white/5 border border-white/5">
+          HP, INDIA
+        </span>
+      </div>
+
+      {/* Center Radar / Quantum Telemetry Core */}
+      <div className="relative w-full py-4 flex flex-col items-center justify-center">
+        <div className="relative w-36 h-36 md:w-40 md:h-40 flex items-center justify-center">
+          {/* Outer ring with tick marks */}
+          <div className="absolute inset-0 rounded-full border border-cyan-500/20 border-dashed animate-spin" style={{ animationDuration: "30s" }} />
+          {/* Middle ring */}
+          <div className="absolute inset-3 rounded-full border border-accent-purple/30 animate-spin" style={{ animationDuration: "18s", animationDirection: "reverse" }} />
+          {/* Inner ring */}
+          <div className="absolute inset-7 rounded-full border border-cyan-400/40" />
+          {/* Radar sweep beam */}
+          <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none animate-spin" style={{ animationDuration: "6s" }}>
+            <div className="w-1/2 h-1/2 bg-gradient-to-br from-cyan-400/25 to-transparent origin-bottom-right" />
+          </div>
+          {/* Core Monogram */}
+          <div className="relative z-10 w-14 h-14 rounded-xl bg-black/80 border border-cyan-400/50 flex flex-col items-center justify-center shadow-[0_0_20px_rgba(0,240,255,0.35)]">
+            <span className="font-display font-black text-lg text-white tracking-wider">AT</span>
+            <span className="font-mono text-[8px] text-cyan-400 tracking-widest">DEV</span>
+          </div>
+
+          {/* Orbital Tags */}
+          <div className="absolute -top-1 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded bg-black/80 border border-cyan-400/30 text-[9px] font-mono text-cyan-300 shadow-sm whitespace-nowrap">
+            MERN STACK
+          </div>
+          <div className="absolute -bottom-1 left-0 px-2 py-0.5 rounded bg-black/80 border border-accent-purple/30 text-[9px] font-mono text-purple-300 shadow-sm whitespace-nowrap">
+            NEXT.JS 16
+          </div>
+          <div className="absolute -bottom-1 right-0 px-2 py-0.5 rounded bg-black/80 border border-amber-400/30 text-[9px] font-mono text-amber-300 shadow-sm whitespace-nowrap">
+            AI INTEGRATION
+          </div>
+        </div>
+      </div>
+
+      {/* Metrics Row */}
+      <div className="grid grid-cols-3 gap-2 mt-6 pt-4 border-t border-white/5 text-center">
+        <div className="p-2 rounded-lg bg-white/[0.02] border border-white/5">
+          <div className="text-xl font-bold font-display text-white">5+</div>
+          <div className="text-[10px] font-mono text-gray-400 uppercase tracking-tight mt-0.5">Projects</div>
+        </div>
+        <div className="p-2 rounded-lg bg-white/[0.02] border border-white/5">
+          <div className="text-lg md:text-base lg:text-lg font-bold font-display text-accent-purple truncate">Full-Stack</div>
+          <div className="text-[10px] font-mono text-gray-400 uppercase tracking-tight mt-0.5">MERN Arch</div>
+        </div>
+        <div className="p-2 rounded-lg bg-white/[0.02] border border-white/5">
+          <div className="text-xl font-bold font-display text-cyan-400">100%</div>
+          <div className="text-[10px] font-mono text-gray-400 uppercase tracking-tight mt-0.5">Responsive</div>
+        </div>
+      </div>
+
+      {/* Console output snippet */}
+      <div className="mt-4 p-3 rounded-lg bg-black/70 border border-white/5 font-mono text-[11px] leading-relaxed select-none">
+        <div className="text-cyan-400/90 flex items-center gap-2 truncate">
+          <span className="text-gray-500">&gt;</span>
+          <span>stack: [&quot;React 19&quot;, &quot;Next.js&quot;, &quot;Node&quot;]</span>
+        </div>
+        <div className="text-purple-300/80 flex items-center gap-2 mt-1 truncate">
+          <span className="text-gray-500">&gt;</span>
+          <span>cloud: Cloudflare Workers + Serverless</span>
+        </div>
+        <div className="text-emerald-400/90 flex items-center gap-2 mt-1 truncate">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+          <span>status: Available for high-impact roles</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function About() {
   const containerRef = useRef(null);
   const shouldReduceMotion = useSafeReducedMotion();
@@ -157,9 +253,16 @@ export default function About() {
         ref={containerRef}
         className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative"
       >
-        {/* Left Column - 3D Animated Star Sphere */}
-        {/* Left Column Spacer */}
-        <div className="hidden lg:block lg:col-span-5 w-full h-full pointer-events-none" />
+        {/* Left Column - Holographic Tech Identity HUD */}
+        <motion.div
+          variants={fadeInLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="lg:col-span-5 w-full"
+        >
+          <DeveloperIdentityHUD />
+        </motion.div>
 
         {/* Right Column - Biography & Interactive Console */}
         <motion.div
