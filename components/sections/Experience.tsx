@@ -77,16 +77,16 @@ export default function Experience() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
-              className="w-full max-w-3xl glass-panel p-8 rounded-2xl border border-white/10 bg-[#0a0a0a]/75 hover-glow-purple group relative cursor-default text-left"
+              className="w-full max-w-3xl glass-panel p-8 sm:p-10 md:p-12 rounded-2xl border border-white/10 bg-[#0a0a0a]/75 hover-glow-purple group relative cursor-default text-left"
             >
               {/* Header */}
-              <div className="flex items-center gap-3 mb-4">
-                <Briefcase className="w-5 h-5 text-accent-purple drop-shadow-[0_0_6px_var(--accent-neon-glow)]" />
+              <div className="flex items-center gap-3.5 mb-6">
+                <Briefcase className="w-5 h-5 text-accent-purple drop-shadow-[0_0_6px_var(--accent-neon-glow)] shrink-0" />
                 <div>
-                  <h4 className="text-xl font-bold font-sans text-white leading-tight">
+                  <h4 className="text-xl md:text-2xl font-bold font-sans text-white leading-tight">
                     {item.role}
                   </h4>
-                  <div className="flex items-center flex-wrap gap-2 mt-2">
+                  <div className="flex items-center flex-wrap gap-2.5 mt-2.5">
                     {item.techStack.map((tech) => (
                       <span key={tech} title={tech} className="inline-flex">
                         <TechLogo name={tech} className="w-[22px] h-[22px] shrink-0 opacity-80 hover:opacity-100 hover:scale-110 hover:-rotate-6 transition-all duration-200 cursor-default" />
@@ -97,7 +97,7 @@ export default function Experience() {
               </div>
 
               {/* Period & Location Badges */}
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-2.5 mb-6">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 border border-white/5 bg-black/60 rounded-full font-mono text-xs text-accent-purple">
                   <Calendar className="w-3.5 h-3.5" />
                   <span>{item.period}</span>
@@ -112,25 +112,25 @@ export default function Experience() {
 
               {/* Role Summary / Description */}
               {item.description && (
-                <p className="text-xs md:text-sm text-gray-300 font-sans leading-relaxed mb-4">
+                <p className="text-sm md:text-[15px] text-gray-300/90 font-sans leading-relaxed mb-7">
                   {item.description}
                 </p>
               )}
 
               {/* Key Achievements */}
-              <div className="text-xs font-mono font-semibold uppercase tracking-wider text-accent-purple/90 mb-3">
+              <div className="text-xs font-mono font-semibold uppercase tracking-wider text-accent-purple/90 mb-4">
                 Key achievements
               </div>
-              <ul className="space-y-3 pt-1 text-left">
+              <ul className="space-y-5 md:space-y-6 pt-1 text-left">
                 {item.achievements.map((achievement, i) => (
                   <li
                     key={i}
-                    className="flex gap-2.5 items-start text-xs md:text-sm text-gray-300 font-sans leading-relaxed"
+                    className="flex gap-3 items-start text-xs md:text-sm text-gray-300 font-sans leading-relaxed"
                   >
-                    <span className="text-accent-purple font-mono text-xs mt-0.5 select-none">
+                    <span className="text-accent-purple font-mono text-sm mt-0.5 select-none shrink-0">
                       {"▸"}
                     </span>
-                    <span>{achievement}</span>
+                    <span className="leading-relaxed">{achievement}</span>
                   </li>
                 ))}
               </ul>
