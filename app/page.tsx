@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
@@ -9,24 +8,12 @@ import Experience from "@/components/sections/Experience";
 import Contact from "@/components/sections/Contact";
 import CyberAtmosphereBackground from "@/components/ui/CyberAtmosphereBackground";
 
-const BackgroundGlobe = dynamic(() => import("@/components/sections/BackgroundGlobe"), {
-  ssr: false,
-  loading: () => null,
-});
-
 export default function Home() {
   return (
     <main className="relative flex flex-col min-h-screen bg-black overflow-x-hidden">
-      {/* 1. Hero Section with scoped 3D Background Globe */}
-      <div className="relative w-full">
-        <div className="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-40 md:opacity-60 overflow-hidden">
-          <BackgroundGlobe />
-          {/* Smooth horizon fade at the bottom of Hero */}
-          <div className="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-black via-black/85 to-transparent z-10 pointer-events-none" />
-        </div>
-        <div className="relative z-10">
-          <Hero />
-        </div>
+      {/* 1. Hero Section - Completely Pure Black Background */}
+      <div className="relative w-full bg-black z-20">
+        <Hero />
       </div>
 
       {/* 2. Cyber Atmosphere Background from About Me downwards */}

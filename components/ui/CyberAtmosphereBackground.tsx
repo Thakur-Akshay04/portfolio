@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Particle {
   x: number;
@@ -17,6 +17,20 @@ interface Particle {
 export default function CyberAtmosphereBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [showAtmosphere, setShowAtmosphere] = useState(false);
+  const showAtmosphereRef = useRef(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const active = window.scrollY > window.innerHeight * 0.45;
+      showAtmosphereRef.current = active;
+      setShowAtmosphere(active);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -69,6 +83,12 @@ export default function CyberAtmosphereBackground() {
 
     const render = (time: number) => {
       if (!isTabActive) return;
+
+      if (!showAtmosphereRef.current) {
+        ctx.clearRect(0, 0, width, height);
+        animationFrameId = requestAnimationFrame(render);
+        return;
+      }
 
       const dt = Math.min((time - lastTime) / 1000, 0.1);
       lastTime = time;
@@ -204,17 +224,29 @@ export default function CyberAtmosphereBackground() {
       {/* Contact Section Bloom (Bottom Center Converging Energy Core) */}
       <div className="absolute bottom-[4%] left-1/2 -translate-x-1/2 w-[850px] h-[600px] rounded-full bg-gradient-to-r from-cyan-500/15 via-purple-600/20 to-amber-500/10 blur-[180px] pointer-events-none animate-pulse" style={{ animationDuration: "8s" }} />
 
-      {/* 4. Interactive Stardust & Constellation Stream Canvas (Fixed Overlay) */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      {/* 4. Interactive Stardust & Constellation Stream Canvas (Fixed Overlay - only below Hero) */}
+      <div
+        className={`fixed inset-0 pointer-events-none z-0 transition-opacity duration-700 ${
+          showAtmosphere ? "opacity-100" : "opacity-0"
+        }`}
+      >
         <canvas ref={canvasRef} className="w-full h-full block" />
       </div>
 
-      {/* 5. Precision Architectural Telemetry Watermarks */}
-      <div className="hidden 2xl:flex flex-col fixed left-4 top-1/3 text-[9px] font-mono text-cyan-400/25 tracking-[0.3em] uppercase gap-2 select-none -rotate-90 origin-left">
+      {/* 5. Precision Architectural Telemetry Watermarks (only below Hero) */}
+      <div
+        className={`hidden 2xl:flex flex-col fixed left-4 top-1/3 text-[9px] font-mono text-cyan-400/25 tracking-[0.3em] uppercase gap-2 select-none -rotate-90 origin-left transition-opacity duration-700 ${
+          showAtmosphere ? "opacity-100" : "opacity-0"
+        }`}
+      >
         <span>SYS_TELEMETRY • V3.8</span>
         <span className="text-purple-400/25">BUFFER • NOMINAL</span>
       </div>
-      <div className="hidden 2xl:flex flex-col fixed right-4 top-2/3 text-[9px] font-mono text-purple-400/25 tracking-[0.3em] uppercase gap-2 select-none rotate-90 origin-right">
+      <div
+        className={`hidden 2xl:flex flex-col fixed right-4 top-2/3 text-[9px] font-mono text-purple-400/25 tracking-[0.3em] uppercase gap-2 select-none rotate-90 origin-right transition-opacity duration-700 ${
+          showAtmosphere ? "opacity-100" : "opacity-0"
+        }`}
+      >
         <span>CORE_GRID • ACTIVE</span>
         <span className="text-cyan-400/25">STACK • FULL_STACK_DEV</span>
       </div>

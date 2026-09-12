@@ -1,18 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { ArrowDown } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/constants/data";
 import { useSafeReducedMotion } from "@/lib/hooks";
 import { useLenis } from "lenis/react";
-
-// Dynamically import 3D background to prevent hydration/SSR mismatch
-const HeroParticles = dynamic(() => import("./HeroParticles"), {
-  ssr: false,
-  loading: () => <div className="absolute inset-0 bg-black -z-10" />,
-});
 
 const ConstellationSphere = dynamic(() => import("./ConstellationSphere"), {
   ssr: false,
@@ -28,10 +22,6 @@ export default function Hero() {
 
   // Custom typewriter taglines
   const words = PORTFOLIO_DATA.personal.taglineWords;
-
-  // Track scroll for background parallax drift
-  const { scrollY } = useScroll();
-  const backgroundY = useTransform(scrollY, [0, 1000], [0, 180]);
 
   // Typewriter effect loop
   useEffect(() => {
@@ -97,14 +87,6 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex flex-col justify-center px-6 md:px-16 overflow-hidden bg-black border-b border-white/10"
     >
-      {/* Cinematic noise/grain texture */}
-      <div className="noise-overlay" />
-
-      {/* Floating background particles with parallax drift scroll */}
-      <motion.div style={{ y: shouldReduceMotion ? 0 : backgroundY }} className="absolute inset-0 -z-10">
-        <HeroParticles />
-      </motion.div>
-
       <div className="w-full max-w-6xl mx-auto z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-24 pb-16">
         {/* Left Side: Name and details */}
         <div className="lg:col-span-7 flex flex-col items-start text-left">

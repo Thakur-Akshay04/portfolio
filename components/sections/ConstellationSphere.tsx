@@ -234,7 +234,6 @@ function QuantumNeuralReactor() {
 function QuantumReactorFallback() {
   return (
     <div className="w-full h-full min-h-[380px] md:min-h-[480px] lg:min-h-[550px] relative flex items-center justify-center select-none">
-      <div className="absolute w-80 h-80 rounded-full bg-cyan-500/20 blur-3xl opacity-80 pointer-events-none animate-pulse" />
       
       <div className="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
         <div className="absolute inset-0 rounded-full border-2 border-cyan-400/35 animate-spin" style={{ animationDuration: "12s" }} />
@@ -289,9 +288,6 @@ export default function ConstellationSphere() {
   return (
     <WebGLErrorBoundary fallback={<QuantumReactorFallback />}>
       <div ref={containerRef} className="w-full h-full min-h-[380px] md:min-h-[480px] lg:min-h-[550px] relative flex items-center justify-center select-none">
-        {/* Deep Cyber Electric Backdrop Glow */}
-        <div className="absolute w-96 h-96 rounded-full bg-gradient-to-r from-cyan-500/25 via-purple-600/20 to-amber-500/20 blur-3xl opacity-80 pointer-events-none animate-pulse" />
-
         <Canvas
           frameloop={isVisible ? "always" : "never"}
           dpr={Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 1.25)}
