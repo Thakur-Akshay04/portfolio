@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { useSafeReducedMotion } from "@/lib/hooks";
 import { getFadeIn } from "@/lib/variants";
@@ -49,7 +50,7 @@ function FloatingTechStack() {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative w-full h-[480px] sm:h-[540px] md:h-[580px] rounded-2xl bg-[#090a0f]/90 border border-white/[0.08] shadow-[0_24px_64px_-16px_rgba(0,0,0,0.95),inset_0_1px_0_0_rgba(255,255,255,0.06)] overflow-hidden flex flex-col select-none backdrop-blur-sm"
+      className="relative w-full h-[480px] sm:h-[540px] md:h-[580px] rounded-2xl bg-[#0d0d11]/90 border border-white/[0.08] shadow-[0_24px_64px_-16px_rgba(0,0,0,0.95),inset_0_1px_0_0_rgba(255,255,255,0.06)] overflow-hidden flex flex-col select-none backdrop-blur-sm"
     >
       {/* Top Header Strip */}
       <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06] bg-white/[0.01] z-30">
@@ -65,8 +66,8 @@ function FloatingTechStack() {
       </div>
 
       {/* Top & Bottom Gradient Fade Masks */}
-      <div className="absolute inset-x-0 top-[53px] h-16 bg-gradient-to-b from-[#090a0f] to-transparent z-20 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#090a0f] to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-x-0 top-[53px] h-16 bg-gradient-to-b from-[#0d0d11] to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0d0d11] to-transparent z-20 pointer-events-none" />
 
       {/* Dual Column Streaming Tracks */}
       <div className="flex-1 grid grid-cols-2 gap-4 px-5 py-4 overflow-hidden relative">
@@ -186,6 +187,22 @@ export default function About() {
             <p className="text-neutral-400 text-base sm:text-lg leading-relaxed">
               I am passionate about creating high-performance digital experiences, experimenting with modern web standards, and integrating intelligent AI features into full-stack systems. From low-latency backend services to intuitive client interactions, I strive for reliability and craft.
             </p>
+          </div>
+
+          {/* Direct page links */}
+          <div className="flex flex-wrap items-center gap-4 pt-4">
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-colors"
+            >
+              <span>Explore Projects</span>
+            </Link>
+            <Link
+              href="/skills"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.04] text-white font-medium text-sm border border-white/[0.08] hover:bg-white/[0.08] transition-colors"
+            >
+              <span>View Technical Skills</span>
+            </Link>
           </div>
         </motion.div>
 

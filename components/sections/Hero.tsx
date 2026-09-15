@@ -1,163 +1,191 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
-import { ArrowDown } from "lucide-react";
-import { PORTFOLIO_DATA } from "@/constants/data";
+import { ArrowUpRight, Mail, Copy, Check } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 import { useSafeReducedMotion } from "@/lib/hooks";
-import { useLenis } from "lenis/react";
+import { PORTFOLIO_DATA } from "@/constants/data";
 
-const ConstellationSphere = dynamic(() => import("./ConstellationSphere"), {
-  ssr: false,
-  loading: () => <div className="w-full h-full min-h-[320px] md:min-h-[420px]" />,
-});
+const QUICK_LINKS = [
+  {
+    title: "Projects",
+    subtitle: "Full-stack apps & systems",
+    href: "/projects",
+  },
+  {
+    title: "About",
+    subtitle: "Background & journey",
+    href: "/about",
+  },
+  {
+    title: "Skills",
+    subtitle: "Stack, tools & databases",
+    href: "/skills",
+  },
+  {
+    title: "Experience",
+    subtitle: "Worisgo internship & impact",
+    href: "/experience",
+  },
+];
 
 export default function Hero() {
   const shouldReduceMotion = useSafeReducedMotion();
-  const lenis = useLenis();
-  const [taglineIndex, setTaglineIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
 
-  // Custom typewriter taglines
-  const words = PORTFOLIO_DATA.personal.taglineWords;
+  const emailAddress =
+    PORTFOLIO_DATA.personal.email || "akshaythakur481@gmail.com";
+  const githubUrl =
+    (process.env.NEXT_PUBLIC_GITHUB_URL || "").trim() ||
+    "https://github.com/Thakur-Akshay04";
+  const linkedinUrl =
+    (process.env.NEXT_PUBLIC_LINKEDIN_URL || "").trim() ||
+    "https://linkedin.com/in/akshay-singh-thakur-446738289";
 
-  // Typewriter effect loop
-  useEffect(() => {
-    if (taglineIndex >= words.length) {
-      setTaglineIndex(0);
-      setCurrentText("");
-      setIsDeleting(false);
-      return;
-    }
-
-    const activeWord = words[taglineIndex];
-    if (!activeWord) return;
-
-    let typingSpeed = isDeleting ? 25 : 60;
-
-    if (!isDeleting && currentText === activeWord) {
-      typingSpeed = 2000; // Pause after typing
-    } else if (isDeleting && currentText === "") {
-      typingSpeed = 150; // Pause before starting next word
-    }
-
-    const handleType = () => {
-      if (!isDeleting) {
-        setCurrentText(activeWord.slice(0, currentText.length + 1));
-        if (currentText.length + 1 === activeWord.length) {
-          setIsDeleting(true);
-        }
-      } else {
-        setCurrentText(activeWord.slice(0, currentText.length - 1));
-        if (currentText.length - 1 === 0) {
-          setIsDeleting(false);
-          setTaglineIndex((prev) => (prev + 1) % words.length);
-        }
-      }
-    };
-
-    const timer = setTimeout(handleType, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [currentText, isDeleting, taglineIndex, words]);
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      if (lenis) {
-        lenis.scrollTo(element, { offset: -80 });
-      } else {
-        const offset = 80;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      }
+  const handleCopyEmail = () => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(emailAddress);
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000);
     }
   };
 
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex flex-col justify-center px-6 md:px-16 overflow-hidden bg-black border-b border-white/10"
-    >
-      <div className="w-full max-w-6xl mx-auto z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-24 pb-16">
-        {/* Left Side: Name and details */}
-        <div className="lg:col-span-7 flex flex-col items-start text-left">
-          {/* Heading Name: Character Staggered Entrance Reveal */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight mb-4 select-none uppercase text-white flex flex-wrap leading-[1.05]">
-            {PORTFOLIO_DATA.personal.name.split(" ").map((word, wIdx) => (
-              <span key={wIdx} className="inline-block whitespace-nowrap mr-3 md:mr-5">
-                {Array.from(word).map((char, cIdx) => {
-                  const charIndex =
-                    PORTFOLIO_DATA.personal.name.split(" ").slice(0, wIdx).join(" ").length +
-                    wIdx +
-                    cIdx;
-                  return (
-                    <motion.span
-                      key={cIdx}
-                      initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 40 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        duration: 0.6,
-                        delay: charIndex * 0.03,
-                        ease: [0.16, 1, 0.3, 1], // easeOutQuart
-                      }}
-                      className="inline-block"
-                    >
-                      {char}
-                    </motion.span>
-                  );
-                })}
-              </span>
-            ))}
-          </h1>
-
-          {/* Dynamic Typewriter Tagline */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-            className="h-8 mb-8 text-base sm:text-lg md:text-2xl font-mono text-gray-300 font-medium"
-          >
-            <span className="text-accent-purple pr-1 border-r-2 border-accent-purple animate-pulse font-semibold drop-shadow-[0_0_10px_var(--accent-neon-glow)]">
-              {currentText}
-            </span>
-          </motion.div>
-
-          {/* Subtitle description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.9 }}
-            className="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl leading-relaxed font-sans"
-          >
-            {PORTFOLIO_DATA.personal.subtitle}
-          </motion.p>
-        </div>
-
-        {/* Right Side: Animated 3D Star Constellation */}
-        <div className="absolute lg:relative inset-0 lg:inset-auto lg:col-span-5 w-full h-full lg:h-auto -z-10 lg:z-0 opacity-40 lg:opacity-100 pointer-events-none lg:pointer-events-auto flex items-center justify-center lg:translate-x-12">
-          <ConstellationSphere />
-        </div>
-      </div>
-
-      {/* Parallax scroll indicator at bottom */}
+    <section className="w-full max-w-3xl mx-auto px-6 sm:px-8 pt-28 sm:pt-36 pb-20 flex flex-col items-start">
+      {/* Location & Status Line */}
       <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-        onClick={() => scrollToSection("about")}
-        className="hidden lg:flex absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer flex-col items-center gap-2 text-gray-500 hover:text-white transition-colors"
+        initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="flex items-center gap-2.5 text-xs font-mono text-neutral-400 uppercase tracking-wider mb-6"
       >
-        <span className="font-mono text-[9px] uppercase tracking-widest">Scroll Down</span>
-        <ArrowDown className="w-4 h-4 text-accent-purple" />
+        <span>Himachal Pradesh, India</span>
+        <span className="text-neutral-600">•</span>
+        <span className="text-neutral-300">Software Engineer</span>
+      </motion.div>
+
+      {/* Name Headline */}
+      <motion.h1
+        initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+        className="text-4xl sm:text-6xl font-display font-extrabold text-white tracking-tight leading-[1.08] mb-5"
+      >
+        {PORTFOLIO_DATA.personal.name}
+      </motion.h1>
+
+      {/* Concise Personal Introduction (Reduced, No Bloat/Ethos) */}
+      <motion.div
+        initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+        className="space-y-3 mb-8"
+      >
+        <p className="text-lg sm:text-xl text-neutral-200 font-display font-medium leading-snug">
+          Full-stack developer building scalable web systems, clean APIs, and
+          reliable digital products.
+        </p>
+        <p className="text-sm sm:text-base text-neutral-400 font-sans leading-relaxed">
+          I work across the modern TypeScript ecosystem—specializing in Next.js,
+          Node.js, and PostgreSQL. Focused on crafting fast, intuitive
+          interfaces backed by resilient architecture.
+        </p>
+      </motion.div>
+
+      {/* Quick Actions & Socials */}
+      <motion.div
+        initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-wrap items-center gap-3 mb-12"
+      >
+        <Link
+          href="/contact"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-all duration-200 shadow-sm"
+        >
+          <Mail className="w-4 h-4" />
+          <span>Contact Me</span>
+        </Link>
+
+        <button
+          onClick={handleCopyEmail}
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-neutral-300 hover:text-white text-xs font-mono border border-white/[0.08] transition-all duration-200"
+          title="Click to copy email"
+        >
+          {copiedEmail ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-emerald-300">Copied!</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-3.5 h-3.5 text-neutral-400" />
+              <span>{emailAddress}</span>
+            </>
+          )}
+        </button>
+
+        <div className="h-4 w-px bg-white/10 hidden sm:block mx-1" />
+
+        <div className="flex items-center gap-2">
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] text-neutral-300 hover:text-white border border-white/[0.08] text-xs font-mono transition-all duration-200"
+          >
+            <GithubIcon className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">GitHub</span>
+          </a>
+
+          <a
+            href={linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] text-neutral-300 hover:text-white border border-white/[0.08] text-xs font-mono transition-all duration-200"
+          >
+            <LinkedinIcon className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">LinkedIn</span>
+          </a>
+        </div>
+      </motion.div>
+
+      {/* Minimal Explore Cards (Reduced, Fast Overview) */}
+      <motion.div
+        initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full pt-8 border-t border-white/[0.08]"
+      >
+        <div className="text-xs font-mono text-neutral-400 uppercase tracking-widest mb-4">
+          Explore Portfolio
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+          {QUICK_LINKS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="p-4 rounded-2xl border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/[0.16] transition-all duration-200 group flex items-center justify-between"
+            >
+              <div>
+                <div className="text-sm font-semibold text-white group-hover:text-neutral-200 transition-colors">
+                  {item.title}
+                </div>
+                <div className="text-xs text-neutral-400 font-sans mt-0.5">
+                  {item.subtitle}
+                </div>
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-neutral-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            </Link>
+          ))}
+        </div>
       </motion.div>
     </section>
   );
 }
+

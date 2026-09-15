@@ -270,43 +270,46 @@ export function TechIcon({ name, className = "w-full h-full" }: { name: string; 
 
 export default function Skills() {
   return (
-    <PageFoldWrapper id="skills" className="py-24 md:py-32 px-6 max-w-7xl mx-auto">
+    <PageFoldWrapper id="skills" className="py-20 md:py-28 px-6 sm:px-10 max-w-7xl mx-auto">
       {/* Section Heading */}
-      <SectionHeading title="Tech Stack" subtitle="▸ Expertise" />
+      <SectionHeading
+        title="Technical Skills"
+        subtitle="Core programming languages, frameworks, databases, cloud architecture, and AI models."
+      />
 
-      {/* Categories Grid: 5 columns on desktop, stack on mobile/tablet */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-y-10 lg:gap-8 lg:gap-x-6 mt-16">
+      {/* Categories Grid: 6 columns on wide screens */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-y-10 lg:gap-8 lg:gap-x-6 mt-12">
         {TECH_CATEGORIES.map((category, catIndex) => (
           <Fragment key={category.title}>
             {/* Divider line between categories on mobile */}
             {catIndex > 0 && (
-              <div className="w-full h-[1px] bg-white/10 lg:hidden my-2" />
+              <div className="w-full h-[1px] bg-white/[0.08] lg:hidden my-2" />
             )}
             <motion.div
               key={category.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: catIndex * 0.08 }}
-              className="flex flex-col gap-6"
+              transition={{ duration: 0.5, delay: catIndex * 0.06 }}
+              className="flex flex-col gap-5"
             >
-              {/* Category Title with simple border line */}
-              <div className="flex items-center gap-3">
-                <span className="hidden lg:inline-block w-1.5 h-4 bg-accent-purple rounded-full shadow-[0_0_8px_var(--accent-neon-glow)]" />
-                <h4 className="text-lg lg:text-sm font-sans lg:font-mono font-bold lg:tracking-widest text-white lg:uppercase">
+              {/* Category Title */}
+              <div className="flex items-center gap-2.5">
+                <span className="w-1.5 h-3.5 bg-accent-purple rounded-full" />
+                <h3 className="text-sm font-mono font-bold tracking-wider text-white uppercase">
                   {category.title}
-                </h4>
+                </h3>
               </div>
 
-              {/* Grid lists of clean cards on mobile, tablet, and desktop */}
-              <div className="flex flex-wrap gap-x-4 gap-y-3 lg:flex-col lg:gap-3.5">
+              {/* Grid lists of clean cards */}
+              <div className="flex flex-wrap gap-x-3 gap-y-2.5 lg:flex-col lg:gap-3">
                 {category.items.map((tech) => (
                   <motion.div
                     key={tech.name}
                     whileHover="hover"
                     whileTap="hover"
                     initial="initial"
-                    className="group flex items-center gap-3 lg:gap-4 py-2.5 lg:py-3.5 px-4 lg:px-5 rounded-xl border border-white/5 bg-[#050505] hover:bg-[#0c0c0c] hover:border-accent-purple/35 transition-all duration-300 cursor-default shrink-0"
+                    className="group flex items-center gap-3 py-2.5 px-3.5 rounded-xl border border-white/[0.08] bg-[#0d0d11]/80 hover:bg-[#14141c] hover:border-accent-purple/35 transition-all duration-300 cursor-default shrink-0"
                     variants={{
                       hover: { x: 6 },
                       initial: { x: 0 }

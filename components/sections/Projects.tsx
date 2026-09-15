@@ -1112,7 +1112,7 @@ function LuminoteMockup() {
   );
 }
 
-function ProjectMockup({ id }: { id: string }) {
+export function ProjectMockup({ id }: { id: string }) {
   if (id === "project-1") {
     return <AIResumeMockup />;
   }
@@ -1186,12 +1186,15 @@ export default function Projects() {
 
   return (
     <>
-      <PageFoldWrapper id="projects" className="py-24 md:py-32 px-6 max-w-6xl mx-auto">
+      <PageFoldWrapper id="projects" className="py-20 md:py-28 px-6 sm:px-10 max-w-6xl mx-auto">
       {/* Reusable Section Heading */}
-      <SectionHeading title="Featured Projects" subtitle="▸ Showcase" />
+      <SectionHeading
+        title="Featured Projects"
+        subtitle="Full-stack web applications, AI productivity systems, and decentralized architectures."
+      />
 
       {/* Projects Showcase Grid */}
-      <div className="mt-16 md:mt-24 space-y-24 md:space-y-36">
+      <div className="mt-12 md:mt-20 space-y-20 md:space-y-28">
         {PORTFOLIO_DATA.projects.map((project, index) => {
           const isEven = index % 2 === 0;
           const displayIndex = String(index + 1).padStart(2, "0");
@@ -1199,7 +1202,7 @@ export default function Projects() {
           return (
             <div
               key={project.id}
-              className="relative p-6 sm:p-8 lg:p-12 rounded-3xl bg-[#09090c]/40 border border-white/[0.03] backdrop-blur-md transition-all duration-500 overflow-hidden group hover:border-accent-purple/20 hover:bg-[#0f0e15]/50 hover:shadow-[0_20px_50px_rgba(157,78,221,0.08)] grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+              className="relative p-6 sm:p-8 lg:p-12 rounded-3xl bg-[#0d0d11]/80 border border-white/[0.08] backdrop-blur-md transition-all duration-500 overflow-hidden group hover:border-white/[0.16] hover:bg-[#121218]/90 hover:shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
             >
               {/* Decorative radial gradient glow */}
               <div className="absolute -inset-px bg-gradient-to-tr from-accent-purple/0 via-accent-purple/5 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-3xl" />
@@ -1210,47 +1213,35 @@ export default function Projects() {
                   isEven ? "order-1" : "order-1 lg:order-2"
                 }`}
               >
-                {/* Index / Category Metadata */}
-                <div className="flex items-center gap-4">
-                  <div className="flex items-baseline font-mono select-none">
-                    <span className="text-5xl md:text-6xl font-extralight bg-gradient-to-b from-white/20 to-white/5 bg-clip-text text-transparent group-hover:from-accent-purple/40 group-hover:to-accent-purple/10 transition-all duration-500">
-                      {displayIndex}
-                    </span>
-                    <span className="text-3xl md:text-4xl font-light text-accent-purple/30 group-hover:text-accent-purple/60 transition-colors duration-500 ml-1">
-                      /
-                    </span>
-                  </div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-purple/5 border border-accent-purple/15 text-[10px] font-mono text-accent-purple tracking-widest uppercase">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent-purple animate-pulse shrink-0" />
+                {/* Category Metadata */}
+                <div className="flex items-center gap-3">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs font-mono text-neutral-300 tracking-wider uppercase">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent-purple shrink-0" />
                     <span>{project.category}</span>
                   </div>
                 </div>
 
                 {/* Title */}
                 <div>
-                  <h3 className="text-3xl md:text-4xl font-display font-extrabold text-white leading-tight hover:text-glow-purple group-hover:text-accent-purple transition-all duration-500">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white leading-tight">
                     {project.title}
                   </h3>
                   {project.subtitle && (
-                    <p className="text-xs sm:text-sm font-mono text-accent-purple/90 mt-1 font-medium tracking-wide">
+                    <p className="text-xs sm:text-sm font-mono text-neutral-400 mt-1.5 font-medium tracking-wide">
                       {project.subtitle}
                     </p>
                   )}
                 </div>
 
                 {/* Title description and feature bullet points */}
-                <ul className="space-y-3.5 pt-2 text-left">
-                  <li className="flex items-start gap-3 text-xs md:text-sm text-gray-400 group-hover:text-gray-200 transition-colors duration-500 font-sans leading-relaxed">
-                    <div className="flex items-center font-mono text-xs shrink-0 select-none pt-0.5">
-                      <span className="text-accent-purple/50 group-hover:text-accent-purple transition-colors duration-500 font-semibold">{"▸"}</span>
-                    </div>
-                    <span className="font-semibold text-gray-300 group-hover:text-white transition-colors duration-500">{project.description}</span>
+                <ul className="space-y-3 pt-2 text-left">
+                  <li className="flex items-start gap-3 text-sm text-neutral-300 font-sans leading-relaxed">
+                    <span className="text-accent-purple font-mono text-sm mt-0.5 select-none shrink-0 font-bold">{"•"}</span>
+                    <span className="font-medium text-white">{project.description}</span>
                   </li>
                   {project.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-start gap-3 text-xs md:text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-500 font-sans leading-relaxed">
-                      <div className="flex items-center font-mono text-xs shrink-0 select-none pt-0.5">
-                        <span className="text-accent-purple/40 group-hover:text-accent-purple/70 transition-colors duration-500 font-semibold">{"▸"}</span>
-                      </div>
+                    <li key={fIdx} className="flex items-start gap-3 text-sm text-neutral-400 font-sans leading-relaxed">
+                      <span className="text-accent-purple font-mono text-sm mt-0.5 select-none shrink-0">{"•"}</span>
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -1269,14 +1260,12 @@ export default function Projects() {
                       key={tech}
                       variants={techItemVariants}
                       whileHover={{
-                        scale: 1.08,
-                        y: -2,
-                        borderColor: "rgba(157, 78, 221, 0.45)",
-                        boxShadow: "0 4px 12px rgba(157, 78, 221, 0.15)",
-                        backgroundColor: "rgba(157, 78, 221, 0.05)",
+                        scale: 1.05,
+                        y: -1,
+                        borderColor: "rgba(255, 255, 255, 0.2)",
                         color: "#ffffff"
                       }}
-                      className="inline-flex items-center gap-1.5 px-3 py-1 border border-white/5 bg-[#050505] rounded-full text-xs text-gray-400 group-hover:text-gray-300 hover:text-white transition-all duration-200 cursor-default font-mono"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 border border-white/[0.08] bg-white/[0.02] rounded-full text-xs text-neutral-300 hover:text-white transition-all duration-200 cursor-default font-mono"
                     >
                       <TechLogo name={tech} className="w-3.5 h-3.5" />
                       <span>{tech}</span>
@@ -1288,18 +1277,18 @@ export default function Projects() {
                 <div className="flex flex-wrap gap-3 pt-4 font-mono text-xs">
                   <div
                     onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 border border-white/5 bg-black/60 rounded-full text-accent-purple hover:border-accent-purple/35 transition-all duration-300 cursor-default select-none group/btn h-9"
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 border border-white/[0.08] bg-white/[0.03] rounded-full text-neutral-300 hover:text-white hover:border-white/20 transition-all duration-200 cursor-default select-none group/btn h-9"
                   >
                     <ExternalLink className="w-3.5 h-3.5 group-hover/btn:hidden shrink-0" />
                     <span className="group-hover/btn:hidden whitespace-nowrap">Live Site</span>
-                    <span className="hidden group-hover/btn:inline text-accent-teal whitespace-nowrap text-[10px] font-semibold font-sans">Deploying Soon..</span>
+                    <span className="hidden group-hover/btn:inline text-neutral-200 whitespace-nowrap text-[10px] font-medium font-sans">Deploying Soon..</span>
                   </div>
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 border border-white/5 bg-black/60 rounded-full text-gray-400 hover:text-white hover:border-white/20 transition-all duration-300 h-9"
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 border border-white/[0.08] bg-white/[0.03] rounded-full text-neutral-300 hover:text-white hover:border-white/20 transition-all duration-200 h-9"
                   >
                     <GithubIcon className="w-3.5 h-3.5" />
                     <span>Repository</span>
@@ -1310,7 +1299,7 @@ export default function Projects() {
                       openTimeRef.current = Date.now();
                       setSelectedProject(project);
                     }}
-                    className="inline-flex items-center justify-center px-5 py-2 border border-accent-purple/40 text-accent-purple bg-accent-purple/5 rounded-full font-semibold hover:bg-accent-purple/15 hover:border-accent-purple transition-all duration-300 h-9"
+                    className="inline-flex items-center justify-center px-5 py-2 bg-white text-black font-semibold rounded-full hover:bg-neutral-200 transition-all duration-200 h-9"
                   >
                     <span>Case Study</span>
                   </button>
@@ -1362,12 +1351,12 @@ export default function Projects() {
               animate="visible"
               exit="exit"
               onClick={(e) => e.stopPropagation()} // Prevent close on card click
-              className="relative w-[92%] sm:w-[88%] md:w-full h-auto max-h-[85vh] md:max-h-[90vh] md:max-w-3xl rounded-2xl border border-accent-purple/35 bg-black overflow-hidden shadow-2xl flex flex-col"
+              className="relative w-[92%] sm:w-[88%] md:w-full h-auto max-h-[85vh] md:max-h-[90vh] md:max-w-3xl rounded-2xl border border-white/[0.12] bg-[#0d0d11] overflow-hidden shadow-2xl flex flex-col"
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-black border border-white/10 text-gray-400 hover:text-white transition-colors z-20"
+                className="absolute top-4 right-4 p-2 rounded-full bg-white/[0.04] border border-white/[0.08] text-neutral-400 hover:text-white transition-colors z-20"
                 aria-label="Close details"
               >
                 <X className="w-5 h-5" />
@@ -1376,14 +1365,14 @@ export default function Projects() {
               <div className="p-5 md:p-8 space-y-6 overflow-y-auto flex-1 pb-16" data-lenis-prevent>
                 {/* Header */}
                 <div className="space-y-2">
-                  <span className="text-xs font-mono text-accent-purple font-semibold tracking-wider uppercase drop-shadow-[0_0_8px_var(--accent-neon-glow)]">
+                  <span className="text-xs font-mono text-neutral-400 font-medium tracking-wider uppercase">
                     {selectedProject.category}
                   </span>
-                  <h3 className="text-3xl md:text-4xl font-display font-extrabold text-white pr-12">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white pr-12">
                     {selectedProject.title}
                   </h3>
                   {selectedProject.subtitle && (
-                    <p className="text-sm font-mono text-accent-purple/90 font-medium tracking-wide">
+                    <p className="text-sm font-mono text-neutral-400 font-medium tracking-wide">
                       {selectedProject.subtitle}
                     </p>
                   )}
@@ -1394,7 +1383,7 @@ export default function Projects() {
                   variants={techContainerVariants}
                   initial="hidden"
                   animate="visible"
-                  className="flex flex-wrap gap-1.5 md:gap-2 border-b border-white/10 pb-6"
+                  className="flex flex-wrap gap-1.5 md:gap-2 border-b border-white/[0.08] pb-6"
                 >
                   {selectedProject.techStack.map((tech) => (
                     <motion.span
@@ -1403,16 +1392,14 @@ export default function Projects() {
                       variants={techItemVariants}
                       whileHover={{
                         scale: 1.05,
-                        borderColor: "rgba(157, 78, 221, 0.45)",
-                        boxShadow: "0 4px 15px rgba(157, 78, 221, 0.2)",
-                        backgroundColor: "rgba(157, 78, 221, 0.05)",
+                        borderColor: "rgba(255, 255, 255, 0.2)",
                         color: "#ffffff"
                       }}
                       onClick={(e) => {
                         e.stopPropagation();
                         setActiveTechMobile(activeTechMobile === tech ? null : tech);
                       }}
-                      className="inline-flex items-center gap-1.5 md:gap-2 p-1.5 md:px-3 md:py-1.5 rounded-full bg-[#0a0a0a] border border-white/5 text-xs text-gray-300 font-mono transition-all cursor-pointer lg:cursor-default select-none"
+                      className="inline-flex items-center gap-1.5 md:gap-2 p-1.5 md:px-3 md:py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs text-neutral-300 font-mono transition-all cursor-pointer lg:cursor-default select-none"
                     >
                       <TechLogo name={tech} className="w-4 h-4 shrink-0" />
                       <span className={activeTechMobile === tech ? "inline" : "hidden lg:inline"}>{tech}</span>
@@ -1420,29 +1407,28 @@ export default function Projects() {
                   ))}
                 </motion.div>
 
-
                 {/* Description Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   {/* Left Column - Main Details */}
                   <div className="lg:col-span-2 space-y-4">
-                    <h4 className="text-sm font-mono text-accent-purple uppercase tracking-wider">{"▸ Description"}</h4>
-                    <p className="text-sm md:text-base text-gray-300 leading-relaxed font-sans whitespace-pre-line">
+                    <h4 className="text-xs font-mono text-neutral-400 uppercase tracking-wider">Description</h4>
+                    <p className="text-sm md:text-base text-neutral-300 leading-relaxed font-sans whitespace-pre-line">
                       {selectedProject.fullDescription.split("\n\nKey Features Built:")[0]}
                     </p>
                     {selectedProject.fullDescription.includes("\n\nKey Features Built:") && (
-                      <p className="hidden lg:block text-sm md:text-base text-gray-300 leading-relaxed font-sans whitespace-pre-line mt-4">
+                      <p className="hidden lg:block text-sm md:text-base text-neutral-300 leading-relaxed font-sans whitespace-pre-line mt-4">
                         {`Key Features Built:${selectedProject.fullDescription.split("\n\nKey Features Built:")[1]}`}
                       </p>
                     )}
                   </div>
 
                   {/* Right Column - Challenges / Stats */}
-                  <div className="hidden lg:block space-y-4 bg-[#0a0a0a] p-5 border border-white/10 rounded-xl hover-glow-purple">
-                    <h4 className="text-sm font-mono text-accent-purple uppercase tracking-wider">{"▸ Project Details"}</h4>
-                    <div className="space-y-3 font-mono text-xs text-gray-400">
+                  <div className="hidden lg:block space-y-4 bg-white/[0.02] p-5 border border-white/[0.08] rounded-xl">
+                    <h4 className="text-xs font-mono text-neutral-400 uppercase tracking-wider">Project Details</h4>
+                    <div className="space-y-3 font-mono text-xs text-neutral-400">
                       <p className="flex justify-between">
                         <span>STATUS:</span>
-                        <span className="text-accent-purple">NOT DEPLOYED</span>
+                        <span className="text-neutral-300">COMPLETED</span>
                       </p>
                       <p className="flex justify-between">
                         <span>ROLE:</span>
@@ -1450,20 +1436,18 @@ export default function Projects() {
                       </p>
                       <p className="flex justify-between">
                         <span>LINT:</span>
-                        <span className="text-green-400">PASS</span>
+                        <span className="text-emerald-400">PASS</span>
                       </p>
                     </div>
                   </div>
                 </div>
 
-
-
                 {/* Footer Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 border-t border-white/10 pt-6 mt-6">
+                <div className="flex flex-col sm:flex-row gap-4 border-t border-white/[0.08] pt-6 mt-6">
                   <motion.div
-                    className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-accent-purple text-black text-sm font-semibold transition-all duration-300 cursor-default select-none group/modal-btn w-full sm:w-[160px] hover:shadow-[0_0_20px_rgba(157,78,221,0.45)]"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
+                    className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white text-black text-sm font-semibold transition-all duration-200 cursor-default select-none group/modal-btn w-full sm:w-[160px] hover:bg-neutral-200"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     <ExternalLink className="w-4 h-4 group-hover/modal-btn:hidden shrink-0" />
                     <span className="group-hover/modal-btn:hidden whitespace-nowrap">Live Demo</span>
@@ -1473,9 +1457,9 @@ export default function Projects() {
                     href={selectedProject.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/10 bg-transparent hover:border-white/35 text-white text-sm font-semibold transition-all duration-300 w-full sm:w-auto"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
+                    className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/[0.12] bg-white/[0.03] hover:bg-white/[0.08] text-white text-sm font-semibold transition-all duration-200 w-full sm:w-auto"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     <GithubIcon className="w-4 h-4" />
                     <span>View Repository</span>

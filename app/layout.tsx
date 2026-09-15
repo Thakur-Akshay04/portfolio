@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 
 const sansFont = Plus_Jakarta_Sans({
@@ -26,19 +27,19 @@ const monoFont = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Akshay Singh Thakur",
-  description: "Explore the personal portfolio of Akshay, a Full Stack & MERN Developer specializing in Next.js, React, Node.js, and high-performance cloud applications.",
+  title: "Akshay Singh Thakur | Full Stack & MERN Developer",
+  description: "Explore the portfolio of Akshay Singh Thakur, Full-Stack & MERN Developer building high-performance web systems with clean architecture, modern React interfaces, and AI integration.",
   keywords: "Full Stack Developer, MERN Stack Developer, React, Next.js, Node.js, Cloud, DevOps, Portfolio",
-  authors: [{ name: "Akshay" }],
+  authors: [{ name: "Akshay Singh Thakur" }],
   openGraph: {
-    title: "Akshay Singh Thakur",
+    title: "Akshay Singh Thakur | Full Stack Developer",
     description: "Personal portfolio demonstrating MERN Stack engineering expertise, interactive React interfaces, and modern full-stack web applications.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Akshay Singh Thakur",
+    title: "Akshay Singh Thakur | Full Stack Developer",
     description: "Personal portfolio demonstrating MERN Stack engineering expertise, interactive React interfaces, and modern full-stack web applications.",
   },
   robots: {
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#000000",
+  themeColor: "#070709",
 };
 
 export default function RootLayout({
@@ -64,11 +65,12 @@ export default function RootLayout({
         className={`${sansFont.variable} ${displayFont.variable} ${monoFont.variable} font-sans antialiased bg-background text-foreground`}
       >
         <SmoothScrollProvider>
-          <div className="max-w-[2200px] mx-auto border-x border-white/10 min-h-screen flex flex-col bg-black relative">
+          <div className="min-h-screen flex flex-col bg-[#070709] relative selection:bg-purple-500/30 selection:text-white">
             <Navbar />
-            <div className="flex-grow">
+            <div className="flex-grow flex flex-col pt-16 sm:pt-20">
               {children}
             </div>
+            <Footer />
           </div>
         </SmoothScrollProvider>
       </body>
