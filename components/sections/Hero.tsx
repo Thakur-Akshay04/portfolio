@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Mail, Copy, Check } from "lucide-react";
+import { ArrowUpRight, FileText, Copy, Check } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 import { useSafeReducedMotion } from "@/lib/hooks";
 import { PORTFOLIO_DATA } from "@/constants/data";
@@ -35,16 +35,73 @@ export default function Hero() {
   const shouldReduceMotion = useSafeReducedMotion();
   const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const emailAddress =
-    PORTFOLIO_DATA.personal.email || "akshaythakur481@gmail.com";
-  const githubUrl =
-    (process.env.NEXT_PUBLIC_GITHUB_URL || "").trim() ||
-    "https://github.com/Thakur-Akshay04";
-  const linkedinUrl =
-    (process.env.NEXT_PUBLIC_LINKEDIN_URL || "").trim() ||
-    "https://linkedin.com/in/akshay-singh-thakur-446738289";
+  const [emailAddress, setEmailAddress] = useState(
+    PORTFOLIO_DATA.personal.email || ""
+  );
+  const [githubUrl, setGithubUrl] = useState(
+    (process.env.NEXT_PUBLIC_GITHUB_URL || "").trim()
+  );
+  const [linkedinUrl, setLinkedinUrl] = useState(
+    (process.env.NEXT_PUBLIC_LINKEDIN_URL || "").trim()
+  );
+  const [resumeUrl, setResumeUrl] = useState(
+    (process.env.NEXT_PUBLIC_RESUME_URL || "").trim()
+  );
+
+  useEffect(() => {
+    fetch("/api/config")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data) {
+          if (data.email) setEmailAddress(data.email.trim());
+          if (data.githubUrl) setGithubUrl(data.githubUrl.trim());
+          if (data.linkedinUrl) setLinkedinUrl(data.linkedinUrl.trim());
+          if (data.resumeUrl) setResumeUrl(data.resumeUrl.trim());
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const rawResumeUrl = (resumeUrl || "").trim();
+  const normalizedResumeUrl = rawResumeUrl
+    ? rawResumeUrl.startsWith("http://") || rawResumeUrl.startsWith("https://")
+      ? rawResumeUrl
+      : `https://${rawResumeUrl}`
+    : "";
+  const hasValidResumeUrl = Boolean(
+    normalizedResumeUrl &&
+      (normalizedResumeUrl.startsWith("http://") ||
+        normalizedResumeUrl.startsWith("https://"))
+  );
+
+  const rawGithubUrl = (githubUrl || "").trim();
+  const normalizedGithubUrl = rawGithubUrl
+    ? rawGithubUrl.startsWith("http://") || rawGithubUrl.startsWith("https://")
+      ? rawGithubUrl
+      : `https://${rawGithubUrl}`
+    : "";
+  const hasValidGithubUrl = Boolean(
+    normalizedGithubUrl &&
+      (normalizedGithubUrl.startsWith("http://") ||
+        normalizedGithubUrl.startsWith("https://"))
+  );
+
+  const rawLinkedinUrl = (linkedinUrl || "").trim();
+  const normalizedLinkedinUrl = rawLinkedinUrl
+    ? rawLinkedinUrl.startsWith("http://") || rawLinkedinUrl.startsWith("https://")
+      ? rawLinkedinUrl
+      : `https://${rawLinkedinUrl}`
+    : "";
+  const hasValidLinkedinUrl = Boolean(
+    normalizedLinkedinUrl &&
+      (normalizedLinkedinUrl.startsWith("http://") ||
+        normalizedLinkedinUrl.startsWith("https://"))
+  );
+
+  const hasValidEmail = Boolean(emailAddress && emailAddress.includes("@"));
 
   const handleCopyEmail = () => {
+    if (!hasValidEmail) return;
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(emailAddress);
       setCopiedEmail(true);
@@ -101,52 +158,88 @@ export default function Hero() {
         transition={{ duration: 0.45, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
         className="flex flex-wrap items-center gap-3 mb-12"
       >
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-all duration-200 shadow-sm"
+        <a
+          href={hasValidResumeUrl ? normalizedResumeUrl : "#"}
+          onClick={(e) => {
+            if (!hasValidResumeUrl) {
+              e.preventDefault();
+            }
+          }}
+          target={hasValidResumeUrl ? "_blank" : undefined}
+          rel={hasValidResumeUrl ? "noopener noreferrer" : undefined}
+          className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-sm transition-all duration-200 shadow-sm ${
+            !hasValidResumeUrl
+              ? "cursor-not-allowed opacity-50"
+              : "hover:bg-neutral-200 cursor-pointer"
+          }`}
+          title={hasValidResumeUrl ? "View Resume" : "Resume not available"}
         >
-          <Mail className="w-4 h-4" />
-          <span>Contact Me</span>
-        </Link>
+          <FileText className="w-4 h-4" />
+          <span>Resume</span>
+        </a>
 
-        <button
-          onClick={handleCopyEmail}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-neutral-300 hover:text-white text-xs font-mono border border-white/[0.08] transition-all duration-200"
-          title="Click to copy email"
-        >
-          {copiedEmail ? (
-            <>
-              <Check className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-emerald-300">Copied!</span>
-            </>
-          ) : (
-            <>
-              <Copy className="w-3.5 h-3.5 text-neutral-400" />
-              <span>{emailAddress}</span>
-            </>
-          )}
-        </button>
+        {hasValidEmail ? (
+          <>
+            <button
+              onClick={handleCopyEmail}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-neutral-300 hover:text-white text-xs font-mono border border-white/[0.08] transition-all duration-200"
+              title="Click to copy email"
+            >
+              {copiedEmail ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-emerald-300">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5 text-neutral-400" />
+                  <span>{emailAddress}</span>
+                </>
+              )}
+            </button>
 
-        <div className="h-4 w-px bg-white/10 hidden sm:block mx-1" />
+            <div className="h-4 w-px bg-white/10 hidden sm:block mx-1" />
+          </>
+        ) : null}
 
         <div className="flex items-center gap-2">
           <a
-            href={githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={hasValidGithubUrl ? normalizedGithubUrl : "#"}
+            onClick={(e) => {
+              if (!hasValidGithubUrl) {
+                e.preventDefault();
+              }
+            }}
+            target={hasValidGithubUrl ? "_blank" : undefined}
+            rel={hasValidGithubUrl ? "noopener noreferrer" : undefined}
             aria-label="GitHub Profile"
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] text-neutral-300 hover:text-white border border-white/[0.08] text-xs font-mono transition-all duration-200"
+            className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.03] text-neutral-300 border border-white/[0.08] text-xs font-mono transition-all duration-200 ${
+              hasValidGithubUrl
+                ? "hover:bg-white/[0.07] hover:text-white cursor-pointer"
+                : "opacity-50 cursor-not-allowed"
+            }`}
+            title={hasValidGithubUrl ? "GitHub Profile" : "GitHub profile not configured"}
           >
             <GithubIcon className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">GitHub</span>
           </a>
 
           <a
-            href={linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={hasValidLinkedinUrl ? normalizedLinkedinUrl : "#"}
+            onClick={(e) => {
+              if (!hasValidLinkedinUrl) {
+                e.preventDefault();
+              }
+            }}
+            target={hasValidLinkedinUrl ? "_blank" : undefined}
+            rel={hasValidLinkedinUrl ? "noopener noreferrer" : undefined}
             aria-label="LinkedIn Profile"
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] text-neutral-300 hover:text-white border border-white/[0.08] text-xs font-mono transition-all duration-200"
+            className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.03] text-neutral-300 border border-white/[0.08] text-xs font-mono transition-all duration-200 ${
+              hasValidLinkedinUrl
+                ? "hover:bg-white/[0.07] hover:text-white cursor-pointer"
+                : "opacity-50 cursor-not-allowed"
+            }`}
+            title={hasValidLinkedinUrl ? "LinkedIn Profile" : "LinkedIn profile not configured"}
           >
             <LinkedinIcon className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">LinkedIn</span>

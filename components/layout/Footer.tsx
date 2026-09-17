@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
-import { Mail, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/constants/data";
 
 export default function Footer() {
