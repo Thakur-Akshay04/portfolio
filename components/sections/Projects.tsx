@@ -1186,7 +1186,7 @@ export default function Projects() {
 
   return (
     <>
-      <PageFoldWrapper id="projects" className="py-20 md:py-28 px-6 sm:px-10 max-w-6xl mx-auto">
+      <PageFoldWrapper id="projects" className="pt-6 sm:pt-10 pb-16 sm:pb-24 px-6 sm:px-10 max-w-6xl mx-auto">
       {/* Reusable Section Heading */}
       <SectionHeading
         title="Featured Projects"
@@ -1194,7 +1194,7 @@ export default function Projects() {
       />
 
       {/* Projects Showcase Grid */}
-      <div className="mt-12 md:mt-20 space-y-20 md:space-y-28">
+      <div className="mt-8 sm:mt-12 space-y-16 md:space-y-24">
         {PORTFOLIO_DATA.projects.map((project, index) => {
           const isEven = index % 2 === 0;
           const displayIndex = String(index + 1).padStart(2, "0");

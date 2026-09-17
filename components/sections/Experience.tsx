@@ -29,7 +29,7 @@ export default function Experience() {
   };
 
   return (
-    <PageFoldWrapper id="experience" className="py-20 md:py-28 px-6 sm:px-10 max-w-5xl mx-auto">
+    <PageFoldWrapper id="experience" className="pt-6 sm:pt-10 pb-16 sm:pb-24 px-6 sm:px-10 max-w-5xl mx-auto">
       {/* Reusable Section Heading */}
       <SectionHeading
         title="Work Experience"
@@ -37,7 +37,7 @@ export default function Experience() {
       />
 
       {/* Horizontal Timeline Section */}
-      <div ref={containerRef} className="relative mt-12 md:mt-20 w-full flex flex-col items-center">
+      <div ref={containerRef} className="relative mt-8 sm:mt-12 w-full flex flex-col items-center">
         
         {/* Horizontal Line Container */}
         <div className="hidden md:block relative w-full h-[2px] bg-white/[0.06] rounded-full my-14">

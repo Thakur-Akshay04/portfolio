@@ -110,13 +110,13 @@ export default function Hero() {
   };
 
   return (
-    <section className="w-full max-w-3xl mx-auto px-6 sm:px-8 pt-28 sm:pt-36 pb-20 flex flex-col items-start">
+    <section className="w-full max-w-3xl mx-auto px-6 sm:px-8 pt-6 sm:pt-10 pb-16 sm:pb-20 flex flex-col items-start">
       {/* Location & Status Line */}
       <motion.div
         initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="flex items-center gap-2.5 text-xs font-mono text-neutral-400 uppercase tracking-wider mb-6"
+        className="flex items-center gap-2.5 text-xs font-mono text-neutral-400 uppercase tracking-wider mb-3.5"
       >
         <span>Himachal Pradesh, India</span>
         <span className="text-neutral-600">•</span>
@@ -128,7 +128,7 @@ export default function Hero() {
         initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-        className="text-4xl sm:text-6xl font-display font-extrabold text-white tracking-tight leading-[1.08] mb-5"
+        className="text-4xl sm:text-6xl font-display font-extrabold text-white tracking-tight leading-[1.08] mb-4"
       >
         {PORTFOLIO_DATA.personal.name}
       </motion.h1>
@@ -138,7 +138,7 @@ export default function Hero() {
         initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-        className="space-y-3 mb-8"
+        className="space-y-2.5 mb-6"
       >
         <p className="text-lg sm:text-xl text-neutral-200 font-display font-medium leading-snug">
           Full-stack developer building scalable web systems, clean APIs, and
@@ -156,7 +156,7 @@ export default function Hero() {
         initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-wrap items-center gap-3 mb-12"
+        className="flex flex-wrap items-center gap-3 mb-8"
       >
         <a
           href={hasValidResumeUrl ? normalizedResumeUrl : "#"}
@@ -252,9 +252,9 @@ export default function Hero() {
         initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full pt-8 border-t border-white/[0.08]"
+        className="w-full pt-6 border-t border-white/[0.08]"
       >
-        <div className="text-xs font-mono text-neutral-400 uppercase tracking-widest mb-4">
+        <div className="text-xs font-mono text-neutral-400 uppercase tracking-widest mb-3">
           Explore Portfolio
         </div>
 

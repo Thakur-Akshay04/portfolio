@@ -202,7 +202,7 @@ export default function Contact() {
   };
 
   return (
-    <PageFoldWrapper id="contact" className="py-24 md:py-32 px-6 max-w-7xl mx-auto relative overflow-hidden">
+    <PageFoldWrapper id="contact" className="pt-6 sm:pt-10 pb-16 sm:pb-24 px-6 max-w-7xl mx-auto relative overflow-hidden">
 
       {/* Floating background neon gradient blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">

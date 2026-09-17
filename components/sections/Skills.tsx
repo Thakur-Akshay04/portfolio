@@ -270,7 +270,7 @@ export function TechIcon({ name, className = "w-full h-full" }: { name: string; 
 
 export default function Skills() {
   return (
-    <PageFoldWrapper id="skills" className="py-20 md:py-28 px-6 sm:px-10 max-w-7xl mx-auto">
+    <PageFoldWrapper id="skills" className="pt-6 sm:pt-10 pb-16 sm:pb-24 px-6 sm:px-10 max-w-7xl mx-auto">
       {/* Section Heading */}
       <SectionHeading
         title="Technical Skills"
@@ -278,7 +278,7 @@ export default function Skills() {
       />
 
       {/* Categories Grid: 6 columns on wide screens */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-y-10 lg:gap-8 lg:gap-x-6 mt-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-y-10 lg:gap-8 lg:gap-x-6 mt-6 sm:mt-8">
         {TECH_CATEGORIES.map((category, catIndex) => (
           <Fragment key={category.title}>
             {/* Divider line between categories on mobile */}
