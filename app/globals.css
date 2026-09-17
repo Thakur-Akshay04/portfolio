@@ -223,7 +223,12 @@ body {
 
 .navbar-dock-item:hover {
   color: rgba(255, 255, 255, 0.95);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+.navbar-dock-item:active {
+  transform: translateY(0) scale(0.96);
 }
 
 .navbar-dock-item.active {

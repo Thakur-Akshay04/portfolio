@@ -21,34 +21,34 @@ export default function Footer() {
         <div className="flex items-center gap-6 text-xs font-mono">
           <Link
             href="/about"
-            className="hover:text-white transition-colors duration-200"
+            className="hover:text-white transition-all duration-200 hover:-translate-y-0.5"
           >
             About
           </Link>
           <Link
             href="/projects"
-            className="hover:text-white transition-colors duration-200"
+            className="hover:text-white transition-all duration-200 hover:-translate-y-0.5"
           >
             Projects
           </Link>
           <Link
             href="/skills"
-            className="hover:text-white transition-colors duration-200"
+            className="hover:text-white transition-all duration-200 hover:-translate-y-0.5"
           >
             Skills
           </Link>
           <Link
             href="/experience"
-            className="hover:text-white transition-colors duration-200"
+            className="hover:text-white transition-all duration-200 hover:-translate-y-0.5"
           >
             Experience
           </Link>
           <Link
             href="/contact"
-            className="text-accent-purple hover:text-accent-purple-hover transition-colors duration-200 flex items-center gap-1 font-semibold"
+            className="group text-accent-purple hover:text-accent-purple-hover transition-all duration-200 flex items-center gap-1 font-semibold hover:-translate-y-0.5"
           >
-            Get In Touch
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <span>Get In Touch</span>
+            <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </div>
       </div>
