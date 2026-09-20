@@ -15,7 +15,7 @@
   A state-of-the-art developer portfolio engineered with <b>Next.js 16 App Router</b>, <b>React 19</b>, <b>Three.js / React Three Fiber</b>, and <b>Tailwind CSS</b>. Features dynamic 3D WebGL scenes, interactive project sandboxes, rate-limited email delivery, and smooth micro-interactions.
 </p>
 
-[View Live Portfolio](https://thakur-akshay04.github.io/portfolio/) • [Explore Projects](#-featured-projects) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started)
+[View Live Portfolio](https://thakurakshay.dev/) • [Explore Projects](#-featured-projects) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started)
 
 </div>
 
