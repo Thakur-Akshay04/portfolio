@@ -1,22 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Outfit, JetBrains_Mono } from "next/font/google";
+import { DM_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 import GlobalPathsBackground from "@/components/ui/GlobalPathsBackground";
 
-const sansFont = Plus_Jakarta_Sans({
+const sansFont = DM_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const displayFont = Outfit({
+const displayFont = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700", "800", "900"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
