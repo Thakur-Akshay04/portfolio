@@ -1,97 +1,238 @@
-# 🚀 Akshay Singh Thakur - Portfolio Website
+<div align="center">
 
-Welcome to the source code of my personal portfolio website. This is a highly interactive, responsive, and secure single-page application built on Next.js, React, and Tailwind CSS, featuring modern 3D visual experiences and micro-interactions.
+# 🌌 Akshay Singh Thakur — Portfolio
 
----
+**Full-Stack / MERN Developer & AI Integration Enthusiast**
 
-## 🛠️ Tech Stack & Technologies Used
+[![Next.js](https://img.shields.io/badge/Next.js-16.2.7-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.2.7-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Three.js](https://img.shields.io/badge/Three.js-0.184-black?style=for-the-badge&logo=threedotjs&logoColor=white)](https://threejs.org/)
+[![Cloudflare Workers](https://img.shields.io/badge/Cloudflare_Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://workers.cloudflare.com/)
 
-### 🌐 Core & Framework
-![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+<p align="center">
+  A state-of-the-art developer portfolio engineered with <b>Next.js 16 App Router</b>, <b>React 19</b>, <b>Three.js / React Three Fiber</b>, and <b>Tailwind CSS</b>. Features dynamic 3D WebGL scenes, interactive project sandboxes, rate-limited email delivery, and smooth micro-interactions.
+</p>
 
-### 🎨 Styling & UI
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Lucide Icons](https://img.shields.io/badge/Lucide_Icons-F56565?style=for-the-badge&logo=feather&logoColor=white)
+[View Live Portfolio](https://thakur-akshay04.github.io/portfolio/) • [Explore Projects](#-featured-projects) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started)
 
-### 🔮 3D Graphics & Animations
-![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=threedotjs&logoColor=white)
-![React Three Fiber](https://img.shields.io/badge/React_Three_Fiber-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
-![Lenis](https://img.shields.io/badge/Lenis_Scroll-000000?style=for-the-badge&logo=scroll&logoColor=white)
-
-### 🛡️ Services & Security
-![Resend](https://img.shields.io/badge/Resend-000000?style=for-the-badge&logo=resend&logoColor=white)
-![Cloudflare Turnstile](https://img.shields.io/badge/Cloudflare_Turnstile-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)
-
-### 🚀 Deployment & DevOps
-![Cloudflare Workers](https://img.shields.io/badge/Cloudflare_Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)
-![OpenNext](https://img.shields.io/badge/OpenNext-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![pnpm](https://img.shields.io/badge/pnpm-F69220?style=for-the-badge&logo=pnpm&logoColor=white)
+</div>
 
 ---
 
-## ✨ Features
+## 📖 Table of Contents
 
-1. **3D WebGL Constellation**: An interactive 3D particle sphere in the About section that floats and wiggles smoothly on mouse movements.
-2. **Animated Tech Dock**: A floating horizontal carousel of technology logos that wiggles and auto-cycles every 4.5 seconds.
-3. **Interactive Project Showcase**:
-   - Concrete, live-updating mockups for featured projects.
-   - **CredVault Sandbox**: Interactive credentials mockup generator allowing users to enter custom student names/majors and cryptographically "secure" the certificate.
-4. **Secure Contact Form**:
-   - Server-side rates limiting (maximum 3 emails per 10 minutes per IP).
-   - Server-side input escaping to prevent HTML injection.
-   - Client-side input validation.
-   - Dynamic, banned interaction for the LinkedIn connection button.
-5. **Robust Security Configuration**: Fully audited via OWASP ZAP scanner with zero unresolved high/medium vulnerabilities.
+- [Overview](#-overview)
+- [Key Features](#-key-features)
+- [Featured Projects](#-featured-projects)
+- [Tech Stack](#-tech-stack)
+- [Architecture & Project Structure](#-architecture--project-structure)
+- [Getting Started](#-getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Environment Variables](#environment-variables)
+  - [Development & Build Commands](#development--build-commands)
+- [Deployment](#-deployment)
+- [Security & Performance](#-security--performance)
+- [Connect With Me](#-connect-with-me)
+- [License](#-license)
 
 ---
 
-## ⚙️ Environment Configuration
+## 🌟 Overview
 
-To run this project locally, create a `.env.local` file in the root directory and add the following keys:
+This repository houses the source code for the personal portfolio of **Akshay Singh Thakur**. Designed and built from scratch, the platform demonstrates full-stack software engineering capabilities, modern frontend architecture, high-performance 3D graphics rendering, and seamless AI integration.
 
-```env
-RESEND_API_KEY=your_resend_api_key
-PERSONAL_EMAIL=your_inbox_email_address
-NEXT_PUBLIC_PERSONAL_EMAIL=your_inbox_email_address
-NEXT_PUBLIC_GITHUB_URL=your_github_profile_url
-NEXT_PUBLIC_LINKEDIN_URL=your_linkedin_profile_url
-NEXT_PUBLIC_RESUME_URL=your_resume_google_drive_link
+The portfolio is structured across modular App Router pages with responsive navigation, fluid Lenis smooth scrolling, accessible motion preferences (`prefers-reduced-motion`), and serverless edge deployment capabilities on Cloudflare Workers via OpenNext.
+
+---
+
+## ✨ Key Features
+
+### 🔮 3D WebGL Graphics & Particle Physics
+- **Interactive Constellation Sphere**: A dynamic 3D particle sphere engineered with Three.js and `@react-three/fiber` that reacts smoothly to pointer movements and physics damping.
+- **Hero & Background Particles**: Lightweight ambient background particle canvas and subtle globe effects designed for high frame-rates across mobile and desktop devices.
+
+### 💼 Interactive Project Showcases & Sandboxes
+- **Live Interactive Demos**: Interactive sandboxes embedded directly in project views (including live interactive certificate generation for CredVault and rich UI preview toggles).
+- **Comprehensive Case Studies**: Detailed breakdowns of architectural challenges, technical solutions, database decisions, and tech stacks for every featured project.
+
+### 🛡️ Production-Grade Contact System
+- **Serverless API Route**: Built on Next.js App Router (`/api/contact`) with the **Resend** email service.
+- **Bot & Abuse Prevention**:
+  - In-memory rate limiting (max 3 submissions per 10 minutes per IP).
+  - Disposable email domain blocking via `disposable-email-domains`.
+  - Strict input sanitization and HTML escaping to prevent XSS and injection attacks.
+  - Client-side validation and responsive error/success feedback animations.
+
+### ⚡ Fluid Micro-Interactions & Accessibility
+- **Framer Motion Orchestration**: Staggered fades, 3D tilt cards, folding page transitions, and smooth hover state feedbacks.
+- **Lenis Smooth Scrolling**: Decoupled momentum scrolling for a synchronized visual experience.
+- **Reduced Motion Support**: Custom hooks (`useSafeReducedMotion`) respecting user system accessibility preferences.
+- **SEO & Social Cards**: Optimized `robots.ts`, semantic HTML5 hierarchy, and OpenGraph-ready metadata.
+
+---
+
+## 🚀 Featured Projects
+
+| Project | Description | Core Stack | Links |
+| :--- | :--- | :--- | :--- |
+| **Luminote** | AI-powered productivity workspace supporting rich text, canvas drawing pads, voice memos with Whisper transcription, vector-based semantic search (`pgvector`), and interactive LLM Q&A. | `Next.js`, `FastAPI`, `PostgreSQL`, `pgvector`, `Redis`, `Groq API` | [GitHub](https://github.com/Thakur-Akshay04/Luminote) |
+| **ResuCraft** | AI resume builder & ATS optimizer with live split-screen print-ready PDF generation, Meta Llama-3 bullet rewriting, and keyword density auditing. | `React 19`, `Node.js`, `Express`, `Puppeteer`, `MongoDB`, `Llama-3` | [GitHub](https://github.com/Thakur-Akshay04/Res_AI) |
+| **CredVault** | Decentralized academic certificate registry and verification system on Ethereum utilizing smart contracts for immutable, tamper-proof credential verification. | `React`, `Solidity`, `Ethers.js`, `Node.js`, `Express`, `MongoDB` | [GitHub](https://github.com/Thakur-Akshay04/CredValut) |
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend & Core
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Library**: [React 19](https://react.dev/)
+- **Language**: [TypeScript 6](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS 3.4](https://tailwindcss.com/), PostCSS
+- **Icons**: [Lucide React](https://lucide.dev/)
+
+### 3D & Animation
+- **3D Graphics**: [Three.js](https://threejs.org/), [@react-three/fiber](https://r3f.docs.pmnd.rs/)
+- **Motion**: [Framer Motion 12](https://www.framer.com/motion/)
+- **Smooth Scroll**: [@studio-freight/lenis](https://github.com/darkroomengineering/lenis)
+
+### Backend & Cloud Services
+- **Runtime**: Node.js & Edge Runtime
+- **Email Delivery**: [Resend API](https://resend.com/)
+- **Spam Filtering**: `disposable-email-domains`
+- **Deployment Platform**: [Cloudflare Workers](https://workers.cloudflare.com/) via [@opennextjs/cloudflare](https://opennext.js.org/cloudflare) & [Wrangler](https://developers.cloudflare.com/workers/wrangler/)
+
+---
+
+## 📂 Architecture & Project Structure
+
+```text
+portfolio/
+├── app/
+│   ├── about/              # About Me page & 3D Constellation Sphere
+│   ├── api/
+│   │   └── contact/        # Secure Resend email API route with rate-limiting
+│   ├── contact/            # Interactive contact form page
+│   ├── experience/         # Professional work experience & milestones
+│   ├── projects/           # Showcase of full-stack & AI projects
+│   ├── skills/             # Categorized technical skill matrix & docks
+│   ├── globals.css         # Custom animations, scanlines & design tokens
+│   ├── layout.tsx          # Root layout with Navbar, Footer & Lenis provider
+│   ├── page.tsx            # Home / Hero landing page
+│   └── robots.ts           # Dynamic SEO robots configuration
+├── components/
+│   ├── icons/              # Custom brand SVG icons & tech stack badges
+│   ├── layout/             # Navbar, Footer, PageFoldWrapper & Headings
+│   ├── sections/           # Section-specific components (Hero, Projects, Skills, etc.)
+│   └── ui/                 # Reusable UI primitives (Buttons, Cards, Inputs)
+├── constants/
+│   └── data.ts             # Centralized portfolio data (Projects, Bio, Experience)
+├── lib/
+│   └── hooks.ts            # Custom React hooks (motion preference, window resize)
+├── public/                 # Static assets, project mockups & illustrations
+├── package.json            # Scripts & dependencies
+├── tailwind.config.ts      # Tailwind design system configuration
+└── tsconfig.json           # TypeScript configuration
 ```
 
 ---
 
 ## 💻 Getting Started
 
-First, install the dependencies:
+### Prerequisites
 
-```bash
-pnpm install
-# or
-npm install
-# or
-yarn install
+- **Node.js**: `v20.0.0` or higher
+- **Package Manager**: `pnpm` (recommended), `npm`, or `yarn`
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Thakur-Akshay04/portfolio.git
+   cd portfolio
+   ```
+
+2. Install project dependencies:
+   ```bash
+   pnpm install
+   # or: npm install / yarn install
+   ```
+
+### Environment Variables
+
+Create a `.env.local` file in the root directory:
+
+```env
+# Resend API Credentials
+RESEND_API_KEY=your_resend_api_key_here
+
+# Recipient Email Configuration
+PERSONAL_EMAIL=your_email@example.com
+NEXT_PUBLIC_PERSONAL_EMAIL=your_email@example.com
+
+# Social & External Links
+NEXT_PUBLIC_GITHUB_URL=https://github.com/Thakur-Akshay04
+NEXT_PUBLIC_LINKEDIN_URL=https://linkedin.com/in/your-profile
+NEXT_PUBLIC_RESUME_URL=https://drive.google.com/your-resume-link
 ```
 
-Next, run the development server:
+### Development & Build Commands
 
-```bash
-pnpm dev
-# or
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Command | Description |
+| :--- | :--- |
+| `pnpm dev` | Starts the local development server at `http://localhost:3000` |
+| `pnpm dev:webpack` | Starts the dev server utilizing Webpack fallback |
+| `pnpm build` | Compiles the production build |
+| `pnpm start` | Runs the compiled production server |
+| `pnpm lint` | Runs ESLint analysis across the project |
+| `pnpm build:cf` | Builds the Cloudflare Workers bundle with OpenNext |
+| `pnpm deploy:cf` | Builds and deploys the portfolio to Cloudflare Workers via Wrangler |
 
 ---
 
-## 📈 Commands Reference
+## ☁️ Deployment
 
-- **Development Server**: `pnpm dev`
-- **Production Build**: `pnpm build`
-- **Production Start**: `pnpm start`
-- **Type Checking (TypeScript)**: `npx tsc --noEmit`
-- **Linter Check**: `pnpm lint`
+This portfolio is configured for dual-target deployment:
+
+### 1. Cloudflare Workers (Edge Deployment)
+The application leverages OpenNext Cloudflare adapter to run Next.js App Router on Cloudflare's global edge network:
+```bash
+pnpm deploy:cf
+```
+
+### 2. Vercel / Standard Node.js Hosting
+Standard Next.js deployment supported natively with zero configuration:
+```bash
+pnpm build
+```
+
+---
+
+## 🔒 Security & Performance
+
+- **Zero Client Secrets**: All sensitive API keys (`RESEND_API_KEY`) remain strictly on the server-side runtime.
+- **Input Sanitization**: User inputs are HTML-escaped and validated prior to email dispatch to prevent template and injection attacks.
+- **Rate Limiting**: IP-based rate limiting safeguards against automated submission spam and DoS attempts.
+- **Optimized Bundle Sizes**: Dynamic imports and lazy loading for heavy 3D canvases and visual effects.
+- **Smooth 60FPS Animations**: Hardware-accelerated CSS transforms and lightweight WebGL rendering.
+
+---
+
+## 📬 Connect With Me
+
+- **Portfolio**: [Akshay Singh Thakur](https://thakur-akshay04.github.io/portfolio/)
+- **GitHub**: [@Thakur-Akshay04](https://github.com/Thakur-Akshay04)
+- **LinkedIn**: [Akshay Singh Thakur](https://linkedin.com/in/akshay-singh-thakur-4043b328a)
+- **Location**: Himachal Pradesh, India
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE) — feel free to explore the code for inspiration.
+
+<div align="center">
+  <sub>Crafted with passion and precision by <b>Akshay Singh Thakur</b>.</sub>
+</div>
