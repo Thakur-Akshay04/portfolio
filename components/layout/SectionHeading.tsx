@@ -27,7 +27,7 @@ export default function SectionHeading({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className={`mb-6 sm:mb-10 ${align === "center" ? "text-center" : "text-left"} ${className}`}
+      className={`${className?.includes("mb-") ? "" : "mb-6 sm:mb-10"} ${align === "center" ? "text-center" : "text-left"} ${className}`}
     >
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white tracking-tight">
         {title}

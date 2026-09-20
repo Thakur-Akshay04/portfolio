@@ -50,12 +50,12 @@ function FloatingTechStack() {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative w-full h-[460px] sm:h-[500px] md:h-[540px] rounded-2xl bg-[#0d0d11]/90 border border-white/[0.08] shadow-[0_24px_64px_-16px_rgba(0,0,0,0.95),inset_0_1px_0_0_rgba(255,255,255,0.06)] overflow-hidden flex flex-col select-none backdrop-blur-sm"
+      className="relative w-full h-[360px] sm:h-[390px] md:h-[410px] lg:h-[420px] rounded-2xl bg-[#0d0d11]/90 border border-white/[0.08] shadow-[0_24px_64px_-16px_rgba(0,0,0,0.95),inset_0_1px_0_0_rgba(255,255,255,0.06)] overflow-hidden flex flex-col select-none backdrop-blur-sm"
     >
       {/* Top Header Strip */}
-      <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/[0.06] bg-white/[0.01] z-30">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06] bg-white/[0.01] z-30">
         <div className="flex items-center gap-2">
-          <span className="w-1 h-3.5 rounded-full bg-accent-purple" />
+          <span className="w-1 h-3 rounded-full bg-accent-purple" />
 
           <span className="font-mono text-xs uppercase tracking-wider text-neutral-300 font-medium">
             Tech Stack
@@ -67,11 +67,11 @@ function FloatingTechStack() {
       </div>
 
       {/* Top & Bottom Gradient Fade Masks */}
-      <div className="absolute inset-x-0 top-[49px] h-14 bg-gradient-to-b from-[#0d0d11] to-transparent z-20 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-[#0d0d11] to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-x-0 top-[45px] h-12 bg-gradient-to-b from-[#0d0d11] to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#0d0d11] to-transparent z-20 pointer-events-none" />
 
       {/* Dual Column Streaming Tracks */}
-      <div className="flex-1 grid grid-cols-2 gap-4 px-4 py-3.5 overflow-hidden relative">
+      <div className="flex-1 grid grid-cols-2 gap-3.5 px-3.5 py-3 overflow-hidden relative">
         {/* Column 1: Drifts Upwards */}
         <div className="relative overflow-hidden h-full">
           <motion.div
@@ -85,21 +85,21 @@ function FloatingTechStack() {
               duration: 26,
               repeat: Infinity,
             }}
-            className="flex flex-col gap-3.5"
+            className="flex flex-col gap-2.5 sm:gap-3"
           >
             {col1Items.map((tech, idx) => (
               <div
                 key={`${tech.name}-${idx}`}
-                className="group p-3 sm:p-3.5 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.06] hover:border-accent-purple/40 transition-all duration-300 flex items-center gap-3 cursor-default shadow-sm"
+                className="group p-2.5 sm:p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.06] hover:border-accent-purple/40 transition-all duration-300 flex items-center gap-2.5 cursor-default shadow-sm"
               >
-                <div className="w-8 h-8 rounded-lg bg-black/50 border border-white/5 flex items-center justify-center shrink-0 p-1.5 group-hover:scale-105 transition-transform duration-200">
+                <div className="w-7 h-7 rounded-lg bg-black/50 border border-white/5 flex items-center justify-center shrink-0 p-1 group-hover:scale-105 transition-transform duration-200">
                   <TechIcon name={tech.name} />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="text-xs sm:text-sm font-display font-medium text-white group-hover:text-white truncate">
+                  <div className="text-xs sm:text-[13px] font-display font-medium text-white group-hover:text-white truncate">
                     {tech.name}
                   </div>
-                  <div className="text-[11px] font-mono text-neutral-400 truncate">
+                  <div className="text-[10px] font-mono text-neutral-400 truncate">
                     {tech.category}
                   </div>
                 </div>
@@ -121,21 +121,21 @@ function FloatingTechStack() {
               duration: 30,
               repeat: Infinity,
             }}
-            className="flex flex-col gap-3.5"
+            className="flex flex-col gap-2.5 sm:gap-3"
           >
             {col2Items.map((tech, idx) => (
               <div
                 key={`${tech.name}-${idx}`}
-                className="group p-3 sm:p-3.5 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.06] hover:border-accent-purple/40 transition-all duration-300 flex items-center gap-3 cursor-default shadow-sm"
+                className="group p-2.5 sm:p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.06] hover:border-accent-purple/40 transition-all duration-300 flex items-center gap-2.5 cursor-default shadow-sm"
               >
-                <div className="w-8 h-8 rounded-lg bg-black/50 border border-white/5 flex items-center justify-center shrink-0 p-1.5 group-hover:scale-105 transition-transform duration-200">
+                <div className="w-7 h-7 rounded-lg bg-black/50 border border-white/5 flex items-center justify-center shrink-0 p-1 group-hover:scale-105 transition-transform duration-200">
                   <TechIcon name={tech.name} />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="text-xs sm:text-sm font-display font-medium text-white group-hover:text-white truncate">
+                  <div className="text-xs sm:text-[13px] font-display font-medium text-white group-hover:text-white truncate">
                     {tech.name}
                   </div>
-                  <div className="text-[11px] font-mono text-neutral-400 truncate">
+                  <div className="text-[10px] font-mono text-neutral-400 truncate">
                     {tech.category}
                   </div>
                 </div>
@@ -158,14 +158,14 @@ export default function About() {
   return (
     <PageFoldWrapper
       id="about"
-      className="flex flex-col justify-center flex-1 pt-6 sm:pt-10 pb-16 sm:pb-24 px-6 sm:px-10 lg:px-16 w-full max-w-7xl mx-auto"
+      className="flex flex-col justify-center flex-1 py-3 sm:py-5 lg:py-6 px-6 sm:px-10 lg:px-16 w-full max-w-7xl mx-auto my-auto"
     >
       {/* Reusable Section Heading */}
-      <SectionHeading title="About Me" subtitle="Introduction & Core Focus" />
+      <SectionHeading title="About Me" subtitle="Introduction & Core Focus" className="mb-3 sm:mb-5" />
 
       <div
         ref={containerRef}
-        className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center w-full"
+        className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center w-full"
       >
         {/* Left Column: Shifted Text (Bio, Highlights, Status, Actions) */}
         <motion.div
@@ -173,34 +173,34 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="lg:col-span-7 flex flex-col justify-center space-y-6 sm:space-y-7 text-left"
+          className="lg:col-span-7 flex flex-col justify-center space-y-4 sm:space-y-5 text-left"
         >
           {/* Confident, Human Editorial Headline */}
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white tracking-tight leading-[1.2]">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-display font-bold text-white tracking-tight leading-[1.2]">
             Engineering high-performance web systems with clean architecture and refined interfaces.
           </h3>
 
           {/* Narrative Paragraphs */}
-          <div className="space-y-4 sm:space-y-5 text-neutral-300 text-base sm:text-lg leading-relaxed font-sans">
+          <div className="space-y-3 text-neutral-300 text-sm sm:text-base leading-relaxed font-sans">
             <p>
               I am a Full-stack / MERN developer focused on crafting clean user interfaces and highly efficient API architectures. I build responsive, modern web applications that prioritize performance, code clarity, and accessibility.
             </p>
-            <p className="text-neutral-400 text-base sm:text-lg leading-relaxed">
+            <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
               I am passionate about creating high-performance digital experiences, experimenting with modern web standards, and integrating intelligent AI features into full-stack systems. From low-latency backend services to intuitive client interactions, I strive for reliability and craft.
             </p>
           </div>
 
           {/* Direct page links */}
-          <div className="flex flex-wrap items-center gap-4 pt-3 sm:pt-4">
+          <div className="flex flex-wrap items-center gap-3.5 pt-1 sm:pt-2">
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-colors"
+              className="inline-flex items-center gap-2 px-4.5 py-2.5 rounded-xl bg-white text-black font-semibold text-xs sm:text-sm hover:bg-neutral-200 transition-colors"
             >
               <span>Explore Projects</span>
             </Link>
             <Link
               href="/skills"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.04] text-white font-medium text-sm border border-white/[0.08] hover:bg-white/[0.08] transition-colors"
+              className="inline-flex items-center gap-2 px-4.5 py-2.5 rounded-xl bg-white/[0.04] text-white font-medium text-xs sm:text-sm border border-white/[0.08] hover:bg-white/[0.08] transition-colors"
             >
               <span>View Technical Skills</span>
             </Link>
