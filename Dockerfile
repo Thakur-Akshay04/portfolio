@@ -42,8 +42,8 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
 
 # Copy standalone build outputs as root with read-only permissions (555) for security
 COPY --from=builder --chown=root:root --chmod=555 /app/public ./public

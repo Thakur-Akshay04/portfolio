@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import dns from "dns/promises";
+import dns from "node:dns/promises";
 
 import disposableDomains from "disposable-email-domains";
 const DISPOSABLE_EMAIL_DOMAINS = new Set(disposableDomains as string[]);
@@ -66,19 +66,41 @@ import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 export const dynamic = "force-dynamic";
 
+/** Resolves Cloudflare env, falling back to process.env in non-worker environments. */
+async function resolveCloudflareEnv(): Promise<Record<string, string | undefined>> {
+  if (process.env.NODE_ENV !== "production") return {};
+  try {
+    const ctx = await getCloudflareContext({ async: true });
+    if (ctx?.env) {
+      return ctx.env as Record<string, string | undefined>;
+    }
+  } catch {
+    // Fallback for non-worker environments
+  }
+  return {};
+}
+
+/** Checks and updates the rate-limit record for the given IP. Returns true if limit exceeded. */
+function isRateLimited(ip: string): boolean {
+  const currentTime = Date.now();
+  let record = rateLimitStore.get(ip);
+
+  if (!record) {
+    record = { count: 1, resetTime: currentTime + RATE_LIMIT_WINDOW_MS };
+    rateLimitStore.set(ip, record);
+  } else if (currentTime > record.resetTime) {
+    record.count = 1;
+    record.resetTime = currentTime + RATE_LIMIT_WINDOW_MS;
+  } else {
+    record.count += 1;
+  }
+
+  return record.count > MAX_LIMIT;
+}
+
 export async function POST(req: Request) {
   try {
-    let cfEnv: Record<string, string | undefined> = {};
-    if (process.env.NODE_ENV === "production") {
-      try {
-        const ctx = await getCloudflareContext({ async: true });
-        if (ctx && ctx.env) {
-          cfEnv = ctx.env as Record<string, string | undefined>;
-        }
-      } catch {
-        // Fallback for non-worker environments
-      }
-    }
+    const cfEnv = await resolveCloudflareEnv();
 
     const apiKey = (cfEnv.RESEND_API_KEY || process.env.RESEND_API_KEY || "").trim();
     const recipientEmail = (
@@ -99,24 +121,7 @@ export async function POST(req: Request) {
 
     // 1. IP-based Rate Limiter Check
     const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "127.0.0.1";
-    const currentTime = Date.now();
-
-    let record = rateLimitStore.get(ip);
-
-    if (!record) {
-      record = { count: 1, resetTime: currentTime + RATE_LIMIT_WINDOW_MS };
-      rateLimitStore.set(ip, record);
-    } else {
-      if (currentTime > record.resetTime) {
-        // Reset window
-        record.count = 1;
-        record.resetTime = currentTime + RATE_LIMIT_WINDOW_MS;
-      } else {
-        record.count += 1;
-      }
-    }
-
-    if (record.count > MAX_LIMIT) {
+    if (isRateLimited(ip)) {
       return NextResponse.json(
         { error: "Too many requests. Please try again after 15 minutes." },
         { status: 429 }

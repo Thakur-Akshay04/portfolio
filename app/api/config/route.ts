@@ -3,11 +3,33 @@ import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 export const dynamic = "force-dynamic";
 
+// Helpers to reduce cognitive complexity (SonarCloud)
+function resolveGithubUrl(raw: string): string {
+  if (!raw) return "";
+  if (raw.startsWith("http://") || raw.startsWith("https://")) return raw;
+  if (raw.startsWith("github.com/")) return `https://${raw}`;
+  return `https://github.com/${raw.replace(/^@/, "")}`;
+}
+
+function resolveLinkedinUrl(raw: string): string {
+  if (!raw) return "";
+  if (raw.startsWith("http://") || raw.startsWith("https://")) return raw;
+  if (raw.startsWith("linkedin.com/")) return `https://${raw}`;
+  if (raw.startsWith("in/")) return `https://linkedin.com/${raw}`;
+  return `https://linkedin.com/in/${raw}`;
+}
+
+function resolveResumeUrl(raw: string): string {
+  if (!raw) return "";
+  if (raw.startsWith("http://") || raw.startsWith("https://")) return raw;
+  return `https://${raw}`;
+}
+
 export async function GET() {
   let cfEnv: Record<string, string | undefined> = {};
   try {
     const ctx = await getCloudflareContext({ async: true });
-    if (ctx && ctx.env) {
+    if (ctx?.env) {
       cfEnv = ctx.env as Record<string, string | undefined>;
     }
   } catch {
@@ -44,16 +66,7 @@ export async function GET() {
     ""
   ).trim();
 
-  let githubUrl = "";
-  if (rawGithub) {
-    if (rawGithub.startsWith("http://") || rawGithub.startsWith("https://")) {
-      githubUrl = rawGithub;
-    } else if (rawGithub.startsWith("github.com/")) {
-      githubUrl = `https://${rawGithub}`;
-    } else {
-      githubUrl = `https://github.com/${rawGithub.replace(/^@/, "")}`;
-    }
-  }
+  const githubUrl = resolveGithubUrl(rawGithub);
 
   // 3. LinkedIn Profile / ID Resolution
   const rawLinkedin = (
@@ -72,18 +85,7 @@ export async function GET() {
     ""
   ).trim();
 
-  let linkedinUrl = "";
-  if (rawLinkedin) {
-    if (rawLinkedin.startsWith("http://") || rawLinkedin.startsWith("https://")) {
-      linkedinUrl = rawLinkedin;
-    } else if (rawLinkedin.startsWith("linkedin.com/")) {
-      linkedinUrl = `https://${rawLinkedin}`;
-    } else if (rawLinkedin.startsWith("in/")) {
-      linkedinUrl = `https://linkedin.com/${rawLinkedin}`;
-    } else {
-      linkedinUrl = `https://linkedin.com/in/${rawLinkedin}`;
-    }
-  }
+  const linkedinUrl = resolveLinkedinUrl(rawLinkedin);
 
   // 4. Resume URL Resolution
   const rawResume = (
@@ -96,14 +98,7 @@ export async function GET() {
     ""
   ).trim();
 
-  let resumeUrl = "";
-  if (rawResume) {
-    if (rawResume.startsWith("http://") || rawResume.startsWith("https://")) {
-      resumeUrl = rawResume;
-    } else {
-      resumeUrl = `https://${rawResume}`;
-    }
-  }
+  const resumeUrl = resolveResumeUrl(rawResume);
 
   return NextResponse.json(
     {

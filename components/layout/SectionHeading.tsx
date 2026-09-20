@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { useSafeReducedMotion } from "@/lib/hooks";
 
 interface SectionHeadingProps {
-  title: string;
-  subtitle?: string;
-  className?: string;
-  align?: "left" | "center";
+  readonly title: string;
+  readonly subtitle?: string;
+  readonly className?: string;
+  readonly align?: "left" | "center";
 }
 
 export default function SectionHeading({
