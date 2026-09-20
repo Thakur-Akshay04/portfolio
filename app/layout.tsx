@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
-import GlobalRippleBackground from "@/components/ui/GlobalRippleBackground";
+import GlobalPathsBackground from "@/components/ui/GlobalPathsBackground";
 
 const sansFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -61,15 +61,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body
         className={`${sansFont.variable} ${displayFont.variable} ${monoFont.variable} font-sans antialiased bg-background text-foreground`}
       >
         <SmoothScrollProvider>
-          <div className="min-h-screen flex flex-col bg-[#070709] relative selection:bg-purple-500/30 selection:text-white">
-            <GlobalRippleBackground />
+          <div className="min-h-screen flex flex-col relative selection:bg-purple-500/30 selection:text-white">
+            <GlobalPathsBackground />
             <Navbar />
-            <div className="flex-grow flex flex-col pt-16 sm:pt-20">
+            <div className="flex-grow flex flex-col pt-16 sm:pt-20 relative z-10">
               {children}
             </div>
             <Footer />
