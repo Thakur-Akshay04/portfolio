@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useSafeReducedMotion } from "@/lib/hooks";
@@ -149,7 +149,6 @@ function FloatingTechStack() {
 }
 
 export default function About() {
-  const containerRef = useRef(null);
   const shouldReduceMotion = useSafeReducedMotion();
 
   const fadeInLeft = getFadeIn("left", 30)(shouldReduceMotion);
@@ -168,7 +167,6 @@ export default function About() {
       />
 
       <div
-        ref={containerRef}
         className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center w-full"
       >
         {/* Left Column: Shifted Text (Bio, Highlights, Status, Actions) */}
