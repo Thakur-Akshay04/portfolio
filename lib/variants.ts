@@ -62,40 +62,5 @@ export const getScaleIn = (shouldReduce: boolean | null): Variants => {
 
 
 
-// Modal/Drawer overlay & dialog transition
-export const getModalOverlay = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.2 } },
-  exit: { opacity: 0, transition: { duration: 0.2, delay: 0.1 } },
-};
-
-export const getModalContent = (shouldReduce: boolean | null): Variants => {
-  const reduce = !!shouldReduce;
-  return {
-    hidden: {
-      opacity: 0,
-      scale: reduce ? 1 : 0.95,
-      y: reduce ? 0 : 20,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        damping: 25,
-        stiffness: 180,
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: reduce ? 1 : 0.95,
-      y: reduce ? 0 : 15,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  };
-};
 
 
