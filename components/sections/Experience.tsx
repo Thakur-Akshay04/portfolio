@@ -59,60 +59,69 @@ export default function Experience() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
               className="w-full p-4 sm:p-5 lg:p-6 rounded-2xl border border-white/[0.08] bg-[#0d0d11]/85 hover:border-white/[0.16] transition-all duration-300 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.7)] backdrop-blur-sm group relative cursor-default text-left"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-7 items-start">
-                {/* Left Column: Role Details, Badges, Summary, Tech Stack */}
-                <div className="lg:col-span-5 flex flex-col space-y-2.5 sm:space-y-3">
-                  {/* Role & Company */}
-                  <div className="flex items-start gap-2.5 sm:gap-3">
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-accent-purple/10 border border-accent-purple/20 flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_12px_rgba(168,85,247,0.15)]">
-                      <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent-purple" />
+              <div className="flex flex-col space-y-4 sm:space-y-5">
+                {/* 1. Full-Width Top Header: Role, Company & Badges */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/[0.06]">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-accent-purple/10 border border-accent-purple/25 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(168,85,247,0.18)]">
+                      <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-accent-purple" />
                     </div>
                     <div>
-                      <h3 className="text-base sm:text-lg lg:text-xl font-bold font-display text-white leading-tight">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold font-display text-white tracking-tight leading-snug">
                         {item.role}
                       </h3>
-                      <div className="text-xs sm:text-sm font-mono text-accent-purple font-medium mt-0.5">
+                      <div className="text-xs sm:text-sm font-mono text-accent-purple font-medium">
                         @{item.company}
                       </div>
                     </div>
                   </div>
 
                   {/* Period & Location Badges */}
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-0.5">
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 border border-white/[0.08] bg-white/[0.02] rounded-full font-mono text-[10px] sm:text-[11px] text-accent-purple">
-                      <Calendar className="w-3 h-3" />
+                  <div className="flex flex-wrap items-center gap-2">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 border border-accent-purple/20 bg-accent-purple/10 rounded-full font-mono text-[11px] sm:text-xs text-accent-purple">
+                      <Calendar className="w-3.5 h-3.5" />
                       <span>{item.period}</span>
                     </div>
                     {item.location && (
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 border border-white/[0.08] bg-white/[0.02] rounded-full font-mono text-[10px] sm:text-[11px] text-neutral-400">
-                        <MapPin className="w-3 h-3" />
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 border border-white/[0.08] bg-white/[0.03] rounded-full font-mono text-[11px] sm:text-xs text-neutral-300">
+                        <MapPin className="w-3.5 h-3.5 text-neutral-400" />
                         <span>{item.location}</span>
                       </div>
                     )}
                   </div>
+                </div>
 
-                  {/* Summary */}
-                  {item.description && (
-                    <p className="text-xs sm:text-[13px] text-neutral-300 font-sans leading-relaxed line-clamp-3 lg:line-clamp-none">
-                      {item.description}
-                    </p>
-                  )}
-
-                  {/* Tech Stack Icons */}
-                  <div className="pt-0.5">
-                    <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                      Technologies &amp; Tools
+                {/* 2. Middle Body: Overview (Left) & Key Achievements (Right) */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start">
+                  {/* Left Column: Role Overview Narrative */}
+                  <div className="lg:col-span-5 flex flex-col space-y-2">
+                    <div className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-2 mb-0.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent-purple" />
+                      <span>Role Overview</span>
                     </div>
-                    <div className="flex items-center flex-wrap gap-1.5 sm:gap-2">
-                      {item.techStack.map((tech) => (
+                    {item.description && (
+                      <p className="text-xs sm:text-[13px] lg:text-sm text-neutral-300 font-sans leading-relaxed">
+                        {item.description}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Right Column: Key Engineering Achievements Grid */}
+                  <div className="lg:col-span-7 flex flex-col space-y-2 lg:border-l lg:border-white/[0.08] lg:pl-7">
+                    <div className="text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-2 mb-0.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent-purple" />
+                      <span>Key Engineering Achievements</span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      {item.achievements.map((achievement, i) => (
                         <div
-                          key={tech}
-                          title={tech}
-                          className="flex items-center gap-1.5 px-2 py-0.5 rounded-lg bg-white/[0.03] border border-white/[0.06] hover:border-accent-purple/40 hover:bg-white/[0.06] transition-all duration-200"
+                          key={i}
+                          className="p-3 rounded-xl border border-white/[0.06] bg-white/[0.015] hover:bg-white/[0.04] hover:border-accent-purple/30 transition-all duration-200 flex items-start gap-2.5 group/card"
                         >
-                          <TechLogo name={tech} className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 opacity-90" />
-                          <span className="text-[10px] sm:text-[11px] font-sans text-neutral-300 font-medium">
-                            {tech}
+                          <CheckCircle2 className="w-4 h-4 text-accent-purple shrink-0 mt-0.5 group-hover/card:scale-110 transition-transform" />
+                          <span className="text-[11px] sm:text-xs text-neutral-300 font-sans leading-relaxed">
+                            {achievement}
                           </span>
                         </div>
                       ))}
@@ -120,25 +129,23 @@ export default function Experience() {
                   </div>
                 </div>
 
-                {/* Right Column: Key Achievements */}
-                <div className="lg:col-span-7 flex flex-col space-y-2 pt-1 lg:pt-0 lg:border-l lg:border-white/[0.08] lg:pl-6">
-                  <div className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-2 mb-0.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent-purple" />
-                    <span>Key Engineering Achievements</span>
+                {/* 3. Full-Width Bottom Bar: Technologies & Tools */}
+                <div className="pt-3 border-t border-white/[0.06]">
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-2 flex items-center gap-2">
+                    <span className="text-accent-purple font-mono">#</span>
+                    <span>Technologies &amp; Tools</span>
                   </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
-                    {item.achievements.map((achievement, i) => (
+                  <div className="flex items-center flex-wrap gap-2">
+                    {item.techStack.map((tech) => (
                       <div
-                        key={i}
-                        className="p-2.5 sm:p-3 rounded-xl border border-white/[0.06] bg-white/[0.015] hover:bg-white/[0.04] hover:border-white/[0.12] transition-all duration-200 flex flex-col justify-start group/card"
+                        key={tech}
+                        title={tech}
+                        className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] hover:border-accent-purple/40 hover:bg-white/[0.06] transition-all duration-200"
                       >
-                        <div className="flex items-start gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-accent-purple shrink-0 mt-0.5 group-hover/card:scale-110 transition-transform" />
-                          <span className="text-[11px] sm:text-xs text-neutral-300 font-sans leading-relaxed">
-                            {achievement}
-                          </span>
-                        </div>
+                        <TechLogo name={tech} className="w-3.5 h-3.5 shrink-0 opacity-90" />
+                        <span className="text-[11px] sm:text-xs font-sans text-neutral-300 font-medium">
+                          {tech}
+                        </span>
                       </div>
                     ))}
                   </div>

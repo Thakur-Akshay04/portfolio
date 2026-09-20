@@ -50,7 +50,7 @@ function FloatingTechStack() {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative w-full h-[360px] sm:h-[390px] md:h-[410px] lg:h-[420px] rounded-2xl bg-[#0d0d11]/90 border border-white/[0.08] shadow-[0_24px_64px_-16px_rgba(0,0,0,0.95),inset_0_1px_0_0_rgba(255,255,255,0.06)] overflow-hidden flex flex-col select-none backdrop-blur-sm"
+      className="relative w-full h-[370px] sm:h-[410px] md:h-[450px] lg:h-[475px] xl:h-[480px] rounded-2xl bg-[#0d0d11]/90 border border-white/[0.08] shadow-[0_24px_64px_-16px_rgba(0,0,0,0.95),inset_0_1px_0_0_rgba(255,255,255,0.06)] overflow-hidden flex flex-col select-none backdrop-blur-sm"
     >
       {/* Top Header Strip */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06] bg-white/[0.01] z-30">
@@ -160,8 +160,12 @@ export default function About() {
       id="about"
       className="flex flex-col justify-center flex-1 py-3 sm:py-5 lg:py-6 px-6 sm:px-10 lg:px-16 w-full max-w-7xl mx-auto my-auto"
     >
-      {/* Reusable Section Heading */}
-      <SectionHeading title="About Me" subtitle="Introduction & Core Focus" className="mb-3 sm:mb-5" />
+      {/* Reusable Section Heading - shifted slightly up for optimal vertical balance */}
+      <SectionHeading
+        title="About Me"
+        subtitle="Introduction & Core Focus"
+        className="-translate-y-1.5 sm:-translate-y-2.5 lg:-translate-y-3 mb-3 sm:mb-4 lg:mb-4"
+      />
 
       <div
         ref={containerRef}
