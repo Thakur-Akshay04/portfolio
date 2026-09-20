@@ -221,5 +221,5 @@ pnpm build
 ---
 
 <div align="center">
-  <sub>Crafted with passion and precision by <b>Akshay Singh Thakur</b>.</sub>
+  <sub>Crafted with "La pasión" by <b>Akshay Singh Thakur</b>.</sub>
 </div>
