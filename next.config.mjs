@@ -9,12 +9,12 @@ const ContentSecurityPolicy = `
   style-src 'self' 'unsafe-inline';
   img-src 'self' data: blob:;
   font-src 'self' data:;
-  connect-src 'self' https://api.web3forms.com;
+  connect-src 'self';
   frame-src 'self';
   worker-src 'self' blob:;
   frame-ancestors 'none';
   base-uri 'self';
-  form-action 'self' https://api.web3forms.com;
+  form-action 'self';
   object-src 'none';
 `.replace(/\s{2,}/g, " ").trim();
 
@@ -56,10 +56,8 @@ const nextConfig = {
   // Fix: Server Leaks Information via "X-Powered-By" — Low Risk
   poweredByHeader: false,
 
-  transpilePackages: ["three", "@react-three/fiber"],
-
   experimental: {
-    optimizePackageImports: ["lucide-react", "three", "framer-motion"],
+    optimizePackageImports: ["lucide-react", "framer-motion"],
   },
 
   onDemandEntries: {

@@ -8,11 +8,10 @@
 [![React](https://img.shields.io/badge/React-19.2.7-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![Three.js](https://img.shields.io/badge/Three.js-0.184-black?style=for-the-badge&logo=threedotjs&logoColor=white)](https://threejs.org/)
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare_Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://workers.cloudflare.com/)
 
 <p align="center">
-  A state-of-the-art developer portfolio engineered with <b>Next.js 16 App Router</b>, <b>React 19</b>, <b>Three.js / React Three Fiber</b>, and <b>Tailwind CSS</b>. Features dynamic 3D WebGL scenes, interactive project sandboxes, rate-limited email delivery, and smooth micro-interactions.
+  A state-of-the-art developer portfolio engineered with <b>Next.js 16 App Router</b>, <b>React 19</b>, <b>Framer Motion</b>, and <b>Tailwind CSS</b>. Features dynamic animated SVG path scenes, interactive project showcases, rate-limited email delivery, and smooth micro-interactions.
 </p>
 
 [View Live Portfolio](https://thakurakshay.dev/) • [Explore Projects](#-featured-projects) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started)
@@ -42,7 +41,7 @@
 
 ## 🌟 Overview
 
-This repository houses the source code for the personal portfolio of **Akshay Singh Thakur**. Designed and built from scratch, the platform demonstrates full-stack software engineering capabilities, modern frontend architecture, high-performance 3D graphics rendering, and seamless AI integration.
+This repository houses the source code for the personal portfolio of **Akshay Singh Thakur**. Designed and built from scratch, the platform demonstrates full-stack software engineering capabilities, modern frontend architecture, high-performance animations, and seamless AI integration.
 
 The portfolio is structured across modular App Router pages with responsive navigation, fluid Lenis smooth scrolling, accessible motion preferences (`prefers-reduced-motion`), and serverless edge deployment capabilities on Cloudflare Workers via OpenNext.
 
@@ -50,9 +49,8 @@ The portfolio is structured across modular App Router pages with responsive navi
 
 ## ✨ Key Features
 
-### 🔮 3D WebGL Graphics & Particle Physics
-- **Interactive Constellation Sphere**: A dynamic 3D particle sphere engineered with Three.js and `@react-three/fiber` that reacts smoothly to pointer movements and physics damping.
-- **Hero & Background Particles**: Lightweight ambient background particle canvas and subtle globe effects designed for high frame-rates across mobile and desktop devices.
+### 🌌 Ambient Vector Motion & Path Physics
+- **Ambient Floating Paths**: Deterministic animated SVG floating paths engineered with Framer Motion for high frame-rates across mobile and desktop devices with zero hydration delay.
 
 ### 💼 Interactive Project Showcases & Sandboxes
 - **Live Interactive Demos**: Interactive sandboxes embedded directly in project views (including live interactive certificate generation for CredVault and rich UI preview toggles).
@@ -93,10 +91,9 @@ The portfolio is structured across modular App Router pages with responsive navi
 - **Styling**: [Tailwind CSS 3.4](https://tailwindcss.com/), PostCSS
 - **Icons**: [Lucide React](https://lucide.dev/)
 
-### 3D & Animation
-- **3D Graphics**: [Three.js](https://threejs.org/), [@react-three/fiber](https://r3f.docs.pmnd.rs/)
+### Animation & Motion
 - **Motion**: [Framer Motion 12](https://www.framer.com/motion/)
-- **Smooth Scroll**: [@studio-freight/lenis](https://github.com/darkroomengineering/lenis)
+- **Smooth Scroll**: [Lenis](https://github.com/darkroomengineering/lenis)
 
 ### Backend & Cloud Services
 - **Runtime**: Node.js & Edge Runtime
