@@ -14,7 +14,7 @@ export interface Project {
   solution: string;
   features: string[];
   techStack: string[];
-  liveUrl: string;
+  liveUrl?: string;
   githubUrl: string;
   category: string;
   image: string;
@@ -90,7 +90,6 @@ export const PORTFOLIO_DATA = {
       subtitle: "AI Resume Builder & ATS Optimizer",
       category: "Full Stack / AI",
       image: "/images/ai_resume.png",
-      liveUrl: "https://ai-resume.demo.dev",
       githubUrl: "https://github.com/Thakur-Akshay04/Res_AI",
       description: "A full-stack web application designed to help job seekers instantly tailor their resumes to specific job descriptions.",
       fullDescription: "ResuCraft is an AI-powered resume builder and ATS optimizer that leverages Meta Llama-3 to provide real-time ATS keyword auditing, AI-powered summary and bullet-point rewriting, and live PDF rendering in a print-ready split-screen editor. It automates the tedious process of keyword-matching and formatting to drastically increase the chances of passing automated ATS filters.",
@@ -120,7 +119,6 @@ export const PORTFOLIO_DATA = {
       title: "CredVault - Blockchain Credentials",
       category: "Blockchain / Web3",
       image: "/images/credvault.png",
-      liveUrl: "https://credvault.demo.dev",
       githubUrl: "https://github.com/Thakur-Akshay04/CredValut",
       description: "A blockchain-based credential registry on Ethereum — issue, store, and verify academic certificates using smart contracts.",
       fullDescription: "CredVault solves academic credential fraud by storing certificate records permanently on the Ethereum blockchain. Academic institutions issue credentials via smart contracts, which live on the Ethereum blockchain and are cryptographically verifiable by anyone, forever.",

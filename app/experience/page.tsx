@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ExperiencePage() {
   return (
-    <main className="w-full flex-1 flex flex-col">
+    <main className="w-full flex-1 flex flex-col justify-center items-center">
       <Experience />
     </main>
   );

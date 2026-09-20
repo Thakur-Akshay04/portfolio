@@ -50,27 +50,28 @@ function FloatingTechStack() {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative w-full h-[480px] sm:h-[540px] md:h-[580px] rounded-2xl bg-[#0d0d11]/90 border border-white/[0.08] shadow-[0_24px_64px_-16px_rgba(0,0,0,0.95),inset_0_1px_0_0_rgba(255,255,255,0.06)] overflow-hidden flex flex-col select-none backdrop-blur-sm"
+      className="relative w-full h-[460px] sm:h-[500px] md:h-[540px] rounded-2xl bg-[#0d0d11]/90 border border-white/[0.08] shadow-[0_24px_64px_-16px_rgba(0,0,0,0.95),inset_0_1px_0_0_rgba(255,255,255,0.06)] overflow-hidden flex flex-col select-none backdrop-blur-sm"
     >
       {/* Top Header Strip */}
-      <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06] bg-white/[0.01] z-30">
+      <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/[0.06] bg-white/[0.01] z-30">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-accent-purple" />
-          <span className="font-mono text-xs uppercase tracking-widest text-neutral-300 font-medium">
-            Core Ecosystem
+          <span className="w-1 h-3.5 rounded-full bg-accent-purple" />
+
+          <span className="font-mono text-xs uppercase tracking-wider text-neutral-300 font-medium">
+            Tech Stack
           </span>
         </div>
         <span className="font-mono text-[11px] text-neutral-400">
-          Production Stack
+          Tools &amp; Frameworks
         </span>
       </div>
 
       {/* Top & Bottom Gradient Fade Masks */}
-      <div className="absolute inset-x-0 top-[53px] h-16 bg-gradient-to-b from-[#0d0d11] to-transparent z-20 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0d0d11] to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-x-0 top-[49px] h-14 bg-gradient-to-b from-[#0d0d11] to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-[#0d0d11] to-transparent z-20 pointer-events-none" />
 
       {/* Dual Column Streaming Tracks */}
-      <div className="flex-1 grid grid-cols-2 gap-4 px-5 py-4 overflow-hidden relative">
+      <div className="flex-1 grid grid-cols-2 gap-4 px-4 py-3.5 overflow-hidden relative">
         {/* Column 1: Drifts Upwards */}
         <div className="relative overflow-hidden h-full">
           <motion.div
@@ -98,7 +99,7 @@ function FloatingTechStack() {
                   <div className="text-xs sm:text-sm font-display font-medium text-white group-hover:text-white truncate">
                     {tech.name}
                   </div>
-                  <div className="text-[10px] font-mono text-neutral-400 truncate">
+                  <div className="text-[11px] font-mono text-neutral-400 truncate">
                     {tech.category}
                   </div>
                 </div>
@@ -134,7 +135,7 @@ function FloatingTechStack() {
                   <div className="text-xs sm:text-sm font-display font-medium text-white group-hover:text-white truncate">
                     {tech.name}
                   </div>
-                  <div className="text-[10px] font-mono text-neutral-400 truncate">
+                  <div className="text-[11px] font-mono text-neutral-400 truncate">
                     {tech.category}
                   </div>
                 </div>
@@ -157,10 +158,10 @@ export default function About() {
   return (
     <PageFoldWrapper
       id="about"
-      className="flex flex-col pt-6 sm:pt-10 pb-16 sm:pb-24 px-6 sm:px-10 lg:px-16 w-full max-w-7xl mx-auto"
+      className="flex flex-col justify-center flex-1 pt-6 sm:pt-10 pb-16 sm:pb-24 px-6 sm:px-10 lg:px-16 w-full max-w-7xl mx-auto"
     >
       {/* Reusable Section Heading */}
-      <SectionHeading title="About Me" subtitle="Introduction" />
+      <SectionHeading title="About Me" subtitle="Introduction & Core Focus" />
 
       <div
         ref={containerRef}
@@ -172,7 +173,7 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="lg:col-span-7 flex flex-col justify-center space-y-7 text-left"
+          className="lg:col-span-7 flex flex-col justify-center space-y-6 sm:space-y-7 text-left"
         >
           {/* Confident, Human Editorial Headline */}
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white tracking-tight leading-[1.2]">
@@ -180,7 +181,7 @@ export default function About() {
           </h3>
 
           {/* Narrative Paragraphs */}
-          <div className="space-y-5 text-neutral-300 text-base sm:text-lg leading-relaxed font-sans">
+          <div className="space-y-4 sm:space-y-5 text-neutral-300 text-base sm:text-lg leading-relaxed font-sans">
             <p>
               I am a Full-stack / MERN developer focused on crafting clean user interfaces and highly efficient API architectures. I build responsive, modern web applications that prioritize performance, code clarity, and accessibility.
             </p>
@@ -190,7 +191,7 @@ export default function About() {
           </div>
 
           {/* Direct page links */}
-          <div className="flex flex-wrap items-center gap-4 pt-4">
+          <div className="flex flex-wrap items-center gap-4 pt-3 sm:pt-4">
             <Link
               href="/projects"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-colors"

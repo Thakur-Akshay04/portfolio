@@ -40,7 +40,6 @@ Welcome to the source code of my personal portfolio website. This is a highly in
 3. **Interactive Project Showcase**:
    - Concrete, live-updating mockups for featured projects.
    - **CredVault Sandbox**: Interactive credentials mockup generator allowing users to enter custom student names/majors and cryptographically "secure" the certificate.
-   - Detailed Case Study Modals with clean, unique tech stack lists (automatic filtering of duplicate logos).
 4. **Secure Contact Form**:
    - Server-side rates limiting (maximum 3 emails per 10 minutes per IP).
    - Server-side input escaping to prevent HTML injection.

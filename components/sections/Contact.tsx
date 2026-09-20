@@ -29,9 +29,9 @@ function FormField({ label, id, type = "text", value, onChange, error, isTextAre
       {/* Label */}
       <label
         htmlFor={id}
-        className={`absolute left-4 top-3.5 font-mono text-xs pointer-events-none transition-all duration-200 ${
+        className={`absolute left-4 top-3 font-mono text-xs pointer-events-none transition-all duration-200 ${
           isFloating
-            ? "-translate-y-7 text-accent-purple scale-90"
+            ? "-translate-y-5 text-accent-purple scale-90"
             : "text-neutral-500"
         } ${focused ? "text-accent-purple" : ""}`}
       >
@@ -45,7 +45,7 @@ function FormField({ label, id, type = "text", value, onChange, error, isTextAre
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          className={`w-full min-h-[140px] px-4 py-3.5 rounded-xl bg-white/[0.03] border font-sans text-sm text-white focus:outline-none transition-all duration-200 ${
+          className={`w-full min-h-[110px] sm:min-h-[130px] px-4 py-3.5 rounded-xl bg-white/[0.03] border font-sans text-sm text-white focus:outline-none transition-all duration-200 resize-none ${
             error
               ? "border-red-500 focus:border-red-500"
               : focused
@@ -61,7 +61,7 @@ function FormField({ label, id, type = "text", value, onChange, error, isTextAre
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          className={`w-full h-12 px-4 rounded-xl bg-white/[0.03] border font-sans text-sm text-white focus:outline-none transition-all duration-200 ${
+          className={`w-full h-11 sm:h-12 px-4 rounded-xl bg-white/[0.03] border font-sans text-sm text-white focus:outline-none transition-all duration-200 ${
             error
               ? "border-red-500 focus:border-red-500"
               : focused
@@ -78,9 +78,9 @@ function FormField({ label, id, type = "text", value, onChange, error, isTextAre
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
-            className="text-[10px] font-mono text-red-400 pl-2 flex items-center gap-1"
+            className="text-xs font-mono text-red-400 pl-2.5 flex items-center gap-1"
           >
-            <AlertTriangle className="w-3 h-3" />
+            <AlertTriangle className="w-3.5 h-3.5" />
             <span>{error}</span>
           </motion.span>
         )}
@@ -202,7 +202,7 @@ export default function Contact() {
   };
 
   return (
-    <PageFoldWrapper id="contact" className="pt-6 sm:pt-10 pb-16 sm:pb-24 px-6 max-w-7xl mx-auto relative overflow-hidden">
+    <PageFoldWrapper id="contact" className="pt-6 sm:pt-10 pb-16 sm:pb-24 px-6 sm:px-10 max-w-6xl mx-auto relative overflow-hidden flex-1 flex flex-col justify-center w-full">
 
       {/* Floating background neon gradient blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
@@ -244,7 +244,7 @@ export default function Contact() {
         onMouseMove={handleMouseMove}
         whileHover={{
           y: -2,
-          boxShadow: "0 24px 48px -12px rgba(0, 0, 0, 0.7)",
+          boxShadow: "0 20px 40px -12px rgba(0, 0, 0, 0.7)",
         }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
         className="grid grid-cols-1 lg:grid-cols-12 border border-white/[0.08] divide-y lg:divide-y-0 lg:divide-x divide-white/[0.08] bg-[#0d0d11]/80 rounded-2xl overflow-hidden shadow-2xl relative z-10 group/card"
@@ -263,11 +263,11 @@ export default function Contact() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="lg:col-span-5 p-8 sm:p-10 flex flex-col justify-between space-y-8 bg-black/40 backdrop-blur-md relative z-10"
+          className="lg:col-span-5 p-6 sm:p-8 md:p-10 flex flex-col justify-between space-y-6 sm:space-y-8 bg-black/40 backdrop-blur-md relative z-10"
         >
-          <div className="space-y-4">
-            <h3 className="text-2xl font-display font-bold text-white">Let&apos;s build something together</h3>
-            <p className="text-sm text-neutral-400 leading-relaxed font-sans">
+          <div className="space-y-3">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white">Let&apos;s build something together</h3>
+            <p className="text-sm sm:text-base text-neutral-400 leading-relaxed font-sans">
               I&apos;m currently open to new opportunities, freelance contracts, or technical advising. If you have any projects, ideas, or questions, I&apos;d love to hear from you.
             </p>
           </div>
@@ -278,7 +278,7 @@ export default function Contact() {
                 <span className="text-neutral-500 text-xs">EMAIL:</span>
                 <motion.a
                   href={`mailto:${emailStr}`}
-                  className="px-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/[0.2] text-neutral-200 font-medium relative overflow-hidden group text-[11px] sm:text-xs max-w-full transition-colors"
+                  className="px-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/[0.2] text-neutral-200 font-medium relative overflow-hidden group text-xs sm:text-sm max-w-full transition-colors"
                   whileHover="hover"
                   whileTap="tap"
                   variants={{
@@ -328,8 +328,8 @@ export default function Contact() {
             ) : null}
 
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-gray-300 gap-2">
-              <span className="text-gray-500">LOCATION:</span>
-              <span className="flex items-center gap-1.5 text-gray-400 font-sans font-medium text-left sm:text-right">
+              <span className="text-gray-500 text-xs">LOCATION:</span>
+              <span className="flex items-center gap-2 text-gray-400 font-sans font-medium text-left sm:text-right text-sm">
                 <MapPin className="w-4 h-4 text-accent-purple shrink-0" />
                 {PORTFOLIO_DATA.personal.location}
               </span>
@@ -358,7 +358,7 @@ export default function Contact() {
                 return (
                   <div key={social.name} className="relative group/btn">
                     {/* Hover Animated Tooltip Text */}
-                    <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 rounded-md bg-[#14141a] border border-white/[0.1] text-[10px] font-mono text-neutral-200 whitespace-nowrap transition-all duration-200 ease-out origin-bottom z-20 opacity-0 translate-y-1 scale-95 pointer-events-none group-hover/btn:opacity-100 group-hover/btn:translate-y-0 group-hover/btn:scale-100 shadow-lg">
+                    <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 rounded-md bg-[#14141a] border border-white/[0.1] text-xs font-mono text-neutral-200 whitespace-nowrap transition-all duration-200 ease-out origin-bottom z-20 opacity-0 translate-y-1 scale-95 pointer-events-none group-hover/btn:opacity-100 group-hover/btn:translate-y-0 group-hover/btn:scale-100 shadow-lg">
                       {social.name}
                       <span className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-[#14141a]" />
                     </span>
@@ -372,7 +372,7 @@ export default function Contact() {
                       }}
                       target={hasValidUrl ? "_blank" : undefined}
                       rel={hasValidUrl ? "noopener noreferrer" : undefined}
-                      className={`w-11 h-11 flex items-center justify-center rounded-xl bg-white/[0.03] border text-neutral-400 hover:text-white transition-all border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.06] ${
+                      className={`w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-xl bg-white/[0.03] border text-neutral-400 hover:text-white transition-all border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.06] ${
                         !hasValidUrl ? "cursor-not-allowed opacity-50" : "cursor-pointer"
                       }`}
                       whileHover={{
@@ -380,7 +380,7 @@ export default function Contact() {
                       }}
                       whileTap={{ scale: hasValidUrl ? 0.96 : 1 }}
                     >
-                      <Icon className="w-4 h-4" />
+                      <Icon className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                     </motion.a>
                   </div>
                 );
@@ -395,10 +395,10 @@ export default function Contact() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="lg:col-span-7 p-8 sm:p-10 bg-[#0d0d11]/40 backdrop-blur-md relative z-10"
+          className="lg:col-span-7 p-6 sm:p-8 md:p-10 bg-[#0d0d11]/40 backdrop-blur-md relative z-10"
         >
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               <FormField
                 label="NAME"
                 id="name"
@@ -451,7 +451,7 @@ export default function Contact() {
               disabled={submitting}
               whileHover={submitting ? {} : { scale: 1.01 }}
               whileTap={submitting ? {} : { scale: 0.99 }}
-              className="w-full h-12 bg-white hover:bg-neutral-200 text-black font-semibold text-sm rounded-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-white/5"
+              className="w-full h-11 sm:h-12 bg-white hover:bg-neutral-200 text-black font-semibold text-sm rounded-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-md shadow-white/5"
             >
               {submitting ? (
                 <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />

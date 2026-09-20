@@ -1,10 +1,9 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, X, ShieldAlert, Lock, Code2, Globe, FileText, Sparkles, Plus } from "lucide-react";
-import { PORTFOLIO_DATA, Project } from "@/constants/data";
-import { getModalOverlay, getModalContent } from "@/lib/variants";
+import { motion } from "framer-motion";
+import { ExternalLink, ShieldAlert, Lock, Code2, Globe, FileText, Sparkles, Plus } from "lucide-react";
+import { PORTFOLIO_DATA } from "@/constants/data";
 import { GithubIcon } from "@/components/icons/BrandIcons";
 import { useSafeReducedMotion } from "@/lib/hooks";
 import PageFoldWrapper from "@/components/layout/PageFoldWrapper";
@@ -1150,43 +1149,10 @@ const techItemVariants = {
 };
 
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [activeTechMobile, setActiveTechMobile] = useState<string | null>(null);
   const shouldReduceMotion = useSafeReducedMotion();
-  const openTimeRef = useRef<number>(0);
-
-  useEffect(() => {
-    if (selectedProject) {
-      document.body.style.overflow = "hidden";
-      document.body.classList.add("modal-open");
-    } else {
-      document.body.style.overflow = "";
-      document.body.classList.remove("modal-open");
-      setActiveTechMobile(null);
-    }
-    return () => {
-      document.body.style.overflow = "";
-      document.body.classList.remove("modal-open");
-    };
-  }, [selectedProject]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setSelectedProject(null);
-      }
-    };
-    if (selectedProject) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [selectedProject]);
 
   return (
-    <>
-      <PageFoldWrapper id="projects" className="pt-6 sm:pt-10 pb-16 sm:pb-24 px-6 sm:px-10 max-w-6xl mx-auto">
+    <PageFoldWrapper id="projects" className="pt-6 sm:pt-10 pb-16 sm:pb-24 px-6 sm:px-10 max-w-7xl mx-auto">
       {/* Reusable Section Heading */}
       <SectionHeading
         title="Featured Projects"
@@ -1235,13 +1201,13 @@ export default function Projects() {
 
                 {/* Title description and feature bullet points */}
                 <ul className="space-y-3 pt-2 text-left">
-                  <li className="flex items-start gap-3 text-sm text-neutral-300 font-sans leading-relaxed">
-                    <span className="text-accent-purple font-mono text-sm mt-0.5 select-none shrink-0 font-bold">{"•"}</span>
+                  <li className="flex items-start gap-3 text-sm sm:text-base text-neutral-300 font-sans leading-relaxed">
+                    <span className="text-accent-purple font-mono text-base mt-0.5 select-none shrink-0 font-bold">{"•"}</span>
                     <span className="font-medium text-white">{project.description}</span>
                   </li>
                   {project.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-start gap-3 text-sm text-neutral-400 font-sans leading-relaxed">
-                      <span className="text-accent-purple font-mono text-sm mt-0.5 select-none shrink-0">{"•"}</span>
+                    <li key={fIdx} className="flex items-start gap-3 text-sm sm:text-base text-neutral-400 font-sans leading-relaxed">
+                      <span className="text-accent-purple font-mono text-base mt-0.5 select-none shrink-0">{"•"}</span>
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -1275,34 +1241,24 @@ export default function Projects() {
 
                 {/* Action Buttons */}
                 <div className="flex flex-wrap gap-3 pt-4 font-mono text-xs">
-                  <div
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 border border-white/[0.08] bg-white/[0.03] rounded-full text-neutral-300 hover:text-white hover:border-white/20 transition-all duration-200 cursor-default select-none group/btn h-9"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5 group-hover/btn:hidden shrink-0" />
-                    <span className="group-hover/btn:hidden whitespace-nowrap">Live Site</span>
-                    <span className="hidden group-hover/btn:inline text-neutral-200 whitespace-nowrap text-[10px] font-medium font-sans">Deploying Soon..</span>
-                  </div>
+                  {project.liveUrl && project.id !== "project-1" && project.id !== "project-2" && (
+                    <div
+                      className="inline-flex items-center justify-center gap-1.5 px-4 py-2 border border-white/[0.08] bg-white/[0.03] rounded-full text-neutral-300 hover:text-white hover:border-white/20 transition-all duration-200 cursor-default select-none group/btn h-9"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5 group-hover/btn:hidden shrink-0" />
+                      <span className="group-hover/btn:hidden whitespace-nowrap">Live Site</span>
+                      <span className="hidden group-hover/btn:inline text-neutral-200 whitespace-nowrap text-[10px] font-medium font-sans">Deploying Soon..</span>
+                    </div>
+                  )}
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 border border-white/[0.08] bg-white/[0.03] rounded-full text-neutral-300 hover:text-white hover:border-white/20 transition-all duration-200 h-9"
+                    className="inline-flex items-center justify-center gap-1.5 px-5 py-2 bg-white text-black font-semibold rounded-full hover:bg-neutral-200 transition-all duration-200 h-9"
                   >
                     <GithubIcon className="w-3.5 h-3.5" />
                     <span>Repository</span>
                   </a>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openTimeRef.current = Date.now();
-                      setSelectedProject(project);
-                    }}
-                    className="inline-flex items-center justify-center px-5 py-2 bg-white text-black font-semibold rounded-full hover:bg-neutral-200 transition-all duration-200 h-9"
-                  >
-                    <span>Case Study</span>
-                  </button>
                 </div>
               </div>
 
@@ -1327,149 +1283,6 @@ export default function Projects() {
           );
         })}
       </div>
-      </PageFoldWrapper>
-
-      {/* Case Study details Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            variants={getModalOverlay}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            onClick={() => {
-              if (Date.now() - openTimeRef.current > 400) {
-                setSelectedProject(null);
-              }
-            }}
-            className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-hidden"
-          >
-            {/* Modal Box */}
-            <motion.div
-              variants={getModalContent(shouldReduceMotion)}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              onClick={(e) => e.stopPropagation()} // Prevent close on card click
-              className="relative w-[92%] sm:w-[88%] md:w-full h-auto max-h-[85vh] md:max-h-[90vh] md:max-w-3xl rounded-2xl border border-white/[0.12] bg-[#0d0d11] overflow-hidden shadow-2xl flex flex-col"
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-white/[0.04] border border-white/[0.08] text-neutral-400 hover:text-white transition-colors z-20"
-                aria-label="Close details"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="p-5 md:p-8 space-y-6 overflow-y-auto flex-1 pb-16" data-lenis-prevent>
-                {/* Header */}
-                <div className="space-y-2">
-                  <span className="text-xs font-mono text-neutral-400 font-medium tracking-wider uppercase">
-                    {selectedProject.category}
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white pr-12">
-                    {selectedProject.title}
-                  </h3>
-                  {selectedProject.subtitle && (
-                    <p className="text-sm font-mono text-neutral-400 font-medium tracking-wide">
-                      {selectedProject.subtitle}
-                    </p>
-                  )}
-                </div>
-
-                {/* Tech Pills */}
-                <motion.div
-                  variants={techContainerVariants}
-                  initial="hidden"
-                  animate="visible"
-                  className="flex flex-wrap gap-1.5 md:gap-2 border-b border-white/[0.08] pb-6"
-                >
-                  {selectedProject.techStack.map((tech) => (
-                    <motion.span
-                      key={tech}
-                      layout
-                      variants={techItemVariants}
-                      whileHover={{
-                        scale: 1.05,
-                        borderColor: "rgba(255, 255, 255, 0.2)",
-                        color: "#ffffff"
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setActiveTechMobile(activeTechMobile === tech ? null : tech);
-                      }}
-                      className="inline-flex items-center gap-1.5 md:gap-2 p-1.5 md:px-3 md:py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs text-neutral-300 font-mono transition-all cursor-pointer lg:cursor-default select-none"
-                    >
-                      <TechLogo name={tech} className="w-4 h-4 shrink-0" />
-                      <span className={activeTechMobile === tech ? "inline" : "hidden lg:inline"}>{tech}</span>
-                    </motion.span>
-                  ))}
-                </motion.div>
-
-                {/* Description Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  {/* Left Column - Main Details */}
-                  <div className="lg:col-span-2 space-y-4">
-                    <h4 className="text-xs font-mono text-neutral-400 uppercase tracking-wider">Description</h4>
-                    <p className="text-sm md:text-base text-neutral-300 leading-relaxed font-sans whitespace-pre-line">
-                      {selectedProject.fullDescription.split("\n\nKey Features Built:")[0]}
-                    </p>
-                    {selectedProject.fullDescription.includes("\n\nKey Features Built:") && (
-                      <p className="hidden lg:block text-sm md:text-base text-neutral-300 leading-relaxed font-sans whitespace-pre-line mt-4">
-                        {`Key Features Built:${selectedProject.fullDescription.split("\n\nKey Features Built:")[1]}`}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Right Column - Challenges / Stats */}
-                  <div className="hidden lg:block space-y-4 bg-white/[0.02] p-5 border border-white/[0.08] rounded-xl">
-                    <h4 className="text-xs font-mono text-neutral-400 uppercase tracking-wider">Project Details</h4>
-                    <div className="space-y-3 font-mono text-xs text-neutral-400">
-                      <p className="flex justify-between">
-                        <span>STATUS:</span>
-                        <span className="text-neutral-300">COMPLETED</span>
-                      </p>
-                      <p className="flex justify-between">
-                        <span>ROLE:</span>
-                        <span className="text-white">FULL-STACK</span>
-                      </p>
-                      <p className="flex justify-between">
-                        <span>LINT:</span>
-                        <span className="text-emerald-400">PASS</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Footer Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 border-t border-white/[0.08] pt-6 mt-6">
-                  <motion.div
-                    className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white text-black text-sm font-semibold transition-all duration-200 cursor-default select-none group/modal-btn w-full sm:w-[160px] hover:bg-neutral-200"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <ExternalLink className="w-4 h-4 group-hover/modal-btn:hidden shrink-0" />
-                    <span className="group-hover/modal-btn:hidden whitespace-nowrap">Live Demo</span>
-                    <span className="hidden group-hover/modal-btn:inline text-black font-bold whitespace-nowrap text-xs">Deploying Soon..</span>
-                  </motion.div>
-                  <motion.a
-                    href={selectedProject.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/[0.12] bg-white/[0.03] hover:bg-white/[0.08] text-white text-sm font-semibold transition-all duration-200 w-full sm:w-auto"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <GithubIcon className="w-4 h-4" />
-                    <span>View Repository</span>
-                  </motion.a>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+    </PageFoldWrapper>
   );
 }
