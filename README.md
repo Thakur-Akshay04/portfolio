@@ -220,19 +220,6 @@ pnpm build
 
 ---
 
-## 📬 Connect With Me
-
-- **Portfolio**: [Akshay Singh Thakur](https://thakur-akshay04.github.io/portfolio/)
-- **GitHub**: [@Thakur-Akshay04](https://github.com/Thakur-Akshay04)
-- **LinkedIn**: [Akshay Singh Thakur](https://linkedin.com/in/akshay-singh-thakur-4043b328a)
-- **Location**: Himachal Pradesh, India
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE) — feel free to explore the code for inspiration.
-
 <div align="center">
   <sub>Crafted with passion and precision by <b>Akshay Singh Thakur</b>.</sub>
 </div>
