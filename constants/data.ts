@@ -17,7 +17,7 @@ export interface Project {
   liveUrl?: string;
   githubUrl: string;
   category: string;
-  image: string;
+  image?: string;
 }
 
 export interface ExperienceItem {
@@ -62,7 +62,6 @@ export const PORTFOLIO_DATA = {
       id: "project-3",
       title: "Luminote",
       category: "Full Stack / Productivity",
-      image: "/images/luminote.png",
       liveUrl: "https://luminote.demo.dev",
       githubUrl: "https://github.com/Thakur-Akshay04/Luminote",
       description: "An AI-powered notes application supporting rich text, hand-drawn sketchpads, and voice memos. Features automated background note summarization, interactive Q&A chat, AI task checklist extraction, and vector-based semantic search.",
@@ -89,7 +88,6 @@ export const PORTFOLIO_DATA = {
       title: "ResuCraft",
       subtitle: "AI Resume Builder & ATS Optimizer",
       category: "Full Stack / AI",
-      image: "/images/ai_resume.png",
       githubUrl: "https://github.com/Thakur-Akshay04/Res_AI",
       description: "A full-stack web application designed to help job seekers instantly tailor their resumes to specific job descriptions.",
       fullDescription: "ResuCraft is an AI-powered resume builder and ATS optimizer that leverages Meta Llama-3 to provide real-time ATS keyword auditing, AI-powered summary and bullet-point rewriting, and live PDF rendering in a print-ready split-screen editor. It automates the tedious process of keyword-matching and formatting to drastically increase the chances of passing automated ATS filters.",
@@ -118,7 +116,6 @@ export const PORTFOLIO_DATA = {
       id: "project-2",
       title: "CredVault - Blockchain Credentials",
       category: "Blockchain / Web3",
-      image: "/images/credvault.png",
       githubUrl: "https://github.com/Thakur-Akshay04/CredValut",
       description: "A blockchain-based credential registry on Ethereum — issue, store, and verify academic certificates using smart contracts.",
       fullDescription: "CredVault solves academic credential fraud by storing certificate records permanently on the Ethereum blockchain. Academic institutions issue credentials via smart contracts, which live on the Ethereum blockchain and are cryptographically verifiable by anyone, forever.",
