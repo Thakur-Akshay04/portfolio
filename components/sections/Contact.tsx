@@ -31,9 +31,9 @@ function FormField({ label, id, type = "text", value, onChange, error, isTextAre
         htmlFor={id}
         className={`absolute left-4 top-3 font-mono text-xs pointer-events-none transition-all duration-200 ${
           isFloating
-            ? "-translate-y-5 text-accent-purple scale-90"
+            ? "-translate-y-5 text-white scale-90"
             : "text-neutral-500"
-        } ${focused ? "text-accent-purple" : ""}`}
+        } ${focused ? "text-white" : ""}`}
       >
         {label}
       </label>
@@ -49,7 +49,7 @@ function FormField({ label, id, type = "text", value, onChange, error, isTextAre
             error
               ? "border-red-500 focus:border-red-500"
               : focused
-                ? "border-accent-purple/60 bg-white/[0.05] shadow-[0_0_12px_rgba(168,85,247,0.15)]"
+                ? "border-white/30 bg-white/[0.05] shadow-[0_0_12px_rgba(255,255,255,0.05)]"
                 : "border-white/[0.1] hover:border-white/[0.18]"
           }`}
         />
@@ -65,7 +65,7 @@ function FormField({ label, id, type = "text", value, onChange, error, isTextAre
             error
               ? "border-red-500 focus:border-red-500"
               : focused
-                ? "border-accent-purple/60 bg-white/[0.05] shadow-[0_0_12px_rgba(168,85,247,0.15)]"
+                ? "border-white/30 bg-white/[0.05] shadow-[0_0_12px_rgba(255,255,255,0.05)]"
                 : "border-white/[0.1] hover:border-white/[0.18]"
           }`}
         />
@@ -100,9 +100,6 @@ export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
-
   const [emailStr, setEmailStr] = useState(PORTFOLIO_DATA.personal.email || "");
   const [socialLinks, setSocialLinks] = useState(PORTFOLIO_DATA.socials);
 
@@ -122,15 +119,6 @@ export default function Contact() {
       .catch(() => {});
   }, []);
 
-
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const { left, top } = e.currentTarget.getBoundingClientRect();
-    setCoords({
-      x: e.clientX - left,
-      y: e.clientY - top,
-    });
-  };
 
   const fadeInLeft = getFadeIn("left", 40)(shouldReduceMotion);
   const fadeInRight = getFadeIn("right", 40)(shouldReduceMotion);
@@ -204,36 +192,6 @@ export default function Contact() {
   return (
     <PageFoldWrapper id="contact" className="pt-6 sm:pt-10 pb-16 sm:pb-24 px-6 sm:px-10 max-w-6xl mx-auto relative overflow-hidden flex-1 flex flex-col justify-center w-full">
 
-      {/* Floating background neon gradient blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-        <motion.div
-          animate={{
-            x: [0, 80, -40, 0],
-            y: [0, -60, 40, 0],
-            scale: [1, 1.15, 0.9, 1],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute -top-10 -left-10 w-72 h-72 rounded-full bg-accent-purple opacity-[0.03] blur-[90px]"
-        />
-        <motion.div
-          animate={{
-            x: [0, -70, 50, 0],
-            y: [0, 80, -30, 0],
-            scale: [1, 1.2, 0.95, 1],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute bottom-10 right-10 w-80 h-80 rounded-full bg-accent-purple opacity-[0.03] blur-[100px]"
-        />
-      </div>
-
       {/* Reusable Section Heading */}
       <SectionHeading
         title="Get In Touch"
@@ -241,7 +199,6 @@ export default function Contact() {
       />
 
       <motion.div
-        onMouseMove={handleMouseMove}
         whileHover={{
           y: -2,
           boxShadow: "0 20px 40px -12px rgba(0, 0, 0, 0.7)",
@@ -249,14 +206,6 @@ export default function Contact() {
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
         className="grid grid-cols-1 lg:grid-cols-12 border border-white/[0.08] divide-y lg:divide-y-0 lg:divide-x divide-white/[0.08] bg-[#0d0d11]/80 rounded-2xl overflow-hidden shadow-2xl relative z-10 group/card"
       >
-        {/* Spotlight background lighting effect */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 z-0"
-          style={{
-            background: `radial-gradient(800px circle at ${coords.x}px ${coords.y}px, rgba(168, 85, 247, 0.08), transparent 80%)`
-          }}
-        />
-
         {/* Left Column - Contact Info */}
         <motion.div
           variants={fadeInLeft}
@@ -266,9 +215,9 @@ export default function Contact() {
           className="lg:col-span-5 p-6 sm:p-8 md:p-10 flex flex-col justify-between space-y-6 sm:space-y-8 bg-black/40 backdrop-blur-md relative z-10"
         >
           <div className="space-y-3">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white">Let&apos;s build something together</h3>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white">Let&apos;s Create something together... </h3>
             <p className="text-sm sm:text-base text-neutral-400 leading-relaxed font-sans">
-              I&apos;m currently open to new opportunities, freelance contracts, or technical advising. If you have any projects, ideas, or questions, I&apos;d love to hear from you.
+              I&apos;m currently open to new opportunities, freelance contracts, or Full-time roles. If you have any projects, ideas, questions, or any niche topic you'd like to discuss, I'd love to hear from you.
             </p>
           </div>
 
@@ -278,51 +227,14 @@ export default function Contact() {
                 <span className="text-neutral-500 text-xs">EMAIL:</span>
                 <motion.a
                   href={`mailto:${emailStr}`}
-                  className="px-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/[0.2] text-neutral-200 font-medium relative overflow-hidden group text-xs sm:text-sm max-w-full transition-colors"
-                  whileHover="hover"
-                  whileTap="tap"
-                  variants={{
-                    hover: {
-                      scale: 1.03,
-                      borderColor: "rgba(157, 78, 221, 0.5)",
-                      boxShadow: "0 0 15px rgba(157, 78, 221, 0.25)",
-                    },
-                    tap: {
-                      scale: 0.98,
-                    }
-                  }}
+                  className="px-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/[0.2] text-neutral-200 font-medium relative overflow-hidden group text-xs sm:text-sm max-w-full transition-all"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 >
-                  {/* Shiny gradient overlay sweeping across the button on hover */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-accent-purple/10 to-transparent -translate-x-full"
-                    variants={{
-                      hover: {
-                        x: "100%",
-                        transition: {
-                          repeat: Infinity,
-                          repeatType: "loop",
-                          duration: 1.5,
-                          ease: "linear",
-                        },
-                      },
-                    }}
-                  />
-
-                  {/* Email text animation */}
-                  <motion.span
-                    className="relative z-10 inline-block break-all"
-                    variants={{
-                      hover: {
-                        color: "#ffffff",
-                        textShadow: "0 0 8px rgba(157, 78, 221, 0.6)",
-                        scale: 1.02,
-                        transition: { duration: 0.2 },
-                      },
-                    }}
-                  >
+                  <span className="relative z-10 inline-block break-all">
                     {emailStr}
-                  </motion.span>
+                  </span>
                 </motion.a>
               </div>
             ) : null}
@@ -330,7 +242,7 @@ export default function Contact() {
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-gray-300 gap-2">
               <span className="text-gray-500 text-xs">LOCATION:</span>
               <span className="flex items-center gap-2 text-gray-400 font-sans font-medium text-left sm:text-right text-sm">
-                <MapPin className="w-4 h-4 text-accent-purple shrink-0" />
+                <MapPin className="w-4 h-4 text-neutral-400 shrink-0" />
                 {PORTFOLIO_DATA.personal.location}
               </span>
             </div>
@@ -474,9 +386,9 @@ export default function Contact() {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="fixed bottom-6 right-6 z-50 p-4 rounded-xl border border-accent-purple/30 bg-black flex items-center gap-3 shadow-2xl"
+            className="fixed bottom-6 right-6 z-50 p-4 rounded-xl border border-white/10 bg-black flex items-center gap-3 shadow-2xl"
           >
-            <CheckCircle className="w-6 h-6 text-accent-purple shrink-0 drop-shadow-[0_0_4px_var(--accent-neon-glow)]" />
+            <CheckCircle className="w-6 h-6 text-emerald-400 shrink-0" />
             <div className="font-sans text-left">
               <p className="text-sm font-bold text-white">Message Sent</p>
               <p className="text-xs text-gray-400">Thank you! I will get back to you as soon as possible.</p>

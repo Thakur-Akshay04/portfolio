@@ -62,8 +62,7 @@ body {
   overflow-x: hidden;
   position: relative;
   background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.12), transparent),
-    radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.04), transparent 40%);
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.12), transparent);
   background-attachment: fixed;
 }
 
