@@ -45,7 +45,6 @@ export function FloatingPaths({ position, count = 36, className = "" }: Floating
         preserveAspectRatio="xMidYMid slice"
         aria-hidden="true"
       >
-        <title>Background Paths</title>
         {paths.map((path) => (
           <motion.path
             key={path.id}

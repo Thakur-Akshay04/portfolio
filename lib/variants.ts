@@ -59,8 +59,3 @@ export const getScaleIn = (shouldReduce: boolean | null): Variants => {
     }),
   };
 };
-
-
-
-
-

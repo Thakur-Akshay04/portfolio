@@ -1,23 +1,13 @@
-export interface Stat {
-  value: number;
-  label: string;
-  suffix: string;
-}
-
 export interface Project {
   id: string;
   title: string;
   subtitle?: string;
   description: string;
-  fullDescription: string;
-  challenge: string;
-  solution: string;
   features: string[];
   techStack: string[];
   liveUrl?: string;
   githubUrl: string;
   category: string;
-  image?: string;
 }
 
 export interface ExperienceItem {
@@ -40,22 +30,9 @@ export interface SocialLink {
 export const PORTFOLIO_DATA = {
   personal: {
     name: "Akshay Singh Thakur",
-    title: "Full-stack / MERN Developer",
-    subtitle: "Developing High-Performance Full-Stack Web Applications with AI Integration",
-    taglineWords: ["MERN Developer", "Full Stack Developer"],
-    bio: [
-      "I am a Full-stack / MERN developer focused on crafting clean user interfaces and highly efficient API architectures. I build responsive, modern web applications.",
-      "I am passionate about creating high-performance digital experiences, experimenting with modern web standards, and integrating intelligent AI features into full-stack systems."
-    ],
     email: (process.env.NEXT_PUBLIC_PERSONAL_EMAIL || "").trim(),
     location: "Himachal Pradesh, India",
   },
-
-  stats: [
-    { value: 5, label: "Projects Completed", suffix: "+" },
-    { value: 1, label: "Internship Completed", suffix: "" },
-    { value: 3, label: "Certifications Earned", suffix: "" },
-  ] as Stat[],
 
   projects: [
     {
@@ -65,8 +42,6 @@ export const PORTFOLIO_DATA = {
       liveUrl: "https://luminote.demo.dev",
       githubUrl: "https://github.com/Thakur-Akshay04/Luminote",
       description: "An AI-powered notes application supporting rich text, hand-drawn sketchpads, and voice memos. Features automated background note summarization, interactive Q&A chat, AI task checklist extraction, and vector-based semantic search.",
-      fullDescription: "Luminote is a next-generation notes and productivity workspace built for developers and creators. Rather than limiting users to simple text, it supports text notes, interactive checklists, an HTML5 Canvas drawing board, and voice recording with auto-transcription. The application leverages a FastAPI backend connected to PostgreSQL and Redis, implementing pgvector for similarity searches across note embeddings and integrating LLMs for real-time document Q&A and task auto-generation.",
-      solution: "Engineered a full-stack web application using Next.js and Tailwind CSS, backed by a FastAPI server, PostgreSQL (with pgvector), and Redis. Implemented a feature-rich editor supporting text, checklists, drawing, and audio transcriptions, alongside LLM-driven tools for Q&A, auto-summarization, and semantic search.",
       features: [
         "Interactive multi-format editor for text notes, checklists, canvas drawings, and voice recordings",
         "LLM-powered background note summarization, interactive Q&A, and task auto-extraction",
@@ -90,9 +65,6 @@ export const PORTFOLIO_DATA = {
       category: "Full Stack / AI",
       githubUrl: "https://github.com/Thakur-Akshay04/Res_AI",
       description: "A full-stack web application designed to help job seekers instantly tailor their resumes to specific job descriptions.",
-      fullDescription: "ResuCraft is an AI-powered resume builder and ATS optimizer that leverages Meta Llama-3 to provide real-time ATS keyword auditing, AI-powered summary and bullet-point rewriting, and live PDF rendering in a print-ready split-screen editor. It automates the tedious process of keyword-matching and formatting to drastically increase the chances of passing automated ATS filters.",
-      challenge: "Job seekers often fail to pass automated ATS filters because they submit generic resumes.",
-      solution: "Engineered a Live Split-Screen Editor where input changes instantly reflect on a live, print-ready PDF using React and Puppeteer. Integrated Groq Cloud API (Llama-3) to rewrite bullet points, summaries, and skills to align perfectly with target job descriptions, backed by Clerk Auth and MongoDB.",
       features: [
         "Real-time ATS keyword auditing using Groq Cloud API (Llama-3)",
         "Live print-ready PDF preview generated instantly on editor input change",
@@ -118,9 +90,6 @@ export const PORTFOLIO_DATA = {
       category: "Blockchain / Web3",
       githubUrl: "https://github.com/Thakur-Akshay04/CredValut",
       description: "A blockchain-based credential registry on Ethereum — issue, store, and verify academic certificates using smart contracts.",
-      fullDescription: "CredVault solves academic credential fraud by storing certificate records permanently on the Ethereum blockchain. Academic institutions issue credentials via smart contracts, which live on the Ethereum blockchain and are cryptographically verifiable by anyone, forever.",
-      challenge: "Credential fraud is rampant — degrees get faked, certificates get forged.",
-      solution: "Built a decentralized registry system featuring on-chain credential issuance via a Solidity smart contract, cryptographic verification via credential hash, MetaMask wallet integration, and Supabase OAuth authentication, backed by Node.js, Express.js, and MongoDB.",
       features: [
         "On-chain certificate registry using Solidity smart contracts",
         "Cryptographic verification checks based on document hash validity",
@@ -144,7 +113,7 @@ export const PORTFOLIO_DATA = {
     },
   ] as Project[],
 
-experience: [
+  experience: [
     {
       id: "exp-1",
       role: "Software Development Intern",
