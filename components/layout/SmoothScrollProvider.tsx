@@ -9,7 +9,7 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
     <ReactLenis
       root
       options={{
-        lerp: 0.09, // Silky 60fps inertial momentum damping
+        lerp: 0.09, 
         orientation: "vertical",
         gestureOrientation: "vertical",
         smoothWheel: true,

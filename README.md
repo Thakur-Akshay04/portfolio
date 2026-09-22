@@ -57,7 +57,7 @@ The portfolio is structured across modular App Router pages with responsive navi
 - **Comprehensive Case Studies**: Detailed breakdowns of architectural challenges, technical solutions, database decisions, and tech stacks for every featured project.
 
 ### 🛡️ Production-Grade Contact System
-- **Serverless API Route**: Built on Next.js App Router (`/api/contact`) with the **Resend** email service.
+- **Serverless API Route**: Built on Next.js App Router (`/api/send`) with the **Resend** email service.
 - **Bot & Abuse Prevention**:
   - In-memory rate limiting (max 3 submissions per 10 minutes per IP).
   - Disposable email domain blocking via `disposable-email-domains`.
@@ -108,14 +108,16 @@ The portfolio is structured across modular App Router pages with responsive navi
 ```text
 portfolio/
 ├── app/
-│   ├── about/              # About Me page & 3D Constellation Sphere
+│   ├── about/              # About Me page & tech stack showcase
 │   ├── api/
-│   │   └── contact/        # Secure Resend email API route with rate-limiting
+│   │   ├── config/         # Dynamic edge configuration route
+│   │   └── send/           # Secure Resend email API route with rate-limiting
 │   ├── contact/            # Interactive contact form page
 │   ├── experience/         # Professional work experience & milestones
+│   ├── not-found.tsx       # Clean 404 page not found view
 │   ├── projects/           # Showcase of full-stack & AI projects
 │   ├── skills/             # Categorized technical skill matrix & docks
-│   ├── globals.css         # Custom animations, scanlines & design tokens
+│   ├── globals.css         # Theme styles, Tailwind directives & navbar dock styling
 │   ├── layout.tsx          # Root layout with Navbar, Footer & Lenis provider
 │   ├── page.tsx            # Home / Hero landing page
 │   └── robots.ts           # Dynamic SEO robots configuration
@@ -123,12 +125,13 @@ portfolio/
 │   ├── icons/              # Custom brand SVG icons & tech stack badges
 │   ├── layout/             # Navbar, Footer, PageFoldWrapper & Headings
 │   ├── sections/           # Section-specific components (Hero, Projects, Skills, etc.)
-│   └── ui/                 # Reusable UI primitives (Buttons, Cards, Inputs)
+│   └── ui/                 # Ambient floating paths background components
 ├── constants/
-│   └── data.ts             # Centralized portfolio data (Projects, Bio, Experience)
+│   └── data.ts             # Centralized portfolio data (Projects, Experience, Socials)
 ├── lib/
-│   └── hooks.ts            # Custom React hooks (motion preference, window resize)
-├── public/                 # Static assets, project mockups & illustrations
+│   ├── hooks.ts            # Custom React hooks (reduced motion accessibility)
+│   └── variants.ts         # Shared Framer Motion animation variants
+├── public/                 # Static favicon & web assets
 ├── package.json            # Scripts & dependencies
 ├── tailwind.config.ts      # Tailwind design system configuration
 └── tsconfig.json           # TypeScript configuration
@@ -212,8 +215,8 @@ pnpm build
 - **Zero Client Secrets**: All sensitive API keys (`RESEND_API_KEY`) remain strictly on the server-side runtime.
 - **Input Sanitization**: User inputs are HTML-escaped and validated prior to email dispatch to prevent template and injection attacks.
 - **Rate Limiting**: IP-based rate limiting safeguards against automated submission spam and DoS attempts.
-- **Optimized Bundle Sizes**: Dynamic imports and lazy loading for heavy 3D canvases and visual effects.
-- **Smooth 60FPS Animations**: Hardware-accelerated CSS transforms and lightweight WebGL rendering.
+- **Optimized Bundle Sizes**: Selective imports, Turbopack tree-shaking, and efficient vector graphics.
+- **Smooth 60FPS Animations**: Hardware-accelerated CSS transforms and responsive vector animations.
 
 ---
 
