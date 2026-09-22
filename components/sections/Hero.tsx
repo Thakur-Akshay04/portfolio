@@ -174,20 +174,6 @@ export default function Hero() {
 
   return (
     <section className="w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 pt-8 sm:pt-10 md:pt-12 pb-8 sm:pb-12 flex-1 flex flex-col justify-center items-center text-center my-auto">
-      {/* Location & Status Line */}
-      <motion.div
-        initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="group inline-flex items-center justify-center gap-2.5 text-xs font-mono text-neutral-400 uppercase tracking-wider mb-4 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.06] transition-all duration-200 cursor-default select-none shadow-sm hover:shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
-      >
-        <span className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-neutral-300 group-hover:text-white transition-colors duration-200">Himachal Pradesh, India</span>
-        </span>
-        <span className="text-neutral-600">•</span>
-        <span className="text-neutral-300 group-hover:text-white transition-colors duration-200">Software Engineer</span>
-      </motion.div>
 
       {/* Name Headline */}
       <motion.h1

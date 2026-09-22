@@ -3,18 +3,12 @@ import { ArrowUpRight } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/constants/data";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="w-full border-t border-white/[0.08] bg-[#070709]/90 backdrop-blur-md py-2.5 sm:py-3 px-4 sm:px-8 mt-auto shrink-0 z-20">
       <div className="max-w-7xl mx-auto flex flex-row items-center justify-between gap-4 text-xs text-neutral-400 font-sans">
-        <div className="flex items-center gap-2 sm:gap-4 text-left">
+        <div className="flex items-center text-left">
           <span className="font-medium text-white tracking-tight text-xs sm:text-sm">
             {PORTFOLIO_DATA.personal.name}
-          </span>
-          <span className="text-neutral-600">•</span>
-          <span className="text-[11px] font-mono text-neutral-500 hidden sm:inline">
-            © {currentYear} All rights reserved.
           </span>
         </div>
 
