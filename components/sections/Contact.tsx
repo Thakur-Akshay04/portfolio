@@ -217,7 +217,7 @@ export default function Contact() {
           <div className="space-y-3">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white">Let&apos;s Create something together... </h3>
             <p className="text-sm sm:text-base text-neutral-400 leading-relaxed font-sans">
-              I&apos;m currently open to new opportunities, freelance contracts, or Full-time roles. If you have any projects, ideas, questions, or any niche topic you'd like to discuss, I'd love to hear from you.
+              I&apos;m currently open to new opportunities, freelance contracts, or Full-time roles. If you have any projects, ideas, questions, or any niche topic you&apos;d like to discuss, I&apos;d love to hear from you.
             </p>
           </div>
 
