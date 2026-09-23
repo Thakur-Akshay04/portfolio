@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
-interface FloatingPathsProps {
+export interface FloatingPathsProps {
   position: number;
   count?: number;
   className?: string;

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Experience from "@/components/sections/Experience";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Experience | Akshay Singh Thakur",
-  description: "Professional journey, internships, and engineering impact of Akshay Singh Thakur.",
+  title: siteConfig.pages.experience.title,
+  description: siteConfig.pages.experience.description,
 };
 
 export default function ExperiencePage() {

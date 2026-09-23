@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { FloatingPaths } from "./background-paths";
+import { FloatingPaths } from "./FloatingPaths";
 
 export function GlobalPathsBackground() {
   return (

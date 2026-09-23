@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Contact from "@/components/sections/Contact";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Contact | Akshay Singh Thakur",
-  description: "Get in touch with Akshay Singh Thakur for full-stack software engineering opportunities, consulting, or technical collaboration.",
+  title: siteConfig.pages.contact.title,
+  description: siteConfig.pages.contact.description,
 };
 
 export default function ContactPage() {

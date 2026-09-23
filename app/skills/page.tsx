@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Skills from "@/components/sections/Skills";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Skills | Akshay Singh Thakur",
-  description: "Technical skill set and proficiency across frontend frameworks, backend runtimes, databases, cloud architecture, DevOps, and AI models.",
+  title: siteConfig.pages.skills.title,
+  description: siteConfig.pages.skills.description,
 };
 
 export default function SkillsPage() {

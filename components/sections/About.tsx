@@ -196,13 +196,13 @@ export default function About() {
           <div className="flex flex-wrap items-center gap-3.5 pt-1 sm:pt-2">
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 px-4.5 py-2.5 rounded-xl bg-white text-black font-semibold text-xs sm:text-sm hover:bg-neutral-200 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-xs sm:text-sm hover:bg-neutral-200 transition-colors"
             >
               <span>Explore Projects</span>
             </Link>
             <Link
               href="/skills"
-              className="inline-flex items-center gap-2 px-4.5 py-2.5 rounded-xl bg-white/[0.04] text-white font-medium text-xs sm:text-sm border border-white/[0.08] hover:bg-white/[0.08] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.04] text-white font-medium text-xs sm:text-sm border border-white/[0.08] hover:bg-white/[0.08] transition-colors"
             >
               <span>View Technical Skills</span>
             </Link>

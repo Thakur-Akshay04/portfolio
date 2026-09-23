@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import About from "@/components/sections/About";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "About | Akshay Singh Thakur",
-  description: "Learn about Akshay Singh Thakur, a Full-Stack & MERN Developer specializing in high-performance web systems, modern React applications, and backend engineering.",
+  title: siteConfig.pages.about.title,
+  description: siteConfig.pages.about.description,
 };
 
 export default function AboutPage() {

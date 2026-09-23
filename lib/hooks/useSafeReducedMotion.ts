@@ -15,3 +15,4 @@ export function useSafeReducedMotion() {
   return isClient ? !!shouldReduceMotion : false;
 }
 
+export default useSafeReducedMotion;

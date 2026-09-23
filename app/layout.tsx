@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
-import GlobalPathsBackground from "@/components/ui/GlobalPathsBackground";
+import GlobalPathsBackground from "@/components/ui/background/GlobalPathsBackground";
 
 const sansFont = DM_Sans({
   subsets: ["latin"],
@@ -27,21 +27,23 @@ const monoFont = JetBrains_Mono({
   display: "swap",
 });
 
+import { siteConfig } from "@/config/site";
+
 export const metadata: Metadata = {
-  title: "Akshay Singh Thakur | Full Stack & MERN Developer",
-  description: "Explore the portfolio of Akshay Singh Thakur, Full-Stack & MERN Developer building high-performance web systems with clean architecture, modern React interfaces, and AI integration.",
-  keywords: "Full Stack Developer, MERN Stack Developer, React, Next.js, Node.js, Cloud, DevOps, Portfolio",
-  authors: [{ name: "Akshay Singh Thakur" }],
+  title: siteConfig.title,
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.author.name }],
   openGraph: {
-    title: "Akshay Singh Thakur | Full Stack Developer",
-    description: "Personal portfolio demonstrating MERN Stack engineering expertise, interactive React interfaces, and modern full-stack web applications.",
+    title: siteConfig.title,
+    description: siteConfig.description,
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Akshay Singh Thakur | Full Stack Developer",
-    description: "Personal portfolio demonstrating MERN Stack engineering expertise, interactive React interfaces, and modern full-stack web applications.",
+    title: siteConfig.title,
+    description: siteConfig.description,
   },
   robots: {
     index: true,

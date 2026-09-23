@@ -13,14 +13,22 @@ import {
   MessageSquare,
 } from "lucide-react";
 
-export const navItems = [
-  { label: "Home", href: "/", icon: Home },
-  { label: "About", href: "/about", icon: User },
-  { label: "Skills", href: "/skills", icon: Wrench },
-  { label: "Projects", href: "/projects", icon: FolderOpen },
-  { label: "Experience", href: "/experience", icon: Briefcase },
-  { label: "Contact", href: "/contact", icon: MessageSquare },
-];
+import { siteConfig } from "@/config/site";
+import type { LucideIcon } from "lucide-react";
+
+const iconMap: Record<string, LucideIcon> = {
+  "/": Home,
+  "/about": User,
+  "/skills": Wrench,
+  "/projects": FolderOpen,
+  "/experience": Briefcase,
+  "/contact": MessageSquare,
+};
+
+export const navItems = siteConfig.navItems.map((item) => ({
+  ...item,
+  icon: iconMap[item.href] || Home,
+}));
 
 export default function Navbar() {
   const pathname = usePathname();

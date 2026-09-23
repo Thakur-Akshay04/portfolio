@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Projects from "@/components/sections/Projects";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Projects | Akshay Singh Thakur",
-  description: "Featured engineering projects built by Akshay Singh Thakur, including Luminote (AI notes workspace), ResuCraft (AI resume optimizer), and CredVault (blockchain credentials).",
+  title: siteConfig.pages.projects.title,
+  description: siteConfig.pages.projects.description,
 };
 
 export default function ProjectsPage() {
