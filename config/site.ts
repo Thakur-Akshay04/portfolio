@@ -22,7 +22,7 @@ export const siteConfig = {
   ],
   author: {
     name: "Akshay Singh Thakur",
-    url: "https://github.com/Thakur-Akshay04",
+    url: (process.env.NEXT_PUBLIC_GITHUB_URL || "").trim(),
   },
   navItems: [
     { label: "Home", href: "/" },

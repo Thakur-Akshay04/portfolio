@@ -68,7 +68,6 @@ export const dynamic = "force-dynamic";
 
 /** Resolves Cloudflare env, falling back to process.env in non-worker environments. */
 async function resolveCloudflareEnv(): Promise<Record<string, string | undefined>> {
-  if (process.env.NODE_ENV !== "production") return {};
   try {
     const ctx = await getCloudflareContext({ async: true });
     if (ctx?.env) {
@@ -102,12 +101,25 @@ export async function POST(req: Request) {
   try {
     const cfEnv = await resolveCloudflareEnv();
 
-    const apiKey = (cfEnv.RESEND_API_KEY || process.env.RESEND_API_KEY || "").trim();
+    const apiKey = (
+      cfEnv.RESEND_API_KEY ||
+      cfEnv.RESEND_KEY ||
+      process.env.RESEND_API_KEY ||
+      process.env.RESEND_KEY ||
+      ""
+    ).trim();
+
     const recipientEmail = (
       cfEnv.PERSONAL_EMAIL ||
+      cfEnv.EMAIL ||
+      cfEnv.TO_EMAIL ||
       cfEnv.NEXT_PUBLIC_PERSONAL_EMAIL ||
+      cfEnv.NEXT_PUBLIC_EMAIL ||
       process.env.PERSONAL_EMAIL ||
+      process.env.EMAIL ||
+      process.env.TO_EMAIL ||
       process.env.NEXT_PUBLIC_PERSONAL_EMAIL ||
+      process.env.NEXT_PUBLIC_EMAIL ||
       ""
     ).trim();
 

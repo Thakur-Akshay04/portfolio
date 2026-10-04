@@ -25,6 +25,16 @@ function resolveResumeUrl(raw: string): string {
   return `https://${raw}`;
 }
 
+function getFirstValid(cfEnv: Record<string, string | undefined>, keys: string[]): string {
+  for (const key of keys) {
+    const val = cfEnv[key] || process.env[key];
+    if (val && typeof val === "string" && val.trim().length > 0) {
+      return val.trim();
+    }
+  }
+  return "";
+}
+
 export async function GET() {
   let cfEnv: Record<string, string | undefined> = {};
   try {
@@ -37,67 +47,52 @@ export async function GET() {
   }
 
   // 1. Email Resolution
-  const email = (
-    cfEnv.NEXT_PUBLIC_PERSONAL_EMAIL ||
-    cfEnv.PERSONAL_EMAIL ||
-    cfEnv.NEXT_PUBLIC_EMAIL ||
-    cfEnv.EMAIL ||
-    process.env.NEXT_PUBLIC_PERSONAL_EMAIL ||
-    process.env.PERSONAL_EMAIL ||
-    process.env.NEXT_PUBLIC_EMAIL ||
-    process.env.EMAIL ||
-    ""
-  ).trim();
+  const email = getFirstValid(cfEnv, [
+    "NEXT_PUBLIC_PERSONAL_EMAIL",
+    "PERSONAL_EMAIL",
+    "NEXT_PUBLIC_EMAIL",
+    "EMAIL",
+    "CONTACT_EMAIL",
+    "TO_EMAIL",
+  ]);
 
   // 2. GitHub Profile / ID Resolution
-  const rawGithub = (
-    cfEnv.NEXT_PUBLIC_GITHUB_URL ||
-    cfEnv.GITHUB_URL ||
-    cfEnv.NEXT_PUBLIC_GITHUB_ID ||
-    cfEnv.GITHUB_ID ||
-    cfEnv.NEXT_PUBLIC_GITHUB_USERNAME ||
-    cfEnv.GITHUB_USERNAME ||
-    process.env.NEXT_PUBLIC_GITHUB_URL ||
-    process.env.GITHUB_URL ||
-    process.env.NEXT_PUBLIC_GITHUB_ID ||
-    process.env.GITHUB_ID ||
-    process.env.NEXT_PUBLIC_GITHUB_USERNAME ||
-    process.env.GITHUB_USERNAME ||
-    ""
-  ).trim();
-
+  const rawGithub = getFirstValid(cfEnv, [
+    "NEXT_PUBLIC_GITHUB_URL",
+    "GITHUB_URL",
+    "NEXT_PUBLIC_GITHUB",
+    "GITHUB",
+    "NEXT_PUBLIC_GITHUB_USERNAME",
+    "GITHUB_USERNAME",
+    "NEXT_PUBLIC_GITHUB_ID",
+    "GITHUB_ID",
+  ]);
   const githubUrl = resolveGithubUrl(rawGithub);
 
   // 3. LinkedIn Profile / ID Resolution
-  const rawLinkedin = (
-    cfEnv.NEXT_PUBLIC_LINKEDIN_URL ||
-    cfEnv.LINKEDIN_URL ||
-    cfEnv.NEXT_PUBLIC_LINKEDIN_ID ||
-    cfEnv.LINKEDIN_ID ||
-    cfEnv.NEXT_PUBLIC_LINKEDIN_PROFILE ||
-    cfEnv.LINKEDIN_PROFILE ||
-    process.env.NEXT_PUBLIC_LINKEDIN_URL ||
-    process.env.LINKEDIN_URL ||
-    process.env.NEXT_PUBLIC_LINKEDIN_ID ||
-    process.env.LINKEDIN_ID ||
-    process.env.NEXT_PUBLIC_LINKEDIN_PROFILE ||
-    process.env.LINKEDIN_PROFILE ||
-    ""
-  ).trim();
-
+  const rawLinkedin = getFirstValid(cfEnv, [
+    "NEXT_PUBLIC_LINKEDIN_URL",
+    "LINKEDIN_URL",
+    "NEXT_PUBLIC_LINKEDIN",
+    "LINKEDIN",
+    "NEXT_PUBLIC_LINKEDIN_PROFILE",
+    "LINKEDIN_PROFILE",
+    "NEXT_PUBLIC_LINKEDIN_ID",
+    "LINKEDIN_ID",
+  ]);
   const linkedinUrl = resolveLinkedinUrl(rawLinkedin);
 
   // 4. Resume URL Resolution
-  const rawResume = (
-    cfEnv.NEXT_PUBLIC_RESUME_URL ||
-    cfEnv.RESUME_URL ||
-    cfEnv.RESUME ||
-    process.env.NEXT_PUBLIC_RESUME_URL ||
-    process.env.RESUME_URL ||
-    process.env.RESUME ||
-    ""
-  ).trim();
-
+  const rawResume = getFirstValid(cfEnv, [
+    "NEXT_PUBLIC_RESUME_URL",
+    "RESUME_URL",
+    "NEXT_PUBLIC_RESUME_LINK",
+    "RESUME_LINK",
+    "NEXT_PUBLIC_RESUME",
+    "RESUME",
+    "CV_URL",
+    "CV",
+  ]);
   const resumeUrl = resolveResumeUrl(rawResume);
 
   return NextResponse.json(
