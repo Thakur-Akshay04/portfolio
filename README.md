@@ -85,10 +85,11 @@ The portfolio is structured across modular App Router pages with responsive navi
 ## 🛠️ Tech Stack
 
 ### Frontend & Core
-- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router, Static Pre-Rendering)
 - **Library**: [React 19](https://react.dev/)
 - **Language**: [TypeScript 6](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS 3.4](https://tailwindcss.com/), PostCSS
+- **Typography**: Chillax (Custom geometric display & sans-serif, high-performance `.woff2`)
 - **Icons**: [Lucide React](https://lucide.dev/)
 
 ### Animation & Motion
@@ -108,30 +109,33 @@ The portfolio is structured across modular App Router pages with responsive navi
 ```text
 portfolio/
 ├── app/
-│   ├── about/              # About Me page & tech stack showcase
+│   ├── about/              # About Me page & interactive tech stack marquee
 │   ├── api/
-│   │   ├── config/         # Dynamic edge configuration route
 │   │   └── send/           # Secure Resend email API route with rate-limiting
 │   ├── contact/            # Interactive contact form page
 │   ├── experience/         # Professional work experience & milestones
-│   ├── not-found.tsx       # Clean 404 page not found view
+│   ├── fonts/              # Chillax font family assets (.woff2 from Extralight to Bold)
+│   ├── not-found.tsx       # Custom 404 page not found view
 │   ├── projects/           # Showcase of full-stack & AI projects
 │   ├── skills/             # Categorized technical skill matrix & docks
 │   ├── globals.css         # Theme styles, Tailwind directives & navbar dock styling
-│   ├── layout.tsx          # Root layout with Navbar, Footer & Lenis provider
+│   ├── layout.tsx          # Root layout with Chillax typography, Navbar & Footer
 │   ├── page.tsx            # Home / Hero landing page
 │   └── robots.ts           # Dynamic SEO robots configuration
 ├── components/
 │   ├── icons/              # Custom brand SVG icons & tech stack badges
 │   ├── layout/             # Navbar, Footer, PageFoldWrapper & Headings
 │   ├── sections/           # Section-specific components (Hero, Projects, Skills, etc.)
-│   └── ui/                 # Ambient floating paths background components
+│   └── ui/                 # Ambient floating paths background component
+├── config/
+│   └── site.ts             # Global site metadata & navigation configurations
 ├── constants/
-│   └── data.ts             # Centralized portfolio data (Projects, Experience, Socials)
+│   └── data/               # Modularized portfolio data (Projects, Skills, Experience, Socials)
 ├── lib/
-│   ├── hooks.ts            # Custom React hooks (reduced motion accessibility)
+│   ├── hooks/              # Custom React hooks (useSafeReducedMotion accessibility)
 │   └── variants.ts         # Shared Framer Motion animation variants
-├── public/                 # Static favicon & web assets
+├── types/                  # Type-safe TypeScript interfaces for all data models
+├── public/                 # Static web assets
 ├── package.json            # Scripts & dependencies
 ├── tailwind.config.ts      # Tailwind design system configuration
 └── tsconfig.json           # TypeScript configuration
