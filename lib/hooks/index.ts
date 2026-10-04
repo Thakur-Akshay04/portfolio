@@ -1,2 +1,2 @@
 export * from "./useSafeReducedMotion";
-export * from "./useReducedMotion";
+export { default as useSafeReducedMotion } from "./useSafeReducedMotion";

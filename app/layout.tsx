@@ -1,22 +1,46 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 import GlobalPathsBackground from "@/components/ui/background/GlobalPathsBackground";
 
-const sansFont = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const displayFont = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["500", "600", "700"],
+const chillaxFont = localFont({
+  src: [
+    {
+      path: "./fonts/Chillax-Extralight.woff2",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Chillax-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Chillax-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Chillax-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Chillax-Semibold.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Chillax-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-chillax",
   display: "swap",
 });
 
@@ -65,7 +89,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body
-        className={`${sansFont.variable} ${displayFont.variable} ${monoFont.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${chillaxFont.variable} ${monoFont.variable} font-sans antialiased bg-background text-foreground`}
       >
         <SmoothScrollProvider>
           <div className="min-h-screen flex flex-col relative selection:bg-purple-500/30 selection:text-white">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, CheckCircle, AlertTriangle, Mail, FileText, MapPin } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
@@ -100,24 +100,8 @@ export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [emailStr, setEmailStr] = useState(PORTFOLIO_DATA.personal.email || "");
-  const [socialLinks, setSocialLinks] = useState(PORTFOLIO_DATA.socials);
-
-  useEffect(() => {
-    fetch("/api/config")
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (data) {
-          if (data.email) setEmailStr(data.email.trim());
-          setSocialLinks([
-            { name: "GitHub", url: (data.githubUrl || "").trim(), iconName: "Github" },
-            { name: "LinkedIn", url: (data.linkedinUrl || "").trim(), iconName: "Linkedin" },
-            { name: "Resume", url: (data.resumeUrl || "").trim(), iconName: "Resume" },
-          ]);
-        }
-      })
-      .catch(() => {});
-  }, []);
+  const emailStr = PORTFOLIO_DATA.personal.email || "";
+  const socialLinks = PORTFOLIO_DATA.socials;
 
 
   const fadeInLeft = getFadeIn("left", 40)(shouldReduceMotion);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, FileText, Copy, Check } from "lucide-react";
@@ -94,67 +94,38 @@ function ExploreCard({ item }: { item: QuickLinkItem }) {
   );
 }
 
+function normalizeUrl(raw?: string): string {
+  if (!raw) return "";
+  const trimmed = raw.trim();
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) return trimmed;
+  return `https://${trimmed}`;
+}
+
 export default function Hero() {
   const shouldReduceMotion = useSafeReducedMotion();
   const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const [emailAddress, setEmailAddress] = useState(
-    PORTFOLIO_DATA.personal.email || ""
-  );
-  const [githubUrl, setGithubUrl] = useState(
-    (process.env.NEXT_PUBLIC_GITHUB_URL || "").trim()
-  );
-  const [linkedinUrl, setLinkedinUrl] = useState(
-    (process.env.NEXT_PUBLIC_LINKEDIN_URL || "").trim()
-  );
-  const [resumeUrl, setResumeUrl] = useState(
-    (process.env.NEXT_PUBLIC_RESUME_URL || "").trim()
-  );
+  const emailAddress = PORTFOLIO_DATA.personal.email || "";
+  const resumeItem = PORTFOLIO_DATA.socials.find((s) => s.name.toLowerCase() === "resume");
+  const githubItem = PORTFOLIO_DATA.socials.find((s) => s.name.toLowerCase() === "github");
+  const linkedinItem = PORTFOLIO_DATA.socials.find((s) => s.name.toLowerCase() === "linkedin");
 
-  useEffect(() => {
-    fetch("/api/config")
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (data) {
-          if (data.email) setEmailAddress(data.email.trim());
-          if (data.githubUrl) setGithubUrl(data.githubUrl.trim());
-          if (data.linkedinUrl) setLinkedinUrl(data.linkedinUrl.trim());
-          if (data.resumeUrl) setResumeUrl(data.resumeUrl.trim());
-        }
-      })
-      .catch(() => {});
-  }, []);
+  const normalizedResumeUrl = normalizeUrl(process.env.NEXT_PUBLIC_RESUME_URL || resumeItem?.url);
+  const normalizedGithubUrl = normalizeUrl(process.env.NEXT_PUBLIC_GITHUB_URL || githubItem?.url);
+  const normalizedLinkedinUrl = normalizeUrl(process.env.NEXT_PUBLIC_LINKEDIN_URL || linkedinItem?.url);
 
-  const rawResumeUrl = (resumeUrl || "").trim();
-  const normalizedResumeUrl = rawResumeUrl
-    ? rawResumeUrl.startsWith("http://") || rawResumeUrl.startsWith("https://")
-      ? rawResumeUrl
-      : `https://${rawResumeUrl}`
-    : "";
   const hasValidResumeUrl = Boolean(
     normalizedResumeUrl &&
       (normalizedResumeUrl.startsWith("http://") ||
         normalizedResumeUrl.startsWith("https://"))
   );
 
-  const rawGithubUrl = (githubUrl || "").trim();
-  const normalizedGithubUrl = rawGithubUrl
-    ? rawGithubUrl.startsWith("http://") || rawGithubUrl.startsWith("https://")
-      ? rawGithubUrl
-      : `https://${rawGithubUrl}`
-    : "";
   const hasValidGithubUrl = Boolean(
     normalizedGithubUrl &&
       (normalizedGithubUrl.startsWith("http://") ||
         normalizedGithubUrl.startsWith("https://"))
   );
 
-  const rawLinkedinUrl = (linkedinUrl || "").trim();
-  const normalizedLinkedinUrl = rawLinkedinUrl
-    ? rawLinkedinUrl.startsWith("http://") || rawLinkedinUrl.startsWith("https://")
-      ? rawLinkedinUrl
-      : `https://${rawLinkedinUrl}`
-    : "";
   const hasValidLinkedinUrl = Boolean(
     normalizedLinkedinUrl &&
       (normalizedLinkedinUrl.startsWith("http://") ||

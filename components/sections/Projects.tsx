@@ -453,10 +453,11 @@ function TiltCard({ children, className, onClick }: TiltCardProps) {
   );
 }
 
+const AI_RESUME_MATCHED_KWS = ["Java", "Spring Boot", "ReactJS", "MongoDB", "Node.js", "JavaScript"];
+const AI_RESUME_MISSING_KWS = ["Agile methodology", "Cloud computing", "Cybersecurity"];
+
 // Simulated mockups for the project cards to show concrete technical content
 function AIResumeMockup() {
-  const matchedKws = ["Java", "Spring Boot", "ReactJS", "MongoDB", "Node.js", "JavaScript"];
-  const missingKws = ["Agile methodology", "Cloud computing", "Cybersecurity"];
 
   return (
     <div className="relative w-full aspect-[4/3] rounded-xl border border-white/10 bg-[#0d0d10] overflow-hidden font-sans text-[9px] text-gray-400 shadow-2xl flex flex-col group-hover:border-accent-purple/30 transition-colors duration-300">
@@ -567,10 +568,10 @@ function AIResumeMockup() {
             <div className="bg-white/[0.025] border border-white/5 rounded-lg p-1.5">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-[7px] text-gray-300 font-semibold">Matched Keywords</span>
-                <span className="text-[6px] text-green-400 font-bold">{matchedKws.length}</span>
+                <span className="text-[6px] text-green-400 font-bold">{AI_RESUME_MATCHED_KWS.length}</span>
               </div>
               <div className="flex flex-wrap gap-0.5">
-                {matchedKws.map((kw) => (
+                {AI_RESUME_MATCHED_KWS.map((kw) => (
                   <span key={kw} className="px-1 py-0.5 bg-green-500/10 border border-green-500/20 rounded text-[5.5px] text-green-400">{kw}</span>
                 ))}
               </div>
@@ -578,10 +579,10 @@ function AIResumeMockup() {
             <div className="bg-white/[0.025] border border-white/5 rounded-lg p-1.5">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-[7px] text-gray-300 font-semibold">Missing Keywords</span>
-                <span className="text-[6px] text-red-400 font-bold">{missingKws.length}</span>
+                <span className="text-[6px] text-red-400 font-bold">{AI_RESUME_MISSING_KWS.length}</span>
               </div>
               <div className="flex flex-wrap gap-0.5">
-                {missingKws.map((kw) => (
+                {AI_RESUME_MISSING_KWS.map((kw) => (
                   <span key={kw} className="px-1 py-0.5 bg-red-500/10 border border-red-500/20 rounded text-[5.5px] text-red-400">{kw}</span>
                 ))}
               </div>

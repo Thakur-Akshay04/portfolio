@@ -41,8 +41,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "sans-serif"],
-        display: ["var(--font-display)", "sans-serif"],
+        sans: ["var(--font-chillax)", "sans-serif"],
+        display: ["var(--font-chillax)", "sans-serif"],
+        chillax: ["var(--font-chillax)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
       },
     },

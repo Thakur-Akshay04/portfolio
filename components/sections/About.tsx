@@ -38,13 +38,13 @@ const COLUMN_TWO_TECHS: TechCardItem[] = [
   { name: "Git", category: "VCS" },
 ];
 
+// Duplicated arrays for seamless infinite vertical looping
+const COL_1_ITEMS = [...COLUMN_ONE_TECHS, ...COLUMN_ONE_TECHS];
+const COL_2_ITEMS = [...COLUMN_TWO_TECHS, ...COLUMN_TWO_TECHS];
+
 function FloatingTechStack() {
   const shouldReduceMotion = useSafeReducedMotion();
   const [isHovered, setIsHovered] = useState(false);
-
-  // Duplicated arrays for seamless infinite vertical looping
-  const col1Items = [...COLUMN_ONE_TECHS, ...COLUMN_ONE_TECHS];
-  const col2Items = [...COLUMN_TWO_TECHS, ...COLUMN_TWO_TECHS];
 
   return (
     <div
@@ -87,7 +87,7 @@ function FloatingTechStack() {
             }}
             className="flex flex-col gap-2.5 sm:gap-3"
           >
-            {col1Items.map((tech, idx) => (
+            {COL_1_ITEMS.map((tech, idx) => (
               <div
                 key={`${tech.name}-${idx}`}
                 className="group p-2.5 sm:p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.06] hover:border-accent-purple/40 transition-all duration-300 flex items-center gap-2.5 cursor-default shadow-sm"
@@ -123,7 +123,7 @@ function FloatingTechStack() {
             }}
             className="flex flex-col gap-2.5 sm:gap-3"
           >
-            {col2Items.map((tech, idx) => (
+            {COL_2_ITEMS.map((tech, idx) => (
               <div
                 key={`${tech.name}-${idx}`}
                 className="group p-2.5 sm:p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.06] hover:border-accent-purple/40 transition-all duration-300 flex items-center gap-2.5 cursor-default shadow-sm"
