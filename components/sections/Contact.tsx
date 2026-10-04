@@ -222,22 +222,20 @@ export default function Contact() {
           </div>
 
           <div className="space-y-4 font-mono text-sm border-t border-white/[0.08] pt-6">
-            {emailStr ? (
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-neutral-300 gap-2">
-                <span className="text-neutral-500 text-xs">EMAIL:</span>
-                <motion.a
-                  href={`mailto:${emailStr}`}
-                  className="px-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/[0.2] text-neutral-200 font-medium relative overflow-hidden group text-xs sm:text-sm max-w-full transition-all"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                  <span className="relative z-10 inline-block break-all">
-                    {emailStr}
-                  </span>
-                </motion.a>
-              </div>
-            ) : null}
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-neutral-300 gap-2">
+              <span className="text-neutral-500 text-xs">EMAIL:</span>
+              <motion.a
+                href={emailStr ? `mailto:${emailStr}` : "/email"}
+                className="px-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/[0.2] text-neutral-200 font-medium relative overflow-hidden group text-xs sm:text-sm max-w-full transition-all cursor-pointer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              >
+                <span className="relative z-10 inline-block break-all">
+                  {emailStr || "Send Email"}
+                </span>
+              </motion.a>
+            </div>
 
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-gray-300 gap-2">
               <span className="text-gray-500 text-xs">LOCATION:</span>
@@ -254,18 +252,25 @@ export default function Contact() {
             <div className="flex gap-3">
               {socialLinks.map((social) => {
                 let Icon: React.ComponentType<{ className?: string }> = Mail;
+                let fallbackHref = "/";
                 const nameLower = social.name.toLowerCase();
-                if (nameLower.includes("github")) Icon = GithubIcon;
-                else if (nameLower.includes("linkedin")) Icon = LinkedinIcon;
-                else if (nameLower.includes("resume")) Icon = FileText;
+                if (nameLower.includes("github")) {
+                  Icon = GithubIcon;
+                  fallbackHref = "/github";
+                } else if (nameLower.includes("linkedin")) {
+                  Icon = LinkedinIcon;
+                  fallbackHref = "/linkedin";
+                } else if (nameLower.includes("resume")) {
+                  Icon = FileText;
+                  fallbackHref = "/resume";
+                }
 
                 const rawUrl = (social.url || "").trim();
                 const normalizedUrl = rawUrl
                   ? rawUrl.startsWith("http://") || rawUrl.startsWith("https://")
                     ? rawUrl
                     : `https://${rawUrl}`
-                  : "";
-                const hasValidUrl = Boolean(normalizedUrl && (normalizedUrl.startsWith("http://") || normalizedUrl.startsWith("https://")));
+                  : fallbackHref;
 
                 return (
                   <div key={social.name} className="relative group/btn">
@@ -276,21 +281,12 @@ export default function Contact() {
                     </span>
 
                     <motion.a
-                      href={hasValidUrl ? normalizedUrl : "#"}
-                      onClick={(e) => {
-                        if (!hasValidUrl) {
-                          e.preventDefault();
-                        }
-                      }}
-                      target={hasValidUrl ? "_blank" : undefined}
-                      rel={hasValidUrl ? "noopener noreferrer" : undefined}
-                      className={`w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-xl bg-white/[0.03] border text-neutral-400 hover:text-white transition-all border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.06] ${
-                        !hasValidUrl ? "cursor-not-allowed opacity-50" : "cursor-pointer"
-                      }`}
-                      whileHover={{
-                        scale: hasValidUrl ? 1.05 : 1,
-                      }}
-                      whileTap={{ scale: hasValidUrl ? 0.96 : 1 }}
+                      href={normalizedUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-xl bg-white/[0.03] border text-neutral-400 hover:text-white transition-all border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.06] cursor-pointer"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.96 }}
                     >
                       <Icon className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                     </motion.a>

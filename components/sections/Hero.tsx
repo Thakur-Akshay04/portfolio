@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, FileText, Copy, Check } from "lucide-react";
+import { ArrowUpRight, FileText, Copy, Check, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 import { useSafeReducedMotion } from "@/lib/hooks";
 import { PORTFOLIO_DATA } from "@/constants/data";
@@ -140,27 +140,16 @@ export default function Hero() {
   const normalizedGithubUrl = normalizeUrl(githubUrl || process.env.NEXT_PUBLIC_GITHUB_URL || githubItem?.url);
   const normalizedLinkedinUrl = normalizeUrl(linkedinUrl || process.env.NEXT_PUBLIC_LINKEDIN_URL || linkedinItem?.url);
 
-  const hasValidResumeUrl = Boolean(
-    normalizedResumeUrl &&
-      (normalizedResumeUrl.startsWith("http://") ||
-        normalizedResumeUrl.startsWith("https://"))
-  );
-
-  const hasValidGithubUrl = Boolean(
-    normalizedGithubUrl &&
-      (normalizedGithubUrl.startsWith("http://") ||
-        normalizedGithubUrl.startsWith("https://"))
-  );
-
-  const hasValidLinkedinUrl = Boolean(
-    normalizedLinkedinUrl &&
-      (normalizedLinkedinUrl.startsWith("http://") ||
-        normalizedLinkedinUrl.startsWith("https://"))
-  );
+  const effectiveResumeUrl = normalizedResumeUrl || "/resume";
+  const effectiveGithubUrl = normalizedGithubUrl || "/github";
+  const effectiveLinkedinUrl = normalizedLinkedinUrl || "/linkedin";
+  const effectiveEmailUrl = emailAddress ? `mailto:${emailAddress}` : "/email";
 
   const hasValidEmail = Boolean(emailAddress && emailAddress.includes("@"));
 
-  const handleCopyEmail = () => {
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (!hasValidEmail) return;
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard
@@ -213,88 +202,70 @@ export default function Hero() {
         transition={{ duration: 0.45, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
         className="flex flex-wrap items-center justify-center gap-3 mb-8 sm:mb-9"
       >
+        {/* Resume Button */}
         <a
-          href={hasValidResumeUrl ? normalizedResumeUrl : "#"}
-          onClick={(e) => {
-            if (!hasValidResumeUrl) {
-              e.preventDefault();
-            }
-          }}
-          target={hasValidResumeUrl ? "_blank" : undefined}
-          rel={hasValidResumeUrl ? "noopener noreferrer" : undefined}
-          className={`group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070709] ${
-            !hasValidResumeUrl
-              ? "bg-white/50 text-black/60 cursor-not-allowed opacity-60"
-              : "bg-white text-black hover:bg-neutral-100 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_-4px_rgba(255,255,255,0.3)] active:translate-y-0 active:scale-[0.98] cursor-pointer"
-          }`}
-          title={hasValidResumeUrl ? "View Resume" : "Resume not available"}
+          href={effectiveResumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm bg-white text-black hover:bg-neutral-100 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_-4px_rgba(255,255,255,0.3)] active:translate-y-0 active:scale-[0.98] transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070709] cursor-pointer"
+          title="View Resume"
         >
           <FileText className="w-4 h-4 transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-rotate-3" />
           <span>Resume</span>
         </a>
 
-        {hasValidEmail ? (
-          <>
+        {/* Email Pill: Click text to redirect / email client, click copy icon to copy */}
+        <div className="group relative inline-flex items-stretch rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/25 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_6px_18px_rgba(0,0,0,0.5)] active:translate-y-0">
+          <a
+            href={effectiveEmailUrl}
+            className="inline-flex items-center gap-2 px-4 py-2.5 text-neutral-300 hover:text-white text-xs font-mono transition-colors focus-visible:outline-none cursor-pointer"
+            title={emailAddress ? `Send email to ${emailAddress}` : "Send Email"}
+          >
+            <Mail className="w-3.5 h-3.5 text-neutral-400 group-hover:text-white transition-colors shrink-0" />
+            <span>{emailAddress || "Email"}</span>
+          </a>
+
+          {hasValidEmail ? (
             <button
+              type="button"
               onClick={handleCopyEmail}
-              className="group relative inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] text-neutral-300 hover:text-white text-xs font-mono border border-white/[0.08] hover:border-white/25 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_6px_18px_rgba(0,0,0,0.5)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 cursor-pointer"
-              title="Click to copy email"
+              className="inline-flex items-center justify-center px-2.5 border-l border-white/[0.08] hover:bg-white/[0.08] text-neutral-400 hover:text-white transition-colors rounded-r-xl focus-visible:outline-none cursor-pointer"
+              title="Copy email address"
+              aria-label="Copy email address"
             >
               {copiedEmail ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-emerald-400 transition-transform duration-200 scale-110" />
-                  <span className="text-emerald-300 font-medium">Copied!</span>
-                </>
+                <Check className="w-3.5 h-3.5 text-emerald-400 scale-110 transition-transform" />
               ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5 text-neutral-400 transition-all duration-200 group-hover:scale-110 group-hover:text-white" />
-                  <span>{emailAddress}</span>
-                </>
+                <Copy className="w-3.5 h-3.5 transition-transform hover:scale-110" />
               )}
             </button>
+          ) : null}
+        </div>
 
-            <div className="h-4 w-px bg-white/10 hidden sm:block mx-1" />
-          </>
-        ) : null}
+        <div className="h-4 w-px bg-white/10 hidden sm:block mx-1" />
 
         <div className="flex items-center gap-2">
+          {/* GitHub Button */}
           <a
-            href={hasValidGithubUrl ? normalizedGithubUrl : "#"}
-            onClick={(e) => {
-              if (!hasValidGithubUrl) {
-                e.preventDefault();
-              }
-            }}
-            target={hasValidGithubUrl ? "_blank" : undefined}
-            rel={hasValidGithubUrl ? "noopener noreferrer" : undefined}
+            href={effectiveGithubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="GitHub Profile"
-            className={`group inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/[0.03] text-neutral-300 border border-white/[0.08] text-xs font-mono transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-              hasValidGithubUrl
-                ? "hover:bg-white/[0.08] hover:border-white/25 hover:text-white hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(0,0,0,0.4)] active:scale-[0.98] cursor-pointer"
-                : "opacity-50 cursor-not-allowed"
-            }`}
-            title={hasValidGithubUrl ? "GitHub Profile" : "GitHub profile not configured"}
+            className="group inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/[0.03] text-neutral-300 border border-white/[0.08] text-xs font-mono transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 hover:bg-white/[0.08] hover:border-white/25 hover:text-white hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(0,0,0,0.4)] active:scale-[0.98] cursor-pointer"
+            title="GitHub Profile"
           >
             <GithubIcon className="w-3.5 h-3.5 transition-transform duration-200 group-hover:scale-110 group-hover:text-white" />
             <span className="hidden sm:inline">GitHub</span>
           </a>
 
+          {/* LinkedIn Button */}
           <a
-            href={hasValidLinkedinUrl ? normalizedLinkedinUrl : "#"}
-            onClick={(e) => {
-              if (!hasValidLinkedinUrl) {
-                e.preventDefault();
-              }
-            }}
-            target={hasValidLinkedinUrl ? "_blank" : undefined}
-            rel={hasValidLinkedinUrl ? "noopener noreferrer" : undefined}
+            href={effectiveLinkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="LinkedIn Profile"
-            className={`group inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/[0.03] text-neutral-300 border border-white/[0.08] text-xs font-mono transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-              hasValidLinkedinUrl
-                ? "hover:bg-white/[0.08] hover:border-white/25 hover:text-white hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(0,0,0,0.4)] active:scale-[0.98] cursor-pointer"
-                : "opacity-50 cursor-not-allowed"
-            }`}
-            title={hasValidLinkedinUrl ? "LinkedIn Profile" : "LinkedIn profile not configured"}
+            className="group inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/[0.03] text-neutral-300 border border-white/[0.08] text-xs font-mono transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 hover:bg-white/[0.08] hover:border-white/25 hover:text-white hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(0,0,0,0.4)] active:scale-[0.98] cursor-pointer"
+            title="LinkedIn Profile"
           >
             <LinkedinIcon className="w-3.5 h-3.5 transition-transform duration-200 group-hover:scale-110 group-hover:text-white" />
             <span className="hidden sm:inline">LinkedIn</span>

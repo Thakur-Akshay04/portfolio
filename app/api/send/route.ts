@@ -62,22 +62,9 @@ function escapeHtml(text: string): string {
     .replace(/'/g, "&#x27;");
 }
 
-import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { getAllEnv, getResolvedConfig } from "@/lib/server-config";
 
 export const dynamic = "force-dynamic";
-
-/** Resolves Cloudflare env, falling back to process.env in non-worker environments. */
-async function resolveCloudflareEnv(): Promise<Record<string, string | undefined>> {
-  try {
-    const ctx = await getCloudflareContext({ async: true });
-    if (ctx?.env) {
-      return ctx.env as Record<string, string | undefined>;
-    }
-  } catch {
-    // Fallback for non-worker environments
-  }
-  return {};
-}
 
 /** Checks and updates the rate-limit record for the given IP. Returns true if limit exceeded. */
 function isRateLimited(ip: string): boolean {
@@ -99,38 +86,41 @@ function isRateLimited(ip: string): boolean {
 
 export async function POST(req: Request) {
   try {
-    const cfEnv = await resolveCloudflareEnv();
+    const envMap = await getAllEnv();
+    const { email: resolvedEmail } = await getResolvedConfig();
 
-    const apiKey = (
-      cfEnv.RESEND_API_KEY ||
-      cfEnv.RESEND_KEY ||
-      process.env.RESEND_API_KEY ||
-      process.env.RESEND_KEY ||
+    let apiKey = (
+      envMap.RESEND_API_KEY ||
+      envMap.RESEND_KEY ||
+      envMap.RESEND_TOKEN ||
+      envMap.RESEND ||
       ""
     ).trim();
 
+    if (!apiKey) {
+      for (const [k, v] of Object.entries(envMap)) {
+        if (k.toLowerCase().includes("resend") && v.length > 10) {
+          apiKey = v.trim();
+          break;
+        }
+      }
+    }
+
     const recipientEmail = (
-      cfEnv.PERSONAL_EMAIL ||
-      cfEnv.EMAIL ||
-      cfEnv.TO_EMAIL ||
-      cfEnv.NEXT_PUBLIC_PERSONAL_EMAIL ||
-      cfEnv.NEXT_PUBLIC_EMAIL ||
-      process.env.PERSONAL_EMAIL ||
-      process.env.EMAIL ||
-      process.env.TO_EMAIL ||
-      process.env.NEXT_PUBLIC_PERSONAL_EMAIL ||
-      process.env.NEXT_PUBLIC_EMAIL ||
+      resolvedEmail ||
+      envMap.PERSONAL_EMAIL ||
+      envMap.EMAIL ||
+      envMap.TO_EMAIL ||
+      envMap.NEXT_PUBLIC_PERSONAL_EMAIL ||
+      envMap.NEXT_PUBLIC_EMAIL ||
       ""
     ).trim();
 
     const sender = (
-      cfEnv.FROM_EMAIL ||
-      cfEnv.RESEND_FROM ||
-      cfEnv.SENDER_EMAIL ||
-      process.env.FROM_EMAIL ||
-      process.env.RESEND_FROM ||
-      process.env.SENDER_EMAIL ||
-      ""
+      envMap.FROM_EMAIL ||
+      envMap.RESEND_FROM ||
+      envMap.SENDER_EMAIL ||
+      "onboarding@resend.dev"
     ).trim();
 
     if (!apiKey) {
