@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, FileText, Copy, Check } from "lucide-react";
@@ -105,14 +105,40 @@ export default function Hero() {
   const shouldReduceMotion = useSafeReducedMotion();
   const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const emailAddress = PORTFOLIO_DATA.personal.email || "";
+  const [emailAddress, setEmailAddress] = useState(
+    PORTFOLIO_DATA.personal.email || ""
+  );
+  const [githubUrl, setGithubUrl] = useState(
+    (process.env.NEXT_PUBLIC_GITHUB_URL || "").trim()
+  );
+  const [linkedinUrl, setLinkedinUrl] = useState(
+    (process.env.NEXT_PUBLIC_LINKEDIN_URL || "").trim()
+  );
+  const [resumeUrl, setResumeUrl] = useState(
+    (process.env.NEXT_PUBLIC_RESUME_URL || "").trim()
+  );
+
+  useEffect(() => {
+    fetch("/api/config")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data) {
+          if (data.email) setEmailAddress(data.email.trim());
+          if (data.githubUrl) setGithubUrl(data.githubUrl.trim());
+          if (data.linkedinUrl) setLinkedinUrl(data.linkedinUrl.trim());
+          if (data.resumeUrl) setResumeUrl(data.resumeUrl.trim());
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const resumeItem = PORTFOLIO_DATA.socials.find((s) => s.name.toLowerCase() === "resume");
   const githubItem = PORTFOLIO_DATA.socials.find((s) => s.name.toLowerCase() === "github");
   const linkedinItem = PORTFOLIO_DATA.socials.find((s) => s.name.toLowerCase() === "linkedin");
 
-  const normalizedResumeUrl = normalizeUrl(process.env.NEXT_PUBLIC_RESUME_URL || resumeItem?.url);
-  const normalizedGithubUrl = normalizeUrl(process.env.NEXT_PUBLIC_GITHUB_URL || githubItem?.url);
-  const normalizedLinkedinUrl = normalizeUrl(process.env.NEXT_PUBLIC_LINKEDIN_URL || linkedinItem?.url);
+  const normalizedResumeUrl = normalizeUrl(resumeUrl || process.env.NEXT_PUBLIC_RESUME_URL || resumeItem?.url);
+  const normalizedGithubUrl = normalizeUrl(githubUrl || process.env.NEXT_PUBLIC_GITHUB_URL || githubItem?.url);
+  const normalizedLinkedinUrl = normalizeUrl(linkedinUrl || process.env.NEXT_PUBLIC_LINKEDIN_URL || linkedinItem?.url);
 
   const hasValidResumeUrl = Boolean(
     normalizedResumeUrl &&
