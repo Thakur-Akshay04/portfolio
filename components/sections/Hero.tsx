@@ -137,9 +137,15 @@ export default function Hero() {
   const handleCopyEmail = () => {
     if (!hasValidEmail) return;
     if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(emailAddress);
-      setCopiedEmail(true);
-      setTimeout(() => setCopiedEmail(false), 2000);
+      navigator.clipboard
+        .writeText(emailAddress)
+        .then(() => {
+          setCopiedEmail(true);
+          setTimeout(() => setCopiedEmail(false), 2000);
+        })
+        .catch((error) => {
+          console.error("Failed to copy email to clipboard:", error);
+        });
     }
   };
 

@@ -19,11 +19,6 @@ export default function NotFound() {
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="max-w-xl mx-auto flex flex-col items-center"
       >
-        {/* Status Pill Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium tracking-wider text-neutral-400 bg-white/[0.04] border border-white/[0.08] shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-6 select-none">
-          <span className="w-1.5 h-1.5 rounded-full bg-neutral-400" />
-          <span>404 NOT FOUND</span>
-        </div>
 
         {/* Large Typographic 404 */}
         <div className="relative mb-2 select-none">
