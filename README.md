@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌌 Akshay Singh Thakur — Portfolio
+#  Akshay Singh Thakur — Portfolio
 
 **Full-Stack / MERN Developer & AI Integration Enthusiast**
 
@@ -225,5 +225,5 @@ pnpm build
 ---
 
 <div align="center">
-  <sub>Crafted with "La pasión" by <b>Akshay Singh Thakur</b>.</sub>
+  <sub>Made with "La pasión" by <b>Akshay Singh Thakur</b>.</sub>
 </div>
