@@ -17,16 +17,19 @@ COPY --from=deps /app/node_modules ./node_modules
 # Copy directories explicitly to prevent directory globbing risks (Compliant with S6470)
 COPY app ./app
 COPY components ./components
-COPY config ./config
 COPY constants ./constants
 COPY lib ./lib
-COPY types ./types
+COPY logo ./logo
 COPY public ./public
 COPY next.config.mjs tailwind.config.ts tsconfig.json postcss.config.mjs package.json ./
 
 # Set environment variables for build time
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
+
+# Allow passing Turnstile site key at build time (fall back to testing key if not provided)
+ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY
+ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-1x00000000000000000000AA}
 
 # Install package manager for pnpm build
 RUN npm install -g pnpm@9.15.4 --ignore-scripts

@@ -5,11 +5,70 @@ import { motion } from "framer-motion";
 import PageFoldWrapper from "@/components/layout/PageFoldWrapper";
 import SectionHeading from "@/components/layout/SectionHeading";
 
-import { TECH_CATEGORIES } from "@/constants/data/skills";
-import type { TechCategory, TechItem } from "@/types";
+export interface TechItem {
+  name: string;
+}
 
-export type { TechCategory, TechItem };
-export { TECH_CATEGORIES };
+export interface TechCategory {
+  title: string;
+  items: TechItem[];
+}
+
+export const TECH_CATEGORIES: TechCategory[] = [
+  {
+    title: "Programming Languages",
+    items: [
+      { name: "JavaScript" },
+      { name: "TypeScript" },
+      { name: "Python" },
+    ],
+  },
+  {
+    title: "Frontend Technologies",
+    items: [
+      { name: "HTML5" },
+      { name: "CSS3" },
+      { name: "React" },
+      { name: "Next.js" },
+      { name: "Tailwind CSS" },
+    ],
+  },
+  {
+    title: "Backend & Frameworks",
+    items: [
+      { name: "Node.js" },
+      { name: "Express.js" },
+      { name: "FastAPI" },
+    ],
+  },
+  {
+    title: "Databases",
+    items: [
+      { name: "MongoDB" },
+      { name: "MySQL" },
+      { name: "PostgreSQL (pgvector)" },
+      { name: "Redis" },
+    ],
+  },
+  {
+    title: "DevOps & Tools",
+    items: [
+      { name: "AWS" },
+      { name: "Git" },
+      { name: "Docker" },
+      { name: "Nginx" },
+    ],
+  },
+  {
+    title: "AI & APIs",
+    items: [
+      { name: "Meta Llama-3" },
+      { name: "Groq Cloud" },
+      { name: "LangChain.js" },
+      { name: "REST APIs" },
+    ],
+  },
+];
 
 // Vector SVG components defined locally for instant rendering & brand colors
 export function TechIcon({ name, className = "w-full h-full" }: { name: string; className?: string }) {
@@ -227,6 +286,7 @@ export default function Skills() {
               <div className="w-full h-[1px] bg-white/[0.08] lg:hidden my-2" />
             )}
             <motion.div
+              key={category.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

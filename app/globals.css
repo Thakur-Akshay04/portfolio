@@ -54,7 +54,7 @@ html.lenis body {
 body {
   color: var(--foreground);
   background-color: var(--background);
-  font-family: var(--font-chillax), var(--font-sans), sans-serif;
+  font-family: var(--font-sans), sans-serif;
   overflow-x: hidden;
   position: relative;
   background-image: 
@@ -200,5 +200,12 @@ body {
 
   .navbar-dock-item {
     padding: 8px 10px;
+  }
+}
+
+/* Hide navbar on mobile and tablets when modal is open */
+@media (max-width: 1023px) {
+  body.modal-open nav {
+    display: none !important;
   }
 }
