@@ -5,7 +5,6 @@ export const projects: Project[] = [
     id: "project-3",
     title: "Luminote",
     category: "Full Stack / Productivity",
-    liveUrl: "https://luminote.demo.dev",
     githubUrl: "https://github.com/Thakur-Akshay04/Luminote",
     description: "An AI-powered notes application supporting rich text, hand-drawn sketchpads, and voice memos. Features automated background note summarization, interactive Q&A chat, AI task checklist extraction, and vector-based semantic search.",
     features: [

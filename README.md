@@ -14,7 +14,7 @@
   A state-of-the-art developer portfolio engineered with <b>Next.js 16 App Router</b>, <b>React 19</b>, <b>Framer Motion</b>, and <b>Tailwind CSS</b>. Features dynamic animated SVG path scenes, interactive project showcases, rate-limited email delivery, and smooth micro-interactions.
 </p>
 
-[View Live Portfolio](https://thakurakshay.dev/) • [Explore Projects](#-featured-projects) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started)
+[Explore Projects](#-featured-projects) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started)
 
 </div>
 
@@ -177,7 +177,7 @@ PERSONAL_EMAIL=your_email@example.com
 NEXT_PUBLIC_PERSONAL_EMAIL=your_email@example.com
 
 # Social & External Links
-NEXT_PUBLIC_GITHUB_URL=https://github.com/Thakur-Akshay04
+NEXT_PUBLIC_GITHUB_URL=https://github.com/your-username
 NEXT_PUBLIC_LINKEDIN_URL=https://linkedin.com/in/your-profile
 NEXT_PUBLIC_RESUME_URL=https://drive.google.com/your-resume-link
 ```

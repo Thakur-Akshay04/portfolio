@@ -123,9 +123,33 @@ export async function POST(req: Request) {
       ""
     ).trim();
 
+    const sender = (
+      cfEnv.FROM_EMAIL ||
+      cfEnv.RESEND_FROM ||
+      cfEnv.SENDER_EMAIL ||
+      process.env.FROM_EMAIL ||
+      process.env.RESEND_FROM ||
+      process.env.SENDER_EMAIL ||
+      ""
+    ).trim();
+
     if (!apiKey) {
       return NextResponse.json(
-        { error: "Email service is not configured (missing API key)." },
+        { error: "Email service is not configured (missing RESEND_API_KEY secret)." },
+        { status: 500 }
+      );
+    }
+
+    if (!recipientEmail) {
+      return NextResponse.json(
+        { error: "Recipient email is not configured (missing PERSONAL_EMAIL secret)." },
+        { status: 500 }
+      );
+    }
+
+    if (!sender) {
+      return NextResponse.json(
+        { error: "Sender email is not configured (missing FROM_EMAIL secret)." },
         { status: 500 }
       );
     }
@@ -166,9 +190,11 @@ export async function POST(req: Request) {
     const cleanSubject = escapeHtml(subject.trim());
     const cleanMessage = escapeHtml(message.trim());
 
+    const formattedSender = sender.includes("<") ? sender : `Portfolio Contact <${sender}>`;
+
     // 4. Send email
     const { data, error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>",
+      from: formattedSender,
       to: [recipientEmail],
       replyTo: cleanEmail,
       subject: `New Portfolio Message: ${cleanSubject}`,

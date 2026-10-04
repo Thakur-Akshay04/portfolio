@@ -8,7 +8,7 @@ export const siteConfig = {
   title: "Akshay Singh Thakur | Full Stack & MERN Developer",
   description:
     "Explore the portfolio of Akshay Singh Thakur, Full-Stack & MERN Developer building high-performance web systems with clean architecture, modern React interfaces, and AI integration.",
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://akshaythakur.dev").trim(),
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "").trim(),
   ogImage: "/og.png",
   keywords: [
     "Full Stack Developer",
