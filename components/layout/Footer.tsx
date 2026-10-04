@@ -5,14 +5,14 @@ import { PORTFOLIO_DATA } from "@/constants/data";
 export default function Footer() {
   return (
     <footer className="w-full border-t border-white/[0.08] bg-[#070709]/90 backdrop-blur-md py-2.5 sm:py-3 px-4 sm:px-8 mt-auto shrink-0 z-20">
-      <div className="max-w-7xl mx-auto flex flex-row items-center justify-between gap-4 text-xs text-neutral-400 font-sans">
-        <div className="flex items-center text-left">
+      <div className="max-w-7xl mx-auto flex flex-row items-center justify-center sm:justify-between gap-4 text-xs text-neutral-400 font-sans">
+        <div className="flex items-center text-center sm:text-left">
           <span className="font-medium text-white tracking-tight text-xs sm:text-sm">
             {PORTFOLIO_DATA.personal.name}
           </span>
         </div>
 
-        <div className="flex items-center gap-3 sm:gap-5 text-[11px] sm:text-xs font-mono">
+        <div className="hidden sm:flex items-center gap-3 sm:gap-5 text-[11px] sm:text-xs font-mono">
           <Link
             href="/about"
             className="hover:text-white transition-colors duration-200"
@@ -49,3 +49,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+
