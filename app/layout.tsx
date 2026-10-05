@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -13,10 +14,20 @@ const sansFont = DM_Sans({
   display: "swap",
 });
 
-const displayFont = Space_Grotesk({
-  subsets: ["latin"],
+const displayFont = localFont({
+  src: [
+    {
+      path: "./fonts/NeueMetana-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/NeueMetana-Bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   variable: "--font-display",
-  weight: ["500", "600", "700"],
   display: "swap",
 });
 

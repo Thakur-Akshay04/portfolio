@@ -42,7 +42,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", "sans-serif"],
-        display: ["var(--font-display)", "sans-serif"],
+        display: ["var(--font-display)", "'Neue Metana'", "sans-serif"],
+        metana: ["var(--font-metana)", "var(--font-display)", "'Neue Metana'", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
       },
     },

@@ -2,7 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Neue Metana';
+  src: url('/fonts/NeueMetana-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Metana';
+  src: url('/fonts/NeueMetana-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
+  --font-metana: var(--font-display);
   --background: #070709;
   --foreground: #FFFFFF;
   --card-bg: rgba(13, 13, 17, 0.75);

@@ -1,0 +1,26 @@
+{
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/.open-next/**": true,
+    "**/.wrangler/**": true,
+    "**/.git/objects/**": true,
+    "**/Chillax_Complete/**": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/.open-next": true,
+    "**/.wrangler": true,
+    "**/tsconfig.tsbuildinfo": true,
+    "**/pnpm-lock.yaml": true
+  },
+  "files.exclude": {
+    "**/.open-next": true,
+    "**/.wrangler": true
+  },
+  // Use the project's TypeScript and cap tsserver memory.
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.tsserver.maxTsServerMemory": 2048,
+  "typescript.disableAutomaticTypeAcquisition": true
+}
